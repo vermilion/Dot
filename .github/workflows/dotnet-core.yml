@@ -30,5 +30,5 @@ jobs:
     - name: Pack PlatformFramework.Web
       run: dotnet pack src/PlatformFramework.Web/PlatformFramework.Web.csproj --output nuget-packages --configuration Release
     - name: Push to NuGet
-      run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push 'nuget-packages/*.nupkg' --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate --no-symbols true
 
