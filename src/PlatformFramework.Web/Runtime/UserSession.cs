@@ -19,7 +19,7 @@ namespace PlatformFramework.Web.Runtime
             _context = Guard.Against.Null(context, nameof(context));
         }
 
-        private HttpContext HttpContext => _context.HttpContext;
+        private HttpContext? HttpContext => _context.HttpContext;
         private ClaimsPrincipal? Principal => HttpContext?.User;
         
         public bool IsAuthenticated => Principal?.Identity?.IsAuthenticated ?? false;

@@ -44,7 +44,7 @@ namespace PlatformFramework.Localization
 
         public string Localize(IStringLocalizerFactory factory)
         {
-            return factory.Create(ResourceName, ResourceLocation).GetString(Name);
+            return factory.Create(ResourceName!, ResourceLocation!).GetString(Name!);
         }
 
         public override string ToString()

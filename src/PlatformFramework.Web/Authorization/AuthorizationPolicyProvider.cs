@@ -16,7 +16,7 @@ namespace PlatformFramework.Web.Authorization
         {
         }
 
-        public override async Task<AuthorizationPolicy> GetPolicyAsync(string policyName)
+        public override async Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
         {
             if (!policyName.StartsWith(PermissionConstant.PolicyPrefix, StringComparison.OrdinalIgnoreCase))
             {
