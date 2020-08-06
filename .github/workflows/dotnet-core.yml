@@ -23,8 +23,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Pack
+    - name: Pack PlatformFramework
       run: dotnet pack src/PlatformFramework/PlatformFramework.csproj --output nuget-packages --configuration Release
+    - name: Pack PlatformFramework.EFCore
+      run: dotnet pack src/PlatformFramework.EFCore/PlatformFramework.EFCore.csproj --output nuget-packages --configuration Release
+    - name: Pack PlatformFramework.Web
+      run: dotnet pack src/PlatformFramework.Web/PlatformFramework.Web.csproj --output nuget-packages --configuration Release
     - name: Push to NuGet
       run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
