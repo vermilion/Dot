@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PlatformFramework.Shared.Exceptions;
+using PlatformFramework.EFCore.Exceptions;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {
@@ -18,11 +18,11 @@ namespace PlatformFramework.EFCore.Context.Migrations
                 if (canConnect)
                     return;
 
-                await Task.Delay(delay);
+                await Task.Delay(delay, cancellationToken);
             }
 
             // after a few attemps we give up
-            throw new DbException("Error waiting database. Check ConnectionString and ensure database exist", null);
+            throw new DbException("Error waiting database. Check ConnectionString and ensure database exist", null!);
         }
 
         private static async Task<bool> CanConnect(DbContext context, CancellationToken cancellationToken)

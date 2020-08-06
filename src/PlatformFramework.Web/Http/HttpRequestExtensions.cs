@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Gets the current HttpContext.Request's Referrer.
         /// </summary>
-        public static Uri GetReferrerUri(this HttpContext httpContext)
+        public static Uri? GetReferrerUri(this HttpContext httpContext)
         {
             var referrer = httpContext.GetReferrerUrl();
             if (string.IsNullOrWhiteSpace(referrer))
@@ -66,8 +67,7 @@ namespace PlatformFramework.Web.Http
             }
 
             // RemoteIpAddress is always null in DNX RC1 Update1 (bug).
-            if (string.IsNullOrWhiteSpace(ip) &&
-                httpContext?.Connection?.RemoteIpAddress != null)
+            if (string.IsNullOrWhiteSpace(ip) && httpContext.Connection?.RemoteIpAddress != null)
             {
                 ip = httpContext.Connection.RemoteIpAddress.ToString();
             }
@@ -94,11 +94,11 @@ namespace PlatformFramework.Web.Http
             return string.Empty;
         }
 
-        private static IEnumerable<string> SplitCsv(string csvList, bool nullOrWhitespaceInputReturnsNull = false)
+        private static IEnumerable<string> SplitCsv(string csvList)
         {
             if (string.IsNullOrWhiteSpace(csvList))
             {
-                return nullOrWhitespaceInputReturnsNull ? null : new List<string>();
+                return new List<string>();
             }
 
             return csvList
@@ -179,7 +179,8 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        public static async Task<T> DeserializeRequestJsonBodyAsAsync<T>(this HttpContext httpContext)
+        public static async Task<T?> DeserializeRequestJsonBodyAsAsync<T>(this HttpContext httpContext)
+            where T: class
         {
             RequestSanityCheck(httpContext);
             var request = httpContext.Request;
@@ -209,7 +210,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        public static async Task<Dictionary<string, string>> DeserializeRequestJsonBodyAsDictionaryAsync(this HttpContext httpContext)
+        public static async Task<Dictionary<string, string>?> DeserializeRequestJsonBodyAsDictionaryAsync(this HttpContext httpContext)
         {
             RequestSanityCheck(httpContext);
             var request = httpContext.Request;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PlatformFramework.Domain.Domain;
+using PlatformFramework.EFCore.Domain;
 
 namespace PlatformFramework.EFCore.Entities.Customizers
 {

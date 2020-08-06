@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlatformFramework.Shared.Exceptions
+namespace PlatformFramework.Exceptions
 {
     /// <summary>
     /// User-readable exception type

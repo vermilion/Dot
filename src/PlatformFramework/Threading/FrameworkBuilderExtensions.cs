@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.Interfaces.Threading;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Threading
 {

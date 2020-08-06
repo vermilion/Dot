@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PlatformFramework.Interfaces.Data;
+using PlatformFramework.EFCore.Abstractions;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {

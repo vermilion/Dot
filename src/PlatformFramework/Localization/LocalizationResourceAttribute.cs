@@ -8,11 +8,11 @@ namespace PlatformFramework.Localization
         /// <summary>
         /// gets or sets name of resource
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// gets or sets location of resource
         /// </summary>
-        public string Location { get; set; }
+        public string? Location { get; set; }
     }
 }

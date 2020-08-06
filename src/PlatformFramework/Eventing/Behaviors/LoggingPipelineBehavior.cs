@@ -1,19 +1,19 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.Shared.GuardToolkit;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
-namespace PlatformFramework.UseCases.Behaviors
+namespace PlatformFramework.Eventing.Behaviors
 {
     public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest: notnull
     {
         private readonly ILogger _logger;
 
         public LoggingPipelineBehavior(ILoggerFactory loggerFactory)
         {
-            _logger = Ensure
-                 .IsNotNull(loggerFactory, nameof(loggerFactory))
+            _logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                  .CreateLogger(GetType().Name);
         }
 

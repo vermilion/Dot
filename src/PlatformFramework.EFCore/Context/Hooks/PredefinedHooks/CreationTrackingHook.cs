@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using PlatformFramework.Interfaces.Runtime;
-using PlatformFramework.Interfaces.Timing;
-using PlatformFramework.Shared.Extensions;
+using PlatformFramework.Abstractions;
+using PlatformFramework.Extensions;
 
-namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
+namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
     internal sealed class CreationTrackingHook : DbContextInsertEntityHook
     {
@@ -25,7 +24,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
         public override Task BeforeSaveChanges(object entity, HookEntityMetadata metadata)
         {
             metadata.Entry.Property(EfCore.CreatedDateTime).CurrentValue = _clock.Now;
-            metadata.Entry.Property(EfCore.CreatedByUserId).CurrentValue = _session.UserId.To<long>();
+            metadata.Entry.Property(EfCore.CreatedByUserId).CurrentValue = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }

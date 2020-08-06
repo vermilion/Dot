@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.Interfaces.Caching;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Caching
 {

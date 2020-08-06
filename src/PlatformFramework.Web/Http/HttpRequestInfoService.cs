@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -62,7 +63,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Gets the current HttpContext.Request's Referrer.
         /// </summary>
-        Uri GetReferrerUri();
+        Uri? GetReferrerUri();
 
         /// <summary>
         /// Gets the current HttpContext.Request content's absolute path.
@@ -98,7 +99,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        Task<T> DeserializeRequestJsonBodyAsAsync<T>();
+        Task<T?> DeserializeRequestJsonBodyAsAsync<T>() where T : class;
 
         /// <summary>
         /// Reads `request.Body` as string.
@@ -108,7 +109,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        Task<Dictionary<string, string>> DeserializeRequestJsonBodyAsDictionaryAsync();
+        Task<Dictionary<string, string>?> DeserializeRequestJsonBodyAsDictionaryAsync();
     }
 
     /// <summary>
@@ -124,7 +125,7 @@ namespace PlatformFramework.Web.Http
         /// </summary>
         public HttpRequestInfoService(IHttpContextAccessor httpContextAccessor, IUrlHelper urlHelper)
         {
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _httpContextAccessor = Guard.Against.Null(httpContextAccessor, nameof(httpContextAccessor));
             _urlHelper = urlHelper;
         }
 
@@ -147,9 +148,9 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Gets the current HttpContext.Request's Referrer.
         /// </summary>
-        public Uri GetReferrerUri()
+        public Uri? GetReferrerUri()
         {
-            return _httpContextAccessor.HttpContext.GetReferrerUri();
+            return _httpContextAccessor.HttpContext?.GetReferrerUri();
         }
 
         /// <summary>
@@ -221,7 +222,8 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        public Task<T> DeserializeRequestJsonBodyAsAsync<T>()
+        public Task<T?> DeserializeRequestJsonBodyAsAsync<T>()
+            where T: class
         {
             return _httpContextAccessor.HttpContext.DeserializeRequestJsonBodyAsAsync<T>();
         }
@@ -237,7 +239,7 @@ namespace PlatformFramework.Web.Http
         /// <summary>
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
-        public Task<Dictionary<string, string>> DeserializeRequestJsonBodyAsDictionaryAsync()
+        public Task<Dictionary<string, string>?> DeserializeRequestJsonBodyAsDictionaryAsync()
         {
             return _httpContextAccessor.HttpContext.DeserializeRequestJsonBodyAsDictionaryAsync();
         }

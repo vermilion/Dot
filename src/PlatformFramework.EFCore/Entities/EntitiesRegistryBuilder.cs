@@ -31,7 +31,7 @@ namespace PlatformFramework.EFCore.Entities
         /// <typeparam name="TModel">Model type</typeparam>
         /// <param name="action">Configure method</param>
         /// <param name="memberList">Validation type</param>
-        public void MapToDto<TModel>(Action<IMappingExpression<TEntity, TModel>> action = null, MemberList memberList = MemberList.None)
+        public void MapToDto<TModel>(Action<IMappingExpression<TEntity, TModel>>? action = null, MemberList memberList = MemberList.None)
             where TModel : class
         {
             Registry.RegisterMapping(expression =>
@@ -46,7 +46,7 @@ namespace PlatformFramework.EFCore.Entities
         /// </summary>
         /// <typeparam name="TModel">Model type</typeparam>
         /// <param name="action">Configure method</param>
-        public void MapFromDto<TModel>(Action<IMappingExpression<TModel, TEntity>> action = null)
+        public void MapFromDto<TModel>(Action<IMappingExpression<TModel, TEntity>>? action = null)
             where TModel : class
         {
             Registry.RegisterMapping(expression =>

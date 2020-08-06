@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using PlatformFramework.Shared.Exceptions;
+using PlatformFramework.Exceptions;
 
 namespace PlatformFramework.Web.Authorization
 {

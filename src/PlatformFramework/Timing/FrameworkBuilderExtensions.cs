@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.Interfaces.Timing;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Timing
 {

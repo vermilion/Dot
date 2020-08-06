@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.Interfaces.Threading
+namespace PlatformFramework.Abstractions
 {
     /// <summary>
     /// Simple background queue

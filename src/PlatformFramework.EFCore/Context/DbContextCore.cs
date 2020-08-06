@@ -17,12 +17,11 @@ namespace PlatformFramework.EFCore.Context
         }
 
         public DbConnection Connection => Database.GetDbConnection();
-        public bool HasTransaction => Transaction != null;
-        public IDbContextTransaction Transaction { get; private set; }
+        public IDbContextTransaction? Transaction { get; private set; }
 
         public async Task<IDbContextTransaction> BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted, CancellationToken cancellationToken = default)
         {
-            if (HasTransaction)
+            if (Transaction != null)
                 return Transaction;
 
             return Transaction = await Database.BeginTransactionAsync(isolationLevel, cancellationToken);
@@ -30,7 +29,7 @@ namespace PlatformFramework.EFCore.Context
 
         public async Task CommitTransaction(CancellationToken cancellationToken = default)
         {
-            if (!HasTransaction)
+            if (Transaction == null)
                 throw new NullReferenceException("Please call `BeginTransaction()` method first.");
 
             try
@@ -39,7 +38,7 @@ namespace PlatformFramework.EFCore.Context
             }
             catch
             {
-                await RollbackTransaction();
+                await RollbackTransaction(cancellationToken);
                 throw;
             }
             finally
@@ -54,7 +53,7 @@ namespace PlatformFramework.EFCore.Context
 
         public async Task RollbackTransaction(CancellationToken cancellationToken = default)
         {
-            if (!HasTransaction)
+            if (Transaction == null)
                 throw new NullReferenceException("Please call `BeginTransaction()` method first.");
 
             try
@@ -90,7 +89,7 @@ namespace PlatformFramework.EFCore.Context
 
         public override int SaveChanges()
         {
-            return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted).GetAwaiter().GetResult(); ;
+            return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted).GetAwaiter().GetResult();
         }
 
         protected virtual void OnSaveCompleted(EntityChangeContext context)

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using PlatformFramework.EFCore.Abstractions;
 
-namespace PlatformFramework.Domain.Domain
+namespace PlatformFramework.EFCore.Domain
 {
     public abstract class Entity : IEntity
     {
@@ -27,7 +28,7 @@ namespace PlatformFramework.Domain.Domain
             return Convert.ToInt64(Id) <= 0;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null || !(obj is Entity instance)) return false;
 

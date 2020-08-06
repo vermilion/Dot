@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace PlatformFramework.Shared.Exceptions
+namespace PlatformFramework.EFCore.Exceptions
 {
     [Serializable]
     public class DbConcurrencyException : DbException
     {
         public DbConcurrencyException()
-            : base("The record has been modified since it was loaded. The operation was canceled!", null)
+            : this("The record has been modified since it was loaded. The operation was canceled!", null!)
         {
         }
 

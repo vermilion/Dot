@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace PlatformFramework.UseCases
+namespace PlatformFramework.Eventing
 {
     public static class FrameworkBuilderExtensions
     {

@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
+namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
     internal sealed class SoftDeleteEntityHook : DbContextDeleteEntityHook
     {

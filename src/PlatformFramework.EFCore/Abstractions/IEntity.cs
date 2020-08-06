@@ -1,4 +1,4 @@
-﻿namespace PlatformFramework.Domain.Domain
+﻿namespace PlatformFramework.EFCore.Abstractions
 {
     public interface IEntity
     {

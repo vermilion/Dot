@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
-using PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks;
+using PlatformFramework.EFCore.Context.Hooks.PredefinedHooks;
 
 namespace PlatformFramework.EFCore
 {

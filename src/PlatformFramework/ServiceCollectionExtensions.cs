@@ -11,7 +11,7 @@ namespace PlatformFramework
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <param name="configure">Configure action for <see cref="FrameworkOptions"/></param>
         /// <returns><see cref="FrameworkBuilder"/></returns>
-        public static FrameworkBuilder AddFramework(this IServiceCollection services, Action<FrameworkOptions> configure = null)
+        public static FrameworkBuilder AddFramework(this IServiceCollection services, Action<FrameworkOptions>? configure = null)
         {
             if (services == null)
                 throw new ArgumentNullException(nameof(services));

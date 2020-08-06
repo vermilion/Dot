@@ -58,7 +58,7 @@ namespace PlatformFramework.EFCore.Entities
             EntityCustomizers.TryAdd(typeof(TEntity), customizerInstance);
         }
 
-        public EntityCustomizer GetCustomizer(Type type)
+        public EntityCustomizer? GetCustomizer(Type type)
         {
             EntityCustomizers.TryGetValue(type, out var customizer);
             return customizer;

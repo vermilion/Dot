@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using PlatformFramework.Interfaces.Localization;
-using PlatformFramework.Shared.GuardToolkit;
+using Ardalis.GuardClauses;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Web.Authorization
 {
@@ -20,18 +20,18 @@ namespace PlatformFramework.Web.Authorization
         /// Parent of this permission if one exists.
         /// If set, this permission can be granted only if parent is granted.
         /// </summary>
-        public Permission Parent { get; private set; }
+        public Permission? Parent { get; private set; }
 
         /// <summary>
         /// Display name of the permission.
         /// This can be used to show permission to the user.
         /// </summary>
-        public ILocalizableString DisplayName { get; }
+        public ILocalizableString? DisplayName { get; }
 
         /// <summary>
         /// A brief description for this permission.
         /// </summary>
-        public ILocalizableString Description { get; }
+        public ILocalizableString? Description { get; }
 
         /// <summary>
         /// Custom Properties. Use this to add your own properties to permission.
@@ -43,10 +43,10 @@ namespace PlatformFramework.Web.Authorization
         /// <summary>
         /// Shortcut of Properties dictionary
         /// </summary>
-        public object this[string key]
+        public object? this[string key]
         {
-            get => !Properties.ContainsKey(key) ? null : Properties[key];
-            set => Properties[key] = value;
+            get => Properties.ContainsKey(key) ? Properties[key] : null;
+            set => Properties[key] = value!;
         }
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace PlatformFramework.Web.Authorization
         /// <param name="properties">Custom Properties. Use this to add your own properties to permission.</param>
         public Permission(
             string name,
-            ILocalizableString displayName = null,
-            ILocalizableString description = null,
-            Dictionary<string, object> properties = null)
+            ILocalizableString? displayName = null,
+            ILocalizableString? description = null,
+            Dictionary<string, object>? properties = null)
         {
-            Name = Ensure.IsNotNullOrEmpty(name, nameof(name));
+            Name = Guard.Against.NullOrEmpty(name, nameof(name));
             DisplayName = displayName;
             Description = description;
             Properties = properties ?? new Dictionary<string, object>();
@@ -84,9 +84,9 @@ namespace PlatformFramework.Web.Authorization
         /// <returns>Returns newly created child permission</returns>
         public Permission CreateChildPermission(
             string name,
-            ILocalizableString displayName = null,
-            ILocalizableString description = null,
-            Dictionary<string, object> properties = null)
+            ILocalizableString? displayName = null,
+            ILocalizableString? description = null,
+            Dictionary<string, object>? properties = null)
         {
             var permission = new Permission(name, displayName, description, properties)
             {
@@ -99,9 +99,9 @@ namespace PlatformFramework.Web.Authorization
 
         public static Permission CreatePermission(
             string name,
-            ILocalizableString displayName = null,
-            ILocalizableString description = null,
-            Dictionary<string, object> properties = null
+            ILocalizableString? displayName = null,
+            ILocalizableString? description = null,
+            Dictionary<string, object>? properties = null
         )
         {
             var permission = new Permission(name, displayName, description, properties);

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace PlatformFramework.Shared.Extensions
+namespace PlatformFramework.Extensions
 {
     public static class ObjectExtensions
     {
@@ -13,7 +13,7 @@ namespace PlatformFramework.Shared.Extensions
         {
             if (value == null)
             {
-                return default;
+                return default!;
             }
 
             return (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromInvariantString(value);

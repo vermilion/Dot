@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using PlatformFramework.Interfaces.Threading;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Threading
 {
@@ -29,7 +29,7 @@ namespace PlatformFramework.Threading
             await _signal.WaitAsync(cancellationToken);
             _workItems.TryDequeue(out var workItem);
 
-            return workItem;
+            return workItem!;
         }
     }
 }

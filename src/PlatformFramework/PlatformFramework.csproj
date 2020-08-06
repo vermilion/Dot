@@ -2,12 +2,22 @@
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
 		<PackageOutputPath>..\Package</PackageOutputPath>
-		<Version>0.0.1</Version>
+		<Version>0.1.0</Version>
+		<NoWarn>$(NoWarn);CA1062;1591</NoWarn>
+		<Nullable>enable</Nullable>
+		<NullableReferenceTypes>true</NullableReferenceTypes>
+		<LangVersion>8.0</LangVersion>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
+
 	<ItemGroup>
+		<PackageReference Include="Ardalis.GuardClauses" Version="2.0.0" />
 		<PackageReference Include="AutoMapper" Version="10.0.0" />
 		<PackageReference Include="FluentValidation.AspNetCore" Version="9.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />

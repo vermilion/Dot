@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlatformFramework.Interfaces.Timing
+namespace PlatformFramework.Abstractions
 {
     /// <summary>
     /// Defines the required contract for implementing a clock.

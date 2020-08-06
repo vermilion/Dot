@@ -3,9 +3,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.Caching.Distributed;
-using PlatformFramework.Interfaces.Caching;
-using PlatformFramework.Shared.GuardToolkit;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Caching
 {
@@ -21,13 +21,14 @@ namespace PlatformFramework.Caching
         /// </summary>
         public MemoryCacheService(IDistributedCache distributedCache)
         {
-            _distributedCache = Guard.ArgumentNotNull(distributedCache, nameof(distributedCache));
+            _distributedCache = Guard.Against.Null(distributedCache, nameof(distributedCache));
         }
 
         /// <summary>
         /// Gets the key's value from the cache.
         /// </summary>
-        public async Task<T> Get<T>(string cacheKey, CancellationToken cancellationToken = default)
+        public async Task<T?> Get<T>(string cacheKey, CancellationToken cancellationToken = default)
+            where T : class
         {
             var bytes = await _distributedCache.GetAsync(cacheKey, cancellationToken);
             var result = default(T);
@@ -60,6 +61,7 @@ namespace PlatformFramework.Caching
         /// Otherwise it will use the factory method to get the value and then inserts it.
         /// </summary>
         public async Task<T> GetOrAdd<T>(string cacheKey, Func<Task<T>> factory, TimeSpan slidingExpiration, CancellationToken cancellationToken = default)
+            where T : class
         {
             // locks get and set internally
             var result = await Get<T>(cacheKey, cancellationToken);

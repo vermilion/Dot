@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
-using PlatformFramework.Shared.Common;
+using PlatformFramework.Web.Common;
 
 namespace PlatformFramework.Web.Authorization
 {

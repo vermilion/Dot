@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Caching;
-using PlatformFramework.Interfaces.Caching;
 using System;
 using System.Threading.Tasks;
+using PlatformFramework.Abstractions;
 using Xunit;
 
 namespace PlatformFramework.Tests.Caching

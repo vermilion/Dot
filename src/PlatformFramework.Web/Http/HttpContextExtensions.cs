@@ -63,7 +63,7 @@ namespace PlatformFramework.Web.Http
             }
             else
             {
-                string cacheControlValue = null;
+                string? cacheControlValue = null;
                 var duration = cacheProfile.Duration.GetValueOrDefault().ToString(CultureInfo.InvariantCulture);
                 switch (cacheProfile.Location)
                 {

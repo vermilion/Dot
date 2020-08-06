@@ -8,8 +8,6 @@ namespace PlatformFramework.EFCore.Context
         public const string ModifiedDateTime = nameof(ModifiedDateTime);
         public const string ModifiedByUserId = nameof(ModifiedByUserId);
 
-        public const string UserId = nameof(UserId);
-
         public const string IsDeleted = nameof(IsDeleted);
         public const string DeletedDateTime = nameof(DeletedDateTime);
         public const string DeletedByUserId = nameof(DeletedByUserId);

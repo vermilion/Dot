@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PlatformFramework.Shared.Exceptions
+namespace PlatformFramework.Exceptions
 {
     /// <summary>
     /// Default Excrption that may be raised from Framework

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Localization;
-using PlatformFramework.Interfaces.Localization;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Localization
 {

@@ -20,7 +20,6 @@ namespace PlatformFramework.EFCore
         /// <summary>
         /// Use default migrations initializer
         /// </summary>
-        /// <typeparam name="TContext">Context type <see cref="TDbContext"/></typeparam>
         /// <returns>Fluent builder</returns>
         public EfCoreBuilder<TDbContext> WithMigrationInitializer()
         {

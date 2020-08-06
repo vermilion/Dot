@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using PlatformFramework.Interfaces.Runtime;
-using PlatformFramework.Interfaces.Timing;
-using PlatformFramework.Shared.Extensions;
+﻿using System.Threading.Tasks;
+using Ardalis.GuardClauses;
+using PlatformFramework.Abstractions;
+using PlatformFramework.Extensions;
 
-namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
+namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
     internal sealed class DeletionTrackingHook : DbContextDeleteEntityHook
     {
@@ -13,8 +12,8 @@ namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
 
         public DeletionTrackingHook(IUserSession session, IClockProvider clock)
         {
-            _session = session ?? throw new ArgumentNullException(nameof(session));
-            _clock = clock ?? throw new ArgumentNullException(nameof(clock));
+            _session = Guard.Against.Null(session, nameof(session));
+            _clock = Guard.Against.Null(clock, nameof(clock));
         }
 
         public override bool CanHook(EntityConfigFlags flags)
@@ -25,7 +24,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.PrefefinedHooks
         public override Task BeforeSaveChanges(object entity, HookEntityMetadata metadata)
         {
             metadata.Entry.Property(EfCore.DeletedDateTime).CurrentValue = _clock.Now;
-            metadata.Entry.Property(EfCore.DeletedByUserId).CurrentValue = _session.UserId.To<long>();
+            metadata.Entry.Property(EfCore.DeletedByUserId).CurrentValue = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }

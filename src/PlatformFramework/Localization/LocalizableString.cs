@@ -1,7 +1,7 @@
 ﻿using System;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.Localization;
-using PlatformFramework.Interfaces.Localization;
-using PlatformFramework.Shared.GuardToolkit;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Localization
 {
@@ -16,17 +16,17 @@ namespace PlatformFramework.Localization
         /// Can be Null for Database localization source.
         /// </summary>
         /// <returns></returns>
-        public string ResourceLocation { get; }
+        public string? ResourceLocation { get; }
 
         /// <summary>
         /// Unique name of the localization resource like, SharedResource,...
         /// </summary>
-        public string ResourceName { get; }
+        public string? ResourceName { get; }
 
         /// <summary>
         /// Unique Name of the string to be localized.
         /// </summary>
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Needed for serialization.
@@ -35,10 +35,10 @@ namespace PlatformFramework.Localization
         {
         }
 
-        public LocalizableString(string name, string resourceName, string resourceLocation = null)
+        public LocalizableString(string name, string resourceName, string? resourceLocation = null)
         {
-            Name = Ensure.IsNotNullOrEmpty(name, nameof(name));
-            ResourceName = Ensure.IsNotNullOrEmpty(resourceName, nameof(resourceName));
+            Name = Guard.Against.NullOrEmpty(name, nameof(name));
+            ResourceName = Guard.Against.NullOrEmpty(resourceName, nameof(resourceName));
             ResourceLocation = resourceLocation;
         }
 

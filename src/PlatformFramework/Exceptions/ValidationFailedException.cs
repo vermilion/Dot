@@ -1,9 +1,9 @@
-using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentValidation.Results;
 
-namespace PlatformFramework.Shared.Exceptions
+namespace PlatformFramework.Exceptions
 {
     /// <summary>
     /// Framework validation exception

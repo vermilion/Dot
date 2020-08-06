@@ -10,8 +10,8 @@ using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Context.Extensions;
 using PlatformFramework.EFCore.Context.Hooks;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
-using PlatformFramework.Shared.Exceptions;
-using DbException = PlatformFramework.Shared.Exceptions.DbException;
+using PlatformFramework.EFCore.Exceptions;
+using DbException = PlatformFramework.EFCore.Exceptions.DbException;
 
 namespace PlatformFramework.EFCore.Entities
 {
@@ -29,7 +29,7 @@ namespace PlatformFramework.EFCore.Entities
             _hooks = context.GetService<IEnumerable<IDbContextEntityHook>>();
         }
 
-        public async Task<int> SaveChanges(Action<EntityChangeContext> onSaveCompleted = null, CancellationToken cancellationToken = default)
+        public async Task<int> SaveChanges(Action<EntityChangeContext>? onSaveCompleted = null, CancellationToken cancellationToken = default)
         {
             int result;
             try
@@ -48,7 +48,7 @@ namespace PlatformFramework.EFCore.Entities
                 //for RowIntegrity scenarios
                 await _context.SaveChangesAsync(true, cancellationToken);
 
-                onSaveCompleted(new EntityChangeContext(names, entryList));
+                onSaveCompleted?.Invoke(new EntityChangeContext(names, entryList));
             }
             catch (DbUpdateConcurrencyException e)
             {
@@ -71,7 +71,6 @@ namespace PlatformFramework.EFCore.Entities
                     continue;
 
                 var hooks = _hooks
-                    .OfType<IDbContextEntityHook>()
                     .Where(hook => hook.HookState == entry.State)
                     .Where(hook => hook.CanHook(customizer.Flags));
 
@@ -91,6 +90,8 @@ namespace PlatformFramework.EFCore.Entities
                                 await hook.AfterSaveChanges(entry.Entity, metadata);
                                 break;
                             }
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(position), position, null);
                     }
 
                 }

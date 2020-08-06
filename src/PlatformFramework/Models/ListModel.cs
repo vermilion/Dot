@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PlatformFramework.Domain.Domain
+namespace PlatformFramework.Models
 {
     public class ListModel<T> where T : class
     {

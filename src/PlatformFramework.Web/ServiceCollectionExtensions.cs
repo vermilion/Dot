@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using PlatformFramework.Abstractions;
 using PlatformFramework.Web.Runtime;
-using PlatformFramework.Interfaces.Runtime;
 
 namespace PlatformFramework.Web
 {

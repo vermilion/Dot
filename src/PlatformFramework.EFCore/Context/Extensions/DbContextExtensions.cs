@@ -26,16 +26,7 @@ namespace PlatformFramework.EFCore.Context.Extensions
                 .Distinct()
                 .ToArray();
 
-            return changedEntityNames;
-        }
-
-        /// <summary>
-        /// Using the ChangeTracker to find types of the changed entities.
-        /// </summary>
-        public static IEnumerable<Type> FindChangedEntityTypes(this DbContext dbContext)
-        {
-            return dbContext.FindChangedEntries()
-                .Select(dbEntityEntry => dbEntityEntry.Entity.GetType());
+            return changedEntityNames!;
         }
 
         /// <summary>
@@ -45,13 +36,13 @@ namespace PlatformFramework.EFCore.Context.Extensions
         {
             if (type.GetTypeInfo().BaseType == null) return type.GetInterfaces();
 
-            return Enumerable.Repeat(type.GetTypeInfo().BaseType, 1)
+            return Enumerable.Repeat(type.GetTypeInfo().BaseType!, 1)
                 .Concat(type.GetInterfaces())
                 .Concat(type.GetInterfaces().SelectMany(FindBaseTypes))
-                .Concat(type.GetTypeInfo().BaseType.FindBaseTypes());
+                .Concat(type.GetTypeInfo().BaseType!.FindBaseTypes());
         }
 
-        public static IReadOnlyList<EntityEntry> FindChangedEntries(this DbContext context)
+        public static IEnumerable<EntityEntry> FindChangedEntries(this DbContext context)
         {
             return context.ChangeTracker
                 .Entries()

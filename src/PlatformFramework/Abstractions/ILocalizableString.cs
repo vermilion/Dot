@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Localization;
 
-namespace PlatformFramework.Interfaces.Localization
+namespace PlatformFramework.Abstractions
 {
     /// <summary>
     /// Represents a string that can be localized when needed.

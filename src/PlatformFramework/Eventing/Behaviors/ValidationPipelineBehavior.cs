@@ -2,14 +2,15 @@
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using PlatformFramework.Shared.Exceptions;
-using PlatformFramework.Shared.GuardToolkit;
 using System.Threading;
 using System.Threading.Tasks;
+using PlatformFramework.Exceptions;
+using Ardalis.GuardClauses;
 
 namespace PlatformFramework.UseCases.Behaviors
 {
     public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : notnull
     {
         private readonly IValidatorFactory _validatorFactory;
 
@@ -21,8 +22,7 @@ namespace PlatformFramework.UseCases.Behaviors
         {
             _validatorFactory = validatorFactory;
 
-            _logger = Ensure
-                .IsNotNull(loggerFactory, nameof(loggerFactory))
+            _logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                 .CreateLogger(GetType().Name);
         }
 
@@ -42,14 +42,13 @@ namespace PlatformFramework.UseCases.Behaviors
         {
             var validator = _validatorFactory.GetValidator<TRequest>();
 
-            if (validator == null)
-            {
-                _logger.LogDebug("Validator not found for type: {@Type}", typeof(TRequest));
+            if (validator != null) 
+                return await validator.ValidateAsync(model);
+            
+            _logger.LogDebug("Validator not found for type: {@Type}", typeof(TRequest));
 
-                return new ValidationResult();
-            }
+            return new ValidationResult();
 
-            return await validator.ValidateAsync(model);
         }
     }
 }

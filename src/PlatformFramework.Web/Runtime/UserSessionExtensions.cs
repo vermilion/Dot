@@ -1,6 +1,6 @@
 using System;
-using PlatformFramework.Interfaces.Runtime;
-using PlatformFramework.Shared.Extensions;
+using PlatformFramework.Abstractions;
+using PlatformFramework.Extensions;
 
 namespace PlatformFramework.Web.Runtime
 {

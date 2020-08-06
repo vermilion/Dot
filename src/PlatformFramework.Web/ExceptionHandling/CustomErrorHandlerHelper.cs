@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using PlatformFramework.Shared.Exceptions;
 using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
+using PlatformFramework.Exceptions;
 
 namespace PlatformFramework.Web.ExceptionHandling
 {
@@ -26,10 +26,10 @@ namespace PlatformFramework.Web.ExceptionHandling
         }
 
         private static Task WriteDevelopmentResponse(HttpContext httpContext, Func<Task> next)
-            => WriteResponse(httpContext, includeDetails: true);
+            => WriteResponse(httpContext, true);
 
         private static Task WriteProductionResponse(HttpContext httpContext, Func<Task> next)
-            => WriteResponse(httpContext, includeDetails: false);
+            => WriteResponse(httpContext, false);
 
         private static async Task WriteResponse(HttpContext httpContext, bool includeDetails)
         {
@@ -74,7 +74,7 @@ namespace PlatformFramework.Web.ExceptionHandling
                 }
 
                 // This is often very handy information for tracing the specific request
-                var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
+                var traceId = Activity.Current?.Id ?? httpContext.TraceIdentifier;
                 if (traceId != null)
                 {
                     problem.Extensions["traceId"] = traceId;

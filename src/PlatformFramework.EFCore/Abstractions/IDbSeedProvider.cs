@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.Interfaces.Data
+namespace PlatformFramework.EFCore.Abstractions
 {
     public interface IDbSeedProvider
     {

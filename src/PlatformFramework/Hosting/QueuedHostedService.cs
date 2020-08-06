@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using PlatformFramework.Interfaces.Threading;
-using PlatformFramework.Shared.GuardToolkit;
+using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Hosting
 {
@@ -20,8 +20,8 @@ namespace PlatformFramework.Hosting
             IServiceScopeFactory factory,
             ILoggerFactory loggerFactory)
         {
-            _factory = Guard.ArgumentNotNull(factory, nameof(factory));
-            _queue = Guard.ArgumentNotNull(queue, nameof(queue));
+            _factory = Guard.Against.Null(factory, nameof(factory));
+            _queue = Guard.Against.Null(queue, nameof(queue));
             _logger = loggerFactory.CreateLogger<QueuedHostedService>();
         }
 

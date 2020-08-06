@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace PlatformFramework.Interfaces.Runtime
+namespace PlatformFramework.Abstractions
 {
     /// <summary>
     ///     Defines some session information that can be useful for applications.
@@ -14,55 +14,55 @@ namespace PlatformFramework.Interfaces.Runtime
         ///     Gets current UserId or null.
         ///     It can be null if no user logged in.
         /// </summary>
-        string UserId { get; }
+        string? UserId { get; }
 
         /// <summary>
         ///     Gets current UserName or null.
         ///     It can be null if no user logged in.
         /// </summary>
-        string UserName { get; }
+        string? UserName { get; }
         
         /// <summary>
         ///     Gets current user's Permissions
         ///     It can be null if no user logged in.
         /// </summary>
-        IReadOnlyList<string> Permissions { get; }
+        IReadOnlyList<string>? Permissions { get; }
 
         /// <summary>
         ///     Gets current user's Roles
         ///     It can be null if no user logged in.
         /// </summary>
-        IReadOnlyList<string> Roles { get; }
+        IReadOnlyList<string>? Roles { get; }
 
         /// <summary>
         ///     Gets current user's Claims
         ///     It can be null if no user logged in.
         /// </summary>
-        IReadOnlyList<Claim> Claims { get; }
+        IReadOnlyList<Claim>? Claims { get; }
 
         /// <summary>
         ///     Gets current UserDisplayName or null.
         ///     It can be null if no user logged in.
         /// </summary>
-        string UserDisplayName { get; }
+        string? UserDisplayName { get; }
 
         /// <summary>
         ///     Gets current UserBrowserInfo or null.
         ///     It can be null if no user logged in.
         /// </summary>
-        string UserBrowserName { get; }
+        string? UserBrowserName { get; }
 
         /// <summary>
         ///     Gets current UserIP or null.
         ///     It can be null if no user logged in.
         /// </summary>
-        string UserIp { get; }
+        string? UserIp { get; }
 
         /// <summary>
         ///     UserId of the impersonator.
         ///     This is filled if a user is performing actions behalf of the <see cref="UserId" />.
         /// </summary>
-        string ImpersonatorUserId { get; }
+        string? ImpersonatorUserId { get; }
 
         bool IsInRole(string role);
         bool IsGranted(string permission);

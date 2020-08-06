@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PlatformFramework.Domain.Models
+namespace PlatformFramework.Models
 {
     /// <summary>
     /// Base Framework model class

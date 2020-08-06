@@ -15,7 +15,7 @@ namespace PlatformFramework.Web.Extensions
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> instance this method extends.</param>
         /// <param name="claimType">The claim type whose first value should be returned.</param>
         /// <returns>The value of the first instance of the specified claim type, or null if the claim is not present.</returns>        
-        public static string FindFirstValue(this ClaimsPrincipal principal, string claimType)
+        public static string? FindFirstValue(this ClaimsPrincipal principal, string claimType)
         {
             if (principal == null) throw new ArgumentNullException(nameof(principal));
 
@@ -57,18 +57,18 @@ namespace PlatformFramework.Web.Extensions
             return principal.FindPermissions().Any(p => p.Equals(permission, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static string FindUserId(this ClaimsPrincipal principal)
+        public static string? FindUserId(this ClaimsPrincipal principal)
         {
             var value = principal.FindFirstValue(UserClaimTypes.UserId);
             return value;
         }
 
-        public static string FindImpersonatorUserId(this ClaimsPrincipal principal)
+        public static string? FindImpersonatorUserId(this ClaimsPrincipal principal)
         {
             return principal.FindFirstValue(UserClaimTypes.ImpersonatorUserId);
         }
 
-        public static string FindUserDisplayName(this ClaimsPrincipal principal)
+        public static string? FindUserDisplayName(this ClaimsPrincipal principal)
         {
             var displayName = principal.FindFirstValue(UserClaimTypes.UserName);
             return string.IsNullOrWhiteSpace(displayName) 
@@ -76,7 +76,7 @@ namespace PlatformFramework.Web.Extensions
                 : displayName;
         }
 
-        public static string FindUserName(this ClaimsPrincipal principal)
+        public static string? FindUserName(this ClaimsPrincipal principal)
         {
             return principal.FindFirstValue(UserClaimTypes.UserName);
         }

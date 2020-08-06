@@ -1,6 +1,7 @@
 ﻿using System;
+using PlatformFramework.Exceptions;
 
-namespace PlatformFramework.Shared.Exceptions
+namespace PlatformFramework.EFCore.Exceptions
 {
     [Serializable]
     public class DbException : FrameworkException
