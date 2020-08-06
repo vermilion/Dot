@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace PlatformFramework.Interfaces.Caching
 {
     /// <summary>
-    /// ICacheService encapsulates IMemoryCache functionality.
+    /// ICacheService encapsulates caching functionality.
     /// </summary>
     public interface ICacheService
     {

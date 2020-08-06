@@ -26,46 +26,46 @@ namespace PlatformFramework.EFCore.Entities
         }
 
         /// <summary>
-        /// Применение маппинга сущности на DTO
+        /// Use mapping to Model
         /// </summary>
-        /// <typeparam name="TDto">Тип DTO</typeparam>
-        /// <param name="action">Метод конфигурирования</param>
-        /// <param name="memberList">Тип валидации</param>
-        public void MapToDto<TDto>(Action<IMappingExpression<TEntity, TDto>> action = null, MemberList memberList = MemberList.None)
-            where TDto : class
+        /// <typeparam name="TModel">Model type</typeparam>
+        /// <param name="action">Configure method</param>
+        /// <param name="memberList">Validation type</param>
+        public void MapToDto<TModel>(Action<IMappingExpression<TEntity, TModel>> action = null, MemberList memberList = MemberList.None)
+            where TModel : class
         {
             Registry.RegisterMapping(expression =>
             {
-                var map = expression.CreateMap<TEntity, TDto>(memberList);
+                var map = expression.CreateMap<TEntity, TModel>(memberList);
                 action?.Invoke(map);
             });
         }
 
         /// <summary>
-        /// Применение маппинга DTO на  ущность
+        /// Use mapping from Model
         /// </summary>
-        /// <typeparam name="TDto">Тип DTO</typeparam>
-        /// <param name="action">Метод конфигурирования</param>
-        public void MapFromDto<TDto>(Action<IMappingExpression<TDto, TEntity>> action = null)
-            where TDto : class
+        /// <typeparam name="TModel">Model type</typeparam>
+        /// <param name="action">Configure method</param>
+        public void MapFromDto<TModel>(Action<IMappingExpression<TModel, TEntity>> action = null)
+            where TModel : class
         {
             Registry.RegisterMapping(expression =>
             {
-                var map = expression.CreateMap<TDto, TEntity>();
+                var map = expression.CreateMap<TModel, TEntity>();
                 action?.Invoke(map);
             });
         }
 
         /// <summary>
-        /// Применение профиля для маппинга сущности
+        /// Wrapper over Mapping profile
         /// </summary>
-        /// <typeparam name="T">Тип профиля</typeparam>
-        public void RegisterMappingProfile<T>()
-            where T : Profile, new()
+        /// <typeparam name="TProfile">Profile type</typeparam>
+        public void RegisterMappingProfile<TProfile>()
+            where TProfile : Profile, new()
         {
             Registry.RegisterMapping(expression =>
             {
-                expression.AddProfile<T>();
+                expression.AddProfile<TProfile>();
             });
         }
     }

@@ -10,7 +10,7 @@ using PlatformFramework.EFCore.Entities.Customizers;
 namespace PlatformFramework.EFCore.Entities
 {
     /// <summary>
-    /// Реестр сущностей
+    /// Registry
     /// </summary>
     public class EntitiesRegistry
     {

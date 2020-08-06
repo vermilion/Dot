@@ -4,12 +4,12 @@ using PlatformFramework.EFCore.Context;
 namespace PlatformFramework.EFCore.Entities.Customizers
 {
     /// <summary>
-    /// Базовый кастомайзер для сущности
+    /// Default Entities Customizer
     /// </summary>
     public abstract class EntityCustomizer
     {
         /// <summary>
-        /// Флаги сущности
+        /// Entity flags
         /// </summary>
         public EntityConfigFlags Flags { get; set; } = new EntityConfigFlags();
 

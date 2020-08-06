@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace PlatformFramework.Shared.Exceptions
 {
+    /// <summary>
+    /// Default Excrption that may be raised from Framework
+    /// </summary>
     public class FrameworkException : Exception
     {
         public FrameworkException()

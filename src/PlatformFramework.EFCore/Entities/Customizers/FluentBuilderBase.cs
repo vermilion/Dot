@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace PlatformFramework.EFCore.Entities.Customizers
 {
     /// <summary>
-    /// Настройщик
+    /// Builder
     /// </summary>
     /// <typeparam name="TBuilder"></typeparam>
     public abstract class FluentBuilderBase<TBuilder>

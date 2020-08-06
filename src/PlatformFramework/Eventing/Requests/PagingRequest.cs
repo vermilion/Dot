@@ -1,8 +1,11 @@
 ﻿namespace PlatformFramework.Domain.Domain
 {
-    public class PagingModel
+    /// <summary>
+    /// Request used for paging
+    /// </summary>
+    public abstract class PagingRequest
     {
-        public PagingModel(int? limit = null, int? offset = null)
+        public PagingRequest(int? limit = null, int? offset = null)
         {
             Limit = limit;
             Offset = offset;

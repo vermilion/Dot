@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.Shared.Exceptions;
 using PlatformFramework.Shared.GuardToolkit;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -13,9 +13,9 @@ namespace PlatformFramework.EFCore
         /// <summary>
         ///     Add the services (application specific class)
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="optionsAction"></param>
-        /// <returns></returns>
+        /// <param name="services"><see cref="IServiceCollection"/></param>
+        /// <param name="optionsAction">Action for configuring <see cref="DbContextOptionsBuilder"/></param>
+        /// <returns>Builder instance</returns>
         public static EfCoreBuilder<TDbContext> AddEfCore<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder> optionsAction = null)
             where TDbContext : DbContext, IUnitOfWork
         {

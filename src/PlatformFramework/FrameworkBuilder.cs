@@ -35,6 +35,10 @@ namespace PlatformFramework
             return defaults;
         }
 
+        /// <summary>
+        /// Default Framework parts
+        /// </summary>
+        /// <returns><see cref="FrameworkBuilder"/></returns>
         public FrameworkBuilder WithDefaults()
         {
             this.WithClockService()

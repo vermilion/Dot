@@ -18,10 +18,10 @@ namespace PlatformFramework.EFCore
         }
 
         /// <summary>
-        /// Использование стандартного сервиса миграций
+        /// Use default migrations initializer
         /// </summary>
-        /// <typeparam name="TContext"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="TContext">Context type <see cref="TDbContext"/></typeparam>
+        /// <returns>Fluent builder</returns>
         public EfCoreBuilder<TDbContext> WithMigrationInitializer()
         {
             Services.AddHostedService<DbContextMigrationsInitializer<TDbContext>>();
@@ -29,7 +29,7 @@ namespace PlatformFramework.EFCore
         }
 
         /// <summary>
-        /// Использование хуков для контекста
+        /// Use hooks for context entities interception
         /// </summary>
         /// <param name="configureAction"></param>
         /// <returns></returns>
@@ -42,7 +42,7 @@ namespace PlatformFramework.EFCore
         }
 
         /// <summary>
-        /// Регистрация сущностей и их кастомизаторов
+        /// Register Entities and their Customizers
         /// </summary>
         /// <param name="configureAction"></param>
         /// <returns></returns>

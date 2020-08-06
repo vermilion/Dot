@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace PlatformFramework.EFCore.Entities.Customizers
 {
     /// <summary>
-    /// Кастомайзер для сущности
+    /// Customizer
     /// </summary>
     /// <typeparam name="TEntity">Тип сущности</typeparam>
     public abstract class EntityCustomizer<TEntity> : EntityCustomizer
@@ -17,12 +17,12 @@ namespace PlatformFramework.EFCore.Entities.Customizers
         }
 
         /// <summary>
-        /// Настройки сущности
+        /// Customize entity to database
         /// </summary>
         public abstract void CustomizeEntity(EntityTypeBuilder<TEntity> entity);
 
         /// <summary>
-        /// Настройки расширения сущности
+        /// Configure entity extensions
         /// </summary>
         public virtual void CustomizeEntityExtension(EntityExtensionBuilder<TEntity> extension)
         {

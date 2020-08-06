@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace PlatformFramework.Web.ExceptionHandling
 {
-
     public static class CustomErrorHandlerHelper
     {
         public static void UseCustomErrors(this IApplicationBuilder app, IHostEnvironment environment)

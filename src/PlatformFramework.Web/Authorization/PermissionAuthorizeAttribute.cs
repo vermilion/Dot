@@ -1,6 +1,5 @@
 using System;
 using Microsoft.AspNetCore.Authorization;
-using PlatformFramework.Shared.Extensions;
 
 namespace PlatformFramework.Web.Authorization
 {

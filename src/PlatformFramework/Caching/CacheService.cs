@@ -10,14 +10,14 @@ using PlatformFramework.Shared.GuardToolkit;
 namespace PlatformFramework.Caching
 {
     /// <summary>
-    /// Encapsulates IDistributedCache functionality.
+    /// Encapsulates <see cref="IDistributedCache"/> functionality.
     /// </summary>
     internal sealed class MemoryCacheService : ICacheService
     {
         private readonly IDistributedCache _distributedCache;
 
         /// <summary>
-        ///  Encapsulates IDistributedCache functionality.
+        ///  Encapsulates <see cref="IDistributedCache"/> functionality.
         /// </summary>
         public MemoryCacheService(IDistributedCache distributedCache)
         {

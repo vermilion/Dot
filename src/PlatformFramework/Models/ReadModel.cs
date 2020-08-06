@@ -2,6 +2,9 @@
 
 namespace PlatformFramework.Domain.Models
 {
+    /// <summary>
+    /// Base Framework model class
+    /// </summary>
     public abstract class ReadModel
     {
         public long Id { get; set; }

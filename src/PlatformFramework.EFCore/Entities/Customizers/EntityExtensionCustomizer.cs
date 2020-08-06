@@ -7,7 +7,7 @@ using System;
 namespace PlatformFramework.EFCore.Entities.Customizers
 {
     /// <summary>
-    /// Кастомайзер для расширений сущности
+    /// Customizer
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     public class EntityExtensionBuilder<TEntity> : FluentBuilderBase<EntityTypeBuilder<TEntity>>
@@ -21,7 +21,7 @@ namespace PlatformFramework.EFCore.Entities.Customizers
         }
 
         /// <summary>
-        /// Включение Optimistic Concurrency check по столбцу RowVersion
+        /// Turn on Optimistic Concurrency check for RowVersion column
         /// </summary>
         /// TODO: должны ли передавать RowVersion на клиент, чтобы держать там версию
         /// <returns></returns>
@@ -53,7 +53,7 @@ namespace PlatformFramework.EFCore.Entities.Customizers
         }
 
         /// <summary>
-        /// Аудит удаления сущности из БД
+        /// Audit entities on Delete
         /// </summary>
         /// <returns>Fluent</returns>
         public EntityExtensionBuilder<TEntity> AddDeletionTracking()
@@ -75,7 +75,7 @@ namespace PlatformFramework.EFCore.Entities.Customizers
         }
 
         /// <summary>
-        /// Аудит добавления сущности в БД
+        /// Audit entities on Create
         /// </summary>
         /// <returns>Fluent</returns>
         public EntityExtensionBuilder<TEntity> AddCreationTracking()
@@ -97,7 +97,7 @@ namespace PlatformFramework.EFCore.Entities.Customizers
         }
 
         /// <summary>
-        /// Аудит редактирования сущности в БД
+        /// Audit entities on Edit
         /// </summary>
         /// <returns>Fluent</returns>
         public EntityExtensionBuilder<TEntity> AddModificationTracking()
@@ -115,21 +115,5 @@ namespace PlatformFramework.EFCore.Entities.Customizers
 
             return this;
         }
-
-        /*
-
-        public EntityExtensionBuilder<TEntity> VersionEnabled(bool? value)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Кэширование запросов сущности
-        /// </summary>
-        /// <returns>Fluent</returns>
-        public EntityExtensionBuilder<TEntity> CachingEnabled()
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

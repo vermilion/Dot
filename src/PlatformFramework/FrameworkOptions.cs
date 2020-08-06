@@ -5,22 +5,22 @@ using System.Reflection;
 namespace PlatformFramework
 {
     /// <summary>
-    /// Настройки Framework
+    /// Framework configuration options
     /// </summary>
     public class FrameworkOptions
     {
         /// <summary>
-        /// Список сборок приложения
+        /// Assemblies used for framework parts
         /// </summary>
         public List<Assembly> Assemblies { get; } = new List<Assembly>(new[] { Assembly.GetEntryAssembly() });
 
         internal Dictionary<Type, Delegate> ConfigureActions { get; } = new Dictionary<Type, Delegate>();
 
         /// <summary>
-        /// Конфигурирование части Framework
+        /// Framework part configuration
         /// </summary>
-        /// <typeparam name="T">Тип</typeparam>
-        /// <param name="action">Метод конфигурирования</param>
+        /// <typeparam name="T">Part Type</typeparam>
+        /// <param name="action">Configuration action</param>
         public void Configure<T>(Action<T> action)
         {
             ConfigureActions[typeof(T)] = action;

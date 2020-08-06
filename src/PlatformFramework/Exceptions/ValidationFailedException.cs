@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace PlatformFramework.Shared.Exceptions
 {
+    /// <summary>
+    /// Framework validation exception
+    /// </summary>
     [Serializable]
     public class ValidationFailedException : FrameworkException
     {

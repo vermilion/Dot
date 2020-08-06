@@ -1,6 +1,4 @@
-﻿using PlatformFramework.Domain;
-using PlatformFramework.Domain.Domain;
-using PlatformFramework.EFCore.Entities;
+﻿using PlatformFramework.EFCore.Entities;
 using PlatformFramework.EFCore.Entities.Customizers;
 
 namespace PlatformFramework.EFCore
