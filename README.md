@@ -11,6 +11,7 @@
 - [ ] add Sample Project
 - [ ] add tests
 - [ ] stabilize Hooks Api
+- [ ] review Auth code and features
 - [ ] derive Context from IdentityContext with configuration
 - [ ] add tenancy
 - [ ] add tenant Angular template project
@@ -51,22 +52,22 @@ public void ConfigureServices(IServiceCollection services)
 #### PlatformFramework.Web
 - In your `Startup.cs`
 ```csharp
-            services
-                .AddWebFramework()
-                .WithPermissionAuthorization()
-                .WithCors(options =>
-                {
-                    options.AddPolicy("Default", x => x
-                        .AllowCredentials()
-                        .SetIsOriginAllowed(isOriginAllowed: _ => true)
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-                })
-                .WithResponseCompression(options =>
-                {
-                    options.Providers.Add<BrotliCompressionProvider>();
-                    options.EnableForHttps = true;
-                });
+    services
+        .AddWebFramework()
+        .WithPermissionAuthorization()
+        .WithCors(options =>
+        {
+            options.AddPolicy("Default", x => x
+                .AllowCredentials()
+                .SetIsOriginAllowed(isOriginAllowed: _ => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+        })
+        .WithResponseCompression(options =>
+        {
+            options.Providers.Add<BrotliCompressionProvider>();
+            options.EnableForHttps = true;
+        });
 ```
 
 #### PlatformFramework.EFCore
