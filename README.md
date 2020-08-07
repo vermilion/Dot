@@ -47,11 +47,16 @@ public void ConfigureServices(IServiceCollection services)
             x.Assemblies.Add(typeof(ApplicationRegistry).Assembly);
         })
         .WithDefaults(); // add default framework services. This can be omitted and replaced by concrete extensions
+    
+    ....
+}
 ```
 
 #### PlatformFramework.Web
 - In your `Startup.cs`
 ```csharp
+public void ConfigureServices(IServiceCollection services)
+{
     services
         .AddWebFramework()
         .WithPermissionAuthorization()
@@ -68,27 +73,35 @@ public void ConfigureServices(IServiceCollection services)
             options.Providers.Add<BrotliCompressionProvider>();
             options.EnableForHttps = true;
         });
+       
+    ....
+}
 ```
 
 #### PlatformFramework.EFCore
 - In your `Startup.cs`
 ```csharp
-services
-    .AddEfCore<ProjectDbContext>(o => //configure DbContext and `IUnitOfWork`
-    {
-        var connectionString = "__CONNECTION_STRING__";
-        o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
-    })
-    .WithMigrationInitializer() // add DBContext migrator to startup
-    .WithHooks(x => // add `on SaveChanges` entity hooks 
-    {
-        x.WithTrackingHooks();
-        x.WithSoftDeletedEntityHook();
-    })
-    .WithEntities(x => // add Entities to DbContext
-    {
-        x.RegisterEntity<FederalProjectItem, FederalProjectItemCustomizer>();
-    });
+public void ConfigureServices(IServiceCollection services)
+{
+    services
+        .AddEfCore<ProjectDbContext>(o => //configure DbContext and `IUnitOfWork`
+        {
+            var connectionString = "__CONNECTION_STRING__";
+            o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
+        })
+        .WithMigrationInitializer() // add DBContext migrator to startup
+        .WithHooks(x => // add `on SaveChanges` entity hooks 
+        {
+            x.WithTrackingHooks();
+            x.WithSoftDeletedEntityHook();
+        })
+        .WithEntities(x => // add Entities to DbContext
+        {
+            x.RegisterEntity<FederalProjectItem, FederalProjectItemCustomizer>();
+        });
+            
+    ....
+}
 ```
 
 ### Samples
