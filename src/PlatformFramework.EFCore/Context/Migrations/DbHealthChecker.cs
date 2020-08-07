@@ -5,7 +5,7 @@ using PlatformFramework.EFCore.Exceptions;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {
-    public static class DbHealthChecker
+    internal static class DbHealthChecker
     {
         public static async Task TestConnection(DbContext context, CancellationToken cancellationToken = default)
         {

@@ -9,7 +9,7 @@ using PlatformFramework.EFCore.Abstractions;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {
-    public class DbContextMigrationsInitializer<TContext> : BackgroundService
+    internal class DbContextMigrationsInitializer<TContext> : BackgroundService
         where TContext : DbContext
     {
         private readonly IServiceProvider _provider;

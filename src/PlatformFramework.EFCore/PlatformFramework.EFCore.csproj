@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<PackageOutputPath>..\Package</PackageOutputPath>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
+		<Title>PlatformFramework.EFCore</Title>
+		<Description>Entity Framework Core part of a PlatformFramework package</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
