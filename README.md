@@ -6,12 +6,23 @@
 | [PlatformFramework.Web](https://www.nuget.org/packages/PlatformFramework.Web) / A Web part of framework on top of the PlatformFramework | ![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Web?logo=nuget&style=flat-square) |
 | [PlatformFramework.EFCore](https://www.nuget.org/packages/PlatformFramework.EFCore) / A EntityFramework Core part of framework on top of the PlatformFramework | ![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore?logo=nuget&style=flat-square) |
 
+## Work in Progress
+
+- [ ] add Sample Project
+- [ ] add tests
+- [ ] stabilize Hooks Api
+- [ ] derive Context from IdentityContext with configuration
+- [ ] add tenancy
+- [ ] add tenant Angular template project
+
 ## Technologies
 
-* [.NET Core 3.1](https://dotnet.microsoft.com/download)
-* [ASP.NET Core 3.1](https://docs.microsoft.com/en-us/aspnet/core)
+* [.NET 5](https://dotnet.microsoft.com/download)
+* [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core)
 * [Entity Framework Core 3.1](https://docs.microsoft.com/en-us/ef/core)
 * [C# 8.0](https://docs.microsoft.com/en-us/dotnet/csharp)
+* [AutoMapper](https://automapper.org/)
+* [Mediatr](https://github.com/jbogard/MediatR)
 
 ## Installing
 
