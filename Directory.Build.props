@@ -1,11 +1,12 @@
 <Project>
- <PropertyGroup>
-    <WarningsAsErrors>CS4014,VSTHRD103</WarningsAsErrors>
-	<NoWarn>$(NoWarn);CA1062;1591;VSTHRD200</NoWarn>
-	<Nullable>enable</Nullable>
-	<NullableReferenceTypes>true</NullableReferenceTypes>
-	<LangVersion>8.0</LangVersion>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<NeutralLanguage>en</NeutralLanguage>
- </PropertyGroup>
+	<PropertyGroup>
+		<Version>0.1.1</Version>
+		<WarningsAsErrors>CS4014,VSTHRD103</WarningsAsErrors>
+		<NoWarn>$(NoWarn);CA1062;1591;VSTHRD200</NoWarn>
+		<Nullable>enable</Nullable>
+		<NullableReferenceTypes>true</NullableReferenceTypes>
+		<LangVersion>8.0</LangVersion>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
 </Project>
