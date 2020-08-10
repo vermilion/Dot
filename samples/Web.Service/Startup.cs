@@ -69,9 +69,13 @@ namespace Web.Service
                     x.WithTrackingHooks();
                     x.WithSoftDeletedEntityHook();
                 })
+                .WithMappers(x =>
+                {
+                    x.AddProfile<MyEntityMappingProfile>();
+                })
                 .WithEntities(x =>
                 {
-                    x.RegisterEntity<MyEntity, MyEntityCustomizer>();
+                    x.ApplyConfiguration<MyEntity, MyEntityConfiguration>();
                 });
 
             //services.AddProblemDetails();

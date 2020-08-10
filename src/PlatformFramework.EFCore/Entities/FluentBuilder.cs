@@ -7,17 +7,17 @@ namespace PlatformFramework.EFCore.Entities.Customizers
     /// Builder
     /// </summary>
     /// <typeparam name="TBuilder"></typeparam>
-    public abstract class FluentBuilderBase<TBuilder>
+    public class FluentBuilder<TBuilder>
     {
         protected List<Action<TBuilder>> Actions = new List<Action<TBuilder>>();
 
-        internal virtual void Apply(TBuilder builder)
+        public void Apply(TBuilder builder)
         {
             Actions.ForEach(action => action(builder));
             Freeze();
         }
 
-        protected void AddAction(Action<TBuilder> action)
+        public void AddAction(Action<TBuilder> action)
         {
             if (Frozen)
                 return;

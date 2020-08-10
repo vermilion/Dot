@@ -6,10 +6,10 @@ namespace PlatformFramework.EFCore
 {
     public static class DbContextExtensions
     {
-        public static void RegisterPlatformEntities(this ModelBuilder modelBuilder, DbContext context)
+        public static void OnModelCreating(this ModelBuilder modelBuilder, DbContext context)
         {
             var registry = context.GetService<EntitiesRegistry>();
-            registry.Configure(modelBuilder);
+            registry.Apply(modelBuilder);
         }
     }
 }

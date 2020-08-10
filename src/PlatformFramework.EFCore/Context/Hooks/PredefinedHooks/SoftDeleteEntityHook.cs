@@ -1,24 +1,20 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 
 namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
-    internal sealed class SoftDeleteEntityHook : DbContextDeleteEntityHook
+    internal sealed class SoftDeleteEntityHook : DeleteEntityHook<ISoftDeletable>
     {
-        public override bool CanHook(EntityConfigFlags flags)
-        {
-            return flags.Has(EfCore.IsSoftDeleteEnabled);
-        }
-
-        public override Task BeforeSaveChanges(object entity, HookEntityMetadata metadata)
+        protected override Task BeforeSaveChanges(ISoftDeletable entity, HookEntityMetadata metadata)
         {
             metadata.Entry.State = EntityState.Modified;
-            metadata.Entry.Property(EfCore.IsDeleted).CurrentValue = true;
+            entity.IsDeleted = true;
 
             return Task.CompletedTask;
         }
 
-        public override Task AfterSaveChanges(object entity, HookEntityMetadata metadata)
+        protected override Task AfterSaveChanges(ISoftDeletable entity, HookEntityMetadata metadata)
         {
             return Task.CompletedTask;
         }

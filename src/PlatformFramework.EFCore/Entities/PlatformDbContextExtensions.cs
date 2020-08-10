@@ -19,14 +19,14 @@ namespace PlatformFramework.EFCore.Entities
     {
         private readonly DbContext _context;
         private readonly EntitiesRegistry _registry;
-        private readonly IEnumerable<IDbContextEntityHook> _hooks;
+        private readonly IEnumerable<IEntityHook> _hooks;
 
         public PlatformDbContextExtensions(DbContext context)
         {
             _context = context;
 
             _registry = context.GetService<EntitiesRegistry>();
-            _hooks = context.GetService<IEnumerable<IDbContextEntityHook>>();
+            _hooks = context.GetService<IEnumerable<IEntityHook>>();
         }
 
         public async Task<int> SaveChanges(Action<EntityChangeContext>? onSaveCompleted = null, CancellationToken cancellationToken = default)
@@ -66,13 +66,7 @@ namespace PlatformFramework.EFCore.Entities
         {
             foreach (var entry in entryList)
             {
-                var customizer = _registry.GetCustomizer(entry.Entity.GetType());
-                if (customizer == null)
-                    continue;
-
-                var hooks = _hooks
-                    .Where(hook => hook.HookState == entry.State)
-                    .Where(hook => hook.CanHook(customizer.Flags));
+                var hooks = _hooks.Where(hook => hook.HookState == entry.State);
 
                 foreach (var hook in hooks)
                 {
@@ -93,7 +87,6 @@ namespace PlatformFramework.EFCore.Entities
                         default:
                             throw new ArgumentOutOfRangeException(nameof(position), position, null);
                     }
-
                 }
             }
         }

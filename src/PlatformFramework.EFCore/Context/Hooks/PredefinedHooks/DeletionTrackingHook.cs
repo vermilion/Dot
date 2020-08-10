@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using PlatformFramework.Abstractions;
+using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.Extensions;
 
 namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
-    internal sealed class DeletionTrackingHook : DbContextDeleteEntityHook
+    internal sealed class DeletionTrackingHook : DeleteEntityHook<IDeletionTrackable>
     {
         private readonly IUserSession _session;
         private readonly IClockProvider _clock;
@@ -16,20 +17,15 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
             _clock = Guard.Against.Null(clock, nameof(clock));
         }
 
-        public override bool CanHook(EntityConfigFlags flags)
+        protected override Task BeforeSaveChanges(IDeletionTrackable entity, HookEntityMetadata metadata)
         {
-            return flags.Has(EfCore.IsSoftDeleteEnabled) && flags.Has(EfCore.IsDeletionTrackingEnabled);
-        }
-
-        public override Task BeforeSaveChanges(object entity, HookEntityMetadata metadata)
-        {
-            metadata.Entry.Property(EfCore.DeletedDateTime).CurrentValue = _clock.Now;
-            metadata.Entry.Property(EfCore.DeletedByUserId).CurrentValue = _session.UserId?.To<long>();
+            entity.DeletedDateTime = _clock.Now;
+            entity.DeletedByUserId = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }
 
-        public override Task AfterSaveChanges(object entity, HookEntityMetadata metadata)
+        protected override Task AfterSaveChanges(IDeletionTrackable entity, HookEntityMetadata metadata)
         {
             return Task.CompletedTask;
         }

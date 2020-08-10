@@ -97,7 +97,7 @@ public void ConfigureServices(IServiceCollection services)
         })
         .WithEntities(x => // add Entities to DbContext
         {
-            x.RegisterEntity<FederalProjectItem, FederalProjectItemCustomizer>();
+            x.ApplyConfiguration<MyEntity, MyEntityConfiguration>();
         });
             
     ....

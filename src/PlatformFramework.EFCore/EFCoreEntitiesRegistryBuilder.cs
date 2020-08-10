@@ -1,5 +1,5 @@
-﻿using PlatformFramework.EFCore.Entities;
-using PlatformFramework.EFCore.Entities.Customizers;
+﻿using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Entities;
 
 namespace PlatformFramework.EFCore
 {
@@ -12,16 +12,13 @@ namespace PlatformFramework.EFCore
             Registry = registry;
         }
 
-        public EfCoreEntitiesRegistryBuilder RegisterEntity<TEntity, TCustomizer>(bool addToContext = true)
+        public EfCoreEntitiesRegistryBuilder ApplyConfiguration<TEntity, TCustomizer>()
             where TEntity : class
-            where TCustomizer : EntityCustomizer<TEntity>, new()
+            where TCustomizer : IEntityTypeConfiguration<TEntity>, new()
         {
-            var customizer = new TCustomizer
-            {
-                AddToContext = addToContext
-            };
+            var customizer = new TCustomizer();
 
-            Registry.RegisterCustomizer<TEntity, TCustomizer>(customizer);
+            Registry.ApplyConfiguration<TEntity, TCustomizer>(customizer);
 
             return this;
         }

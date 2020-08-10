@@ -1,0 +1,19 @@
+2020-08-10 11:30:40.194 +03:00 [INF] Queued Hosted Service is starting.
+2020-08-10 11:30:41.357 +03:00 [INF] Migrating database associated with context ProjectDbContext
+2020-08-10 11:30:42.523 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data, this mode should only be enabled during development.
+2020-08-10 11:30:42.629 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null 
+2020-08-10 11:30:44.249 +03:00 [INF] Now listening on: https://localhost:5001
+2020-08-10 11:30:44.250 +03:00 [INF] Now listening on: http://localhost:5000
+2020-08-10 11:30:44.251 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-08-10 11:30:44.252 +03:00 [INF] Hosting environment: Development
+2020-08-10 11:30:44.252 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service
+2020-08-10 11:30:44.745 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2020-08-10 11:30:44.839 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2020-08-10 11:30:44.876 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2020-08-10 11:30:44.903 +03:00 [INF] No migrations were applied. The database is already up to date.
+2020-08-10 11:30:44.904 +03:00 [INF] Migrated database associated with context ProjectDbContext

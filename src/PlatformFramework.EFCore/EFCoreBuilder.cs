@@ -1,4 +1,6 @@
 ﻿using System;
+using AutoMapper;
+using AutoMapper.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.EFCore.Context;
@@ -30,8 +32,8 @@ namespace PlatformFramework.EFCore
         /// <summary>
         /// Use hooks for context entities interception
         /// </summary>
-        /// <param name="configureAction"></param>
-        /// <returns></returns>
+        /// <param name="configureAction">Configure <see cref="EfCoreHooksBuilder"/></param>
+        /// <returns>Fluent builder</returns>
         public EfCoreBuilder<TDbContext> WithHooks(Action<EfCoreHooksBuilder> configureAction)
         {
             var builder = new EfCoreHooksBuilder(Services);
@@ -41,10 +43,26 @@ namespace PlatformFramework.EFCore
         }
 
         /// <summary>
+        /// Register Mapper configuration
+        /// </summary>
+        /// <param name="configureAction">Configure <see cref="MapperConfigurationExpression"/></param>
+        /// <returns>Fluent builder</returns>
+        public EfCoreBuilder<TDbContext> WithMappers(Action<MapperConfigurationExpression> configureAction)
+        {
+            var expression = new MapperConfigurationExpression();
+            configureAction?.Invoke(expression);
+
+            var automapperConfig = new MapperConfiguration(expression);
+            Services.AddSingleton(automapperConfig.CreateMapper());
+
+            return this;
+        }
+
+        /// <summary>
         /// Register Entities and their Customizers
         /// </summary>
-        /// <param name="configureAction"></param>
-        /// <returns></returns>
+        /// <param name="configureAction">Configure <see cref="EfCoreEntitiesRegistryBuilder"/></param>
+        /// <returns>Fluent builder</returns>
         public EfCoreBuilder<TDbContext> WithEntities(Action<EfCoreEntitiesRegistryBuilder> configureAction)
         {
             var registry = new EntitiesRegistry();
@@ -52,8 +70,6 @@ namespace PlatformFramework.EFCore
 
             var builder = new EfCoreEntitiesRegistryBuilder(registry);
             configureAction?.Invoke(builder);
-
-            registry.ConfigureServices(Services);
 
             return this;
         }

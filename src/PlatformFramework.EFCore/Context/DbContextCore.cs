@@ -9,6 +9,9 @@ using PlatformFramework.EFCore.Entities;
 
 namespace PlatformFramework.EFCore.Context
 {
+    /// <summary>
+    /// Framework's DbContext encapsulating all the entities/hooks/etc.. logic
+    /// </summary>
     public abstract class DbContextCore : DbContext, IUnitOfWork
     {
         protected DbContextCore(DbContextOptions options)
@@ -79,15 +82,15 @@ namespace PlatformFramework.EFCore.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.RegisterPlatformEntities(this);
+            modelBuilder.OnModelCreating(this);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted, cancellationToken);
         }
 
-        public override int SaveChanges()
+        public sealed override int SaveChanges()
         {
             return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted).GetAwaiter().GetResult();
         }

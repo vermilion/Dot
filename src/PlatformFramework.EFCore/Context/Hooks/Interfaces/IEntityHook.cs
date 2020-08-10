@@ -6,7 +6,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
     /// <summary>
     /// A 'hook' usable for calling at certain point in an entities life cycle.
     /// </summary>
-    public interface IDbContextEntityHook
+    public interface IEntityHook
     {
         /// <summary>
         /// Gets the entity state(s) to listen for.
@@ -26,7 +26,5 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
         /// <param name="entity">The entity</param>
         /// <param name="metadata">The metadata</param>
         Task AfterSaveChanges(object entity, HookEntityMetadata metadata);
-
-        bool CanHook(EntityConfigFlags flags);
     }
 }

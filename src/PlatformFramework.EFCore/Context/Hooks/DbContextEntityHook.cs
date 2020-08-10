@@ -5,35 +5,10 @@ using System.Threading.Tasks;
 namespace PlatformFramework.EFCore.Context.Hooks
 {
     /// <summary>
-    /// A strongly typed PreActionHook.
-    /// </summary>
-    public abstract class DbContextEntityHook : IDbContextEntityHook
-    {
-        /// <summary>
-        /// Entity States that this hook must be registered to listen for.
-        /// </summary>
-        public abstract EntityState HookState { get; }
-
-        /// <summary>
-        /// The logic to perform per entity before the registered action gets performed.
-        /// This gets run once per entity that has been changed.
-        /// </summary>
-        public abstract Task BeforeSaveChanges(object entity, HookEntityMetadata metadata);
-
-        /// <summary>
-        /// The logic to perform per entity before the registered action gets performed.
-        /// This gets run once per entity that has been changed.
-        /// </summary>
-        public abstract Task AfterSaveChanges(object entity, HookEntityMetadata metadata);
-
-        public abstract bool CanHook(EntityConfigFlags flags);
-    }
-
-    /// <summary>
     /// Implements a strongly-typed hook to be run after an action is performed in the database.
     /// </summary>
     /// <typeparam name="TEntity">The type of entity this hook must watch for.</typeparam>
-    public abstract class DbContextEntityHook<TEntity> : IDbContextEntityHook
+    public abstract class EntityHook<TEntity> : IEntityHook
     {
         /// <summary>
         /// Implements the interface.  This causes the hook to only run for objects that are assignable to TEntity.
@@ -69,7 +44,5 @@ namespace PlatformFramework.EFCore.Context.Hooks
         /// This gets run once per entity that has been changed.
         /// </summary>
         protected abstract Task AfterSaveChanges(TEntity entity, HookEntityMetadata metadata);
-
-        public abstract bool CanHook(EntityConfigFlags flags);
     }
 }

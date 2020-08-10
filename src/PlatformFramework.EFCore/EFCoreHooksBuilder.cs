@@ -15,23 +15,23 @@ namespace PlatformFramework.EFCore
 
         public EfCoreHooksBuilder WithTrackingHooks()
         {
-            Services.AddTransient<IDbContextEntityHook, CreationTrackingHook>();
-            Services.AddTransient<IDbContextEntityHook, ModificationTrackingHook>();
-            Services.AddTransient<IDbContextEntityHook, DeletionTrackingHook>();
+            Services.AddTransient<IEntityHook, CreationTrackingHook>();
+            Services.AddTransient<IEntityHook, ModificationTrackingHook>();
+            Services.AddTransient<IEntityHook, DeletionTrackingHook>();
 
             return this;
         }
 
         public EfCoreHooksBuilder WithSoftDeletedEntityHook()
         {
-            Services.AddTransient<IDbContextEntityHook, SoftDeleteEntityHook>();
+            Services.AddTransient<IEntityHook, SoftDeleteEntityHook>();
             return this;
         }
 
         public EfCoreHooksBuilder WithHook<THook>()
-            where THook : class, IDbContextEntityHook
+            where THook : class, IEntityHook
         {
-            Services.AddTransient<IDbContextEntityHook, THook>();
+            Services.AddTransient<IEntityHook, THook>();
             return this;
         }
     }

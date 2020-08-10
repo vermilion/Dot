@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using PlatformFramework.Abstractions;
+using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.Extensions;
 
 namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
-    internal sealed class ModificationTrackingHook : DbContextUpdateEntityHook
+    internal sealed class ModificationTrackingHook : UpdateEntityHook<IModificationTrackable>
     {
         private readonly IUserSession _session;
         private readonly IClockProvider _clock;
@@ -16,20 +17,15 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
             _clock = clock ?? throw new ArgumentNullException(nameof(clock));
         }
 
-        public override bool CanHook(EntityConfigFlags flags)
+        protected override Task BeforeSaveChanges(IModificationTrackable entity, HookEntityMetadata metadata)
         {
-            return flags.Has(EfCore.IsModificationTrackingEnabled);
-        }
-
-        public override Task BeforeSaveChanges(object entity, HookEntityMetadata metadata)
-        {
-            metadata.Entry.Property(EfCore.ModifiedDateTime).CurrentValue = _clock.Now;
-            metadata.Entry.Property(EfCore.ModifiedByUserId).CurrentValue = _session.UserId?.To<long>();
+            entity.ModifiedDateTime = _clock.Now;
+            entity.ModifiedByUserId = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }
 
-        public override Task AfterSaveChanges(object entity, HookEntityMetadata metadata)
+        protected override Task AfterSaveChanges(IModificationTrackable entity, HookEntityMetadata metadata)
         {
             return Task.CompletedTask;
         }
