@@ -1,14 +1,13 @@
 # PlatformFramework ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/vermilion/PlatformFramework/.NET%20Core?style=flat-square) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/vermilion/PlatformFramework?style=flat-square)
 
-| Package | Install |
-| --- | --- |
-| [PlatformFramework](https://www.nuget.org/packages/PlatformFramework) / An application framework for building applications on ASP.NET Core | ![Nuget](https://img.shields.io/nuget/v/PlatformFramework?logo=nuget&style=flat-square) |
-| [PlatformFramework.Web](https://www.nuget.org/packages/PlatformFramework.Web) / A Web part of framework on top of the PlatformFramework | ![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Web?logo=nuget&style=flat-square) |
-| [PlatformFramework.EFCore](https://www.nuget.org/packages/PlatformFramework.EFCore) / A EntityFramework Core part of framework on top of the PlatformFramework | ![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore?logo=nuget&style=flat-square) |
+[![Nuget](https://img.shields.io/nuget/v/PlatformFramework?logo=nuget&label=PlatformFramework&style=flat-square)](https://www.nuget.org/packages/PlatformFramework) An application framework for building applications on ASP.NET Core
+
+[![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Web?logo=nuget&label=PlatformFramework.Web&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.Web) A Web part of framework on top of the PlatformFramework
+
+[![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore?logo=nuget&label=PlatformFramework.EFCore&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.EFCore) / A EntityFramework Core part of framework on top of the PlatformFramework
 
 ## Work in Progress
 
-- [ ] add Sample Project
 - [ ] add tests
 - [ ] stabilize Hooks Api
 - [ ] review Auth code and features
