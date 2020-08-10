@@ -9,16 +9,44 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace PlatformFramework.EFCore.Context
 {
+    /// <summary>
+    /// Unit-of-work abstraction hiding real DbContext type
+    /// </summary>
     public interface IUnitOfWork : IDisposable
     {
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+
+        /// <summary>
+        /// Allows to save changes to context
+        /// </summary>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+        /// <returns>A task that represents the asynchronous save operation. The task result contains the number of state entries written to the database</returns>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         Task UseTransaction(DbTransaction transaction, CancellationToken cancellationToken = default);
         DbConnection Connection { get; }
         IDbContextTransaction? Transaction { get; }
+
+        /// <summary>
+        /// Starts the transaction
+        /// </summary>
+        /// <param name="isolationLevel"><see cref="IsolationLevel"/></param>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+        /// <returns>Transaction</returns>
         Task<IDbContextTransaction> BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Commits the transaction
+        /// </summary>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+        /// <returns><see cref="Task"/></returns>
         Task CommitTransaction(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Rolls back entire transaction
+        /// </summary>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+        /// <returns><see cref="Task"/></returns>
         Task RollbackTransaction(CancellationToken cancellationToken = default);
     }
 }

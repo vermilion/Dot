@@ -17,3 +17,7 @@ FROM "__EFMigrationsHistory"
 ORDER BY "MigrationId";
 2020-08-10 11:30:44.903 +03:00 [INF] No migrations were applied. The database is already up to date.
 2020-08-10 11:30:44.904 +03:00 [INF] Migrated database associated with context ProjectDbContext
+2020-08-10 11:54:51.067 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data, this mode should only be enabled during development.
+2020-08-10 11:54:51.200 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null 
+2020-08-10 11:55:00.109 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data, this mode should only be enabled during development.
+2020-08-10 11:55:00.407 +03:00 [INF] Entity Framework Core 3.1.6 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.2.0.0, Culture=neutral, PublicKeyToken=null 

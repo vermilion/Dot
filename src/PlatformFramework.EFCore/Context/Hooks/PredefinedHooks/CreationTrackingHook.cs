@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.Extensions;
@@ -13,14 +13,14 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 
         public CreationTrackingHook(IUserSession session, IClockProvider clock)
         {
-            _session = session ?? throw new ArgumentNullException(nameof(session));
-            _clock = clock ?? throw new ArgumentNullException(nameof(clock));
+            _session = Guard.Against.Null(session, nameof(session));
+            _clock = Guard.Against.Null(clock, nameof(clock));
         }
 
         protected override Task BeforeSaveChanges(ICreationTrackable entity, HookEntityMetadata metadata)
         {
-            metadata.Entry.Property(nameof(ICreationTrackable.CreatedDateTime)).CurrentValue = _clock.Now;
-            metadata.Entry.Property(nameof(ICreationTrackable.CreatedByUserId)).CurrentValue = _session.UserId?.To<long>();
+            entity.CreatedDateTime = _clock.Now;
+            entity.CreatedByUserId = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }

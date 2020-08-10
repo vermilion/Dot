@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.Extensions;
@@ -13,8 +13,8 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 
         public ModificationTrackingHook(IUserSession session, IClockProvider clock)
         {
-            _session = session ?? throw new ArgumentNullException(nameof(session));
-            _clock = clock ?? throw new ArgumentNullException(nameof(clock));
+            _session = Guard.Against.Null(session, nameof(session));
+            _clock = Guard.Against.Null(clock, nameof(clock));
         }
 
         protected override Task BeforeSaveChanges(IModificationTrackable entity, HookEntityMetadata metadata)
