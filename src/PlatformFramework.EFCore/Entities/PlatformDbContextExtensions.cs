@@ -15,38 +15,37 @@ using DbException = PlatformFramework.EFCore.Exceptions.DbException;
 
 namespace PlatformFramework.EFCore.Entities
 {
-    public class PlatformDbContextExtensions
+    public static class PlatformDbContextExtensions
     {
-        private readonly DbContext _context;
-        private readonly EntitiesRegistry _registry;
-        private readonly IEnumerable<IEntityHook> _hooks;
-
-        public PlatformDbContextExtensions(DbContext context)
-        {
-            _context = context;
-
-            _registry = context.GetService<EntitiesRegistry>();
-            _hooks = context.GetService<IEnumerable<IEntityHook>>();
-        }
-
-        public async Task<int> SaveChanges(Action<EntityChangeContext>? onSaveCompleted = null, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Context extension method with hooks intercepting save operation
+        /// </summary>
+        /// <param name="context">Context instance <see cref="DbContext"/></param>
+        /// <param name="onSaveCompleted">Once save done this method is executed</param>
+        /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+        /// <returns>Task with number of entities changed</returns>
+        public static async Task<int> SaveChangesWithHooks(
+            this DbContext context,
+            Action<EntityChangeContext>? onSaveCompleted = null,
+            CancellationToken cancellationToken = default)
         {
             int result;
             try
             {
-                var entryList = _context.FindChangedEntries();
+                var entryList = context.FindChangedEntries();
                 var names = entryList.FindEntityNames();
+                var hooks = context.GetService<IEnumerable<IEntityHook>>();
 
-                await ExecuteHooks(entryList, HookPosition.Before);
+                await ExecuteHooks(hooks, entryList, HookPosition.Before);
 
-                _context.ChangeTracker.AutoDetectChangesEnabled = false;
-                result = await _context.SaveChangesAsync(true, cancellationToken);
-                _context.ChangeTracker.AutoDetectChangesEnabled = true;
+                context.ChangeTracker.AutoDetectChangesEnabled = false;
+                result = await context.SaveChangesAsync(true, cancellationToken);
+                context.ChangeTracker.AutoDetectChangesEnabled = true;
 
-                await ExecuteHooks(entryList, HookPosition.After);
+                await ExecuteHooks(hooks, entryList, HookPosition.After);
 
                 //for RowIntegrity scenarios
-                await _context.SaveChangesAsync(true, cancellationToken);
+                await context.SaveChangesAsync(true, cancellationToken);
 
                 onSaveCompleted?.Invoke(new EntityChangeContext(names, entryList));
             }
@@ -62,11 +61,11 @@ namespace PlatformFramework.EFCore.Entities
             return result;
         }
 
-        private async Task ExecuteHooks(IEnumerable<EntityEntry> entryList, HookPosition position)
+        private static async Task ExecuteHooks(IEnumerable<IEntityHook> hooksList, IEnumerable<EntityEntry> entryList, HookPosition position)
         {
             foreach (var entry in entryList)
             {
-                var hooks = _hooks.Where(hook => hook.HookState == entry.State);
+                var hooks = hooksList.Where(hook => hook.HookState == entry.State);
 
                 foreach (var hook in hooks)
                 {

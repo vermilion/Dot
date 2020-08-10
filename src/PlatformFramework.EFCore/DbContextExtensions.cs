@@ -6,7 +6,7 @@ namespace PlatformFramework.EFCore
 {
     public static class DbContextExtensions
     {
-        public static void OnModelCreating(this ModelBuilder modelBuilder, DbContext context)
+        public static void ApplyEntitiesConfiguration(this ModelBuilder modelBuilder, DbContext context)
         {
             var registry = context.GetService<EntitiesRegistry>();
             registry.Apply(modelBuilder);

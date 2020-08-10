@@ -82,19 +82,23 @@ namespace PlatformFramework.EFCore.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.OnModelCreating(this);
+            modelBuilder.ApplyEntitiesConfiguration(this);
         }
 
         public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted, cancellationToken);
+            return this.SaveChangesWithHooks(OnSaveCompleted, cancellationToken);
         }
 
         public sealed override int SaveChanges()
         {
-            return new PlatformDbContextExtensions(this).SaveChanges(OnSaveCompleted).GetAwaiter().GetResult();
+            return this.SaveChangesWithHooks(OnSaveCompleted).GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Callback executed once save complete
+        /// </summary>
+        /// <param name="context">Context <see cref="EntityChangeContext"/></param>
         protected virtual void OnSaveCompleted(EntityChangeContext context)
         {
         }
