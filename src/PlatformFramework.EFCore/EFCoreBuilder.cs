@@ -43,22 +43,6 @@ namespace PlatformFramework.EFCore
         }
 
         /// <summary>
-        /// Register Mapper configuration
-        /// </summary>
-        /// <param name="configureAction">Configure <see cref="MapperConfigurationExpression"/></param>
-        /// <returns>Fluent builder</returns>
-        public EfCoreBuilder<TDbContext> WithMappers(Action<MapperConfigurationExpression> configureAction)
-        {
-            var expression = new MapperConfigurationExpression();
-            configureAction?.Invoke(expression);
-
-            var automapperConfig = new MapperConfiguration(expression);
-            Services.AddSingleton(automapperConfig.CreateMapper());
-
-            return this;
-        }
-
-        /// <summary>
         /// Register Entities and their Customizers
         /// </summary>
         /// <param name="configureAction">Configure <see cref="EfCoreEntitiesRegistryBuilder"/></param>

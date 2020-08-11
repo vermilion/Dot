@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.UseCases;
 using PlatformFramework.Validation;
 using System.Linq;
 using System.Reflection;

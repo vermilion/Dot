@@ -28,7 +28,7 @@ namespace PlatformFramework.Eventing.Behaviors
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            var validationResults = await RunValidations(request);
+            var validationResults = await RunValidations(request, cancellationToken);
 
             if (validationResults.IsValid)
                 return await next();
@@ -38,12 +38,12 @@ namespace PlatformFramework.Eventing.Behaviors
             throw new ValidationFailedException("Validation failed", validationResults.Errors);
         }
 
-        private async Task<ValidationResult> RunValidations(TRequest model)
+        private async Task<ValidationResult> RunValidations(TRequest model, CancellationToken cancellationToken)
         {
             var validator = _validatorFactory.GetValidator<TRequest>();
 
             if (validator != null) 
-                return await validator.ValidateAsync(model);
+                return await validator.ValidateAsync(model, cancellationToken);
             
             _logger.LogDebug("Validator not found for type: {@Type}", typeof(TRequest));
 

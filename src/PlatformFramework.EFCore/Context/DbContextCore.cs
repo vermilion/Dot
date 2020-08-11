@@ -85,12 +85,12 @@ namespace PlatformFramework.EFCore.Context
             modelBuilder.ApplyEntitiesConfiguration(this);
         }
 
-        public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return this.SaveChangesWithHooks(OnSaveCompleted, cancellationToken);
         }
 
-        public sealed override int SaveChanges()
+        public override int SaveChanges()
         {
             return this.SaveChangesWithHooks(OnSaveCompleted).GetAwaiter().GetResult();
         }

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Title>PlatformFramework.Tenancy</Title>
+		<Description>Tenancy support for PlatformFramework package</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.0.0-preview5" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.0.0-preview5" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.6" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\src\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
+	</ItemGroup>
+</Project>

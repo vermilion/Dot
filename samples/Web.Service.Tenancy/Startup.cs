@@ -1,5 +1,4 @@
 using PlatformFramework;
-using PlatformFramework.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using PlatformFramework.Web;
 using System.Text.Json.Serialization;
@@ -15,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using PlatformFramework.Web.ExceptionHandling;
 using PlatformFramework.Mapping;
+using PlatformFramework.Tenancy;
+using Finbuckle.MultiTenant;
 
 namespace Web.Service
 {
@@ -59,15 +59,7 @@ namespace Web.Service
                 });
 
             services
-                .AddEfCore<ProjectDbContext>(o =>
-                {
-                    o.EnableSensitiveDataLogging();
-
-                    var c = Configuration.GetConnectionString("Default");
-                    //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-                    var connectionString = "Server=localhost; Database=PlatformDb;User ID=postgres;Password=Qwerty12;";
-                    o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
-                })
+                .AddMultitenantEfCore<ProjectDbContext>()
                 .WithMigrationInitializer()
                 .WithHooks(x =>
                 {
@@ -127,6 +119,7 @@ namespace Web.Service
             app.UseExceptionHandler(err => err.UseCustomErrors(env));
 
             app.UseRouting();
+            app.UseMultiTenant();
 
             //app.UseAuthentication();
             //app.UseAuthorization();
