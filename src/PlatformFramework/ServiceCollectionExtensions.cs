@@ -1,4 +1,5 @@
 ﻿using System;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace PlatformFramework
@@ -13,8 +14,7 @@ namespace PlatformFramework
         /// <returns><see cref="FrameworkBuilder"/></returns>
         public static FrameworkBuilder AddFramework(this IServiceCollection services, Action<FrameworkOptions>? configure = null)
         {
-            if (services == null)
-                throw new ArgumentNullException(nameof(services));
+            Guard.Against.Null(services, nameof(services));
 
             return new FrameworkBuilder(services, configure);
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PlatformFramework.EFCore.Entities.Customizers
+namespace PlatformFramework.EFCore.Entities
 {
     /// <summary>
     /// Builder
@@ -9,29 +9,29 @@ namespace PlatformFramework.EFCore.Entities.Customizers
     /// <typeparam name="TBuilder"></typeparam>
     public class FluentBuilder<TBuilder>
     {
-        protected List<Action<TBuilder>> Actions = new List<Action<TBuilder>>();
+        private readonly List<Action<TBuilder>> _actions = new List<Action<TBuilder>>();
 
         public void Apply(TBuilder builder)
         {
-            Actions.ForEach(action => action(builder));
+            _actions.ForEach(action => action(builder));
             Freeze();
         }
 
-        public void AddAction(Action<TBuilder> action)
+        protected void AddAction(Action<TBuilder> action)
         {
             if (Frozen)
                 return;
 
             if (action != null)
-                Actions.Add(action);
+                _actions.Add(action);
         }
 
-        public void Freeze()
+        private void Freeze()
         {
             if (!Frozen)
                 Frozen = true;
         }
 
-        public bool Frozen { get; private set; }
+        private bool Frozen { get; set; }
     }
 }

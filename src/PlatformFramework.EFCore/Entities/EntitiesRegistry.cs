@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatformFramework.EFCore.Entities.Customizers;
 
 namespace PlatformFramework.EFCore.Entities
 {

@@ -55,9 +55,9 @@ namespace PlatformFramework.Web.ExceptionHandling
 
                     var props = frameworkException.Properties();
 
-                    foreach (var prop in props)
+                    foreach ((string key, object value) in props)
                     {
-                        problem.Extensions[prop.Key] = prop.Value;
+                        problem.Extensions[key] = value;
                     }
                 }
                 else

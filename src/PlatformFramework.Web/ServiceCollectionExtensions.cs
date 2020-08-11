@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Abstractions;
 using PlatformFramework.Web.Runtime;
@@ -14,8 +14,7 @@ namespace PlatformFramework.Web
         /// <returns><see cref="WebFrameworkBuilder"/></returns>
         public static WebFrameworkBuilder AddWebFramework(this IServiceCollection services)
         {
-            if (services == null)
-                throw new ArgumentNullException(nameof(services));
+            Guard.Against.Null(services, nameof(services));
 
             services.AddHttpContextAccessor();
             services.AddScoped<IUserSession, UserSession>();

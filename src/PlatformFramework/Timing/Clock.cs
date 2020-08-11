@@ -8,11 +8,11 @@ namespace PlatformFramework.Timing
     /// </summary>
     internal sealed class ClockProvider : IClockProvider
     {
-        public DateTime Now => SystemTime.Now();
+        public DateTime Now => DateTime.UtcNow;
 
         public DateTime Normalize(DateTime dateTime)
         {
-            return SystemTime.Normalize(dateTime);
+            return DateTime.SpecifyKind(dateTime, DateTimeKind.Utc);
         }
     }
 }

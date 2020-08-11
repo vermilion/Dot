@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using PlatformFramework.Abstractions;
 
 namespace PlatformFramework.Threading
@@ -15,10 +16,7 @@ namespace PlatformFramework.Threading
 
         public void QueueBackgroundWorkItem(Func<CancellationToken, IServiceProvider, Task> workItem)
         {
-            if (workItem == null)
-            {
-                throw new ArgumentNullException(nameof(workItem));
-            }
+            Guard.Against.Null(workItem, nameof(workItem));
 
             _workItems.Enqueue(workItem);
             _signal.Release();

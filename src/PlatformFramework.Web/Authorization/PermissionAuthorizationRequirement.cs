@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Authorization;
 using PlatformFramework.Web.Extensions;
 
@@ -11,7 +11,7 @@ namespace PlatformFramework.Web.Authorization
     {
         public PermissionAuthorizationRequirement(IEnumerable<string> permissions)
         {
-            Permissions = permissions ?? throw new ArgumentNullException(nameof(permissions));
+            Permissions = Guard.Against.Null(permissions, nameof(permissions));
         }
 
         public IEnumerable<string> Permissions { get; }

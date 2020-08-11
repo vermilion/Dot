@@ -22,6 +22,10 @@ namespace PlatformFramework.Exceptions
         {
         }
 
+        /// <summary>
+        /// Get value properties of an Exception
+        /// </summary>
+        /// <returns>List of properties</returns>
         public virtual Dictionary<string, object> Properties()
         {
             return new Dictionary<string, object>();

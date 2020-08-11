@@ -1,16 +1,16 @@
-﻿using FluentValidation;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.GuardClauses;
+using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 using PlatformFramework.Exceptions;
-using Ardalis.GuardClauses;
 
-namespace PlatformFramework.UseCases.Behaviors
+namespace PlatformFramework.Eventing.Behaviors
 {
     public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : notnull
+        where TRequest : IRequest<TResponse>
     {
         private readonly IValidatorFactory _validatorFactory;
 

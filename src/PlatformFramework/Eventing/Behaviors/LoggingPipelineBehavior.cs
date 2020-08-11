@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace PlatformFramework.Eventing.Behaviors
 {
     public class LoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest: notnull
+        where TRequest: IRequest<TResponse>
     {
         private readonly ILogger _logger;
 

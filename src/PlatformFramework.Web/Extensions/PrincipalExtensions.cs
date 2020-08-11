@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using Ardalis.GuardClauses;
 using PlatformFramework.Web.Authorization;
 using PlatformFramework.Web.Runtime;
 
@@ -17,7 +18,7 @@ namespace PlatformFramework.Web.Extensions
         /// <returns>The value of the first instance of the specified claim type, or null if the claim is not present.</returns>        
         public static string? FindFirstValue(this ClaimsPrincipal principal, string claimType)
         {
-            if (principal == null) throw new ArgumentNullException(nameof(principal));
+            Guard.Against.Null(principal, nameof(principal));
 
             var claim = principal.FindFirst(claimType);
             return claim?.Value;
@@ -25,7 +26,7 @@ namespace PlatformFramework.Web.Extensions
 
         public static IReadOnlyList<string> FindRoles(this ClaimsPrincipal principal)
         {
-            if (principal == null) throw new ArgumentNullException(nameof(principal));
+            Guard.Against.Null(principal, nameof(principal));
 
             var roles = principal.Claims
                 .Where(c => c.Type.Equals(UserClaimTypes.Role, StringComparison.OrdinalIgnoreCase))
@@ -36,7 +37,7 @@ namespace PlatformFramework.Web.Extensions
 
         public static IReadOnlyList<string> FindPermissions(this ClaimsPrincipal principal)
         {
-            if (principal == null) throw new ArgumentNullException(nameof(principal));
+            Guard.Against.Null(principal, nameof(principal));
 
             var permissions = principal.Claims
                 .Where(c => c.Type.Equals(UserClaimTypes.Permission, StringComparison.OrdinalIgnoreCase))

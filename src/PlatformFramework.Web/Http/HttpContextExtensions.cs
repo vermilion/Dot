@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
+using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -31,15 +32,8 @@ namespace PlatformFramework.Web.Http
         /// <exception cref="System.ArgumentNullException">context or cacheProfile.</exception>
         public static HttpContext ApplyCacheProfile(this HttpContext context, CacheProfile cacheProfile)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (cacheProfile == null)
-            {
-                throw new ArgumentNullException(nameof(cacheProfile));
-            }
+            Guard.Against.Null(context, nameof(context));
+            Guard.Against.Null(cacheProfile, nameof(cacheProfile));
 
             var headers = context.Response.Headers;
 
