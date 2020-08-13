@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup>
-		<Version>0.2.2</Version>
+		<Version>0.3.0</Version>
 		<WarningsAsErrors>CS4014,VSTHRD103</WarningsAsErrors>
 		<NoWarn>$(NoWarn);CA1062;1591;VSTHRD200</NoWarn>
 		<Nullable>enable</Nullable>
@@ -8,5 +8,7 @@
 		<LangVersion>8.0</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NeutralLanguage>en</NeutralLanguage>
+
+		<RepositoryUrl>https://github.com/vermilion/PlatformFramework</RepositoryUrl>
 	</PropertyGroup>
 </Project>

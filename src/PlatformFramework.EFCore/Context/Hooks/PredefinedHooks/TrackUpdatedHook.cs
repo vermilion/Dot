@@ -6,26 +6,26 @@ using PlatformFramework.Extensions;
 
 namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {
-    internal sealed class CreationTrackingHook : InsertEntityHook<ICreationTrackable>
+    internal sealed class TrackUpdatedHook : EntityUpdatedHook<ITrackUpdated>
     {
         private readonly IUserSession _session;
         private readonly IClockProvider _clock;
 
-        public CreationTrackingHook(IUserSession session, IClockProvider clock)
+        public TrackUpdatedHook(IUserSession session, IClockProvider clock)
         {
             _session = Guard.Against.Null(session, nameof(session));
             _clock = Guard.Against.Null(clock, nameof(clock));
         }
 
-        protected override Task BeforeSaveChanges(ICreationTrackable entity, HookEntityMetadata metadata)
+        protected override Task BeforeSaveChanges(ITrackUpdated entity, HookEntityMetadata metadata)
         {
-            entity.CreatedDateTime = _clock.Now;
-            entity.CreatedByUserId = _session.UserId?.To<long>();
+            entity.Updated = _clock.Now;
+            entity.UpdatedBy = _session.UserId?.To<long>();
 
             return Task.CompletedTask;
         }
 
-        protected override Task AfterSaveChanges(ICreationTrackable entity, HookEntityMetadata metadata)
+        protected override Task AfterSaveChanges(ITrackUpdated entity, HookEntityMetadata metadata)
         {
             return Task.CompletedTask;
         }

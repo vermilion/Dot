@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using FluentValidation;
@@ -6,9 +8,11 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.Exceptions;
+using PlatformFramework.Validation;
 
 namespace PlatformFramework.Eventing.Behaviors
 {
+    [DebuggerStepThrough]
     public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
@@ -35,7 +39,8 @@ namespace PlatformFramework.Eventing.Behaviors
 
             _logger.LogWarning("Validation failed with results: {@Results}", validationResults);
 
-            throw new ValidationFailedException("Validation failed", validationResults.Errors);
+            var errors = validationResults.Errors.Select(x => new ValidationError(x.PropertyName, x.ErrorMessage));
+            throw new ValidationFailedException("Validation failed", errors);
         }
 
         private async Task<ValidationResult> RunValidations(TRequest model)

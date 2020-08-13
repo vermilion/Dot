@@ -15,19 +15,23 @@ namespace PlatformFramework.EFCore
 
         public EfCoreHooksBuilder WithTrackingHooks()
         {
-            Services.AddTransient<IEntityHook, CreationTrackingHook>();
-            Services.AddTransient<IEntityHook, ModificationTrackingHook>();
-            Services.AddTransient<IEntityHook, DeletionTrackingHook>();
+            Services.AddTransient<IEntityHook, TrackCreatedHook>();
+            Services.AddTransient<IEntityHook, TrackUpdatedHook>();
 
             return this;
         }
 
         public EfCoreHooksBuilder WithSoftDeletedEntityHook()
         {
-            Services.AddTransient<IEntityHook, SoftDeleteEntityHook>();
+            Services.AddTransient<IEntityHook, TrackDeletedHook>();
             return this;
         }
 
+        /// <summary>
+        /// Allows to add custom hook to provider, <see cref="IServiceCollection"/>
+        /// </summary>
+        /// <typeparam name="THook">Hook type</typeparam>
+        /// <returns><see cref="EfCoreHooksBuilder"/></returns>
         public EfCoreHooksBuilder WithHook<THook>()
             where THook : class, IEntityHook
         {

@@ -5,9 +5,9 @@ using PlatformFramework.EFCore.Eventing.Handlers;
 
 namespace Web.Service.BusinessLogic
 {
-    public class CreateHandler : EntityCreateHandlerBase<MyEntity, MyEntityModel, CreateRequest>
+    public class DeleteHandler : EntityDeleteHandlerBase<MyEntity, MyEntityModel, DeleteRequest>
     {
-        public CreateHandler(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper) 
+        public DeleteHandler(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper) 
             : base(loggerFactory, unitOfWork, mapper)
         {
         }

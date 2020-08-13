@@ -5,16 +5,16 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
     /// <summary>
     /// Implement this interface for creation-tracking scenarios
     /// </summary>
-    public interface ICreationTrackable
+    public interface ITrackCreated
     {
         /// <summary>
         /// Date the entity was created
         /// </summary>
-        public DateTime CreatedDateTime { get; set; }
+        public DateTime Created { get; set; }
 
         /// <summary>
         /// User ID when entity was created
         /// </summary>
-        public long? CreatedByUserId { get; set; }
+        public long? CreatedBy { get; set; }
     }
 }

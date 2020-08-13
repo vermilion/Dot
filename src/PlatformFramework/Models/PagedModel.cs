@@ -2,9 +2,9 @@
 
 namespace PlatformFramework.Models
 {
-    public class ListModel<T> where T : class
+    public class PagedModel<T> where T : class
     {
-        public ListModel(IEnumerable<T> collection, long total)
+        public PagedModel(IEnumerable<T> collection, long total)
         {
             Collection = collection;
             Total = total;

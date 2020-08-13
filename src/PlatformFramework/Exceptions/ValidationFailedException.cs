@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentValidation.Results;
+using PlatformFramework.Validation;
 
 namespace PlatformFramework.Exceptions
 {
@@ -11,14 +11,14 @@ namespace PlatformFramework.Exceptions
     [Serializable]
     public class ValidationFailedException : FrameworkException
     {
-        public IReadOnlyList<ValidationFailure> Failures { get; }
+        public IReadOnlyList<ValidationError> Failures { get; }
 
         public ValidationFailedException(string message)
-            : this(message, Enumerable.Empty<ValidationFailure>())
+            : this(message, Enumerable.Empty<ValidationError>())
         {
         }
 
-        public ValidationFailedException(string message, IEnumerable<ValidationFailure> failures)
+        public ValidationFailedException(string message, IEnumerable<ValidationError> failures)
             : base(message)
         {
             Failures = failures.ToList();

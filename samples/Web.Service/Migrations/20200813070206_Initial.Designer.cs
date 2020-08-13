@@ -9,15 +9,15 @@ using Web.Service;
 namespace Web.Service.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20200810085500_EntityHooks")]
-    partial class EntityHooks
+    [Migration("20200813070206_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Web.Service.MyEntity", b =>

@@ -12,7 +12,11 @@ namespace PlatformFramework
         /// <summary>
         /// Assemblies used for framework parts
         /// </summary>
-        public List<Assembly> Assemblies { get; } = new List<Assembly>(new[] { Assembly.GetEntryAssembly()! });
+        public ICollection<Assembly> Assemblies { get; } = new List<Assembly>(new[]
+        {
+            Assembly.GetExecutingAssembly(),
+            Assembly.GetEntryAssembly()!
+        });
 
         internal Dictionary<Type, Delegate> ConfigureActions { get; } = new Dictionary<Type, Delegate>();
 

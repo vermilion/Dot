@@ -2,7 +2,7 @@
 
 namespace Web.Service.BusinessLogic
 {
-    public class GetAllRequest : EntitySelectRequest<MyEntityModel>
+    public class GetAllPagedRequest : EntityPagedSelectRequest<MyEntityModel>
     {
     }
 }
