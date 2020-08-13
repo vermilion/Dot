@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Web.Service.BusinessLogic
+namespace Web.Service.Domain
 {
     public class MyEntityModelValidator : AbstractValidator<MyEntityModel>
     {
