@@ -9,9 +9,8 @@ namespace Web.Service
         public MyEntityMappingProfile()
         {
             CreateMap<MyEntity, MyEntityModel>()
-                .ForMember(m => m.Title, o => o.MapFrom(oo => oo.Title));
-
-            CreateMap<MyEntityModel, MyEntity>();
+                .ForMember(m => m.Title, o => o.MapFrom(oo => oo.Title))
+                .ReverseMap();
         }
     }
 

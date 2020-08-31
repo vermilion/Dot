@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
+﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +16,8 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         where TEntity : class, IEntity, new()
         where TRequest : EntityUpdateRequest<TReadModel>
     {
-        protected EntityUpdateHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        protected EntityUpdateHandlerBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 
@@ -34,8 +32,8 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
 
             // copy updates from model to entity
             Mapper.Map(request.Model, entity);
-            
-            // restore Id is reset
+
+            // restore Id
             entity.Id = request.Id;
 
             // save updates

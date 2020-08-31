@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using PlatformFramework.Exceptions;
 using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
-using PlatformFramework.Exceptions;
 
 namespace PlatformFramework.Web.ExceptionHandling
 {

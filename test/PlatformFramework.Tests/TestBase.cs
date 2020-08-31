@@ -19,7 +19,7 @@ namespace PlatformFramework.Tests
             return (services, counter);
         }
 
-        public class TestRunContext<T> 
+        public class TestRunContext<T>
             where T : struct, IConvertible
         {
             public ConcurrentDictionary<T, int> Data = new ConcurrentDictionary<T, int>();

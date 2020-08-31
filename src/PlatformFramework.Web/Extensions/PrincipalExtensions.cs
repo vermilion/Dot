@@ -15,7 +15,7 @@ namespace PlatformFramework.Web.Extensions
         /// </summary>
         /// <param name="principal">The <see cref="ClaimsPrincipal"/> instance this method extends.</param>
         /// <param name="claimType">The claim type whose first value should be returned.</param>
-        /// <returns>The value of the first instance of the specified claim type, or null if the claim is not present.</returns>        
+        /// <returns>The value of the first instance of the specified claim type, or null if the claim is not present.</returns>
         public static string? FindFirstValue(this ClaimsPrincipal principal, string claimType)
         {
             Guard.Against.Null(principal, nameof(principal));
@@ -72,8 +72,8 @@ namespace PlatformFramework.Web.Extensions
         public static string? FindUserDisplayName(this ClaimsPrincipal principal)
         {
             var displayName = principal.FindFirstValue(UserClaimTypes.UserName);
-            return string.IsNullOrWhiteSpace(displayName) 
-                ? FindUserName(principal) 
+            return string.IsNullOrWhiteSpace(displayName)
+                ? FindUserName(principal)
                 : displayName;
         }
 

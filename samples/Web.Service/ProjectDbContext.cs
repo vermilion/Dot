@@ -6,7 +6,7 @@ namespace Web.Service
     public class ProjectDbContext : DbContextCore
     {
         public ProjectDbContext(
-            DbContextOptions<ProjectDbContext> options) 
+            DbContextOptions<ProjectDbContext> options)
             : base(options)
         {
         }

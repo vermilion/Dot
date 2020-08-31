@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.Extensions;
+using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 {

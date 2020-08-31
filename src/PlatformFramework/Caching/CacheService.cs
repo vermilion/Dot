@@ -36,15 +36,14 @@ namespace PlatformFramework.Caching
             if (bytes == null)
                 return result;
 
-            result = JsonSerializer.Deserialize<T>(Encoding.UTF8.GetString(bytes));
-
-            return result;
+            return JsonSerializer.Deserialize<T>(Encoding.UTF8.GetString(bytes));
         }
 
         /// <summary>
         /// Adds a key-value to the cache.
         /// </summary>
         public Task Add<T>(string cacheKey, T value, TimeSpan slidingExpiration, CancellationToken cancellationToken = default)
+            where T : class
         {
             var bytes = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(value));
 

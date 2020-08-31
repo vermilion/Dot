@@ -35,7 +35,8 @@ namespace PlatformFramework.Abstractions
         /// <param name="slidingExpiration"></param>
         /// <param name="cancellationToken"></param>
         /// <typeparam name="T"></typeparam>
-        Task Add<T>(string cacheKey, T value, TimeSpan slidingExpiration, CancellationToken cancellationToken = default);
+        Task Add<T>(string cacheKey, T value, TimeSpan slidingExpiration, CancellationToken cancellationToken = default)
+            where T : class;
 
         /// <summary>
         /// Removes the object associated with the given key.

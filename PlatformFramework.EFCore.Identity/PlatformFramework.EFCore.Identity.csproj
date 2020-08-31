@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Title>PlatformFramework.EFCore.Identity</Title>
+		<Description>Entity Framework Core part of a PlatformFramework package</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.7" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\src\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
+	</ItemGroup>
+</Project>

@@ -23,7 +23,7 @@ namespace PlatformFramework.Web.Http
         {
             services.AddHttpContextAccessor();
             services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
-            
+
             // Allows injecting IUrlHelper as a dependency
             services.AddScoped(serviceProvider =>
             {
@@ -215,7 +215,7 @@ namespace PlatformFramework.Web.Http
         /// Deserialize `request.Body` as a JSON content.
         /// </summary>
         public Task<T?> DeserializeRequestJsonBodyAsAsync<T>()
-            where T: class
+            where T : class
         {
             return _httpContextAccessor.HttpContext?.DeserializeRequestJsonBodyAsAsync<T>()!;
         }

@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
+﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +16,8 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
        where TEntity : class, IEntity, new()
        where TRequest : EntityDeleteRequest<TReadModel>
     {
-        protected EntityDeleteHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        protected EntityDeleteHandlerBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 
@@ -43,10 +41,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
                 .ConfigureAwait(false);
 
             // convert deleted entity to read model
-            var model = Mapper.Map<TReadModel>(entity);
-
-            return model;
+            return Mapper.Map<TReadModel>(entity);
         }
     }
-
 }

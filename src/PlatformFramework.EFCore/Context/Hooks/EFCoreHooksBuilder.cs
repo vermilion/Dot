@@ -2,7 +2,7 @@
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.EFCore.Context.Hooks.PredefinedHooks;
 
-namespace PlatformFramework.EFCore
+namespace PlatformFramework.EFCore.Context.Hooks
 {
     public class EfCoreHooksBuilder
     {

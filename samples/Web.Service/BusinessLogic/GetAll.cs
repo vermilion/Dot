@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
+using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Eventing.Handlers;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 
 namespace Web.Service.BusinessLogic
 {
@@ -12,8 +14,8 @@ namespace Web.Service.BusinessLogic
 
     public class GetAllHandler : EntitySelectHandlerBase<MyEntity, MyEntityModel, GetAllRequest>
     {
-        public GetAllHandler(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        public GetAllHandler(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
     }

@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,8 +20,8 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         where TEntity : class, IEntity, new()
         where TRequest : IRequest<TResponse>
     {
-        protected EntityReadHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        protected EntityReadHandlerBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 
@@ -46,7 +44,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         }
 
         /// <summary>
-        /// Override this for for custom entity query process
+        /// Override this for custom entity query process
         /// </summary>
         /// <param name="key">Entity key</param>
         /// <param name="cancellationToken"><see cref="CancellationToken"/></param>

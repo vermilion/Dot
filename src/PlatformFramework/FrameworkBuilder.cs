@@ -26,9 +26,9 @@ namespace PlatformFramework
             where T : class, new()
         {
             var defaults = new T();
-            if (!Options.ConfigureActions.ContainsKey(typeof(T))) 
+            if (!Options.ConfigureActions.ContainsKey(typeof(T)))
                 return defaults;
-            
+
             var action = Options.ConfigureActions[typeof(T)];
             action.DynamicInvoke(defaults);
 

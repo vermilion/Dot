@@ -1,8 +1,10 @@
 ﻿using Ardalis.GuardClauses;
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Context;
+using PlatformFramework.EFCore.Abstractions;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -31,8 +33,12 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         /// </summary>
         protected IMapper Mapper { get; }
 
-        protected EntityHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
+        protected EntityHandlerBase(IServiceProvider serviceProvider)
         {
+            var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+            var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
+            var mapper = serviceProvider.GetRequiredService<IMapper>();
+
             Logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                 .CreateLogger(GetType().Name);
 

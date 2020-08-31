@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PlatformFramework.Eventing.Behaviors
 {

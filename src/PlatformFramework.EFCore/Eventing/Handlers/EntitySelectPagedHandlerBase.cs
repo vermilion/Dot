@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Eventing.Requests;
 using PlatformFramework.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,11 +19,11 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
     /// <typeparam name="TRequest">Unique request type</typeparam>
     public abstract class EntitySelectPagedHandlerBase<TEntity, TReadModel, TRequest> : EntityHandlerBase<TRequest, PagedModel<TReadModel>>
         where TEntity : class, IEntity, new()
-        where TRequest : EntityPagedSelectRequest<TReadModel>
         where TReadModel : class
+        where TRequest : EntityPagedSelectRequest<TReadModel>
     {
-        protected EntitySelectPagedHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        protected EntitySelectPagedHandlerBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 
@@ -101,5 +99,4 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
                 .ConfigureAwait(false);
         }
     }
-
 }

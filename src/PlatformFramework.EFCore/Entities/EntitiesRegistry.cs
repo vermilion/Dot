@@ -11,10 +11,7 @@ namespace PlatformFramework.EFCore.Entities
             where TEntity : class
             where TEntityCustomizer : IEntityTypeConfiguration<TEntity>
         {
-            AddAction(modelBuilder =>
-            {
-                modelBuilder.ApplyConfiguration(customizerInstance);
-            });
+            AddAction(modelBuilder => modelBuilder.ApplyConfiguration(customizerInstance));
         }
     }
 }

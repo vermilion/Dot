@@ -8,7 +8,7 @@ namespace PlatformFramework.Exceptions
     [Serializable]
     public class UserFriendlyException : FrameworkException
     {
-        public UserFriendlyException(string message) 
+        public UserFriendlyException(string message)
             : base(message)
         {
         }

@@ -14,6 +14,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using PlatformFramework.Web.ExceptionHandling;
+using Web.Service.BusinessLogic;
 
 namespace Web.Service
 {
@@ -60,7 +61,7 @@ namespace Web.Service
 
                     var c = Configuration.GetConnectionString("Default");
                     //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-                    var connectionString = "Server=localhost; Database=PlatformDb;User ID=postgres;Password=Qwerty12;";
+                    const string connectionString = "Server=localhost; Database=PlatformDb;User ID=postgres;Password=Qwerty12;";
                     o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
                 })
                 .WithMigrationInitializer()
@@ -104,6 +105,9 @@ namespace Web.Service
                     Description = "Swagger"
                 });
             });
+
+
+            services.AddScoped<ICustomService, CustomService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

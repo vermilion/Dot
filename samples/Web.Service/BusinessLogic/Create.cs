@@ -1,10 +1,8 @@
 ﻿using Ardalis.GuardClauses;
-using AutoMapper;
 using FluentValidation;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Eventing.Handlers;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 using Web.Service.Domain;
 
 namespace Web.Service.BusinessLogic
@@ -18,8 +16,8 @@ namespace Web.Service.BusinessLogic
 
     public class CreateHandler : EntityCreateHandlerBase<MyEntity, MyEntityModel, CreateRequest>
     {
-        public CreateHandler(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        public CreateHandler(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
     }

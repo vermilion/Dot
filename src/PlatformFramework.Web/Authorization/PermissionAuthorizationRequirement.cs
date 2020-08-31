@@ -18,11 +18,10 @@ namespace PlatformFramework.Web.Authorization
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionAuthorizationRequirement requirement)
         {
-            if (context.User == null || requirement.Permissions == null || !requirement.Permissions.Any())
+            if (context.User == null || requirement.Permissions?.Any() != true)
                 return Task.CompletedTask;
 
-            var hasPermission =
-                requirement.Permissions.Any(permission => context.User.HasPermission(permission));
+            var hasPermission = requirement.Permissions.Any(permission => context.User.HasPermission(permission));
 
             if (!hasPermission) return Task.CompletedTask;
 

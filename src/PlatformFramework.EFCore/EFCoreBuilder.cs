@@ -1,16 +1,16 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.EFCore.Context;
+using PlatformFramework.EFCore.Context.Hooks;
 using PlatformFramework.EFCore.Context.Migrations;
 using PlatformFramework.EFCore.Entities;
+using System;
 
 namespace PlatformFramework.EFCore
 {
     public class EfCoreBuilder<TDbContext>
-        where TDbContext : DbContext, IUnitOfWork
+        where TDbContext : DbContext
     {
         private IServiceCollection Services { get; }
 

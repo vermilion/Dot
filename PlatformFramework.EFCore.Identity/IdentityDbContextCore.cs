@@ -1,21 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.EFCore.Context
+namespace PlatformFramework.EFCore.Identity
 {
     /// <summary>
     /// Framework's DbContext encapsulating all the entities/hooks/etc.. logic
     /// </summary>
-    public abstract class DbContextCore : DbContext
+    public abstract class IdentityDbContextCore : IdentityDbContext
     {
-        protected DbContextCore(DbContextOptions options)
+        protected IdentityDbContextCore(DbContextOptions options)
             : base(options)
         {
         }
-      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

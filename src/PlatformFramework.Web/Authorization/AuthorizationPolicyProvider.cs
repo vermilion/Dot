@@ -23,7 +23,7 @@ namespace PlatformFramework.Web.Authorization
                 return await base.GetPolicyAsync(policyName);
             }
 
-            var policy = _policies.GetOrAdd(policyName, name =>
+            var policy = _policies.GetOrAdd(policyName, _ =>
             {
                 var permissions = policyName
                     .Substring(PermissionConstant.PolicyPrefix.Length)

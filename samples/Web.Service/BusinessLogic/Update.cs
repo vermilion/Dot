@@ -1,25 +1,23 @@
 ﻿using Ardalis.GuardClauses;
-using AutoMapper;
 using FluentValidation;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Eventing.Handlers;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 using Web.Service.Domain;
 
 namespace Web.Service.BusinessLogic
 {
     public class UpdateRequest : EntityUpdateRequest<MyEntityModel>
     {
-        public UpdateRequest(long id, MyEntityModel model) : base(id, model)
+        public UpdateRequest(int id, MyEntityModel model) : base(id, model)
         {
         }
     }
 
     public class UpdateHandler : EntityUpdateHandlerBase<MyEntity, MyEntityModel, UpdateRequest>
     {
-        public UpdateHandler(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        public UpdateHandler(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
     }

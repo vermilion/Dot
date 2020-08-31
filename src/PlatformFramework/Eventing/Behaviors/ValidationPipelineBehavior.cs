@@ -1,14 +1,14 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.Exceptions;
 using PlatformFramework.Validation;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PlatformFramework.Eventing.Behaviors
 {
@@ -47,13 +47,12 @@ namespace PlatformFramework.Eventing.Behaviors
         {
             var validator = _validatorFactory.GetValidator<TRequest>();
 
-            if (validator != null) 
+            if (validator != null)
                 return await validator.ValidateAsync(model);
-            
+
             _logger.LogDebug("Validator not found for type: {@Type}", typeof(TRequest));
 
             return new ValidationResult();
-
         }
     }
 }

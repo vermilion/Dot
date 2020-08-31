@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
+﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +16,8 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         where TEntity : class, IEntity, new()
         where TRequest : EntityCreateRequest<TReadModel>
     {
-        protected EntityCreateHandlerBase(ILoggerFactory loggerFactory, IUnitOfWork unitOfWork, IMapper mapper)
-            : base(loggerFactory, unitOfWork, mapper)
+        protected EntityCreateHandlerBase(IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
         }
 

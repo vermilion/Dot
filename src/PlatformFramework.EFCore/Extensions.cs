@@ -1,7 +1,8 @@
-﻿using System;
-using PlatformFramework.EFCore.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PlatformFramework.EFCore.Abstractions;
+using PlatformFramework.EFCore.Context;
+using System;
 
 namespace PlatformFramework.EFCore
 {
@@ -17,10 +18,15 @@ namespace PlatformFramework.EFCore
         /// <param name="optionsAction">Action for configuring <see cref="DbContextOptionsBuilder"/></param>
         /// <returns>Builder instance</returns>
         public static EfCoreBuilder<TDbContext> AddEfCore<TDbContext>(this IServiceCollection services, Action<DbContextOptionsBuilder>? optionsAction = null)
-            where TDbContext : DbContext, IUnitOfWork
+            where TDbContext : DbContext
         {
             services.AddDbContext<TDbContext>(optionsAction);
-            services.AddScoped(provider => (IUnitOfWork)provider.GetRequiredService(typeof(TDbContext)));
+
+            services.AddScoped<IUnitOfWork>(provider =>
+            {
+                var context = provider.GetRequiredService<TDbContext>();
+                return new UnitOfWork(context);
+            });
 
             return new EfCoreBuilder<TDbContext>(services);
         }

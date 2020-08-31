@@ -8,11 +8,11 @@ namespace PlatformFramework.EFCore.Eventing.Requests
     /// <typeparam name="TReadModel">Model</typeparam>
     public abstract class EntityIdentifierRequest<TReadModel> : IRequest<TReadModel>
     {
-        protected EntityIdentifierRequest(long id)
+        protected EntityIdentifierRequest(int id)
         {
             Id = id;
         }
 
-        public long Id { get; }
+        public int Id { get; }
     }
 }

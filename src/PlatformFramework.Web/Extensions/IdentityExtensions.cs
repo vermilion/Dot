@@ -8,7 +8,7 @@ namespace PlatformFramework.Web.Extensions
 {
     public static class IdentityExtensions
     {
-        public static T? FindUserId<T>(this IIdentity identity) 
+        public static T? FindUserId<T>(this IIdentity identity)
             where T : class, IEquatable<T>
         {
             return identity.FindUserId()?.FromString<T>();

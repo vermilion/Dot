@@ -6,7 +6,8 @@
     /// <typeparam name="TReadModel">Model</typeparam>
     public abstract class EntityDeleteRequest<TReadModel> : EntityIdentifierRequest<TReadModel>
     {
-        public EntityDeleteRequest(long id) : base(id)
+        protected EntityDeleteRequest(int id)
+            : base(id)
         {
         }
     }

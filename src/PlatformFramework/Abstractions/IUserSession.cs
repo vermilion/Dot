@@ -21,7 +21,7 @@ namespace PlatformFramework.Abstractions
         ///     It can be null if no user logged in.
         /// </summary>
         string? UserName { get; }
-        
+
         /// <summary>
         ///     Gets current user's Permissions
         ///     It can be null if no user logged in.

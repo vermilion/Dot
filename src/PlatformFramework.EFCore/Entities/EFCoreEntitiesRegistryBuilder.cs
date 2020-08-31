@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatformFramework.EFCore.Entities;
 
-namespace PlatformFramework.EFCore
+namespace PlatformFramework.EFCore.Entities
 {
     public class EfCoreEntitiesRegistryBuilder
     {

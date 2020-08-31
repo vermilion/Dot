@@ -37,16 +37,23 @@ namespace Web.Service.Controllers
         }
 
         [HttpPost("[action]")]
-        public Task<MyEntityModel> Update([FromQuery] long id, [FromBody] MyEntityModel model)
+        public Task<MyEntityModel> Update([FromQuery] int id, [FromBody] MyEntityModel model)
         {
             var request = new UpdateRequest(id, model);
             return _mediator.Send(request);
         }
 
         [HttpPost("[action]")]
-        public Task<MyEntityModel> Delete([FromQuery] long id)
+        public Task<MyEntityModel> Delete([FromQuery] int id)
         {
             var request = new DeleteRequest(id);
+            return _mediator.Send(request);
+        }
+
+        [HttpPost("[action]")]
+        public Task<CustomResponse> Custom()
+        {
+            var request = new CustomRequest();
             return _mediator.Send(request);
         }
     }

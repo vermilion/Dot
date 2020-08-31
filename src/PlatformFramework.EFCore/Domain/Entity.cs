@@ -7,7 +7,7 @@ namespace PlatformFramework.EFCore.Domain
     public abstract class Entity : IEntity
     {
         private int? _hashCode;
-        public virtual long Id { get; set; }
+        public int Id { get; set; }
         protected virtual object This => this;
 
         public override int GetHashCode()
