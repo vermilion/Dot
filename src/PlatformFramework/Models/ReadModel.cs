@@ -7,8 +7,8 @@ namespace PlatformFramework.Models
     /// </summary>
     public abstract class ReadModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
-        public virtual bool IsNew() => EqualityComparer<long>.Default.Equals(Id, default);
+        public virtual bool IsNew() => EqualityComparer<int>.Default.Equals(Id, default);
     }
 }

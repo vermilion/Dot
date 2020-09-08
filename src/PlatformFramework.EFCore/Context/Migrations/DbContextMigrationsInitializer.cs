@@ -1,11 +1,11 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {

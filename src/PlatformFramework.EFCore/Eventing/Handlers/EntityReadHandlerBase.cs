@@ -31,7 +31,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         /// <param name="key">Entity key</param>
         /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
         /// <returns>Entity Model</returns>
-        protected virtual async Task<TReadModel> Read(long key, CancellationToken cancellationToken = default)
+        protected virtual async Task<TReadModel> Read(int key, CancellationToken cancellationToken = default)
         {
             var model = await UnitOfWork.Set<TEntity>()
                 .AsNoTracking()
@@ -49,7 +49,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         /// <param name="key">Entity key</param>
         /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
         /// <returns>Tracked Entity</returns>
-        protected virtual async Task<TEntity> ReadEntity(long key, CancellationToken cancellationToken = default)
+        protected virtual async Task<TEntity> ReadEntity(int key, CancellationToken cancellationToken = default)
         {
             var entity = await UnitOfWork.Set<TEntity>()
                  .Where(p => Equals(p.Id, key))

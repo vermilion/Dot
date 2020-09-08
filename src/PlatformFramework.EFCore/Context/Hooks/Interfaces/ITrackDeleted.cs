@@ -20,6 +20,6 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
         /// <summary>
         /// User ID when entity was deleted
         /// </summary>
-        public long? DeletedBy { get; set; }
+        public int? DeletedBy { get; set; }
     }
 }

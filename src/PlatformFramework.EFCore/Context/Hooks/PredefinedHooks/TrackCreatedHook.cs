@@ -20,7 +20,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
         protected override Task BeforeSaveChanges(ITrackCreated entity, HookEntityMetadata metadata)
         {
             entity.Created = _clock.Now;
-            entity.CreatedBy = _session.UserId?.To<long>();
+            entity.CreatedBy = _session.UserId?.To<int>();
 
             return Task.CompletedTask;
         }

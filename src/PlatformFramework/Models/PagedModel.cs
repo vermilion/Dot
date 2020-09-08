@@ -6,7 +6,7 @@ namespace PlatformFramework.Models
     public class PagedModel<T>
         where T : class
     {
-        public PagedModel(IEnumerable<T> collection, long total)
+        public PagedModel(IEnumerable<T> collection, int total)
         {
             Collection = collection.ToList();
             Total = total;
@@ -14,6 +14,6 @@ namespace PlatformFramework.Models
 
         public IReadOnlyCollection<T> Collection { get; }
 
-        public long Total { get; }
+        public int Total { get; }
     }
 }

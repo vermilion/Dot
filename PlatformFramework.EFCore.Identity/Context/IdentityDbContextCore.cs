@@ -5,7 +5,7 @@ using PlatformFramework.EFCore.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.EFCore.Identity
+namespace PlatformFramework.EFCore.Identity.Context
 {
     /// <summary>
     /// Framework's DbContext encapsulating all the entities/hooks/etc.. logic

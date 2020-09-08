@@ -1,7 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Exceptions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {

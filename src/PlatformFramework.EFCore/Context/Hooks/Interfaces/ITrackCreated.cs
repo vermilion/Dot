@@ -15,6 +15,6 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
         /// <summary>
         /// User ID when entity was created
         /// </summary>
-        public long? CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
     }
 }

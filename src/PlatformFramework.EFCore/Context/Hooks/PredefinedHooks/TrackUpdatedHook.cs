@@ -20,7 +20,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
         protected override Task BeforeSaveChanges(ITrackUpdated entity, HookEntityMetadata metadata)
         {
             entity.Updated = _clock.Now;
-            entity.UpdatedBy = _session.UserId?.To<long>();
+            entity.UpdatedBy = _session.UserId?.To<int>();
 
             return Task.CompletedTask;
         }

@@ -22,9 +22,10 @@ namespace PlatformFramework.EFCore.Domain
 
         public virtual bool IsTransient()
         {
-            if (EqualityComparer<long>.Default.Equals(Id, default)) return true;
+            if (EqualityComparer<int>.Default.Equals(Id, default)) 
+                return true;
 
-            //Workaround for EF Core since it sets int/long to min value when attaching to dbContext
+            //Workaround for EF Core since it sets int to min value when attaching to dbContext
             return Convert.ToInt64(Id) <= 0;
         }
 

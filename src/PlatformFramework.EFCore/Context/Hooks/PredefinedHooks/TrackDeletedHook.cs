@@ -24,7 +24,7 @@ namespace PlatformFramework.EFCore.Context.Hooks.PredefinedHooks
 
             entity.IsDeleted = true;
             entity.Deleted = _clock.Now;
-            entity.DeletedBy = _session.UserId?.To<long>();
+            entity.DeletedBy = _session.UserId?.To<int>();
 
             return Task.CompletedTask;
         }

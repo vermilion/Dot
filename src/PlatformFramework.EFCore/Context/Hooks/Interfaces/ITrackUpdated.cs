@@ -15,6 +15,6 @@ namespace PlatformFramework.EFCore.Context.Hooks.Interfaces
         /// <summary>
         /// User ID when entity was last modified
         /// </summary>
-        public long? UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
     }
 }
