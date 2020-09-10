@@ -11,6 +11,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\src\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
+	  <ProjectReference Include="..\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
 	</ItemGroup>
 </Project>

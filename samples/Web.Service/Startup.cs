@@ -1,21 +1,21 @@
-using PlatformFramework;
-using PlatformFramework.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using PlatformFramework.Web;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using PlatformFramework.Web.ExceptionHandling;
-using Web.Service.BusinessLogic;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using PlatformFramework;
+using PlatformFramework.EFCore;
 using PlatformFramework.Mapping;
+using PlatformFramework.Web;
+using PlatformFramework.Web.ExceptionHandling;
+using System.Reflection;
+using System.Text.Json.Serialization;
+using Web.Service.BusinessLogic;
 
 namespace Web.Service
 {
