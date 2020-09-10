@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.EFCore.Context.Hooks;
 using PlatformFramework.EFCore.Context.Migrations;
@@ -12,7 +10,7 @@ namespace PlatformFramework.EFCore
     public class EfCoreBuilder<TDbContext>
         where TDbContext : DbContext
     {
-        private IServiceCollection Services { get; }
+        public IServiceCollection Services { get; }
 
         public EfCoreBuilder(IServiceCollection services)
         {
@@ -38,22 +36,6 @@ namespace PlatformFramework.EFCore
         {
             var builder = new EfCoreHooksBuilder(Services);
             configureAction?.Invoke(builder);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Register Mapper configuration
-        /// </summary>
-        /// <param name="configureAction">Configure <see cref="MapperConfigurationExpression"/></param>
-        /// <returns>Fluent builder</returns>
-        public EfCoreBuilder<TDbContext> WithMappers(Action<MapperConfigurationExpression> configureAction)
-        {
-            var expression = new MapperConfigurationExpression();
-            configureAction?.Invoke(expression);
-
-            var automapperConfig = new MapperConfiguration(expression);
-            Services.AddSingleton(automapperConfig.CreateMapper());
 
             return this;
         }

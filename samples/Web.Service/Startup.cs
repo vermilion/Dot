@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using PlatformFramework.Web.ExceptionHandling;
 using Web.Service.BusinessLogic;
+using PlatformFramework.Mapping;
 
 namespace Web.Service
 {
@@ -34,6 +35,10 @@ namespace Web.Service
                 {
                     x.Assemblies.Clear();
                     x.Assemblies.Add(Assembly.GetExecutingAssembly());
+                })
+                .WithMappers(x =>
+                {
+                    x.AddProfile<MyEntityMappingProfile>();
                 })
                 .WithDefaults();
 
@@ -70,10 +75,6 @@ namespace Web.Service
                     x.WithTrackingHooks();
                     x.WithSoftDeletedEntityHook();
                 })
-                .WithMappers(x =>
-                {
-                    x.AddProfile<MyEntityMappingProfile>();
-                })
                 .WithEntities(x =>
                 {
                     x.ApplyConfiguration<MyEntity, MyEntityConfiguration>();
@@ -105,7 +106,6 @@ namespace Web.Service
                     Description = "Swagger"
                 });
             });
-
 
             services.AddScoped<ICustomService, CustomService>();
         }

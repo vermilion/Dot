@@ -7,12 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
-		<PackageReference Include="Serilog" Version="2.9.0" />
+		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
 	</ItemGroup>
 
