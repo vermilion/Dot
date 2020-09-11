@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Context;
 using PlatformFramework.EFCore.Entities;
+using PlatformFramework.EFCore.Identity.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace PlatformFramework.EFCore.Identity.Context
     /// <summary>
     /// Framework's DbContext encapsulating all the entities/hooks/etc.. logic
     /// </summary>
-    public abstract class IdentityDbContextCore : IdentityDbContext
+    public abstract class IdentityDbContextCore : IdentityDbContext<User, Role, long>
     {
         protected IdentityDbContextCore(DbContextOptions options)
             : base(options)
