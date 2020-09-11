@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Identity.Context;
 
 namespace Web.Service

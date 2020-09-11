@@ -15,6 +15,7 @@ namespace PlatformFramework.EFCore.Identity
             var builder = services
                 .AddIdentity<User, Role>(setupAction)
                 .AddUserManager<UserManager<User>>()
+                .AddEntityFrameworkStores<TDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IUserStore<User>, UserStore<TDbContext>>();

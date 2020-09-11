@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System;
 using System.Threading.Tasks;
 
 namespace Web.Service
@@ -11,6 +12,8 @@ namespace Web.Service
     {
         public static Task Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             return CreateHostBuilder(args)
                 .Build()
                 .RunAsync();

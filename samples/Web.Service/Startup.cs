@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PlatformFramework;
 using PlatformFramework.EFCore;
+using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Identity;
 using PlatformFramework.Mapping;
 using PlatformFramework.Web;
@@ -82,7 +83,16 @@ namespace Web.Service
                 });
 
             //services.AddProblemDetails();
-            services.AddPlatformIdentity<ProjectDbContext>();
+            services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
+
+            services.AddPlatformIdentity<ProjectDbContext>(x =>
+            {
+                x.Password.RequireDigit = false;
+                x.Password.RequiredLength = 4;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = false;
+            });
 
             services
                 .AddMvcCore(o =>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using PlatformFramework.EFCore.Abstractions;
 
 namespace PlatformFramework.EFCore.Domain
@@ -7,6 +9,9 @@ namespace PlatformFramework.EFCore.Domain
     public abstract class Entity : IEntity
     {
         private int? _hashCode;
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         protected virtual object This => this;
 
@@ -22,7 +27,7 @@ namespace PlatformFramework.EFCore.Domain
 
         public virtual bool IsTransient()
         {
-            if (EqualityComparer<int>.Default.Equals(Id, default)) 
+            if (EqualityComparer<int>.Default.Equals(Id, default))
                 return true;
 
             //Workaround for EF Core since it sets int to min value when attaching to dbContext
