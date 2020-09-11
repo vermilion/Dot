@@ -1,5 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using MediatR;
+using PlatformFramework.Eventing;
 
 namespace PlatformFramework.EFCore.Eventing.Requests
 {

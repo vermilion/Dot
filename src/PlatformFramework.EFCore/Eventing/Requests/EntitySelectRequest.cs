@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using PlatformFramework.Eventing;
 using System.Collections.Generic;
 
 namespace PlatformFramework.EFCore.Eventing.Requests

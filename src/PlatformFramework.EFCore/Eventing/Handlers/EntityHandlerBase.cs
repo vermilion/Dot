@@ -1,9 +1,9 @@
 ﻿using Ardalis.GuardClauses;
 using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
+using PlatformFramework.Eventing;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

@@ -1,7 +1,8 @@
-﻿using MediatR;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using PlatformFramework.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PlatformFramework.Eventing.Helpers;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace PlatformFramework.Eventing
 {
@@ -12,19 +13,33 @@ namespace PlatformFramework.Eventing
             var services = builder.Services;
             var options = builder.Options;
 
-            var config = builder.GetOption<FrameworkMediatrOptions>();
+            services.AddTransient<IMediator, Mediator>();
+            services.AddTransient<ServiceFactory>(p => p.GetService!);
 
-            services.AddMediatR(options.Assemblies, x => x.AsTransient());
-
-            foreach (var behavior in config.Behaviors)
-            {
-                if (!behavior.IsAssignableToGenericType(typeof(IPipelineBehavior<,>)))
-                    throw new ArgumentException("Invalid behavior type");
-
-                services.AddTransient(typeof(IPipelineBehavior<,>), behavior);
-            }
+            services.AddMessageHandlers(options.Assemblies);
 
             return builder;
+        }
+
+        private static void AddMessageHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+        {
+            foreach (var type in assemblies.SelectMany(assembly => assembly.GetTypes()))
+            {
+                var handlerInterfaces = type.GetInterfaces()
+                   .Where(Utils.IsHandlerInterface)
+                   .ToList();
+
+                if (handlerInterfaces.Count > 0)
+                {
+                    var handlerFactory = new HandlerFactory(type);
+
+                    // register handlers
+                    foreach (var interfaceType in handlerInterfaces)
+                    {
+                        services.AddTransient(interfaceType, provider => handlerFactory.Create(provider, interfaceType));
+                    }
+                }
+            }
         }
     }
 }

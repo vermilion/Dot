@@ -1,7 +1,7 @@
 ﻿using AutoMapper.QueryableExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Abstractions;
+using PlatformFramework.Eventing;
 using System;
 using System.Linq;
 using System.Threading;

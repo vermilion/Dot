@@ -2,6 +2,8 @@
 using FluentValidation;
 using PlatformFramework.EFCore.Eventing.Handlers;
 using PlatformFramework.EFCore.Eventing.Requests;
+using PlatformFramework.Eventing.Decorators.DatabaseRetry;
+using PlatformFramework.Eventing.Decorators.Validation;
 using System;
 using Web.Service.Domain;
 
@@ -14,6 +16,8 @@ namespace Web.Service.BusinessLogic
         }
     }
 
+    [Validation(typeof(CreateRequestValidator))]
+    [DatabaseRetry]
     public class CreateHandler : EntityCreateHandlerBase<MyEntity, MyEntityModel, CreateRequest>
     {
         public CreateHandler(IServiceProvider serviceProvider)

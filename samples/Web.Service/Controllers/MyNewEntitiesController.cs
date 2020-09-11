@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PlatformFramework.Eventing;
 using PlatformFramework.Models;
 using Web.Service.BusinessLogic;
 

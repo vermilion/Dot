@@ -1,6 +1,6 @@
-﻿using MediatR;
-using PlatformFramework.EFCore.Abstractions;
+﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Handlers;
+using PlatformFramework.Eventing;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
