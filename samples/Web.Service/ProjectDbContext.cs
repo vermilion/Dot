@@ -1,9 +1,9 @@
-﻿using PlatformFramework.EFCore.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Identity.Context;
 
 namespace Web.Service
 {
-    public class ProjectDbContext : DbContextCore
+    public class ProjectDbContext : IdentityDbContextCore
     {
         public ProjectDbContext(
             DbContextOptions<ProjectDbContext> options)

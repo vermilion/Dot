@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PlatformFramework;
 using PlatformFramework.EFCore;
+using PlatformFramework.EFCore.Identity;
 using PlatformFramework.Mapping;
 using PlatformFramework.Web;
 using PlatformFramework.Web.ExceptionHandling;
@@ -81,6 +82,7 @@ namespace Web.Service
                 });
 
             //services.AddProblemDetails();
+            services.AddPlatformIdentity<ProjectDbContext>();
 
             services
                 .AddMvcCore(o =>
