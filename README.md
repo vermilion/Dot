@@ -4,7 +4,7 @@
 
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore?logo=nuget&label=PlatformFramework.EFCore&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.EFCore) / A EntityFramework Core part of framework on top of the PlatformFramework
 
-[![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Identity.EFCore?logo=nuget&label=PlatformFramework.Identity.EFCore&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.Identity.EFCore) / A Identity part of framework on top of the PlatformFramework.EFCore
+[![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore.Identity?logo=nuget&label=PlatformFramework.EFCore.Identity&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.EFCore.Identity) / A Identity part of framework on top of the PlatformFramework.EFCore
 
 ## Work in Progress
 
