@@ -1,6 +1,5 @@
-﻿using System;
+﻿using PlatformFramework.Abstractions;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace PlatformFramework
 {
@@ -9,25 +8,17 @@ namespace PlatformFramework
     /// </summary>
     public class FrameworkOptions
     {
-        /// <summary>
-        /// Assemblies used for framework parts
-        /// </summary>
-        public ICollection<Assembly> Assemblies { get; } = new List<Assembly>(new[]
-        {
-            Assembly.GetExecutingAssembly(),
-            Assembly.GetEntryAssembly()!
-        });
-
-        internal Dictionary<Type, Delegate> ConfigureActions { get; } = new Dictionary<Type, Delegate>();
+        internal List<IFrameworkModule> Modules { get; } = new List<IFrameworkModule>();
 
         /// <summary>
-        /// Framework part configuration
+        /// Adds Framework module configuration
         /// </summary>
-        /// <typeparam name="T">Part Type</typeparam>
-        /// <param name="action">Configuration action</param>
-        public void Configure<T>(Action<T> action)
+        /// <typeparam name="T">Module Type</typeparam>
+        public void AddModule<T>()
+            where T: IFrameworkModule, new()
         {
-            ConfigureActions[typeof(T)] = action;
+            var module = new T();
+            Modules.Add(module);
         }
     }
 }

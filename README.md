@@ -2,8 +2,6 @@
 
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework?logo=nuget&label=PlatformFramework&style=flat-square)](https://www.nuget.org/packages/PlatformFramework) An application framework for building applications on ASP.NET Core
 
-[![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Web?logo=nuget&label=PlatformFramework.Web&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.Web) A Web part of framework on top of the PlatformFramework
-
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore?logo=nuget&label=PlatformFramework.EFCore&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.EFCore) / A EntityFramework Core part of framework on top of the PlatformFramework
 
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework.Identity.EFCore?logo=nuget&label=PlatformFramework.Identity.EFCore&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.Identity.EFCore) / A Identity part of framework on top of the PlatformFramework.EFCore
@@ -23,15 +21,14 @@
 * [Entity Framework Core 3.1](https://docs.microsoft.com/en-us/ef/core)
 * [C# 8.0](https://docs.microsoft.com/en-us/dotnet/csharp)
 * [AutoMapper](https://automapper.org/)
-* [Mediatr](https://github.com/jbogard/MediatR)
 
 ## Installing
 
 From the Package Manager Console:
 
     PM> Install-Package PlatformFramework
-    PM> Install-Package PlatformFramework.Web
     PM> Install-Package PlatformFramework.EFCore
+    PM> Install-Package PlatformFramework.EFCore.Identity
 
 ### Getting Started
 #### PlatformFramework
@@ -42,38 +39,11 @@ public void ConfigureServices(IServiceCollection services)
     services
         .AddFramework(x =>
         {
-            x.Assemblies.Clear();
-            x.Assemblies.Add(Assembly.GetExecutingAssembly());
-            x.Assemblies.Add(typeof(ApplicationRegistry).Assembly);
-        })
-        .WithDefaults(); // add default framework services. This can be omitted and replaced by concrete extensions
-    
-    ....
-}
-```
-
-#### PlatformFramework.Web
-- In your `Startup.cs`
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services
-        .AddWebFramework()
-        .WithPermissionAuthorization()
-        .WithCors(options =>
-        {
-            options.AddPolicy("Default", x => x
-                .AllowCredentials()
-                .SetIsOriginAllowed(isOriginAllowed: _ => true)
-                .AllowAnyMethod()
-                .AllowAnyHeader());
-        })
-        .WithResponseCompression(options =>
-        {
-            options.Providers.Add<BrotliCompressionProvider>();
-            options.EnableForHttps = true;
+            // add modules
+            x.AddModule<ApplicationModule>();
+            x.AddModule<PlatformIdentityModule>();
         });
-       
+    
     ....
 }
 ```

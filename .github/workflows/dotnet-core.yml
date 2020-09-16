@@ -27,8 +27,6 @@ jobs:
       run: dotnet pack src/PlatformFramework/PlatformFramework.csproj --output nuget-packages --configuration Release
     - name: Pack PlatformFramework.EFCore
       run: dotnet pack src/PlatformFramework.EFCore/PlatformFramework.EFCore.csproj --output nuget-packages --configuration Release
-    - name: Pack PlatformFramework.Web
-      run: dotnet pack src/PlatformFramework.Web/PlatformFramework.Web.csproj --output nuget-packages --configuration Release
     - name: Pack PlatformFramework.EFCore.Identity
       run: dotnet pack src/PlatformFramework.EFCore.Identity/PlatformFramework.EFCore.Identity.csproj --output nuget-packages --configuration Release
     - name: Push to NuGet

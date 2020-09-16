@@ -3,13 +3,12 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
-using PlatformFramework.Exceptions;
 using System;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.Web.ExceptionHandling
+namespace PlatformFramework.Exceptions
 {
     public static class CustomErrorHandlerHelper
     {

@@ -14,15 +14,7 @@ namespace PlatformFramework.Tests.Validation
         public void Should_Have_Failures_When_Validator_Resolved_And_Defined_Some_Rules()
         {
             var services = new ServiceCollection();
-            services
-                .AddFramework(x =>
-                {
-                    x.Assemblies.Clear();
-                    x.Assemblies.Add(Assembly.GetExecutingAssembly());
-                })
-                .WithValidation();
-
-            services.AddSingleton<IValidatorFactory, ServiceProviderValidatorFactory>();
+            services.AddFramework();
 
             var factory = services.BuildServiceProvider().GetRequiredService<IValidatorFactory>();
             var validator = factory.GetValidator<TestModel>();

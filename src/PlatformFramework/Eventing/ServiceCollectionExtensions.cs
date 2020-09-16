@@ -1,27 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Eventing.Helpers;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace PlatformFramework.Eventing
 {
-    public static class FrameworkBuilderExtensions
+    public static class ServiceCollectionExtensions
     {
-        public static FrameworkBuilder WithMediator(this FrameworkBuilder builder)
-        {
-            var services = builder.Services;
-            var options = builder.Options;
-
-            services.AddTransient<IMediator, Mediator>();
-            services.AddTransient<ServiceFactory>(p => p.GetService!);
-
-            services.AddMessageHandlers(options.Assemblies);
-
-            return builder;
-        }
-
-        private static void AddMessageHandlers(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+        public static IServiceCollection AddMediatorHandlers(this IServiceCollection services, params Assembly[] assemblies)
         {
             foreach (var type in assemblies.SelectMany(assembly => assembly.GetTypes()))
             {
@@ -40,6 +26,8 @@ namespace PlatformFramework.Eventing
                     }
                 }
             }
+
+            return services;
         }
     }
 }

@@ -43,6 +43,7 @@ namespace PlatformFramework.EFCore.Identity
                 .AddSingleton(jwtTokenConfig)
                 .AddAuthentication(x =>
                 {
+                    x.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 })
@@ -64,9 +65,9 @@ namespace PlatformFramework.EFCore.Identity
             services
                  .AddAuthorization(options =>
                  {
-                     var builder = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme);
-                     builder = builder.RequireAuthenticatedUser();
-                     options.DefaultPolicy = builder.Build();
+                     options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                        .RequireAuthenticatedUser()
+                        .Build();
                  });
 
             return services;

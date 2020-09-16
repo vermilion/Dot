@@ -13,9 +13,7 @@ namespace PlatformFramework.Tests.Caching
         public async Task Should_Allow_Add_To_Cache()
         {
             var services = new ServiceCollection();
-            services
-                .AddFramework()
-                .WithCaching();
+            services.AddFramework();
 
             var cacheService = services.BuildServiceProvider().GetService<ICacheService>();
 
@@ -37,9 +35,7 @@ namespace PlatformFramework.Tests.Caching
         public async Task Should_Clear_Cache()
         {
             var services = new ServiceCollection();
-            services
-                .AddFramework()
-                .WithCaching();
+            services.AddFramework();
 
             var cacheService = services.BuildServiceProvider().GetService<ICacheService>();
 

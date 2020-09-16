@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,11 +13,8 @@ using PlatformFramework;
 using PlatformFramework.EFCore;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Identity;
-using PlatformFramework.EFCore.Identity.Mapping;
 using PlatformFramework.EFCore.Identity.Models;
-using PlatformFramework.Mapping;
-using PlatformFramework.Web;
-using PlatformFramework.Web.ExceptionHandling;
+using PlatformFramework.Exceptions;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Web.Service.BusinessLogic;
@@ -39,40 +35,30 @@ namespace Web.Service
             services
                 .AddFramework(x =>
                 {
-                    x.Assemblies.Clear();
-                    x.Assemblies.Add(Assembly.GetExecutingAssembly());
-                    x.Assemblies.Add(typeof(PlatformIdentityRegistar).Assembly);
-                })
-                .WithMappers(x =>
-                {
-                    x.AddIdentityMappingProfiles();
-                    x.AddProfile<MyEntityMappingProfile>();
-                })
-                .WithDefaults();
-
-            services
-                .AddWebFramework()
-                .WithPermissionAuthorization()
-                .WithCors(options =>
-                {
-                    options.AddPolicy("Default", x => x
-                        .AllowCredentials()
-                        .SetIsOriginAllowed(isOriginAllowed: _ => true)
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-                })
-                .WithResponseCompression(options =>
-                {
-                    options.Providers.Add<BrotliCompressionProvider>();
-                    options.EnableForHttps = true;
+                    x.AddModule<ApplicationModule>();
+                    x.AddModule<PlatformIdentityModule>();
                 });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Default", x => x
+                       .AllowCredentials()
+                       .SetIsOriginAllowed(isOriginAllowed: _ => true)
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
+            });
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.EnableForHttps = true;
+            });
 
             services
                 .AddEfCore<ProjectDbContext>(o =>
                 {
                     o.EnableSensitiveDataLogging();
 
-                    var c = Configuration.GetConnectionString("Default");
                     const string connectionString = "Server=localhost; Database=PlatformDb;User ID=postgres;Password=Qwerty12;";
                     o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
                 })
@@ -116,7 +102,6 @@ namespace Web.Service
                     o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 })
                 .AddApiExplorer();
-            //.AddAuthorization();
 
             // configure openapi
             services.AddSwaggerGen(c =>
@@ -194,11 +179,6 @@ namespace Web.Service
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
-                    c.OAuthClientId("Swagger");
-                    c.OAuthClientSecret("swagger");
-                    c.OAuthAppName("Api");
-                    c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
-
                     c.DefaultModelsExpandDepth(-1);
                 });
 

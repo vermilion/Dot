@@ -22,7 +22,8 @@ namespace PlatformFramework.Hosting
         {
             _factory = Guard.Against.Null(factory, nameof(factory));
             _queue = Guard.Against.Null(queue, nameof(queue));
-            _logger = loggerFactory.CreateLogger<QueuedHostedService>();
+            _logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
+                .CreateLogger<QueuedHostedService>();
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -31,14 +32,12 @@ namespace PlatformFramework.Hosting
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                var workItem = await _queue.DequeueAsync(cancellationToken);
+                var workItem = await _queue.DequeueAsync(cancellationToken).ConfigureAwait(false);
 
                 try
                 {
-                    using (var scope = _factory.CreateScope())
-                    {
-                        await workItem(cancellationToken, scope.ServiceProvider);
-                    }
+                    using var scope = _factory.CreateScope();
+                    await workItem(cancellationToken, scope.ServiceProvider).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {

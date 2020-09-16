@@ -14,6 +14,5 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
-	  <ProjectReference Include="..\PlatformFramework.Web\PlatformFramework.Web.csproj" />
 	</ItemGroup>
 </Project>
