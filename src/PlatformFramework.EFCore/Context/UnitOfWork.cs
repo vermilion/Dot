@@ -27,7 +27,7 @@ namespace PlatformFramework.EFCore.Context
             if (Transaction != null)
                 return Transaction;
 
-            return Transaction = await _context.Database.BeginTransactionAsync(isolationLevel, cancellationToken);
+            return Transaction = await _context.Database.BeginTransactionAsync(isolationLevel, cancellationToken).ConfigureAwait(false);
         }
 
         public async Task CommitTransaction(CancellationToken cancellationToken = default)
@@ -37,11 +37,11 @@ namespace PlatformFramework.EFCore.Context
 
             try
             {
-                await Transaction.CommitAsync(cancellationToken);
+                await Transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
             catch
             {
-                await RollbackTransaction(cancellationToken);
+                await RollbackTransaction(cancellationToken).ConfigureAwait(false);
                 throw;
             }
             finally
@@ -61,7 +61,7 @@ namespace PlatformFramework.EFCore.Context
 
             try
             {
-                await Transaction.RollbackAsync(cancellationToken);
+                await Transaction.RollbackAsync(cancellationToken).ConfigureAwait(false);
             }
             finally
             {

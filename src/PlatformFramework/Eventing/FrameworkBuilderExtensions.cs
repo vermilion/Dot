@@ -8,7 +8,7 @@ namespace PlatformFramework.Eventing
 {
     public static class FrameworkBuilderExtensions
     {
-        public static FrameworkBuilder WithMediatr(this FrameworkBuilder builder)
+        public static FrameworkBuilder WithMediator(this FrameworkBuilder builder)
         {
             var services = builder.Services;
             var options = builder.Options;

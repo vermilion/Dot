@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +14,8 @@ using PlatformFramework;
 using PlatformFramework.EFCore;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Identity;
+using PlatformFramework.EFCore.Identity.Mapping;
+using PlatformFramework.EFCore.Identity.Models;
 using PlatformFramework.Mapping;
 using PlatformFramework.Web;
 using PlatformFramework.Web.ExceptionHandling;
@@ -37,9 +41,11 @@ namespace Web.Service
                 {
                     x.Assemblies.Clear();
                     x.Assemblies.Add(Assembly.GetExecutingAssembly());
+                    x.Assemblies.Add(typeof(PlatformIdentityRegistar).Assembly);
                 })
                 .WithMappers(x =>
                 {
+                    x.AddIdentityMappingProfiles();
                     x.AddProfile<MyEntityMappingProfile>();
                 })
                 .WithDefaults();
@@ -67,7 +73,6 @@ namespace Web.Service
                     o.EnableSensitiveDataLogging();
 
                     var c = Configuration.GetConnectionString("Default");
-                    //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
                     const string connectionString = "Server=localhost; Database=PlatformDb;User ID=postgres;Password=Qwerty12;";
                     o.UseNpgsql(connectionString, assembly => assembly.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName));
                 })
@@ -85,14 +90,19 @@ namespace Web.Service
             //services.AddProblemDetails();
             services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
 
-            services.AddPlatformIdentity<ProjectDbContext>(x =>
-            {
-                x.Password.RequireDigit = false;
-                x.Password.RequiredLength = 4;
-                x.Password.RequireNonAlphanumeric = false;
-                x.Password.RequireUppercase = false;
-                x.Password.RequireLowercase = false;
-            });
+            var jwtTokenConfig = Configuration.GetSection("JwtTokenConfig").Get<JwtTokenConfig>();
+
+            services
+                .AddJwtAuthorization()
+                .AddJwtAuthentication(jwtTokenConfig)
+                .AddPlatformIdentity<ProjectDbContext>(x =>
+                {
+                    x.Password.RequireDigit = false;
+                    x.Password.RequiredLength = 4;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequireUppercase = false;
+                    x.Password.RequireLowercase = false;
+                });
 
             services
                 .AddMvcCore(o =>
@@ -105,17 +115,38 @@ namespace Web.Service
                     o.JsonSerializerOptions.IgnoreNullValues = true;
                     o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 })
-                .AddApiExplorer()
-                .AddAuthorization();
+                .AddApiExplorer();
+            //.AddAuthorization();
 
             // configure openapi
-            services.AddSwaggerGen(options =>
+            services.AddSwaggerGen(c =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo()
+                c.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Version = "v1",
                     Title = "API ",
                     Description = "Swagger"
+                });
+
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { securityScheme, new string[] { } }
                 });
             });
 
@@ -143,10 +174,9 @@ namespace Web.Service
 
             app.UseRouting();
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseHttpsRedirection();
             app.UseFileServer(new FileServerOptions
             {
                 // Don't expose file system

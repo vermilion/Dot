@@ -1,19 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace PlatformFramework.Models
+﻿namespace PlatformFramework.Models
 {
-    public class PagedModel<T>
-        where T : class
+    public class PagedModel
     {
-        public PagedModel(IEnumerable<T> collection, int total)
+        public PagedModel(int? limit = null, int? offset = null)
         {
-            Collection = collection.ToList();
-            Total = total;
+            Limit = limit;
+            Offset = offset;
         }
 
-        public IReadOnlyCollection<T> Collection { get; }
-
-        public int Total { get; }
+        public int? Limit { get; }
+        public int? Offset { get; }
     }
 }

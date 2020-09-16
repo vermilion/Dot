@@ -24,7 +24,7 @@ namespace Web.Service.Controllers
         }
 
         [HttpPost("[action]")]
-        public Task<PagedModel<MyEntityModel>> GetAllPaged([FromBody] GetAllPagedRequest request)
+        public Task<PagedCollection<MyEntityModel>> GetAllPaged([FromBody] GetAllPagedRequest request)
         {
             return _mediator.Send(request);
         }

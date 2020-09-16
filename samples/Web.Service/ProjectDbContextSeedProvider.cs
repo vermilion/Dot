@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Web.Service
 {
-
     public class ProjectDbContextSeedProvider : IDbSeedProvider
     {
         private readonly UserManager<User> _userManager;
@@ -20,33 +19,39 @@ namespace Web.Service
 
         public async Task Seed(CancellationToken cancellationToken = default)
         {
-            var role = new Role
+            if (!await _roleManager.RoleExistsAsync(IdentityConstants.AdminRole))
             {
-                Name = "Administrator"
-            };
+                var role = new Role
+                {
+                    Name = IdentityConstants.AdminRole
+                };
 
-            if (!await _roleManager.RoleExistsAsync(role.Name))
-            {
                 var roleResult = await _roleManager.CreateAsync(role);
             }
 
-            var user = await _userManager.FindByNameAsync("admin");
+            var user = await _userManager.FindByNameAsync(IdentityConstants.AdminName);
 
             if (user == null)
             {
                 var newUser = new User
                 {
-                    UserName = "admin"
+                    UserName = IdentityConstants.AdminName
                 };
 
-                var userResult = await _userManager.CreateAsync(newUser, "admin");
-                user = await _userManager.FindByNameAsync("admin");
+                var userResult = await _userManager.CreateAsync(newUser, IdentityConstants.AdminName);
+                user = await _userManager.FindByNameAsync(IdentityConstants.AdminName);
             }
 
-            if (!await _userManager.IsInRoleAsync(user, role.Name))
+            if (!await _userManager.IsInRoleAsync(user, IdentityConstants.AdminRole))
             {
-                var roleResult = await _userManager.AddToRoleAsync(user, role.Name);
+                var roleResult = await _userManager.AddToRoleAsync(user, IdentityConstants.AdminRole);
             }
         }
+    }
+
+    public static class IdentityConstants
+    {
+        public const string AdminName = "admin";
+        public const string AdminRole = "Administrator";
     }
 }

@@ -17,7 +17,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
     /// <typeparam name="TEntity">Entity type</typeparam>
     /// <typeparam name="TReadModel">Model type</typeparam>
     /// <typeparam name="TRequest">Unique request type</typeparam>
-    public abstract class EntitySelectPagedHandlerBase<TEntity, TReadModel, TRequest> : EntityHandlerBase<TRequest, PagedModel<TReadModel>>
+    public abstract class EntitySelectPagedHandlerBase<TEntity, TReadModel, TRequest> : EntityHandlerBase<TRequest, PagedCollection<TReadModel>>
         where TEntity : class, IEntity, new()
         where TReadModel : class
         where TRequest : EntityPagedSelectRequest<TReadModel>
@@ -27,7 +27,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         {
         }
 
-        public override async Task<PagedModel<TReadModel>> Handle(TRequest request, CancellationToken cancellationToken)
+        public override async Task<PagedCollection<TReadModel>> Handle(TRequest request, CancellationToken cancellationToken)
         {
             var query = UnitOfWork
                 .Set<TEntity>()
@@ -42,13 +42,13 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
 
             // short circuit if total is zero
             if (total == 0)
-                return new PagedModel<TReadModel>(new List<TReadModel>(), total);
+                return new PagedCollection<TReadModel>(new List<TReadModel>(), total);
 
             // page the query and convert to read model
             var result = await QueryPaged(request, query, cancellationToken)
                 .ConfigureAwait(false);
 
-            return new PagedModel<TReadModel>(result, total);
+            return new PagedCollection<TReadModel>(result, total);
         }
 
         /// <summary>

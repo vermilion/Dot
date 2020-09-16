@@ -45,7 +45,7 @@ namespace PlatformFramework
                 .WithValidation()
                 .WithCaching()
                 .WithBackgroundTaskQueue()
-                .WithMediatr()
+                .WithMediator()
                 .WithQueuedHostedService();
 
             return this;
