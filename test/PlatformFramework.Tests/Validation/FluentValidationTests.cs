@@ -15,6 +15,7 @@ namespace PlatformFramework.Tests.Validation
         {
             var services = new ServiceCollection();
             services.AddFramework();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             var factory = services.BuildServiceProvider().GetRequiredService<IValidatorFactory>();
             var validator = factory.GetValidator<TestModel>();
