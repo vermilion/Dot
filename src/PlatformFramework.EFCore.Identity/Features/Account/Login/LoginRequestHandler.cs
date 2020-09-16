@@ -51,6 +51,7 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
                 var claims = await _userManager.GetClaimsAsync(appUser).ConfigureAwait(false);
                 var roles = await _userManager.GetRolesAsync(appUser).ConfigureAwait(false);
 
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, appUser.Id.ToString()));
                 claims.Add(new Claim(ClaimTypes.Name, appUser.UserName));
 
                 foreach (var role in roles)

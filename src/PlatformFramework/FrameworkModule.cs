@@ -7,6 +7,7 @@ using PlatformFramework.Caching;
 using PlatformFramework.Eventing;
 using PlatformFramework.Eventing.Helpers;
 using PlatformFramework.Hosting;
+using PlatformFramework.Sessions;
 using PlatformFramework.Threading;
 using PlatformFramework.Timing;
 
@@ -35,6 +36,10 @@ namespace PlatformFramework
             // mediator
             services.TryAddTransient<IMediator, Mediator>();
             services.TryAddTransient<ServiceFactory>(p => p.GetService!);
+
+            // session
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserSession, UserSession>();
         }
     }
 }
