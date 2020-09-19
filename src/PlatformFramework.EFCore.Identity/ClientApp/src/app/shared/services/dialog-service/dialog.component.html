@@ -1,0 +1,5 @@
+<div class="overlay" (click)="onOverlayClicked($event)">
+  <div [@dialog] class="dialog" [style.width]="config.width" [style.height]="config.height" (click)="onDialogClicked($event)">
+    <ng-template #point></ng-template>
+  </div>
+</div>

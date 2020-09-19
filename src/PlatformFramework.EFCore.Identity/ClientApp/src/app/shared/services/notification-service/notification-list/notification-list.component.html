@@ -1,0 +1,5 @@
+<div *ngIf="notifications$ | async as notifications" [@notificationListAnimation]="{value: notifications.length, params: params}" [style.max-width]="maxWidth" class="ngx-notifications-list">
+  <div *ngFor="let notification of notifications; trackBy: trackById" class="ngx-notifications-item">
+    <app-notification-item [notification]="notification" (destroy)="onNotificationDestroy($event)"></app-notification-item>
+  </div>
+</div>

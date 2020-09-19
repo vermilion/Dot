@@ -1,0 +1,12 @@
+<i class="{{ notification.icon }} notification-icon"></i>
+
+<div class="notification-data" (click)="tryClear(notification)">
+  <h1 class="notification-title">
+    {{ notification.title }}
+  </h1>
+  <p class="notification-text">
+    {{ notification.text }}
+  </p>
+</div>
+
+<div *ngIf="notification.timeout > 0" [style.width]="progressWidth" class="notification-progress"></div>

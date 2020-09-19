@@ -1,0 +1,23 @@
+<div class="text-center mb-4">
+  <h1 class="h3 mb-3">Identity Admin</h1>
+</div>
+
+<form class="form-signin" (ngSubmit)="login()">
+  <div class="form-label-group">
+    <input type="text" id="userName" name="username" [(ngModel)]="username" class="form-control" placeholder="Username"
+      required autofocus />
+    <label for="userName">Username</label>
+  </div>
+  <div class="form-label-group">
+    <input type="password" id="inputPassword" name="password" [(ngModel)]="password" class="form-control"
+      placeholder="Password" required />
+    <label for="inputPassword">Password</label>
+  </div>
+
+  <div class="checkbox mb-3 text-danger" *ngIf="loginError">
+    Login failed. Please try again.
+  </div>
+  <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="busy">
+    Sign in
+  </button>
+</form>

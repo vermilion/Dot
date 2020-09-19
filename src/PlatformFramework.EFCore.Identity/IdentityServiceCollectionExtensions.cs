@@ -76,22 +76,14 @@ namespace PlatformFramework.EFCore.Identity
         public static IdentityBuilder AddPlatformIdentity<TDbContext>(this IServiceCollection services, Action<IdentityOptions>? setupAction = null)
             where TDbContext : IdentityDbContextCore
         {
-            return services.AddPlatformIdentity<TDbContext, User, Role>(setupAction);
-        }
-
-        private static IdentityBuilder AddPlatformIdentity<TDbContext, TUser, TRole>(this IServiceCollection services, Action<IdentityOptions>? setupAction = null)
-            where TDbContext : IdentityDbContextCore
-            where TUser : User
-            where TRole : Role
-        {
             var builder = services
-                .AddIdentity<TUser, TRole>(setupAction)
-                .AddUserManager<UserManager<TUser>>()
+                .AddIdentity<User, Role>(setupAction)
+                .AddUserManager<UserManager<User>>()
                 .AddEntityFrameworkStores<TDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped<IUserStore<TUser>, UserStore<TUser, TRole, TDbContext, int>>();
-            services.AddScoped<IRoleStore<TRole>, RoleStore<TRole, TDbContext, int>>();
+            services.AddScoped<IUserStore<User>, UserStore<User, Role, TDbContext, int, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>>();
+            services.AddScoped<IRoleStore<Role>, RoleStore<Role, TDbContext, int, UserRole, RoleClaim>>();
 
             return builder;
         }

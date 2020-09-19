@@ -11,7 +11,7 @@ namespace PlatformFramework.EFCore.Identity.Context
     /// <summary>
     /// Framework's DbContext encapsulating all the entities/hooks/etc.. logic
     /// </summary>
-    public abstract class IdentityDbContextCore : IdentityDbContext<User, Role, int>
+    public abstract class IdentityDbContextCore : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         protected IdentityDbContextCore(DbContextOptions options)
             : base(options)

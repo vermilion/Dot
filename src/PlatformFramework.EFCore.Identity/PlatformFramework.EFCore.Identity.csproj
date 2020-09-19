@@ -6,9 +6,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="ClientApp\**" />
+		<Content Remove="ClientApp\**" />
+		<EmbeddedResource Remove="ClientApp\**" />
+		<None Remove="ClientApp\**" />
+		<EmbeddedResource Remove="ClientApp\dist" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.8" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.1.8" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.7.1" />
 	</ItemGroup>
 
