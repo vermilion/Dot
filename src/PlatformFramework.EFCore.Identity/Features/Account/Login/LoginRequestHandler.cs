@@ -1,6 +1,6 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Identity.Abstrations;
 using PlatformFramework.EFCore.Identity.Entities;
 using PlatformFramework.EFCore.Identity.Models;
@@ -20,17 +20,20 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IClockProvider _clockProvider;
         private readonly IJwtAuthService _jwtAuthManager;
         private readonly ILogger<LoginRequestHandler> _logger;
 
         public LoginRequestHandler(
              UserManager<User> userManager,
              SignInManager<User> signInManager,
+             IClockProvider clockProvider,
              IJwtAuthService jwtAuthService,
              ILogger<LoginRequestHandler> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _clockProvider = clockProvider;
             _jwtAuthManager = jwtAuthService;
             _logger = logger;
         }
@@ -59,14 +62,12 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
                     claims.Add(new Claim(ClaimTypes.Role, role));
                 }
 
-                var jwtResult = _jwtAuthManager.GenerateTokens(request.UserName, claims, DateTime.Now);
+                var jwtResult = await _jwtAuthManager.GenerateTokens(request.UserName, claims, _clockProvider.Now);
 
                 return new LoginResponse.Success(new TokenResponse
                 {
-                    UserName = request.UserName,
-                    AccessToken = jwtResult.AccessToken,
-                    RefreshToken = jwtResult.RefreshToken.TokenString
-                });
+                    AccessToken = jwtResult.AccessToken
+                }, jwtResult.RefreshToken.TokenString);
             }
 
             if (result.RequiresTwoFactor)
@@ -85,8 +86,6 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
             {
                 return new LoginResponse.BadRequest(request);
             }
-
-            throw new NotImplementedException();
         }
     }
 }

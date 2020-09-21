@@ -1,0 +1,55 @@
+:host {
+  height: 100%;
+
+  &>.card {
+    height: 100%;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+
+    &>.card-header {
+      h4 {
+        margin: 0;
+      }
+    }
+
+    &>.card-body {
+      padding: 0.5rem;
+    }
+
+    &>.card-footer {
+      text-align: right;
+
+      &>.btn {
+        &:not(:last-child) {
+          margin-right: 0.2rem;
+        }
+      }
+    }
+
+    &>.dismiss {
+      position: absolute;
+      right: 0;
+
+      .modal-close {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: #333;
+        border: none;
+        border-radius: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-size: 1.125rem;
+        color: #999;
+        outline: none;
+
+        &:hover {
+          background-color: #222;
+        }
+      }
+    }
+  }
+}

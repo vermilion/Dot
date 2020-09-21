@@ -1,0 +1,18 @@
+<ux-page-header [condensed]="true" [header]="header" [iconMenus]="menus" [backVisible]="false"></ux-page-header>
+
+<div class="layout-body">
+  <div class="sidebar col-sm-2">
+    <div class="side-navigation-scroll-pane">
+      <ul class="side-navigation-list">
+        <li class="side-navigation-list-item" *ngFor="let category of categories">
+          <a class="side-navigation-list-item-link" [routerLink]="category.link" routerLinkActive="active">
+            {{ category.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrapper-content col-sm-10">
+    <router-outlet></router-outlet>
+  </div>
+</div>

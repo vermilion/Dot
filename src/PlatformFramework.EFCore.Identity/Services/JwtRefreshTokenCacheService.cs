@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Identity.Abstrations;
 using System;
 using System.Threading;
@@ -10,10 +11,12 @@ namespace PlatformFramework.EFCore.Identity.Services
     {
         private Timer? _timer;
         private readonly IJwtAuthService _jwtAuthManager;
+        private readonly IClockProvider _clockProvider;
 
-        public JwtRefreshTokenCacheService(IJwtAuthService jwtAuthManager)
+        public JwtRefreshTokenCacheService(IJwtAuthService jwtAuthManager, IClockProvider clockProvider)
         {
             _jwtAuthManager = jwtAuthManager;
+            _clockProvider = clockProvider;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
@@ -25,7 +28,7 @@ namespace PlatformFramework.EFCore.Identity.Services
 
         private void DoWork(object state)
         {
-            _jwtAuthManager.RemoveExpiredRefreshTokens(DateTime.Now);
+            _jwtAuthManager.RemoveExpiredRefreshTokens(_clockProvider.Now);
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

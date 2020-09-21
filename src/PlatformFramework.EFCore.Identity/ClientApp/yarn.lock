@@ -1492,10 +1492,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.10.3.tgz#5ae1f119c96643fc9b19b2d1a83bfa2ec3dbb7ea"
   integrity sha512-zdN0hor7TLkjAdKTnYW+Y22oIhUUpil5ZD1V1OFq0CR0CLKw+NdR6dkziTfkWRLo6sKzisayoj/GNpNbe4LY9Q==
 
-"@types/node@^12.12.61":
-  version "12.12.61"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.61.tgz#f9115df7cef34d76afa0a333d1c7e6aab051870a"
-  integrity sha512-+/KPk6uV9qGfVX0y2uUj3y8O0Z6KZWUy3XTS0uQGYYF+iXGtepm9GPETdcRq+hGmErkLOr5QJDX8vuymkwu4sA==
+"@types/node@^12.12.62":
+  version "12.12.62"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.62.tgz#733923d73669188d35950253dd18a21570085d2b"
+  integrity sha512-qAfo81CsD7yQIM9mVyh6B/U47li5g7cfpVQEDMfQeF8pSZVwzbhwU3crc0qG4DmpsebpJPR49AKOExQyJ05Cpg==
 
 "@types/q@^1.5.1":
   version "1.5.4"
@@ -1516,10 +1516,10 @@
     "@types/source-list-map" "*"
     source-map "^0.6.1"
 
-"@ux-aspects/ux-aspects@^2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@ux-aspects/ux-aspects/-/ux-aspects-2.1.3.tgz#af76fbd80582e2bdc5a54f73e785510ab0c131e2"
-  integrity sha512-hl6k5BOeJH92/X/1JVYPX7VCxeyE7a8eUrvgqb3lL/wTFFLkUPmG5E8kzhh8x0pr2yJpnxkR2A2XjAHBCFtc0Q==
+"@ux-aspects/ux-aspects@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@ux-aspects/ux-aspects/-/ux-aspects-2.1.4.tgz#82e173596b2d9021408f17762c3a05209e4f37e4"
+  integrity sha512-WS+JAFv+KvdM6ry9jKUss+eAa1pbvUsKljM/2KL7RJ16+iElEb0kswhcttOpRmvsyYCRudmqt7IJNvdLTO5bGw==
   dependencies:
     "@types/chart.js" "^2.7.45"
     "@types/d3" "^5.7.2"
@@ -8423,10 +8423,15 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.0.2, typescript@~4.0.2:
+typescript@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
   integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
+
+typescript@~4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
+  integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

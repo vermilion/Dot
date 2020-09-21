@@ -5,7 +5,7 @@ import { APP_INITIALIZER, NgModule, Optional, SkipSelf } from "@angular/core";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor";
 import { appInitializer } from "./services/app-initializer";
-import { AuthService } from "./services/auth.service";
+import { AuthenticationService } from "./services/auth.service";
 
 @NgModule({
   declarations: [],
@@ -15,7 +15,7 @@ import { AuthService } from "./services/auth.service";
       provide: APP_INITIALIZER,
       useFactory: appInitializer,
       multi: true,
-      deps: [AuthService],
+      deps: [AuthenticationService],
     },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {

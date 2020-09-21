@@ -1,20 +1,9 @@
-import {
-  AlertModule,
-  CheckboxModule,
-  ColorService,
-  ColorServiceModule,
-  IconModule,
-  PaginationModule,
-  PopoverModule,
-  ProgressBarModule,
-  SelectModule,
-  TabsetModule,
-  TagInputModule,
-  TooltipModule,
-  TypeaheadModule
-} from "@ux-aspects/ux-aspects";
-
 import { NgModule } from "@angular/core";
+import {
+    AlertModule, CheckboxModule, ColorService, ColorServiceModule, IconModule, PaginationModule,
+    PopoverModule, ProgressBarModule, SelectModule, TabsetModule, TagInputModule, TooltipModule,
+    TypeaheadModule
+} from "@ux-aspects/ux-aspects";
 
 @NgModule({
   imports: [

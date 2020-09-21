@@ -1,0 +1,11 @@
+:host {
+    display: contents;
+
+    &>.card {
+      flex: 1;
+
+      .card-body {
+        padding: 0;
+      }
+    }
+  }

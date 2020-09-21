@@ -1,0 +1,57 @@
+<div class="card card-default">
+  <div class="card-header">
+    <button class="btn button-primary ux-focus-indicator" (click)="reload()">
+      <ux-icon class="ux-icon ux-icon-refresh"></ux-icon>
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="50"></th>
+            <th width="50">Id</th>
+            <th>Name</th>
+            <th width="50"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>
+              <a class="btn btn-icon button-primary" (click)="edit(item)">
+                <ux-icon name="edit"></ux-icon>
+              </a>
+            </td>
+            <td>
+              {{ item.id }}
+            </td>
+            <td>
+              {{ item.name }}
+            </td>
+            <td>
+              <button class="btn btn-link button-warning" (click)="remove(item.id)">
+                <ux-icon name="close"></ux-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <app-loading *ngIf="isLoading"></app-loading>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex">
+      <div class="ml-auto">
+        <div class="input-group">
+          <label class="col-form-label">Items per page:&nbsp;</label>
+
+          <ux-select style="width: 80px;" class="m-r" [(value)]="quantity" (valueChange)="reload()" [options]="['10', '20', '30', '40', '50']" [readonlyInput]="true"></ux-select>
+
+          <ux-pagination [(ngModel)]="page" [totalItems]="total" [itemsPerPage]="quantity" [maxSize]="5" (pageChange)="reload()">
+          </ux-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

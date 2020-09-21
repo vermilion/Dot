@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { PageHeaderIconMenu } from "@ux-aspects/ux-aspects";
 
-import { AuthService } from "./core";
+import { AuthenticationService } from "./core";
 
 @Component({
   selector: "app-root",
@@ -31,7 +31,7 @@ export class AppComponent {
     }
   ];
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit(): void { }
 

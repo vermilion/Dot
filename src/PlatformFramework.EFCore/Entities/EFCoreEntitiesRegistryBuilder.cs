@@ -11,13 +11,13 @@ namespace PlatformFramework.EFCore.Entities
             Registry = registry;
         }
 
-        public EfCoreEntitiesRegistryBuilder ApplyConfiguration<TEntity, TCustomizer>()
+        public EfCoreEntitiesRegistryBuilder ApplyConfiguration<TEntity, TConfiguration>()
             where TEntity : class
-            where TCustomizer : IEntityTypeConfiguration<TEntity>, new()
+            where TConfiguration : IEntityTypeConfiguration<TEntity>, new()
         {
-            var customizer = new TCustomizer();
+            var configuration = new TConfiguration();
 
-            Registry.ApplyConfiguration<TEntity, TCustomizer>(customizer);
+            Registry.ApplyConfiguration<TEntity, TConfiguration>(configuration);
 
             return this;
         }

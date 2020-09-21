@@ -1,13 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using PlatformFramework.EFCore.Identity.Abstrations;
-using PlatformFramework.EFCore.Identity.Entities;
-using PlatformFramework.EFCore.Identity.Models;
-using PlatformFramework.Eventing;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using PlatformFramework.EFCore.Identity.Models;
 
 namespace PlatformFramework.EFCore.Identity.Features.Account
 {
@@ -15,12 +6,15 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
     {
         public class Success : RefreshTokenResponse
         {
-            public Success(TokenResponse model)
+            public Success(TokenResponse model, string refreshToken)
             {
                 Model = model;
+                RefreshToken = refreshToken;
             }
 
             public TokenResponse Model { get; }
+
+            public string RefreshToken { get; }
         }
 
         public class Unauthorized : RefreshTokenResponse

@@ -24,6 +24,7 @@ namespace PlatformFramework.EFCore.Identity.Services
         public JwtAuthService(JwtTokenConfig jwtTokenConfig)
         {
             _jwtTokenConfig = jwtTokenConfig;
+
             _usersRefreshTokens = new ConcurrentDictionary<string, RefreshToken>();
             _secret = Encoding.ASCII.GetBytes(jwtTokenConfig.Secret);
         }
@@ -50,7 +51,7 @@ namespace PlatformFramework.EFCore.Identity.Services
             return Task.CompletedTask;
         }
 
-        public JwtAuthResult GenerateTokens(string username, IEnumerable<Claim> claims, DateTime now)
+        public async Task<JwtAuthResult> GenerateTokens(string userName, IEnumerable<Claim> claims, DateTime now)
         {
             var shouldAddAudienceClaim = string.IsNullOrWhiteSpace(claims?.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Aud)?.Value);
 
@@ -65,7 +66,7 @@ namespace PlatformFramework.EFCore.Identity.Services
 
             var refreshToken = new RefreshToken
             {
-                UserName = username,
+                UserName = userName,
                 TokenString = GenerateRefreshTokenString(),
                 ExpireAt = now.AddMinutes(_jwtTokenConfig.RefreshTokenExpiration)
             };
@@ -79,25 +80,19 @@ namespace PlatformFramework.EFCore.Identity.Services
             };
         }
 
-        public JwtAuthResult Refresh(string refreshToken, string accessToken, DateTime now)
+        public Task<string> TryGetUserWithToken(string token, DateTime now)
         {
-            var (principal, jwtToken) = DecodeJwtToken(accessToken);
-            if (jwtToken?.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature) != true)
+            if (!_usersRefreshTokens.TryGetValue(token, out var existingRefreshToken))
             {
                 throw new SecurityTokenException("Invalid token");
             }
 
-            var userName = principal.Identity!.Name;
-            if (!_usersRefreshTokens.TryGetValue(refreshToken, out var existingRefreshToken))
-            {
-                throw new SecurityTokenException("Invalid token");
-            }
-            if (existingRefreshToken.UserName != userName || existingRefreshToken.ExpireAt < now)
+            if (existingRefreshToken.ExpireAt < now)
             {
                 throw new SecurityTokenException("Invalid token");
             }
 
-            return GenerateTokens(userName, principal.Claims.ToArray(), now); // need to recover the original claims
+            return Task.FromResult(existingRefreshToken.UserName);
         }
 
         public (ClaimsPrincipal, JwtSecurityToken?) DecodeJwtToken(string token)

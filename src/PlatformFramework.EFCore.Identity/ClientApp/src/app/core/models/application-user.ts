@@ -1,5 +1,5 @@
-export interface ApplicationUser {
+export class User {
+  id: number;
   username: string;
-  role: string;
-  originalUserName: string;
+  accessToken?: string;
 }

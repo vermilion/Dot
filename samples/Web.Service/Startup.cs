@@ -11,13 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PlatformFramework;
 using PlatformFramework.EFCore;
-using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Identity;
 using PlatformFramework.EFCore.Identity.Models;
 using PlatformFramework.Exceptions;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Web.Service.BusinessLogic;
 
 namespace Web.Service
 {
@@ -74,7 +72,6 @@ namespace Web.Service
                 });
 
             //services.AddProblemDetails();
-            services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
 
             var jwtTokenConfig = Configuration.GetSection("JwtTokenConfig").Get<JwtTokenConfig>();
 
@@ -134,8 +131,6 @@ namespace Web.Service
                     { securityScheme, new string[] { } }
                 });
             });
-
-            services.AddScoped<ICustomService, CustomService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

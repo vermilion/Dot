@@ -1,9 +1,10 @@
-import { AuthService } from "./auth.service";
+import { AuthenticationService } from "./auth.service";
 
-export function appInitializer(authService: AuthService) {
-  return () =>
-    new Promise((resolve) => {
-      console.log('refresh token on app start up')
-      authService.refreshToken().subscribe().add(resolve);
+export function appInitializer(authenticationService: AuthenticationService) {
+    return () => new Promise(resolve => {
+        // attempt to refresh token on app start up to auto authenticate
+        authenticationService.refreshToken()
+            .subscribe()
+            .add(resolve);
     });
 }

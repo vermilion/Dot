@@ -19,12 +19,15 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
     {
         public class Success : LoginResponse
         {
-            public Success(TokenResponse model)
+            public Success(TokenResponse model, string refreshToken)
             {
                 Model = model;
+                RefreshToken = refreshToken;
             }
 
             public TokenResponse Model { get; }
+
+            public string RefreshToken { get; }
         }
 
         public class NotFound : LoginResponse

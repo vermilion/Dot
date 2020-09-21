@@ -11,8 +11,8 @@ namespace PlatformFramework.EFCore.Identity.Abstrations
     public interface IJwtAuthService
     {
         IImmutableDictionary<string, RefreshToken> UsersRefreshTokensReadOnlyDictionary { get; }
-        JwtAuthResult GenerateTokens(string username, IEnumerable<Claim> claims, DateTime now);
-        JwtAuthResult Refresh(string refreshToken, string accessToken, DateTime now);
+        Task<JwtAuthResult> GenerateTokens(string username, IEnumerable<Claim> claims, DateTime now);
+        Task<string> TryGetUserWithToken(string token, DateTime now);
         void RemoveExpiredRefreshTokens(DateTime now);
         Task RemoveRefreshTokenByUserName(string userName);
         (ClaimsPrincipal, JwtSecurityToken?) DecodeJwtToken(string token);

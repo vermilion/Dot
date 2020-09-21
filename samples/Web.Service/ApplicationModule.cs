@@ -2,8 +2,11 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Abstractions;
+using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.Eventing;
 using System.Reflection;
+using Web.Service;
+using Web.Service.BusinessLogic;
 
 namespace PlatformFramework.EFCore.Identity
 {
@@ -20,6 +23,10 @@ namespace PlatformFramework.EFCore.Identity
                 .AddMediatorHandlers(assembly)
                 .AddValidatorsFromAssembly(assembly)
                 .AddAutoMapper(assembly);
+
+            services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
+
+            services.AddScoped<ICustomService, CustomService>();
         }
     }
 }
