@@ -27,9 +27,9 @@ namespace PlatformFramework.EFCore.Identity.Features.UserTokens
 
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedCollection<UserTokenModel>))]
-        public async Task<IActionResult> GetAll([FromBody] PagedModel model)
+        public async Task<IActionResult> GetAll([FromQuery] int userId, [FromBody] PagedModel model)
         {
-            var request = new GetAllRequest(model);
+            var request = new GetAllRequest(userId, model);
             var result = await _mediator.Send(request).ConfigureAwait(false);
             return Ok(result);
         }

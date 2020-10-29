@@ -6,9 +6,12 @@ namespace PlatformFramework.EFCore.Identity.Features.UserClaims.GetAll
 {
     public class GetAllRequest : EntityPagedSelectRequest<UserClaimModel>
     {
-        public GetAllRequest(PagedModel model)
+        public GetAllRequest(int userId, PagedModel model)
             : base(model.Limit, model.Offset)
         {
+            UserId = userId;
         }
+
+        public int UserId { get; }
     }
 }
