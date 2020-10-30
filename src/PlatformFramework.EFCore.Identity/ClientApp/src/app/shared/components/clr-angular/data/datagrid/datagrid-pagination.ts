@@ -1,24 +1,18 @@
+import { Subscription } from "rxjs";
+
 /*
  * Copyright (c) 2016-2020 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 import {
-  Component,
-  ContentChild,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Page } from './providers/page';
-import { ClrDatagridPageSize } from './datagrid-page-size';
-import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service';
-import { DetailService } from './providers/detail.service';
+    Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild
+} from "@angular/core";
+
+import { ClrCommonStringsService } from "../../utils/i18n/common-strings.service";
+import { ClrDatagridPageSize } from "./datagrid-page-size";
+import { DetailService } from "./providers/detail.service";
+import { Page } from "./providers/page";
 
 @Component({
   selector: 'clr-dg-pagination',

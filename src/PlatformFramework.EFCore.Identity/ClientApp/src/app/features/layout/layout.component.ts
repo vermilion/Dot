@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthenticationService, User } from "@app/core";
-import { PageHeaderIconMenu, PageHeaderNavigationItem } from "@ux-aspects/ux-aspects";
 
 @Component({
   selector: "app-layout",
@@ -13,7 +12,7 @@ export class FeaturesLayoutComponent {
   public user: User;
 
   header: string;
-  menus: PageHeaderIconMenu[] = [
+  menus: any[] = [
     {
       icon: "hpe-actions",
       dropdown: [
@@ -32,7 +31,7 @@ export class FeaturesLayoutComponent {
     }
   ];
 
-  menuItems: Array<PageHeaderNavigationItem>;
+  menuItems: Array<any>;
 
   categories = [
     {

@@ -1,44 +1,34 @@
+import { Subscription } from "rxjs";
+
 /*
  * Copyright (c) 2016-2020 VMware, Inc. All Rights Reserved.
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 import {
-  Component,
-  ContentChild,
-  EventEmitter,
-  Injector,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewContainerRef,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+    ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, EventEmitter, Injector,
+    Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewContainerRef
+} from "@angular/core";
 
-import { HostWrapper } from '../../utils/host-wrapping/host-wrapper';
-import { DatagridPropertyComparator } from './built-in/comparators/datagrid-property-comparator';
-import { DatagridPropertyStringFilter } from './built-in/filters/datagrid-property-string-filter';
-import { DatagridPropertyNumericFilter } from './built-in/filters/datagrid-property-numeric-filter';
-import { DatagridStringFilterImpl } from './built-in/filters/datagrid-string-filter-impl';
-import { DatagridNumericFilterImpl } from './built-in/filters/datagrid-numeric-filter-impl';
-import { ClrDatagridSortOrder } from './enums/sort-order.enum';
-import { ClrDatagridComparatorInterface } from './interfaces/comparator.interface';
-import { CustomFilter } from './providers/custom-filter';
-import { FiltersProvider } from './providers/filters';
-import { Sort } from './providers/sort';
-import { DatagridFilterRegistrar } from './utils/datagrid-filter-registrar';
-import { ClrDatagridFilterInterface } from './interfaces/filter.interface';
-import { WrappedColumn } from './wrapped-column';
-import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service';
-import { ClrPopoverPositionService } from '../../utils/popover/providers/popover-position.service';
-import { ClrPopoverEventsService } from '../../utils/popover/providers/popover-events.service';
-import { ClrPopoverToggleService } from '../../utils/popover/providers/popover-toggle.service';
-import { DetailService } from './providers/detail.service';
+import { HostWrapper } from "../../utils/host-wrapping/host-wrapper";
+import { ClrCommonStringsService } from "../../utils/i18n/common-strings.service";
+import { ClrPopoverEventsService } from "../../utils/popover/providers/popover-events.service";
+import { ClrPopoverPositionService } from "../../utils/popover/providers/popover-position.service";
+import { ClrPopoverToggleService } from "../../utils/popover/providers/popover-toggle.service";
+import { DatagridPropertyComparator } from "./built-in/comparators/datagrid-property-comparator";
+import { DatagridNumericFilterImpl } from "./built-in/filters/datagrid-numeric-filter-impl";
+import { DatagridPropertyNumericFilter } from "./built-in/filters/datagrid-property-numeric-filter";
+import { DatagridPropertyStringFilter } from "./built-in/filters/datagrid-property-string-filter";
+import { DatagridStringFilterImpl } from "./built-in/filters/datagrid-string-filter-impl";
+import { ClrDatagridSortOrder } from "./enums/sort-order.enum";
+import { ClrDatagridComparatorInterface } from "./interfaces/comparator.interface";
+import { ClrDatagridFilterInterface } from "./interfaces/filter.interface";
+import { CustomFilter } from "./providers/custom-filter";
+import { DetailService } from "./providers/detail.service";
+import { FiltersProvider } from "./providers/filters";
+import { Sort } from "./providers/sort";
+import { DatagridFilterRegistrar } from "./utils/datagrid-filter-registrar";
+import { WrappedColumn } from "./wrapped-column";
 
 @Component({
   selector: 'clr-dg-column',

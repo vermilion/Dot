@@ -39,7 +39,7 @@
 }
 
 // Standard Clarity Input Bottom Border Animation
-@mixin input-border-bottom-animation(
+@mixin input-border-animation(
   $border-color-sass: $clr-forms-focused-color,
   $border-color-prop: clr-forms-focused-color,
   $use-custom-props: $clr-use-custom-properties
@@ -61,9 +61,9 @@
   &:focus,
   &.clr-focus {
     @if $border-color-prop == null or $use-custom-props != true {
-      border-bottom-color: $border-color-sass;
+      border-color: $border-color-sass;
     } @else {
-      @include css-var(border-bottom-color, $border-color-prop, $border-color-sass, $use-custom-props);
+      @include css-var(border-color, $border-color-prop, $border-color-sass, $use-custom-props);
     }
     background-size: 100% 100%;
   }
@@ -74,7 +74,6 @@
   @include clr-appearance-normal();
   margin: 0;
   padding: 0;
-  border: none;
   border-radius: 0;
   box-shadow: none;
   background: none;
@@ -94,11 +93,11 @@
 ) {
   @if $use-custom-props != true {
     color: $text-color-sass;
-    border-bottom: $clr-global-borderwidth solid $border-color-sass;
+    border: $clr-global-borderwidth solid $border-color-sass;
   } @else {
     @include css-var(color, $text-color-prop, $text-color-sass, $use-custom-props);
-    border-bottom: $clr-global-borderwidth solid;
-    @include css-var(border-bottom-color, $border-color-prop, $border-color-sass, $use-custom-props);
+    border: $clr-global-borderwidth solid;
+    @include css-var(border-color, $border-color-prop, $border-color-sass, $use-custom-props);
   }
   display: inline-block;
 }

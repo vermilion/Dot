@@ -13,6 +13,7 @@ import { PagingParam, PagingResult, User } from "../interfaces";
 })
 export class UsersComponent implements OnInit {
 
+
   isLoading: boolean = false;
   items: User[] = [];
 

@@ -11,7 +11,7 @@
     select {
       @include custom-inputs($clr_baselineRem_1);
       @include form-fields-appearance();
-      @include input-border-bottom-animation();
+      @include input-border-animation();
       position: relative;
       padding: 0 ($clr-forms-select-caret-size + $clr-forms-baseline * 2) 0 $clr-forms-baseline;
       cursor: pointer;
@@ -120,7 +120,7 @@
 
   .clr-error select:not([multiple]) {
     @include css-var(
-      border-bottom-color,
+      border-color,
       clr-forms-invalid-color,
       $clr-forms-invalid-color,
       $clr-use-custom-properties

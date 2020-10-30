@@ -92,7 +92,7 @@
     input[type='checkbox']:indeterminate + label::after {
       border-left: none;
       @include css-var(
-        border-bottom-color,
+        border-color,
         $indetermCssBrdrColorVar,
         $indetermSassBrdrColorVar,
         $clr-use-custom-properties
@@ -133,7 +133,7 @@
       border-left: $disabled-border-style;
       border-bottom: $disabled-border-style;
       @include css-var(border-left-color, $cssVar, $sassVar, $clr-use-custom-properties);
-      @include css-var(border-bottom-color, $cssVar, $sassVar, $clr-use-custom-properties);
+      @include css-var(border-color, $cssVar, $sassVar, $clr-use-custom-properties);
     }
 
     input[type='checkbox']:checked.clr-indeterminate + label::after,

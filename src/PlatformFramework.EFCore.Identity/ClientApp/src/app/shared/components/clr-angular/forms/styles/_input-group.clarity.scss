@@ -5,7 +5,7 @@
 @include exports('forms.input-group') {
   .clr-input-group {
     @include form-fields-appearance();
-    @include input-border-bottom-animation();
+    @include input-border-animation();
     max-width: 100%;
     height: $clr_baselineRem_1;
 
@@ -62,12 +62,12 @@
 
   .clr-error .clr-input-group {
     @include css-var(
-      border-bottom-color,
+      border-color,
       clr-forms-invalid-color,
       $clr-forms-invalid-color,
       $clr-use-custom-properties
     );
-    @include input-border-bottom-animation(
+    @include input-border-animation(
       $clr-forms-invalid-color,
       clr-forms-invalid-color,
       $clr-use-custom-properties

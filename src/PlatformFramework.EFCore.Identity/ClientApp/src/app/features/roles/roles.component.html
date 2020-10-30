@@ -1,57 +1,25 @@
-<div class="card card-default">
-  <div class="card-header">
-    <button class="btn button-primary ux-focus-indicator" (click)="reload()">
-      <ux-icon class="ux-icon ux-icon-refresh"></ux-icon>
-    </button>
-  </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th width="50"></th>
-            <th width="50">Id</th>
-            <th>Name</th>
-            <th width="50"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of items">
-            <td>
-              <a class="btn btn-icon button-primary" (click)="edit(item)">
-                <ux-icon name="edit"></ux-icon>
-              </a>
-            </td>
-            <td>
-              {{ item.id }}
-            </td>
-            <td>
-              {{ item.name }}
-            </td>
-            <td>
-              <button class="btn btn-link button-warning" (click)="remove(item.id)">
-                <ux-icon name="close"></ux-icon>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<clr-datagrid [clrDgLoading]="isLoading">
+  <clr-dg-action-bar>
+    <button class="btn btn-sm">Add Role</button>
+  </clr-dg-action-bar>
 
-    <app-loading *ngIf="isLoading"></app-loading>
-  </div>
-  <div class="card-footer">
-    <div class="d-flex">
-      <div class="ml-auto">
-        <div class="input-group">
-          <label class="col-form-label">Items per page:&nbsp;</label>
+  <clr-dg-column>Id</clr-dg-column>
+  <clr-dg-column>Name</clr-dg-column>
 
-          <ux-select style="width: 80px;" class="m-r" [(value)]="quantity" (valueChange)="reload()" [options]="['10', '20', '30', '40', '50']" [readonlyInput]="true"></ux-select>
+  <clr-dg-row *clrDgItems="let item of items" [clrDgItem]="item">
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="edit(item)">Edit</button>
+      <button class="action-item" (click)="remove(item.id)">Delete</button>
+    </clr-dg-action-overflow>
 
-          <ux-pagination [(ngModel)]="page" [totalItems]="total" [itemsPerPage]="quantity" [maxSize]="5" (pageChange)="reload()">
-          </ux-pagination>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <clr-dg-cell>{{ item.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ item.name }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgTotalItems]="total" [clrDgPageSize]="quantity" [clrDgPage]="page">
+      <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">Rows per page</clr-dg-page-size>
+      {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} of {{ pagination.totalItems }} rows
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>

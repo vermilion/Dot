@@ -3,11 +3,11 @@
  * This software is released under MIT license.
  * The full license information can be found in LICENSE in the root directory of this project.
  */
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'clr-dg-action-bar',
+  selector: "clr-dg-action-bar",
   template: ` <ng-content></ng-content> `,
-  host: { '[class.datagrid-action-bar]': 'true' },
+  host: { "[class.datagrid-action-bar]": "true" },
 })
 export class ClrDatagridActionBar {}

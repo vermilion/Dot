@@ -1,13 +1,9 @@
-/*
- * Copyright (c) 2016-2020 VMware, Inc. All Rights Reserved.
- * This software is released under MIT license.
- * The full license information can be found in LICENSE in the root directory of this project.
- */
-import { Component, Input } from '@angular/core';
-import { Page } from './providers/page';
+import { Component, Input, OnInit } from "@angular/core";
+
+import { Page } from "./providers/page";
 
 @Component({
-  selector: 'clr-dg-page-size',
+  selector: "clr-dg-page-size",
   template: `
     <ng-content></ng-content>
     <div class="clr-select-wrapper">
@@ -17,8 +13,8 @@ import { Page } from './providers/page';
     </div>
   `,
 })
-export class ClrDatagridPageSize {
-  @Input('clrPageSizeOptions') pageSizeOptions: number[];
+export class ClrDatagridPageSize implements OnInit {
+  @Input("clrPageSizeOptions") pageSizeOptions: number[];
 
   constructor(public page: Page) {}
 

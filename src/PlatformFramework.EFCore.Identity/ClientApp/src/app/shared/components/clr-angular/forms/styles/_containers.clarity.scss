@@ -33,7 +33,7 @@
         $clr-use-custom-properties
       );
       @include css-var(
-        border-bottom-color,
+        border-color,
         clr-forms-border-disabled-color,
         $clr-forms-border-disabled-color,
         $clr-use-custom-properties
@@ -111,7 +111,7 @@
 
   .clr-success {
     .clr-input {
-      @include css-var(border-bottom-color, clr-forms-valid-color, $clr-forms-valid-color, $clr-use-custom-properties);
+      @include css-var(border-color, clr-forms-valid-color, $clr-forms-valid-color, $clr-use-custom-properties);
     }
     .clr-validate-icon {
       display: inline-block;

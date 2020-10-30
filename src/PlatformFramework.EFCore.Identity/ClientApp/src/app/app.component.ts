@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { PageHeaderIconMenu } from "@ux-aspects/ux-aspects";
 
 import { AuthenticationService } from "./core";
 
@@ -11,7 +10,7 @@ import { AuthenticationService } from "./core";
 export class AppComponent {
 
   header: string;
-  menus: PageHeaderIconMenu[] = [
+  menus: any[] = [
     {
       icon: "hpe-actions",
       dropdown: [

@@ -12,9 +12,11 @@ import { AuthenticationService } from "../../core";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  isLoading = false;
-  username = "";
-  password = "";
+  isLoading: boolean = false;
+  username: string = "";
+  password: string = "";
+  rememberMe: boolean = false;
+
   loginError = false;
   private subscription: Subscription;
 
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const returnUrl = this.route.snapshot.queryParams["returnUrl"] || "";
     this.authService
-      .login(this.username, this.password)
+      .login(this.username, this.password, this.rememberMe)
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -52,9 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         () => {
           this.router.navigate([returnUrl]);
         },
-        () => {
-          this.loginError = true;
-        }
+        () => { this.loginError = true; }
       );
   }
 

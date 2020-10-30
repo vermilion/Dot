@@ -19,10 +19,6 @@
       border: none;
     }
 
-    &:not([readonly]) {
-      @include input-border-bottom-animation();
-    }
-
     &:disabled {
       @include disabled-form-fields();
     }
@@ -30,12 +26,12 @@
 
   .clr-error .clr-input:not([readonly]) {
     @include css-var(
-      border-bottom-color,
+      border-color,
       clr-forms-invalid-color,
       $clr-forms-invalid-color,
       $clr-use-custom-properties
     );
-    @include input-border-bottom-animation(
+    @include input-border-animation(
       $clr-forms-invalid-color,
       clr-forms-invalid-color,
       $clr-use-custom-properties

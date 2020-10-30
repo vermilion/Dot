@@ -1,21 +1,26 @@
-<div class="text-center mb-4">
-  <h1 class="h3 mb-3">Identity Admin</h1>
+<div class="login-wrapper">
+  <form class="login" (ngSubmit)="login()">
+      <section class="title">
+          <h3 class="welcome">Welcome to</h3>
+          Identity Admin
+      </section>
+      <div class="login-group">
+          <clr-input-container>
+              <label class="clr-sr-only">Username</label>
+              <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="username"/>
+          </clr-input-container>
+          <clr-password-container>
+              <label class="clr-sr-only">Password</label>
+              <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password"/>
+          </clr-password-container>
+          <clr-checkbox-wrapper>
+              <label>Remember me</label>
+              <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="rememberMe"/>
+          </clr-checkbox-wrapper>
+          <div class="error active" *ngIf="loginError">
+              Invalid user name or password
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading">Sign in</button>
+      </div>
+  </form>
 </div>
-
-<form class="form-signin" (ngSubmit)="login()">
-  <div class="form-label-group">
-    <input type="text" id="userName" name="username" [(ngModel)]="username" class="form-control" placeholder="Username" required autofocus />
-    <label for="userName">Username</label>
-  </div>
-  <div class="form-label-group">
-    <input type="password" id="inputPassword" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required />
-    <label for="inputPassword">Password</label>
-  </div>
-
-  <div class="checkbox mb-3 text-danger" *ngIf="loginError">
-    Login failed. Please try again.
-  </div>
-  <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="isLoading">
-    Sign in
-  </button>
-</form>

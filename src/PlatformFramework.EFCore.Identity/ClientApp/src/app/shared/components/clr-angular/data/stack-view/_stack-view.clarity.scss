@@ -345,7 +345,7 @@ $styledInputs: 'input[type=text], input[type=password], input[type=number], inpu
           $clr-color-neutral-600,
           $clr-use-custom-properties
         );
-        @include input-border-bottom-animation($clr-color-action-600, clr-color-action-600, $clr-use-custom-properties);
+        @include input-border-animation($clr-color-action-600, clr-color-action-600, $clr-use-custom-properties);
       }
 
       .select {
