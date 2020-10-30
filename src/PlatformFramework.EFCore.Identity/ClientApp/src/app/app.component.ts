@@ -17,7 +17,7 @@ export class AppComponent {
       dropdown: [
         {
           header: true,
-          title: "",//this.user?.name,
+          title: "", //this.user?.name,
           divider: true
         },
         {
@@ -32,7 +32,4 @@ export class AppComponent {
   ];
 
   constructor(public authService: AuthenticationService) { }
-
-  ngOnInit(): void { }
-
 }

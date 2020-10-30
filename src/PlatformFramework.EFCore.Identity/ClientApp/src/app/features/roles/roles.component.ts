@@ -7,9 +7,9 @@ import { API_BASE_URL } from "@shared/constants";
 import { PagingParam, PagingResult, Role } from "../interfaces";
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss'],
+  selector: "app-roles",
+  templateUrl: "./roles.component.html",
+  styleUrls: ["./roles.component.scss"],
 })
 export class RolesComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class RolesComponent implements OnInit {
   public reload() {
     this.isLoading = true;
 
-    var param: PagingParam = {
+    const param: PagingParam = {
       limit: this.quantity,
       offset: (this.page - 1) * this.quantity
     };

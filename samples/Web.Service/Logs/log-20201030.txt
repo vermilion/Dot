@@ -1,0 +1,40 @@
+2020-10-30 09:58:53.817 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-10-30 09:58:54.083 +03:00 [INF] Queued Hosted Service is starting.
+2020-10-30 09:58:54.521 +03:00 [INF] Migrating database associated with context ProjectDbContext
+2020-10-30 09:58:55.488 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data, this mode should only be enabled during development.
+2020-10-30 09:58:55.581 +03:00 [INF] Entity Framework Core 3.1.9 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2020-10-30 09:58:56.309 +03:00 [INF] Now listening on: https://localhost:5001
+2020-10-30 09:58:56.309 +03:00 [INF] Now listening on: http://localhost:5000
+2020-10-30 09:58:56.310 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2020-10-30 09:58:56.310 +03:00 [INF] Hosting environment: Development
+2020-10-30 09:58:56.311 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service
+2020-10-30 09:58:57.901 +03:00 [INF] Executed DbCommand (174ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2020-10-30 09:58:58.920 +03:00 [INF] Executed DbCommand (30ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2020-10-30 09:58:59.127 +03:00 [INF] Executed DbCommand (126ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2020-10-30 09:58:59.225 +03:00 [INF] No migrations were applied. The database is already up to date.
+2020-10-30 09:58:59.947 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[@__normalizedName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2020-10-30 09:59:00.087 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedUserName_0='ADMIN'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2020-10-30 09:59:00.142 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2020-10-30 09:59:00.184 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__p_0='1', @__p_1='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE (a."UserId" = @__p_0) AND (a."RoleId" = @__p_1)
+LIMIT 1
+2020-10-30 09:59:00.217 +03:00 [INF] Migrated database associated with context ProjectDbContext

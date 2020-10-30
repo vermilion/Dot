@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 
+import { ClarityModule } from "./components/clr-angular/clr-angular.module";
 import { Error404Component } from "./components/error404/error404.component";
 import { SpinnersComponent } from "./components/spinners/spinners.component";
 import { NumberDirective } from "./directives/numbers-only.directive";
@@ -17,7 +18,8 @@ import { UxModule } from "./ux.module";
     ReactiveFormsModule,
     DialogModule,
 
-    UxModule
+    UxModule,
+    ClarityModule
   ],
   providers: [
   ],
@@ -36,7 +38,8 @@ import { UxModule } from "./ux.module";
     NumberDirective,
     DialogModule,
 
-    UxModule
+    UxModule,
+    ClarityModule
   ]
 })
 export class SharedModule {

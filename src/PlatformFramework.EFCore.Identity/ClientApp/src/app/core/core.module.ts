@@ -28,7 +28,7 @@ import { AuthenticationService } from "./services/auth.service";
 export class CoreModule {
   constructor(@Optional() @SkipSelf() core: CoreModule) {
     if (core) {
-      throw new Error('Core Module can only be imported to AppModule.');
+      throw new Error("Core Module can only be imported to AppModule.");
     }
   }
 }

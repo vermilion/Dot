@@ -8,7 +8,7 @@ import { API_BASE_URL } from "@shared/constants";
 
 import { User } from "../models/application-user";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
@@ -33,6 +33,7 @@ export class AuthenticationService {
         map(user => {
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
+
           return user;
         })
       );
@@ -45,7 +46,7 @@ export class AuthenticationService {
 
     this.stopRefreshTokenTimer();
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 
   refreshToken() {
@@ -55,6 +56,7 @@ export class AuthenticationService {
         map((user) => {
           this.userSubject.next(user);
           this.startRefreshTokenTimer();
+
           return user;
         })
       );
@@ -66,7 +68,7 @@ export class AuthenticationService {
 
   private startRefreshTokenTimer() {
     // parse json object from base64 encoded jwt token
-    const jwtToken = JSON.parse(atob(this.userValue.accessToken.split('.')[1]));
+    const jwtToken = JSON.parse(atob(this.userValue.accessToken.split(".")[1]));
 
     // set a timeout to refresh the token a minute before it expires
     const expires = new Date(jwtToken.exp * 1000);

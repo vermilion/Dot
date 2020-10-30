@@ -19,7 +19,7 @@ export class FeaturesLayoutComponent {
       dropdown: [
         {
           header: true,
-          title: "",//this.user?.name,
+          title: "", //this.user?.name,
           divider: true
         },
         {

@@ -7,9 +7,9 @@ import { API_BASE_URL } from "@shared/constants";
 import { PagingParam, PagingResult, User } from "../interfaces";
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: "app-users",
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.scss"],
 })
 export class UsersComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
   public reload() {
     this.isLoading = true;
 
-    var param: PagingParam = {
+    const param: PagingParam = {
       limit: this.quantity,
       offset: (this.page - 1) * this.quantity
     };
