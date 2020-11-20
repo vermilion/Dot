@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 
 import { ClarityModule } from "./components/clr-angular/clr-angular.module";
 import { Error404Component } from "./components/error404/error404.component";
+import { BreadcrumbModule } from "./components/ng-breadcrumbs/breadcrumb.module";
 import { NumberDirective } from "./directives/numbers-only.directive";
 import { DialogModule } from "./services/dialog-service/dialog.module";
 
@@ -15,6 +16,7 @@ import { DialogModule } from "./services/dialog-service/dialog.module";
     FormsModule,
     ReactiveFormsModule,
     DialogModule,
+    BreadcrumbModule,
 
     ClarityModule
   ],
@@ -32,6 +34,7 @@ import { DialogModule } from "./services/dialog-service/dialog.module";
     Error404Component,
     NumberDirective,
     DialogModule,
+    BreadcrumbModule,
 
     ClarityModule
   ]

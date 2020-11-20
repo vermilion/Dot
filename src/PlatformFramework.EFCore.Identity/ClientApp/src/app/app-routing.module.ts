@@ -12,13 +12,12 @@ const routes: Routes = [
     path: "register",
     loadChildren: () => import("./auth/register/register.module").then(m => m.RegisterModule)
   },
-  ...FeaturesRoutes,
-  { path: "**", redirectTo: "main" },
+  ...FeaturesRoutes
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: false
+    enableTracing: true
   })],
   exports: [RouterModule],
 })

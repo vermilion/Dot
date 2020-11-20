@@ -13,6 +13,10 @@
     </ul>
   </nav>
   <div class="content-container">
+    <div *ngIf="isLoading" class="progress loop">
+      <progress></progress>
+    </div>
+
     <div class="content-area">
       <router-outlet></router-outlet>
     </div>

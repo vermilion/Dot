@@ -9,7 +9,7 @@ namespace PlatformFramework.EFCore.Identity.Context.Configurations
         public void Configure(EntityTypeBuilder<Role> entity)
         {
             entity.HasKey(r => r.Id);
-            entity.HasIndex(r => r.NormalizedName).HasName("RoleNameIndex").IsUnique();
+            entity.HasIndex(r => r.NormalizedName).HasDatabaseName("RoleNameIndex").IsUnique();
             entity.ToTable("AspNetRoles");
             entity.Property(r => r.ConcurrencyStamp).IsConcurrencyToken();
 
@@ -17,7 +17,7 @@ namespace PlatformFramework.EFCore.Identity.Context.Configurations
             entity.Property(u => u.NormalizedName).HasMaxLength(256);
 
             entity.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.RoleId).IsRequired();
-            entity.HasMany<RoleClaim>().WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
+            entity.HasMany(x => x.Claims).WithOne().HasForeignKey(rc => rc.RoleId).IsRequired();
         }
     }
 }

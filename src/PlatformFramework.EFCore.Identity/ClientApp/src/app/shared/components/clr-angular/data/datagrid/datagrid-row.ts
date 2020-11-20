@@ -4,39 +4,30 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
+import { combineLatest, Subscription } from "rxjs";
+
 import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  ContentChildren,
-  ElementRef,
-  EventEmitter,
-  Injector,
-  Input,
-  Output,
-  QueryList,
-  Renderer2,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
-import { combineLatest, Subscription } from 'rxjs';
+    AfterContentInit, AfterViewInit, Component, ContentChildren, ElementRef, EventEmitter, Injector,
+    Input, Output, QueryList, Renderer2, ViewChild, ViewContainerRef
+} from "@angular/core";
 
-import { IfExpandService } from '../../utils/conditional/if-expanded.service';
-import { HostWrapper } from '../../utils/host-wrapping/host-wrapper';
-import { LoadingListener } from '../../utils/loading/loading-listener';
-
-import { ClrDatagridCell } from './datagrid-cell';
-import { DatagridDisplayMode } from './enums/display-mode.enum';
-import { DisplayModeService } from './providers/display-mode.service';
-import { ExpandableRowsCount } from './providers/global-expandable-rows';
-import { RowActionService } from './providers/row-action-service';
-import { Selection } from './providers/selection';
-import { WrappedRow } from './wrapped-row';
-import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service';
-import { SelectionType } from './enums/selection-type';
-import { DatagridIfExpandService } from './datagrid-if-expanded.service';
-import { ClrExpandableAnimation } from '../../utils/animations/expandable-animation/expandable-animation';
-import { DetailService } from './providers/detail.service';
+import {
+    ClrExpandableAnimation
+} from "../../utils/animations/expandable-animation/expandable-animation";
+import { IfExpandService } from "../../utils/conditional/if-expanded.service";
+import { HostWrapper } from "../../utils/host-wrapping/host-wrapper";
+import { ClrCommonStringsService } from "../../utils/i18n/common-strings.service";
+import { LoadingListener } from "../../utils/loading/loading-listener";
+import { ClrDatagridCell } from "./datagrid-cell";
+import { DatagridIfExpandService } from "./datagrid-if-expanded.service";
+import { DatagridDisplayMode } from "./enums/display-mode.enum";
+import { SelectionType } from "./enums/selection-type";
+import { DetailService } from "./providers/detail.service";
+import { DisplayModeService } from "./providers/display-mode.service";
+import { ExpandableRowsCount } from "./providers/global-expandable-rows";
+import { RowActionService } from "./providers/row-action-service";
+import { Selection } from "./providers/selection";
+import { WrappedRow } from "./wrapped-row";
 
 let nbRow = 0;
 

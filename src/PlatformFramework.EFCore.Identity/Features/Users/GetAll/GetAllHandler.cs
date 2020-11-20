@@ -5,7 +5,7 @@ using System;
 
 namespace PlatformFramework.EFCore.Identity.Features.Users.GetAll
 {
-    public class GetAllHandler : EntitySelectPagedHandlerBase<User, UserModel, GetAllRequest>
+    public class GetAllHandler : EntitySelectPagedHandlerBase<User, UserListModel, GetAllRequest>
     {
         public GetAllHandler(IServiceProvider serviceProvider)
             : base(serviceProvider)

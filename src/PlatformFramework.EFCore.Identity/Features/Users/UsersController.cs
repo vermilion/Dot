@@ -34,7 +34,7 @@ namespace PlatformFramework.EFCore.Identity.Features.Users
             return Ok(result);
         }
 
-        [HttpPost("[action]")]
+        [HttpGet("[action]")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserModel))]
         public async Task<IActionResult> Get([FromQuery] int id)
         {

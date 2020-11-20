@@ -9,7 +9,7 @@ namespace PlatformFramework.EFCore.Identity.Context.Configurations
         public void Configure(EntityTypeBuilder<UserToken> entity)
         {
             entity.HasKey(u => u.Id);
-            entity.HasIndex(t => new { t.UserId, t.LoginProvider, t.Name }).HasName("UserTokenUserIndex").IsUnique();
+            entity.HasIndex(t => new { t.UserId, t.LoginProvider, t.Name }).HasDatabaseName("UserTokenUserIndex").IsUnique();
             entity.ToTable("AspNetUserTokens");
         }
     }

@@ -26,9 +26,9 @@ export class AuthenticationService {
     return this.userSubject.value;
   }
 
-  login(username: string, password: string, rememberMe: boolean) {
+  login(userName: string, password: string, rememberMe: boolean) {
     return this.http
-      .post<User>(`${this.baseUrl}/api/account/login`, { username, password, rememberMe }, { withCredentials: true })
+      .post<User>(`${this.baseUrl}/api/account/login`, { userName, password, rememberMe }, { withCredentials: true })
       .pipe(
         map(user => {
           this.userSubject.next(user);
