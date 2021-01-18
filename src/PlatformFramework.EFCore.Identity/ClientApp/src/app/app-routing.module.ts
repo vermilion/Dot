@@ -1,7 +1,7 @@
-import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { FeaturesRoutes } from "./features/features.routes";
+import { NgModule } from "@angular/core";
 
 const routes: Routes = [
   {
@@ -17,8 +17,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: true
-  })],
+    enableTracing: true,
+    relativeLinkResolution: "legacy"
+})],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

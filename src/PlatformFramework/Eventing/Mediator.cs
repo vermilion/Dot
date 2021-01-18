@@ -33,7 +33,7 @@ namespace PlatformFramework.Eventing
             var handler = (RequestHandlerWrapper<TResponse>)_requestHandlers.GetOrAdd(requestType,
                 t => Activator.CreateInstance(typeof(RequestHandlerWrapperImpl<,>).MakeGenericType(requestType, typeof(TResponse))));
 
-            return handler.Handle(request, cancellationToken, _serviceFactory);
+            return handler.Handle(request, _serviceFactory, cancellationToken);
         }
     }
 }

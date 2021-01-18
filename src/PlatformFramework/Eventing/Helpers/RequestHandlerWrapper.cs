@@ -7,16 +7,15 @@ namespace PlatformFramework.Eventing.Helpers
 {
     internal abstract class RequestHandlerWrapper<TResponse> : RequestHandlerBase
     {
-        public abstract Task<TResponse> Handle(IRequest<TResponse> request, CancellationToken cancellationToken,
-            ServiceFactory serviceFactory);
+        public abstract Task<TResponse> Handle(IRequest<TResponse> request, ServiceFactory serviceFactory, CancellationToken cancellationToken);
     }
 
     internal class RequestHandlerWrapperImpl<TRequest, TResponse> : RequestHandlerWrapper<TResponse>
         where TRequest : IRequest<TResponse>
     {
-        public override Task<object?> Handle(object request, CancellationToken cancellationToken, ServiceFactory serviceFactory)
+        public override Task<object?> Handle(object request, ServiceFactory serviceFactory, CancellationToken cancellationToken)
         {
-            return Handle((IRequest<TResponse>)request, cancellationToken, serviceFactory)
+            return Handle((IRequest<TResponse>)request, serviceFactory, cancellationToken)
                 .ContinueWith(t =>
                 {
                     if (t.IsFaulted)
@@ -27,7 +26,7 @@ namespace PlatformFramework.Eventing.Helpers
                 }, cancellationToken);
         }
 
-        public override Task<TResponse> Handle(IRequest<TResponse> request, CancellationToken cancellationToken, ServiceFactory serviceFactory)
+        public override Task<TResponse> Handle(IRequest<TResponse> request, ServiceFactory serviceFactory, CancellationToken cancellationToken)
         {
             var handler = GetHandler<IRequestHandler<TRequest, TResponse>>(serviceFactory);
             return handler.Handle((TRequest)request, cancellationToken);
@@ -36,7 +35,7 @@ namespace PlatformFramework.Eventing.Helpers
 
     internal abstract class RequestHandlerBase
     {
-        public abstract Task<object?> Handle(object request, CancellationToken cancellationToken, ServiceFactory serviceFactory);
+        public abstract Task<object?> Handle(object request, ServiceFactory serviceFactory, CancellationToken cancellationToken);
 
         protected static THandler GetHandler<THandler>(ServiceFactory factory)
         {

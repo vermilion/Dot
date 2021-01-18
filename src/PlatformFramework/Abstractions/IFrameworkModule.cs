@@ -3,7 +3,7 @@
 namespace PlatformFramework.Abstractions
 {
     /// <summary>
-    /// Framework module marker
+    /// Framework module marker interface
     /// </summary>
     public interface IFrameworkModule
     {

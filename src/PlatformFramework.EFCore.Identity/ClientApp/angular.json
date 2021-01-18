@@ -51,7 +51,6 @@
               "optimization": false,
               "outputHashing": "all",
               "sourceMap": true,
-              "extractCss": true,
               "namedChunks": false,
               "aot": false,
               "extractLicenses": true,
@@ -68,7 +67,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -124,8 +122,5 @@
       }
     }
   },
-  "defaultProject": "angular",
-  "cli": {
-    "analytics": "a7d8b924-2f4c-4728-82b9-a0d4d6592366"
-  }
+  "defaultProject": "angular"
 }
