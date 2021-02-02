@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { FeaturesRoutes } from "./features/features.routes";
 import { NgModule } from "@angular/core";
+import { featuresRoutes } from "./features/features.routes";
 
 const routes: Routes = [
   {
@@ -12,14 +12,14 @@ const routes: Routes = [
     path: "register",
     loadChildren: () => import("./auth/register/register.module").then(m => m.RegisterModule)
   },
-  ...FeaturesRoutes
+  ...featuresRoutes
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    enableTracing: true,
+    //enableTracing: true,
     relativeLinkResolution: "legacy"
-})],
+  })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }

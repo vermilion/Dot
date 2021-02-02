@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { DialogRef } from '@shared/services/dialog-service/dialog-ref';
-import { MunicipalitiesService, MunicipalityModel } from '@shared/services/municipalities.service';
+import { Component, Input } from "@angular/core";
+import { MunicipalitiesService, MunicipalityModel } from "@shared/services/municipalities.service";
+
+import { DialogRef } from "@shared/services/dialog-service/dialog-ref";
 
 @Component({
   selector: "app-edit-dialog",

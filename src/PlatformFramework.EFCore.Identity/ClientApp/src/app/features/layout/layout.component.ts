@@ -1,8 +1,14 @@
-import { Component } from "@angular/core";
 import {
-    ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router
+  ActivatedRoute,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
 } from "@angular/router";
 import { AuthenticationService, User } from "@app/core";
+
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-layout",

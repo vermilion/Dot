@@ -1,17 +1,27 @@
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NZ_CONFIG, NzConfig } from "ng-zorro-antd/core/config";
+import { NZ_I18N, en_US } from "ng-zorro-antd/i18n";
 
-import { environment } from "../environments/environment";
-import { AppRoutingModule } from "./app-routing.module";
+import { API_BASE_URL } from "./shared/constants";
 import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from "@angular/platform-browser";
 import { CoreModule } from "./core/core.module";
 import { FeaturesLayoutModule } from "./features/layout/layout.module";
-import { API_BASE_URL } from "./shared/constants";
-import { NotificationModule } from "./shared/services/notification-service/notification.module";
+import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
 import { SharedModule } from "./shared/shared.module";
+import en from "@angular/common/locales/en";
+import { environment } from "../environments/environment";
+import { registerLocaleData } from "@angular/common";
+
+registerLocaleData(en);
+
+const ngZorroConfig: NzConfig = {
+  notification: { nzPlacement: "bottomRight" },
+  datePicker: { nzSuffixIcon: "" }
+};
 
 export function getRemoteServiceBaseUrl() {
   return environment.apiUrl;
@@ -28,13 +38,14 @@ export function getRemoteServiceBaseUrl() {
     HttpClientModule,
     CoreModule,
     AppRoutingModule,
-    SharedModule.forRoot(),
-    NotificationModule.forRoot(),
+    SharedModule,
 
     FeaturesLayoutModule,
   ],
   providers: [
-    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl }
+    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_CONFIG, useValue: ngZorroConfig }
   ],
   bootstrap: [AppComponent],
 })

@@ -1,10 +1,10 @@
-import { Subscription } from "rxjs";
-import { finalize } from "rxjs/operators";
-
+import { ActivatedRoute, Router, RouterOutlet } from "@angular/router";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AuthenticationService } from "../../core";
+import { Subscription } from "rxjs";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-login",
@@ -12,41 +12,44 @@ import { AuthenticationService } from "../../core";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  isLoading: boolean = false;
-  username: string = "";
-  password: string = "";
-  rememberMe: boolean = false;
+  validateForm!: FormGroup;
 
-  loginError = false;
-  private subscription: Subscription;
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthenticationService) {
-  }
+    private authService: AuthenticationService,
+    private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    /*this.subscription = this.authService.user$.subscribe((x) => {
-      if (this.route.snapshot.url[0].path === "login") {
-        const accessToken = localStorage.getItem("access_token");
-        if (x && accessToken) {
-          const returnUrl = this.route.snapshot.queryParams["returnUrl"] || "";
-          this.router.navigate([returnUrl]);
-        }
-      } // optional touch-up: if a tab shows login page, then refresh the page to reduce duplicate login
-    });*/
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true]
+    });
   }
 
+
+  isLoading: boolean = false;
+  loginError = false;
+
   login() {
-    if (!this.username || !this.password) {
+    if (!this.validateForm.valid) {
       return;
     }
 
     this.isLoading = true;
+
+    const value = this.validateForm.value;
     const returnUrl = this.route.snapshot.queryParams["returnUrl"] || "";
     this.authService
-      .login(this.username, this.password, this.rememberMe)
+      .login(value.userName, value.password, value.remember)
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -59,6 +62,5 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
   }
 }

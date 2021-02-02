@@ -1,9 +1,8 @@
-import { Routes } from "@angular/router";
-
 import { AuthGuard } from "../core";
 import { FeaturesLayoutComponent } from "./layout/layout.component";
+import { Routes } from "@angular/router";
 
-export const FeaturesRoutes: Routes = [
+export const featuresRoutes: Routes = [
   {
     path: "main",
     component: FeaturesLayoutComponent,

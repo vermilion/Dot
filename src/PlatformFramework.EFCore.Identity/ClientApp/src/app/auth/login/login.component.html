@@ -1,26 +1,36 @@
-<div class="login-wrapper">
-  <form class="login" (ngSubmit)="login()">
-      <section class="title">
-          <h3 class="welcome">Welcome to</h3>
-          Identity Admin
-      </section>
-      <div class="login-group">
-          <clr-input-container>
-              <label class="clr-sr-only">Username</label>
-              <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="userName"/>
-          </clr-input-container>
-          <clr-password-container>
-              <label class="clr-sr-only">Password</label>
-              <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password"/>
-          </clr-password-container>
-          <clr-checkbox-wrapper>
-              <label>Remember me</label>
-              <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="rememberMe"/>
-          </clr-checkbox-wrapper>
-          <div class="error active" *ngIf="loginError">
-              Invalid user name or password
+<div class="wrapper">
+  <div nz-row>
+    <div nz-col nzSpan="8"></div>
+    <div nz-col nzSpan="8">
+      <form nz-form [formGroup]="validateForm" (ngSubmit)="login()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+              <input type="text" nz-input formControlName="userName" placeholder="Username" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input type="password" nz-input formControlName="password" placeholder="Password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <div nz-row class="login-form-margin">
+          <div nz-col [nzSpan]="12">
+            <label nz-checkbox formControlName="remember">
+              <span>Remember me</span>
+            </label>
           </div>
-          <button type="submit" class="btn btn-primary" [disabled]="isLoading">Sign in</button>
-      </div>
-  </form>
+          <div nz-col [nzSpan]="12">
+            <a class="login-form-forgot">Forgot password</a>
+          </div>
+        </div>
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
+        Or <a [routerLink]="['/register']"> register now! </a>
+      </form>
+    </div>
+    <div nz-col nzSpan="8"></div>
+  </div>
 </div>
