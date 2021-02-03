@@ -1,0 +1,183 @@
+2021-02-03 09:25:50.995 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-02-03 09:25:51.386 +03:00 [INF] Queued Hosted Service is starting.
+2021-02-03 09:25:52.158 +03:00 [INF] Migrating database associated with context ProjectDbContext
+2021-02-03 09:25:53.068 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2021-02-03 09:25:53.308 +03:00 [INF] Entity Framework Core 5.0.2 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2021-02-03 09:25:54.458 +03:00 [INF] Now listening on: https://localhost:5001
+2021-02-03 09:25:54.458 +03:00 [INF] Now listening on: http://localhost:5000
+2021-02-03 09:25:54.475 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-02-03 09:25:54.475 +03:00 [INF] Hosting environment: Development
+2021-02-03 09:25:54.476 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service
+2021-02-03 09:25:54.693 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2021-02-03 09:25:54.802 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2021-02-03 09:25:54.827 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2021-02-03 09:25:54.845 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-02-03 09:25:55.287 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[@__normalizedName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2021-02-03 09:25:55.404 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedUserName_0='ADMIN'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2021-02-03 09:25:55.469 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2021-02-03 09:25:55.503 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='1', @__p_1='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE (a."UserId" = @__p_0) AND (a."RoleId" = @__p_1)
+LIMIT 1
+2021-02-03 09:25:55.574 +03:00 [INF] Migrated database associated with context ProjectDbContext
+2021-02-03 09:26:10.489 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - -
+2021-02-03 09:26:10.715 +03:00 [INF] Entity Framework Core 5.0.2 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2021-02-03 09:26:10.753 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2021-02-03 09:26:11.017 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__user_Id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ClaimType", a."ClaimValue", a."UserId"
+FROM "AspNetUserClaims" AS a
+WHERE a."UserId" = @__user_Id_0
+2021-02-03 09:26:11.114 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__userId_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2021-02-03 09:26:11.134 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2021-02-03 09:26:11.173 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__role_Id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2021-02-03 09:26:11.256 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - - - 301 0 - 773.6692ms
+2021-02-03 09:26:11.285 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - -
+2021-02-03 09:26:11.612 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - - - 200 - text/html;charset=utf-8 327.2132ms
+2021-02-03 09:26:11.677 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - -
+2021-02-03 09:26:11.677 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - -
+2021-02-03 09:26:11.678 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - -
+2021-02-03 09:26:11.743 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2021-02-03 09:26:11.745 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - - - 200 - text/css 68.2577ms
+2021-02-03 09:26:11.747 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2021-02-03 09:26:11.748 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - - - 200 - application/javascript 69.2370ms
+2021-02-03 09:26:11.759 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2021-02-03 09:26:11.760 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - - - 200 - application/javascript 83.3312ms
+2021-02-03 09:26:12.239 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - -
+2021-02-03 09:26:12.278 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - -
+2021-02-03 09:26:12.281 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2021-02-03 09:26:12.284 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - - - 200 628 image/png 6.3101ms
+2021-02-03 09:26:12.416 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 176.3982ms
+2021-02-03 09:26:25.255 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Account/Login application/json 58
+2021-02-03 09:26:25.271 +03:00 [INF] CORS policy execution successful.
+2021-02-03 09:26:25.940 +03:00 [INF] Executing endpoint 'PlatformFramework.EFCore.Identity.Controllers.AccountController.Login (PlatformFramework.EFCore.Identity)'
+2021-02-03 09:26:26.021 +03:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(PlatformFramework.EFCore.Identity.Features.Account.LoginRequest) on controller PlatformFramework.EFCore.Identity.Controllers.AccountController (PlatformFramework.EFCore.Identity).
+2021-02-03 09:26:26.389 +03:00 [INF] Executing action method PlatformFramework.EFCore.Identity.Controllers.AccountController.Login (PlatformFramework.EFCore.Identity) - Validation state: "Valid"
+2021-02-03 09:26:26.779 +03:00 [INF] Entity Framework Core 5.0.2 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2021-02-03 09:26:26.795 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedUserName_0='ADMIN'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2021-02-03 09:26:26.966 +03:00 [WRN] Invalid password for user.
+2021-02-03 09:26:26.968 +03:00 [WRN] User failed to provide the correct password.
+2021-02-03 09:26:26.986 +03:00 [INF] Executed action method PlatformFramework.EFCore.Identity.Controllers.AccountController.Login (PlatformFramework.EFCore.Identity), returned result Microsoft.AspNetCore.Mvc.BadRequestObjectResult in 583.4289ms.
+2021-02-03 09:26:27.002 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'PlatformFramework.EFCore.Identity.Features.Account.LoginRequest'.
+2021-02-03 09:26:27.034 +03:00 [INF] Executed action PlatformFramework.EFCore.Identity.Controllers.AccountController.Login (PlatformFramework.EFCore.Identity) in 995.2898ms
+2021-02-03 09:26:27.040 +03:00 [INF] Executed endpoint 'PlatformFramework.EFCore.Identity.Controllers.AccountController.Login (PlatformFramework.EFCore.Identity)'
+2021-02-03 09:26:27.044 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Account/Login application/json 58 - 400 - application/json;+charset=utf-8 1788.3690ms
+2021-02-03 09:26:46.109 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/MyNewEntities/Create application/json 25
+2021-02-03 09:26:46.111 +03:00 [INF] CORS policy execution successful.
+2021-02-03 09:26:46.133 +03:00 [INF] Executing endpoint 'Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service)'
+2021-02-03 09:26:46.142 +03:00 [INF] Route matched with {action = "Create", controller = "MyNewEntities"}. Executing controller action with signature System.Threading.Tasks.Task`1[Web.Service.MyEntityModel] Create(Web.Service.MyEntityModel) on controller Web.Service.Controllers.MyNewEntitiesController (Web.Service).
+2021-02-03 09:26:46.195 +03:00 [INF] Executing action method Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service) - Validation state: "Valid"
+2021-02-03 11:53:51.606 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-02-03 11:53:51.737 +03:00 [INF] Queued Hosted Service is starting.
+2021-02-03 11:53:52.087 +03:00 [INF] Migrating database associated with context ProjectDbContext
+2021-02-03 11:53:52.937 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2021-02-03 11:53:53.135 +03:00 [INF] Entity Framework Core 5.0.2 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2021-02-03 11:53:53.972 +03:00 [INF] Now listening on: https://localhost:5001
+2021-02-03 11:53:53.981 +03:00 [INF] Now listening on: http://localhost:5000
+2021-02-03 11:53:53.982 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-02-03 11:53:53.982 +03:00 [INF] Hosting environment: Development
+2021-02-03 11:53:53.982 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service
+2021-02-03 11:53:54.626 +03:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2021-02-03 11:53:54.743 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (SELECT 1 FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE c.relname='__EFMigrationsHistory');
+2021-02-03 11:53:54.768 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2021-02-03 11:53:54.786 +03:00 [INF] No migrations were applied. The database is already up to date.
+2021-02-03 11:53:55.108 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__normalizedName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2021-02-03 11:53:55.207 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedUserName_0='ADMIN'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2021-02-03 11:53:55.273 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2021-02-03 11:53:55.304 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='1', @__p_1='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE (a."UserId" = @__p_0) AND (a."RoleId" = @__p_1)
+LIMIT 1
+2021-02-03 11:53:55.345 +03:00 [INF] Migrated database associated with context ProjectDbContext
+2021-02-03 11:54:50.953 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/MyNewEntities/Create application/json 25
+2021-02-03 11:54:50.972 +03:00 [INF] CORS policy execution successful.
+2021-02-03 11:54:51.230 +03:00 [INF] Entity Framework Core 5.0.2 initialized 'ProjectDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL' with options: SensitiveDataLoggingEnabled MigrationsAssembly=Web.Service, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null 
+2021-02-03 11:54:51.307 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2021-02-03 11:54:51.567 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[@__user_Id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ClaimType", a."ClaimValue", a."UserId"
+FROM "AspNetUserClaims" AS a
+WHERE a."UserId" = @__user_Id_0
+2021-02-03 11:54:51.645 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2021-02-03 11:54:51.716 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='ADMINISTRATOR'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2021-02-03 11:54:51.802 +03:00 [INF] Executed DbCommand (47ms) [Parameters=[@__role_Id_0='1'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2021-02-03 11:54:51.838 +03:00 [INF] Executing endpoint 'Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service)'
+2021-02-03 11:54:51.922 +03:00 [INF] Route matched with {action = "Create", controller = "MyNewEntities"}. Executing controller action with signature System.Threading.Tasks.Task`1[Web.Service.MyEntityModel] Create(Web.Service.MyEntityModel) on controller Web.Service.Controllers.MyNewEntitiesController (Web.Service).
+2021-02-03 11:54:52.510 +03:00 [INF] Executing action method Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service) - Validation state: "Valid"
+2021-02-03 11:55:38.977 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@p0=NULL, @p1='string'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "TableTest" ("SecondProperty", "NewTitle")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2021-02-03 11:56:08.370 +03:00 [INF] Executed action method Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 75850.4608ms.
+2021-02-03 11:56:08.385 +03:00 [INF] Executing ObjectResult, writing value of type 'Web.Service.MyEntityModel'.
+2021-02-03 11:56:08.520 +03:00 [INF] Executed action Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service) in 76582.7612ms
+2021-02-03 11:56:08.525 +03:00 [INF] Executed endpoint 'Web.Service.Controllers.MyNewEntitiesController.Create (Web.Service)'
+2021-02-03 11:56:08.533 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/MyNewEntities/Create application/json 25 - 200 - application/json;+charset=utf-8 77585.7108ms

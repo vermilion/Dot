@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.EFCore.Context.Hooks;
 using PlatformFramework.EFCore.Context.Migrations;
-using PlatformFramework.EFCore.Entities;
 using System;
 
 namespace PlatformFramework.EFCore
@@ -35,22 +34,6 @@ namespace PlatformFramework.EFCore
         public EfCoreBuilder<TDbContext> WithHooks(Action<EfCoreHooksBuilder> configureAction)
         {
             var builder = new EfCoreHooksBuilder(Services);
-            configureAction?.Invoke(builder);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Register Entities and their Customizers
-        /// </summary>
-        /// <param name="configureAction">Configure <see cref="EfCoreEntitiesRegistryBuilder"/></param>
-        /// <returns>Fluent builder</returns>
-        public EfCoreBuilder<TDbContext> WithEntities(Action<EfCoreEntitiesRegistryBuilder> configureAction)
-        {
-            var registry = new EntitiesRegistry();
-            Services.AddSingleton(registry);
-
-            var builder = new EfCoreEntitiesRegistryBuilder(registry);
             configureAction?.Invoke(builder);
 
             return this;

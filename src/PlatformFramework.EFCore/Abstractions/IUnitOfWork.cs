@@ -12,7 +12,7 @@ namespace PlatformFramework.EFCore.Abstractions
     /// <summary>
     /// Unit-of-work abstraction hiding real DbContext type
     /// </summary>
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IEntityServicesFactory, IDisposable
     {
         /// <summary>
         /// Gets entity Set

@@ -25,8 +25,6 @@ namespace PlatformFramework.EFCore.Identity.Context
             modelBuilder.ApplyConfiguration(new UserLoginConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserTokenConfiguration());
-
-            modelBuilder.ApplyEntitiesConfiguration(this);
         }
     }
 }

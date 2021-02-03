@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using PlatformFramework.EFCore.Abstractions;
 using System;
@@ -93,6 +94,12 @@ namespace PlatformFramework.EFCore.Context
             where TEntity : class
         {
             return _context.Entry(entity);
+        }
+
+        public IEntityService<TEntity> GetEntityServiceFor<TEntity>() 
+            where TEntity : class, IEntity, new()
+        {
+            return _context.GetService<IEntityService<TEntity>>();
         }
 
         protected virtual void Dispose(bool disposing)

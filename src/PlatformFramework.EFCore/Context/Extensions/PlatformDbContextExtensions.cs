@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using PlatformFramework.EFCore.Context;
-using PlatformFramework.EFCore.Context.Extensions;
 using PlatformFramework.EFCore.Context.Hooks;
 using PlatformFramework.EFCore.Context.Hooks.Interfaces;
 using PlatformFramework.EFCore.Exceptions;
 using DbException = PlatformFramework.EFCore.Exceptions.DbException;
 
-namespace PlatformFramework.EFCore.Entities
+namespace PlatformFramework.EFCore.Context.Extensions
 {
     public static class PlatformDbContextExtensions
     {

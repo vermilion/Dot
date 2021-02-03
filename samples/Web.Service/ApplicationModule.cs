@@ -27,6 +27,8 @@ namespace PlatformFramework.EFCore.Identity
             services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
 
             services.AddScoped<ICustomService, CustomService>();
+
+            services.AddScoped<MyEntityService>();
         }
     }
 }

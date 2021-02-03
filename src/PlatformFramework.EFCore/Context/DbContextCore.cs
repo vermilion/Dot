@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Context.Extensions;
 using PlatformFramework.EFCore.Entities;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,13 +14,6 @@ namespace PlatformFramework.EFCore.Context
         protected DbContextCore(DbContextOptions options)
             : base(options)
         {
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyEntitiesConfiguration(this);
         }
 
         public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

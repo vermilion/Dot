@@ -65,10 +65,6 @@ namespace Web.Service
                 {
                     x.WithTrackingHooks();
                     x.WithSoftDeletedEntityHook();
-                })
-                .WithEntities(x =>
-                {
-                    x.ApplyConfiguration<MyEntity, MyEntityConfiguration>();
                 });
 
             //services.AddProblemDetails();

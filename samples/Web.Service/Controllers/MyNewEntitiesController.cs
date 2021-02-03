@@ -11,10 +11,12 @@ namespace Web.Service.Controllers
     public class MyNewEntitiesController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly MyEntityService _myEntityService;
 
-        public MyNewEntitiesController(IMediator mediator)
+        public MyNewEntitiesController(IMediator mediator, MyEntityService myEntityService)
         {
             _mediator = mediator;
+            _myEntityService = myEntityService;
         }
 
         [HttpPost("[action]")]
@@ -32,8 +34,7 @@ namespace Web.Service.Controllers
         [HttpPost("[action]")]
         public Task<MyEntityModel> Create([FromBody] MyEntityModel model)
         {
-            var request = new CreateRequest(model);
-            return _mediator.Send(request);
+            return _myEntityService.Create(model);
         }
 
         [HttpPost("[action]")]

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Context;
+using PlatformFramework.EFCore.Entities;
 using System;
 
 namespace PlatformFramework.EFCore
@@ -27,6 +28,8 @@ namespace PlatformFramework.EFCore
                 var context = provider.GetRequiredService<TDbContext>();
                 return new UnitOfWork(context);
             });
+
+            services.AddTransient(typeof(IEntityService<>), typeof(EntityService<>));
 
             return new EfCoreBuilder<TDbContext>(services);
         }
