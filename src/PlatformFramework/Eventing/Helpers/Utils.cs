@@ -13,7 +13,7 @@ namespace PlatformFramework.Eventing.Helpers
 
             var typeDefinition = type.GetGenericTypeDefinition();
 
-            return typeDefinition == typeof(IRequestHandler<,>);
+            return typeDefinition == typeof(RequestHandler<,>);
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using PlatformFramework.Eventing;
+using PlatformFramework.Results;
 
 namespace PlatformFramework.EFCore.Identity.Features.Account
 {
-    public class LoginRequest : IRequest<LoginResponse>
+    public class LoginRequest : IRequest<Result<LoginResponse>>
     {
         public string UserName { get; set; }
 

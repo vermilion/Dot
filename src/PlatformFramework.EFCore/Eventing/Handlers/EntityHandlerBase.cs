@@ -1,5 +1,4 @@
 ﻿using Ardalis.GuardClauses;
-using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
@@ -15,7 +14,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
     /// </summary>
     /// <typeparam name="TRequest">Unique request type</typeparam>
     /// <typeparam name="TResponse">Response type</typeparam>
-    public abstract class EntityHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public abstract class EntityHandlerBase<TRequest, TResponse> : RequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         /// <summary>
@@ -28,24 +27,15 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         /// </summary>
         protected IUnitOfWork UnitOfWork { get; }
 
-        /// <summary>
-        /// Mapper <see cref="IMapper"/>
-        /// </summary>
-        protected IMapper Mapper { get; }
-
         protected EntityHandlerBase(IServiceProvider serviceProvider)
         {
             var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
             var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
-            var mapper = serviceProvider.GetRequiredService<IMapper>();
 
             Logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                 .CreateLogger(GetType().Name);
 
             UnitOfWork = Guard.Against.Null(unitOfWork, nameof(unitOfWork));
-            Mapper = Guard.Against.Null(mapper, nameof(mapper));
         }
-
-        public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
     }
 }

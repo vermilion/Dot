@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Identity.Features.Account;
 using PlatformFramework.EFCore.Identity.Models;
 using PlatformFramework.Eventing;
+using PlatformFramework.Results;
 using System;
 using System.Threading.Tasks;
 
@@ -39,15 +39,15 @@ namespace PlatformFramework.EFCore.Identity.Controllers
         {
             var result = await _mediator.Send(model).ConfigureAwait(false);
 
-            switch (result)
+            switch (result.Status)
             {
-                case LoginResponse.Success x:
-                    SetTokenCookie(x.RefreshToken);
-                    return Ok(x.Model);
-                case LoginResponse.NotFound _:
+                case ResultStatus.Ok:
+                    SetTokenCookie(result.Value.RefreshToken);
+                    return Ok(result.Value.Model);
+                case ResultStatus.NotFound:
                     return NotFound();
-                case LoginResponse.BadRequest x:
-                    return BadRequest(x.Model);
+                case ResultStatus.Error:
+                    return BadRequest(null);
                 default:
                     throw new Exception("Unknown response type");
             }

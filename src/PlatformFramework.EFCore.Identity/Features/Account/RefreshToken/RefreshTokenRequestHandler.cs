@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Identity.Features.Account
 {
-    public class RefreshTokenRequestHandler : IRequestHandler<RefreshTokenRequest, RefreshTokenResponse>
+    public class RefreshTokenRequestHandler : RequestHandler<RefreshTokenRequest, RefreshTokenResponse>
     {
         private readonly UserManager<User> _userManager;
         private readonly IClockProvider _clockProvider;
@@ -31,7 +31,7 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
             _logger = logger;
         }
 
-        public async Task<RefreshTokenResponse> Handle(RefreshTokenRequest request, CancellationToken cancellationToken)
+        public override async Task<RefreshTokenResponse> Handle(RefreshTokenRequest request, CancellationToken cancellationToken)
         {
             try
             {

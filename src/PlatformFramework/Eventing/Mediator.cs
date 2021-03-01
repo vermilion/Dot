@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using Microsoft.Extensions.Logging;
 using PlatformFramework.Eventing.Helpers;
 using System;
 using System.Collections.Concurrent;
@@ -12,16 +13,21 @@ namespace PlatformFramework.Eventing
     /// </summary>
     public class Mediator : IMediator
     {
-        private readonly ServiceFactory _serviceFactory;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger _logger;
         private static readonly ConcurrentDictionary<Type, object> _requestHandlers = new ConcurrentDictionary<Type, object>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Mediator"/> class.
         /// </summary>
-        /// <param name="serviceFactory">The single instance factory.</param>
-        public Mediator(ServiceFactory serviceFactory)
+        /// <param name="serviceProvider">The single instance factory.</param>
+        /// <param name="loggerFactory"></param>
+        public Mediator(IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         {
-            _serviceFactory = serviceFactory;
+            _serviceProvider = serviceProvider;
+
+            _logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
+               .CreateLogger(GetType().Name);
         }
 
         public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
@@ -30,10 +36,16 @@ namespace PlatformFramework.Eventing
 
             var requestType = request.GetType();
 
-            var handler = (RequestHandlerWrapper<TResponse>)_requestHandlers.GetOrAdd(requestType,
-                t => Activator.CreateInstance(typeof(RequestHandlerWrapperImpl<,>).MakeGenericType(requestType, typeof(TResponse))));
+            object addFunc(Type t)
+            {
+                var instance = Activator.CreateInstance(typeof(RequestHandlerWrapperImpl<,>).MakeGenericType(requestType, typeof(TResponse)));
+                return instance ?? throw new NullReferenceException("Unable to create internal handler wrapper");
+            }
 
-            return handler.Handle(request, _serviceFactory, cancellationToken);
+            var handler = (RequestHandlerWrapper<TResponse>)_requestHandlers.GetOrAdd(requestType, addFunc);
+
+            handler.InitializeLogger(_logger);
+            return handler.Handle(request, _serviceProvider, cancellationToken);
         }
     }
 }

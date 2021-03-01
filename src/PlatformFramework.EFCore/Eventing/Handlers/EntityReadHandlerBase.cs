@@ -1,7 +1,7 @@
-﻿using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.Eventing;
+using PlatformFramework.Extensions;
 using System;
 using System.Linq;
 using System.Threading;
@@ -36,7 +36,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
             var model = await UnitOfWork.Set<TEntity>()
                 .AsNoTracking()
                 .Where(p => Equals(p.Id, key))
-                .ProjectTo<TReadModel>(Mapper.ConfigurationProvider)
+                .Project<TReadModel>()
                 .SingleOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);
 

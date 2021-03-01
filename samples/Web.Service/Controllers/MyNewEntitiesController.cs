@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PlatformFramework.Eventing;
 using PlatformFramework.Models;
 using Web.Service.BusinessLogic;
 
@@ -10,52 +10,41 @@ namespace Web.Service.Controllers
     [Route("api/[controller]")]
     public class MyNewEntitiesController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly MyEntityService _myEntityService;
+        private readonly IMyEntityService _service;
 
-        public MyNewEntitiesController(IMediator mediator, MyEntityService myEntityService)
+        public MyNewEntitiesController(IMyEntityService myEntityService)
         {
-            _mediator = mediator;
-            _myEntityService = myEntityService;
+            _service = myEntityService;
         }
 
         [HttpPost("[action]")]
-        public Task<IEnumerable<MyEntityModel>> GetAll([FromBody] GetAllRequest request)
+        public Task<List<MyEntityModel>> GetAll()
         {
-            return _mediator.Send(request);
+            return Task.FromResult(_service.GetAll().ToList());
         }
 
         [HttpPost("[action]")]
-        public Task<PagedCollection<MyEntityModel>> GetAllPaged([FromBody] GetAllPagedRequest request)
+        public Task<PagedCollection<MyEntityModel>> GetAllPaged([FromQuery] int offset, [FromQuery] int limit)
         {
-            return _mediator.Send(request);
+            return _service.GetAllPaged(offset, limit);
         }
 
         [HttpPost("[action]")]
         public Task<MyEntityModel> Create([FromBody] MyEntityModel model)
         {
-            return _myEntityService.Create(model);
+            return _service.Create(model);
         }
 
         [HttpPost("[action]")]
-        public Task<MyEntityModel> Update([FromQuery] int id, [FromBody] MyEntityModel model)
+        public Task<MyEntityModel> Update([FromBody] MyEntityModel model)
         {
-            var request = new UpdateRequest(id, model);
-            return _mediator.Send(request);
+            return _service.Update(model);
         }
 
         [HttpPost("[action]")]
-        public Task<MyEntityModel> Delete([FromQuery] int id)
+        public Task Delete([FromQuery] int id)
         {
-            var request = new DeleteRequest(id);
-            return _mediator.Send(request);
-        }
-
-        [HttpPost("[action]")]
-        public Task<CustomResponse> Custom()
-        {
-            var request = new CustomRequest();
-            return _mediator.Send(request);
+            return _service.Delete(id);
         }
     }
 }

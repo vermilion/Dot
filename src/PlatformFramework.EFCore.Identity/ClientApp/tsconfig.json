@@ -18,17 +18,17 @@
     ],
     "paths": {
       "@shared/*": [
-          "src/app/shared/*"
+        "src/app/shared/*"
       ],
       "@app/*": [
-          "src/app/*"
+        "src/app/*"
       ],
       "@core/*": [
-          "src/app/core/*"
+        "src/app/core/*"
       ],
       "@env/*": [
-          "src/environments/*"
+        "src/environments/*"
       ]
-  }
+    }
   }
 }

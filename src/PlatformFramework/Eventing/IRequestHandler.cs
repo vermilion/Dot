@@ -1,15 +1,10 @@
-﻿using System.Threading;
+﻿using FluentValidation;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PlatformFramework.Eventing
 {
-    /// <summary>
-    /// Defines a handler for a request
-    /// </summary>
-    /// <typeparam name="TRequest">The type of request being handled</typeparam>
-    /// <typeparam name="TResponse">The type of response from the handler</typeparam>
-    public interface IRequestHandler<TRequest, TResponse>
-       where TRequest : IRequest<TResponse>
+    public interface IRequestHandler<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
         /// <summary>
         /// Handles a request
@@ -18,5 +13,7 @@ namespace PlatformFramework.Eventing
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response from the request</returns>
         Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+
+        Task Validate(InlineValidator<TRequest> validator, CancellationToken cancellationToken);
     }
 }

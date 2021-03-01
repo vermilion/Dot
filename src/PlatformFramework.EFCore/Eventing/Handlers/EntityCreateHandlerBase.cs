@@ -1,5 +1,6 @@
 ﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using PlatformFramework.Extensions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         public override async Task<TReadModel> Handle(TRequest request, CancellationToken cancellationToken)
         {
             // create new entity from model
-            var entity = Mapper.Map<TEntity>(request.Model);
+            var entity = request.Model!.MapTo<TEntity>();
 
             var dbSet = UnitOfWork.Set<TEntity>();
 

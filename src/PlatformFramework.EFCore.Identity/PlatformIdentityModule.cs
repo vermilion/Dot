@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Abstractions;
 using PlatformFramework.Eventing;
@@ -18,8 +17,7 @@ namespace PlatformFramework.EFCore.Identity
 
             services
                 .AddMediatorHandlers(assembly)
-                .AddValidatorsFromAssembly(assembly)
-                .AddAutoMapper(assembly);
+                .AddValidatorsFromAssembly(assembly);
         }
     }
 }

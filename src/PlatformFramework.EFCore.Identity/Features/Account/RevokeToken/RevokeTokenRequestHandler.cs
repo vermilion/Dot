@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Identity.Features.Account
 {
-    public class RevokeTokenRequestHandler : IRequestHandler<RevokeTokenRequest, RevokeTokenResponse>
+    public class RevokeTokenRequestHandler : RequestHandler<RevokeTokenRequest, RevokeTokenResponse>
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -30,7 +30,7 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
             _logger = logger;
         }
 
-        public async Task<RevokeTokenResponse> Handle(RevokeTokenRequest request, CancellationToken cancellationToken)
+        public override async Task<RevokeTokenResponse> Handle(RevokeTokenRequest request, CancellationToken cancellationToken)
         {
             try
             {

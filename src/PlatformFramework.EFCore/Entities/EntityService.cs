@@ -1,12 +1,13 @@
 ﻿using Ardalis.GuardClauses;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
+using PlatformFramework.Extensions;
+using PlatformFramework.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,22 +26,15 @@ namespace PlatformFramework.EFCore.Entities
         /// </summary>
         protected IUnitOfWork UnitOfWork { get; }
 
-        /// <summary>
-        /// Mapper <see cref="IMapper"/>
-        /// </summary>
-        protected IMapper Mapper { get; }
-
         protected EntityService(IServiceProvider serviceProvider)
         {
             var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
             var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
-            var mapper = serviceProvider.GetRequiredService<IMapper>();
 
             Logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                 .CreateLogger(GetType().Name);
 
             UnitOfWork = Guard.Against.Null(unitOfWork, nameof(unitOfWork));
-            Mapper = Guard.Against.Null(mapper, nameof(mapper));
         }
     }
 
@@ -55,6 +49,44 @@ namespace PlatformFramework.EFCore.Entities
         public EntityService(IServiceProvider serviceProvider)
             : base(serviceProvider)
         {
+        }
+
+        public virtual IQueryable<TEntity> GetAll()
+        {
+            return DbSet;
+        }
+
+        public virtual async Task<PagedCollection<TModel>> GetAllPaged<TModel>(int? offset, int? limit,
+            Func<IQueryable<TEntity>, IQueryable<TEntity>>? filter = default,
+            CancellationToken cancellationToken = default)
+            where TModel : class
+        {
+            var query = DbSet.AsNoTracking();
+
+            // build query from filter
+            if (filter != null)
+                query = filter.Invoke(query);
+
+            // get total for query
+            var total = await query.CountAsync(cancellationToken).ConfigureAwait(false);
+
+            // short circuit if total is zero
+            if (total == 0)
+                return new PagedCollection<TModel>(new List<TModel>(), total);
+
+            // page the query and convert to read model
+            if (offset.HasValue)
+                query = query.Skip(offset.Value);
+
+            if (limit.HasValue)
+                query = query.Take(limit.Value);
+
+            var result = await query
+                .Project<TModel>()
+                .ToListAsync(cancellationToken)
+                .ConfigureAwait(false); ;
+
+            return new PagedCollection<TModel>(result, total);
         }
 
         public virtual async Task<TEntity> Add(TEntity entity, CancellationToken cancellationToken = default)
@@ -87,21 +119,6 @@ namespace PlatformFramework.EFCore.Entities
         public virtual void Delete(TEntity entity)
         {
             DbSet.Remove(entity);
-        }
-
-        public virtual IQueryable<TModel> ProjectTo<TModel>(IQueryable<TEntity> query)
-        {
-            return query.ProjectTo<TModel>(Mapper.ConfigurationProvider);
-        }
-
-        public TModel ProjectTo<TModel>(TEntity entity)
-        {
-            return Mapper.Map<TModel>(entity);
-        }
-
-        public TEntity ProjectFrom<TModel>(TModel model)
-        {
-            return Mapper.Map<TEntity>(model);
         }
     }
 }

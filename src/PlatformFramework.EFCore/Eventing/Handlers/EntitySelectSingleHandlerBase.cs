@@ -1,7 +1,7 @@
-﻿using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using PlatformFramework.Extensions;
 using System;
 using System.Linq;
 using System.Threading;
@@ -64,7 +64,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
         protected virtual async Task<TReadModel> QuerySelect(TRequest request, IQueryable<TEntity> query, CancellationToken cancellationToken)
         {
             return await query
-                .ProjectTo<TReadModel>(Mapper.ConfigurationProvider)
+                .Project<TReadModel>()
                 .SingleOrDefaultAsync(cancellationToken)
                 .ConfigureAwait(false);
         }

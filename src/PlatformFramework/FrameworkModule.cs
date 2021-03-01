@@ -35,7 +35,6 @@ namespace PlatformFramework
 
             // mediator
             services.TryAddTransient<IMediator, Mediator>();
-            services.TryAddTransient<ServiceFactory>(p => p.GetService!);
 
             // session
             services.AddHttpContextAccessor();

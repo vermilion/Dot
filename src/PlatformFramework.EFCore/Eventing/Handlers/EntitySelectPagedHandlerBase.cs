@@ -1,7 +1,7 @@
-﻿using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using PlatformFramework.Extensions;
 using PlatformFramework.Models;
 using System;
 using System.Collections.Generic;
@@ -94,7 +94,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
                 query = query.Take(request.Limit.Value);
 
             return await query
-                .ProjectTo<TReadModel>(Mapper.ConfigurationProvider)
+                .Project<TReadModel>()
                 .ToListAsync(cancellationToken)
                 .ConfigureAwait(false);
         }

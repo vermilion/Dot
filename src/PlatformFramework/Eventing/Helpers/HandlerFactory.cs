@@ -1,5 +1,4 @@
-﻿using PlatformFramework.Eventing.Decorators;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,7 +12,6 @@ namespace PlatformFramework.Eventing.Helpers
         public HandlerFactory(Type type)
         {
             AddHandlerFactory(type);
-            AddDecoratedFactories(type);
         }
 
         public object Create(IServiceProvider provider, Type handlerInterfaceType)
@@ -25,29 +23,6 @@ namespace PlatformFramework.Eventing.Helpers
             }
 
             return currentHandler!;
-        }
-
-        private void AddDecoratedFactories(Type type)
-        {
-            var attributes = type
-                .GetCustomAttributes<DecoratorAttributeBase>(inherit: false)
-                .OrderBy(x => x.Order)
-                .ToArray();
-
-            for (var i = attributes.Length - 1; i >= 0; i--)
-            {
-                var attribute = attributes[i];
-                var attributeType = attribute.GetType();
-                Type? decoratorHandlerType = null;
-                var hasDecoratorHandler = type.HasInterface(typeof(IRequestHandler<,>)) && Mappings.AttributeToRequestHandler.TryGetValue(attributeType, out decoratorHandlerType);
-
-                if (!hasDecoratorHandler || decoratorHandlerType == null)
-                {
-                    continue;
-                }
-
-                AddHandlerFactory(decoratorHandlerType, attribute);
-            }
         }
 
         private void AddHandlerFactory(Type handlerType, object? attribute = null)

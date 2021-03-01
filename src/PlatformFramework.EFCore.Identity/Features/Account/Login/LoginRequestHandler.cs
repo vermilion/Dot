@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Identity.Abstrations;
 using PlatformFramework.EFCore.Identity.Entities;
 using PlatformFramework.EFCore.Identity.Models;
 using PlatformFramework.Eventing;
-using PlatformFramework.Eventing.Decorators.Validation;
+using PlatformFramework.Results;
+using PlatformFramework.Validation;
+using System;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Identity.Features.Account
 {
-    [Validation(typeof(LoginRequestValidator))]
-    public class LoginRequestHandler : IRequestHandler<LoginRequest, LoginResponse>
+    public class LoginRequestHandler : RequestHandler<LoginRequest, Result<LoginResponse>>
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
@@ -35,8 +37,22 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
             _logger = logger;
         }
 
-        public async Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
+        public override Task Validate(InlineValidator<LoginRequest> validator, CancellationToken cancellationToken)
         {
+            validator.RuleFor(x => x.UserName).NotEmpty();
+            validator.RuleFor(x => x.Password).NotEmpty();
+
+            return Task.CompletedTask;
+        }
+
+        public override async Task<Result<LoginResponse>> Handle(LoginRequest request, CancellationToken cancellationToken)
+        {
+            await ValidationHelper.ValidateAndThrowAsync(request, validator =>
+            {
+                validator.RuleFor(x => x.UserName).NotEmpty();
+                validator.RuleFor(x => x.Password).NotEmpty();
+            }, cancellationToken);
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, set lockoutOnFailure: true
             var result = await _signInManager
@@ -61,27 +77,27 @@ namespace PlatformFramework.EFCore.Identity.Features.Account
 
                 var jwtResult = await _jwtAuthManager.GenerateTokens(request.UserName, claims, _clockProvider.Now);
 
-                return new LoginResponse.Success(new TokenResponse
+                return Result<LoginResponse>.Success(new LoginResponse(new TokenResponse
                 {
                     AccessToken = jwtResult.AccessToken
-                }, jwtResult.RefreshToken.TokenString);
+                }, jwtResult.RefreshToken.TokenString));
             }
 
             if (result.RequiresTwoFactor)
             {
                 //return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                return new LoginResponse.NotFound();
+                return Result<LoginResponse>.NotFound();
             }
 
             if (result.IsLockedOut)
             {
                 _logger.LogWarning("User account locked out.");
                 //return RedirectToAction(nameof(Lockout));
-                return new LoginResponse.NotFound();
+                return Result<LoginResponse>.NotFound();
             }
             else
             {
-                return new LoginResponse.BadRequest(request);
+                return Result<LoginResponse>.Error();
             }
         }
     }

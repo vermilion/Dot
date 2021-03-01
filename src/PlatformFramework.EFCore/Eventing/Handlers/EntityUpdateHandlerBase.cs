@@ -1,5 +1,6 @@
 ﻿using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.EFCore.Eventing.Requests;
+using PlatformFramework.Extensions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace PlatformFramework.EFCore.Eventing.Handlers
                 return default!;
 
             // copy updates from model to entity
-            Mapper.Map(request.Model, entity);
+            entity = request.Model!.MapTo(entity);
 
             // restore Id
             entity.Id = request.Id;

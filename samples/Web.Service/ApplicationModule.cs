@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformFramework.Abstractions;
 using PlatformFramework.EFCore.Abstractions;
@@ -21,14 +20,11 @@ namespace PlatformFramework.EFCore.Identity
 
             services
                 .AddMediatorHandlers(assembly)
-                .AddValidatorsFromAssembly(assembly)
-                .AddAutoMapper(assembly);
+                .AddValidatorsFromAssembly(assembly);
 
             services.AddTransient<IDbSeedProvider, ProjectDbContextSeedProvider>();
 
-            services.AddScoped<ICustomService, CustomService>();
-
-            services.AddScoped<MyEntityService>();
+            services.AddScoped<IMyEntityService, MyEntityService>();
         }
     }
 }
