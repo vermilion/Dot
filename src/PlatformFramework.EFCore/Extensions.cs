@@ -29,8 +29,6 @@ namespace PlatformFramework.EFCore
                 return new UnitOfWork(context);
             });
 
-            services.AddTransient(typeof(IEntityService<>), typeof(EntityService<>));
-
             return new EfCoreBuilder<TDbContext>(services);
         }
     }

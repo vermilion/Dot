@@ -1,7 +1,5 @@
 ﻿using Ardalis.GuardClauses;
-using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PlatformFramework.EFCore.Abstractions;
 using PlatformFramework.Extensions;
@@ -14,10 +12,16 @@ using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Entities
 {
-    public abstract class EntityService
+    public class EntityService<TEntity> : IEntityService<TEntity>
+        where TEntity : class, IEntity, new()
     {
         /// <summary>
-        /// Current instalce logger <see cref="ILogger"/>
+        /// Gets entity Set
+        /// </summary>
+        protected DbSet<TEntity> DbSet => UnitOfWork.Set<TEntity>();
+
+        /// <summary>
+        /// Current instance logger <see cref="ILogger"/>
         /// </summary>
         protected ILogger Logger { get; }
 
@@ -26,29 +30,14 @@ namespace PlatformFramework.EFCore.Entities
         /// </summary>
         protected IUnitOfWork UnitOfWork { get; }
 
-        protected EntityService(IServiceProvider serviceProvider)
+        protected EntityService(
+            ILoggerFactory loggerFactory,
+            IUnitOfWork unitOfWork)
         {
-            var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-            var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
-
             Logger = Guard.Against.Null(loggerFactory, nameof(loggerFactory))
                 .CreateLogger(GetType().Name);
 
             UnitOfWork = Guard.Against.Null(unitOfWork, nameof(unitOfWork));
-        }
-    }
-
-    public class EntityService<TEntity> : EntityService, IEntityService<TEntity>
-        where TEntity : class, IEntity, new()
-    {
-        /// <summary>
-        /// Gets entity Set
-        /// </summary>
-        protected DbSet<TEntity> DbSet => UnitOfWork.Set<TEntity>();
-
-        public EntityService(IServiceProvider serviceProvider)
-            : base(serviceProvider)
-        {
         }
 
         public virtual IQueryable<TEntity> GetAll()

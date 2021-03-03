@@ -34,7 +34,7 @@ namespace PlatformFramework.EFCore.Context
         public async Task CommitTransaction(CancellationToken cancellationToken = default)
         {
             if (Transaction == null)
-                throw new NullReferenceException("Please call `BeginTransaction()` method first.");
+                throw new NullReferenceException($"Please call `{nameof(BeginTransaction)}` method first.");
 
             try
             {
@@ -58,7 +58,7 @@ namespace PlatformFramework.EFCore.Context
         public async Task RollbackTransaction(CancellationToken cancellationToken = default)
         {
             if (Transaction == null)
-                throw new NullReferenceException("Please call `BeginTransaction()` method first.");
+                throw new NullReferenceException($"Please call `{nameof(BeginTransaction)}` method first.");
 
             try
             {
