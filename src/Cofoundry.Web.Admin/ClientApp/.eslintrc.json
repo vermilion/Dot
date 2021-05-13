@@ -1,0 +1,105 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "src/tsconfig.app.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Component"
+            ]
+          }
+        ],
+        "@angular-eslint/component-max-inline-declarations": "error",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": [],
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-class-suffix": [
+          "error",
+          {
+            "suffixes": [
+              "Directive"
+            ]
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": [],
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-native": "off",
+        "@angular-eslint/no-output-rename": "off",
+        "@angular-eslint/no-queries-metadata-property": "error",
+        "@typescript-eslint/quotes": [
+          2,
+          "double",
+          {
+            "avoidEscape": true,
+            "allowTemplateLiterals": true
+          }
+        ],
+        "@typescript-eslint/no-empty-interface": 0,
+        "no-duplicate-case": "error",
+        "@typescript-eslint/member-delimiter-style": 0,
+        "@typescript-eslint/member-ordering": 0,
+        "@typescript-eslint/no-inferrable-types": 0,
+        "eol-last": 0,
+        "max-len": 0,
+        "curly": 0,
+        "arrow-body-style": 0,
+        "no-bitwise": 0,
+        "no-shadow": 0,
+        "indent": [
+          "error",
+          2,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "no-duplicate-imports": "error",
+        "no-multiple-empty-lines": "error",
+        "jsdoc/newline-after-description": 0,
+        "prefer-arrow/prefer-arrow-functions": 0
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-call-expression": "off"
+      }
+    }
+  ]
+}

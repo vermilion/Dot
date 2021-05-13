@@ -1,0 +1,20 @@
+<button nz-button>Add Role</button>
+
+<nz-table #table [nzFrontPagination]="false" [nzShowPagination]="false" nzTableLayout="fixed" [nzData]="items">
+  <thead>
+    <tr>
+      <th nzWidth="110px">Id</th>
+      <th nzWidth="150px">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of table.data">
+      <td>
+        {{ row.id }}
+      </td>
+      <td>
+        {{ row.name }}
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

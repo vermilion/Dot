@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<PackageId>Cofoundry.Web.Admin</PackageId>
+		<Description>
+			Adds the Cofoundry admin panel to a website.
+		</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Copyright>Copyright © Cofoundry.org</Copyright>
+		<PackageTags>Cofoundry Web Admin CMS</PackageTags>
+
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.5" />
+
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="ClientApp\**" />
+		<Content Remove="ClientApp\**" />
+		<EmbeddedResource Remove="ClientApp\**" />
+		<None Remove="ClientApp\**" />
+		<EmbeddedResource Include="ClientApp\dist\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cofoundry.Core\Cofoundry.Core.csproj" />
+		<ProjectReference Include="..\Cofoundry.Domain\Cofoundry.Domain.csproj" />
+		<ProjectReference Include="..\Cofoundry.Web\Cofoundry.Web.csproj" />
+	</ItemGroup>
+
+</Project>

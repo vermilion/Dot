@@ -4,6 +4,7 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>ca9f30bf-a80b-4618-9f5b-309b19aa3ab1</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<Nullable>disable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
