@@ -36,18 +36,18 @@ export class UsersListComponent implements OnInit {
     this.isLoading = true;
 
     const param: PagingParam = {
-      limit: this.quantity,
-      offset: (this.page - 1) * this.quantity
+      pageSize: this.quantity,
+      pageNumber: this.page
     };
 
     this.http
-      .post<PagingResult<User>>(`${this.baseUrl}/api/users/getAll`, param)
+      .post<PagingResult<User>>(`${this.baseUrl}/api/usersApi/getAll`, param)
       .pipe(
         finalize(() => this.isLoading = false)
       )
       .subscribe(res => {
-        this.items = res.collection;
-        this.total = res.total;
+        this.items = res.items;
+        this.total = res.totalItems;
       });
   }
 

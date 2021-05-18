@@ -33,18 +33,18 @@ export class RolesComponent implements OnInit {
     this.isLoading = true;
 
     const param: PagingParam = {
-      limit: this.quantity,
-      offset: (this.page - 1) * this.quantity
+      pageSize: this.quantity,
+      pageNumber: this.page
     };
 
     this.http
-      .post<PagingResult<Role>>(`${this.baseUrl}/api/roles/getAll`, param)
+      .post<PagingResult<Role>>(`${this.baseUrl}/api/rolesApi/getAll`, param)
       .pipe(
         finalize(() => this.isLoading = false)
       )
       .subscribe(res => {
-        this.items = res.collection;
-        this.total = res.total;
+        this.items = res.items;
+        this.total = res.totalItems;
       });
   }
 

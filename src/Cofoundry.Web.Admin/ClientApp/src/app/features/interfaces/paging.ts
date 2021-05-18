@@ -1,9 +1,9 @@
 export interface PagingParam {
-    limit: number;
-    offset: number;
+    pageNumber: number;
+    pageSize: number;
 }
 
 export interface PagingResult<T> {
-    collection: T[];
-    total: number;
+    items: T[];
+    totalItems: number;
 }

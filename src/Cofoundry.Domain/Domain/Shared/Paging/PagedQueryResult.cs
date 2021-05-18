@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Domain
 {
@@ -64,12 +61,14 @@ namespace Cofoundry.Domain
         /// <returns>New instance of PagedQueryResult.</returns>
         public PagedQueryResult<TResultTo> ChangeType<TResultTo>(ICollection<TResultTo> newItems)
         {
-            var newResult = new PagedQueryResult<TResultTo>();
-            newResult.Items = newItems.ToList();
-            newResult.PageCount = PageCount;
-            newResult.PageNumber = PageNumber;
-            newResult.PageSize = PageSize;
-            newResult.TotalItems = TotalItems;
+            var newResult = new PagedQueryResult<TResultTo>
+            {
+                Items = newItems.ToList(),
+                PageCount = PageCount,
+                PageNumber = PageNumber,
+                PageSize = PageSize,
+                TotalItems = TotalItems
+            };
 
             return newResult;
         }

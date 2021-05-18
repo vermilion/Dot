@@ -3,17 +3,17 @@
 <nz-table #table [nzFrontPagination]="false" [nzShowPagination]="false" nzTableLayout="fixed" [nzData]="items">
   <thead>
     <tr>
-      <th nzWidth="110px">Id</th>
-      <th nzWidth="150px">Name</th>
+      <th>Title</th>
+      <th nzWidth="50px"></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let row of table.data">
       <td>
-        {{ row.id }}
+        {{ row.title }}
       </td>
       <td>
-        {{ row.name }}
+
       </td>
     </tr>
   </tbody>

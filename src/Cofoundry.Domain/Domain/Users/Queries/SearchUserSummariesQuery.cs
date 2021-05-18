@@ -13,13 +13,6 @@ namespace Cofoundry.Domain
     public class SearchUserSummariesQuery : SimplePageableQuery, IQuery<PagedQueryResult<UserSummary>>
     {
         /// <summary>
-        /// Users are partitioned by UserArea and are treated as completely
-        /// separate, therefore a UserAreaCode is required for the search.
-        /// </summary>
-        [Required]
-        public string UserAreaCode { get; set; }
-
-        /// <summary>
         /// Filter by first or last name.
         /// </summary>
         public string Name { get; set; }

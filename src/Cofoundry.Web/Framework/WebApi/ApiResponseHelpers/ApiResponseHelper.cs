@@ -48,9 +48,7 @@ namespace Cofoundry.Web
         /// <param name="result">The result to return</param>
         public JsonResult SimpleQueryResponse<T>(T result)
         {
-            var response = new SimpleResponseData<T>() { Data = result };
-
-            var jsonResult = CreateJsonResult(response);
+            var jsonResult = CreateJsonResult(result);
 
             if (result == null)
             {
@@ -238,10 +236,11 @@ namespace Cofoundry.Web
 
         private ValidationError ToValidationError(ValidationResult result)
         {
-            var error = new ValidationError();
-
-            error.Message = result.ErrorMessage;
-            error.Properties = result.MemberNames.ToArray();
+            var error = new ValidationError
+            {
+                Message = result.ErrorMessage,
+                Properties = result.MemberNames.ToArray()
+            };
 
             return error;
         }
