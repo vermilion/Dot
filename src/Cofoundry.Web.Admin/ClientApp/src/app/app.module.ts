@@ -12,16 +12,7 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { SharedModule } from "./shared/shared.module";
-import en from "@angular/common/locales/en";
 import { environment } from "../environments/environment";
-import { registerLocaleData } from "@angular/common";
-
-registerLocaleData(en);
-
-const ngZorroConfig: NzConfig = {
-  notification: { nzPlacement: "bottomRight" },
-  datePicker: { nzSuffixIcon: "" }
-};
 
 export function getRemoteServiceBaseUrl() {
   return environment.apiUrl;
@@ -43,9 +34,7 @@ export function getRemoteServiceBaseUrl() {
     FeaturesLayoutModule,
   ],
   providers: [
-    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
-    { provide: NZ_I18N, useValue: en_US },
-    { provide: NZ_CONFIG, useValue: ngZorroConfig }
+    { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl }
   ],
   bootstrap: [AppComponent],
 })

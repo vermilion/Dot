@@ -12,7 +12,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class GetCurrentUserMicroSummaryQueryHandler 
         : IQueryHandler<GetCurrentUserMicroSummaryQuery, UserMicroSummary>
-        , IIgnorePermissionCheckHandler
     {
         private readonly IQueryExecutor _queryExecutor;
 

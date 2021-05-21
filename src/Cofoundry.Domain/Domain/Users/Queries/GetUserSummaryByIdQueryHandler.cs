@@ -15,7 +15,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class GetUserSummaryByIdQueryHandler 
         : IQueryHandler<GetUserSummaryByIdQuery, UserSummary>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
         

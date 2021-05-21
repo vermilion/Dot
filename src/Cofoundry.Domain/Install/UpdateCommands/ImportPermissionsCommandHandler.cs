@@ -11,7 +11,7 @@ namespace Cofoundry.Domain.Installation
     /// a single batch job during first startup, reducing the burden of 
     /// doing this individually as roles are created
     /// </summary>
-    public class ImportPermissionsCommandHandler : IAsyncVersionedUpdateCommandHandler<ImportPermissionsCommand>
+    public class ImportPermissionsCommandHandler : IVersionedUpdateCommandHandler<ImportPermissionsCommand>
     {
         private readonly ICofoundryDatabase _db;
         private readonly ITransactionScopeManager _transactionScopeManager;

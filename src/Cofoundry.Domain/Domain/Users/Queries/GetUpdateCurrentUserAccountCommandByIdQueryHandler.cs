@@ -11,7 +11,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateCurrentUserAccountCommandByIdQueryHandler 
         : IQueryHandler<GetUpdateCommandByIdQuery<UpdateCurrentUserAccountCommand>, UpdateCurrentUserAccountCommand>
-        , IIgnorePermissionCheckHandler
     {
         private readonly CofoundryDbContext _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;

@@ -24,16 +24,6 @@ namespace Cofoundry.Domain
         void EnforceIsSuperAdminRole(IUserContext userContext);
 
         /// <summary>
-        /// Checks to see if the user if logged in and throws a NotPermittedException if not.
-        /// </summary>
-        Task EnforceIsLoggedInAsync();
-
-        /// <summary>
-        /// Checks to see if the specified user context is logged in and throws a NotPermittedException if not.
-        /// </summary>
-        void EnforceIsLoggedIn(IUserContext userContext);
-
-        /// <summary>
         /// Determintes if the specified user id belongs to the current user or if the
         /// currenty logged in user has the specified permission. Useful for checking
         /// access to a user object when only an id is specified.

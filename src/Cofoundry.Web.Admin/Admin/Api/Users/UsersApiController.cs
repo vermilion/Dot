@@ -22,7 +22,7 @@ namespace Cofoundry.Web.Admin
         #region queries
 
         [HttpPost]
-        public async Task<JsonResult> GetAll([FromQuery] SearchUserSummariesQuery query)
+        public async Task<JsonResult> GetAll([FromBody] SearchUserSummariesQuery query)
         {
             if (query == null) query = new SearchUserSummariesQuery();
 
@@ -44,12 +44,13 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public async Task<JsonResult> Post([FromBody] AddUserCommand command)
+        public async Task<JsonResult> Add([FromBody] AddUserCommand command)
         {
             // TODO: We have a separate command here for adding Cofoundry Admin users, but we could re-use the same one
             // and separate the notification part out of the handler and make it a separate function in the admin panel.
             var userCommand = new AddCofoundryUserCommand
             {
+                Username = command.Username,
                 Email = command.Email,
                 FirstName = command.FirstName,
                 LastName = command.LastName,

@@ -14,7 +14,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class LogSuccessfulLoginCommandHandler 
         : ICommandHandler<LogSuccessfulLoginCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

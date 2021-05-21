@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Concurrent;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Text;
 using System.Threading.Tasks;
-using Cofoundry.Core.Validation;
 
 namespace Cofoundry.Domain.CQS.Internal
 {
@@ -14,10 +11,6 @@ namespace Cofoundry.Domain.CQS.Internal
     /// <summary>
     /// Service for executing commands of various types.
     /// </summary>
-    /// <remarks>
-    /// Inspiration taken from http://www.cuttingedge.it/blogs/steven/pivot/entry.php?id=91,
-    /// but has been adapted a fair bit.
-    /// </remarks>
     public class CommandExecutor : ICommandExecutor
     {
         private static readonly MethodInfo _executeAsyncMethod = typeof(CommandExecutor).GetMethod(nameof(ExecuteCommandAsync), BindingFlags.NonPublic | BindingFlags.Instance);
@@ -25,27 +18,27 @@ namespace Cofoundry.Domain.CQS.Internal
 
         #region constructor
 
-        private readonly IModelValidationService _modelValidationService;
         private readonly DbContext _dbContext;
         private readonly ICommandHandlerFactory _commandHandlerFactory;
         private readonly IExecutionContextFactory _executionContextFactory;
         private readonly ICommandLogService _commandLogService;
+        private readonly IExecuteModelValidationService _executeModelValidationService;
         private readonly IExecutePermissionValidationService _executePermissionValidationService;
 
         public CommandExecutor(
             DbContext dbContext,
-            IModelValidationService modelValidationService,
             ICommandHandlerFactory commandHandlerFactory,
             IExecutionContextFactory executionContextFactory,
             ICommandLogService commandLogService,
+            IExecuteModelValidationService executeModelValidationService,
             IExecutePermissionValidationService executePermissionValidationService
             )
         {
             _dbContext = dbContext;
-            _modelValidationService = modelValidationService;
             _commandHandlerFactory = commandHandlerFactory;
             _executionContextFactory = executionContextFactory;
             _commandLogService = commandLogService;
+            _executeModelValidationService = executeModelValidationService;
             _executePermissionValidationService = executePermissionValidationService;
         }
 
@@ -132,7 +125,7 @@ namespace Cofoundry.Domain.CQS.Internal
 
             try
             {
-                _modelValidationService.Validate(command);
+                _executeModelValidationService.Validate(command, handler, cx);
                 _executePermissionValidationService.Validate(command, handler, cx);
                 await handler.ExecuteAsync(command, cx);
             }

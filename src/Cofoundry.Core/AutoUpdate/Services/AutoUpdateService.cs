@@ -17,8 +17,8 @@ namespace Cofoundry.Core.AutoUpdate.Internal
     {
         #region private variables
 
-        private static readonly MethodInfo _runVersionedCommandMethod = typeof(AutoUpdateService).GetMethod("ExecuteGenericVersionedCommand", BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly MethodInfo _runAlwaysRunCommandMethod = typeof(AutoUpdateService).GetMethod("ExecuteGenericAlwaysRunCommand", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo _runVersionedCommandMethod = typeof(AutoUpdateService).GetMethod(nameof(ExecuteGenericVersionedCommand), BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo _runAlwaysRunCommandMethod = typeof(AutoUpdateService).GetMethod(nameof(ExecuteGenericAlwaysRunCommand), BindingFlags.NonPublic | BindingFlags.Instance);
 
         private readonly IEnumerable<IUpdatePackageFactory> _updatePackageFactories;
         private readonly IUpdateCommandHandlerFactory _commandHandlerFactory;
@@ -197,31 +197,13 @@ namespace Cofoundry.Core.AutoUpdate.Internal
         private Task ExecuteGenericVersionedCommand<TCommand>(TCommand command) where TCommand : IVersionedUpdateCommand
         {
             var runner = _commandHandlerFactory.CreateVersionedCommand<TCommand>();
-
-            if (runner is IAsyncVersionedUpdateCommandHandler<TCommand>)
-            {
-                return ((IAsyncVersionedUpdateCommandHandler<TCommand>)runner).ExecuteAsync(command);
-            }
-            else
-            {
-                ((ISyncVersionedUpdateCommandHandler<TCommand>)runner).Execute(command);
-                return Task.CompletedTask;
-            }
+            return runner.ExecuteAsync(command);
         }
 
         private Task ExecuteGenericAlwaysRunCommand<TCommand>(TCommand command) where TCommand : IAlwaysRunUpdateCommand
         {
             var runner = _commandHandlerFactory.CreateAlwaysRunCommand<TCommand>();
-
-            if (runner is IAsyncAlwaysRunUpdateCommandHandler<TCommand>)
-            {
-                return ((IAsyncAlwaysRunUpdateCommandHandler<TCommand>)runner).ExecuteAsync(command);
-            }
-            else
-            {
-                ((ISyncAlwaysRunUpdateCommandHandler<TCommand>)runner).Execute(command);
-                return Task.CompletedTask;
-            }
+            return runner.ExecuteAsync(command);
         }
 
         /// <summary>

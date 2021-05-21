@@ -42,8 +42,6 @@ namespace Cofoundry.Domain.Internal
         
         public async Task ExecuteAsync(UpdateCurrentUserPasswordCommand command, IExecutionContext executionContext)
         {
-            _permissionValidationService.EnforceIsLoggedIn(executionContext.UserContext);
-
             var user = await GetUser(command, executionContext);
             UpdatePassword(command, executionContext, user);
             await _dbContext.SaveChangesAsync();

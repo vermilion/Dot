@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cofoundry.Core.Mail;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Core.Mail;
 using Cofoundry.Domain.MailTemplates;
 using Microsoft.AspNetCore.Html;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -62,6 +60,7 @@ namespace Cofoundry.Domain.Internal
         {
             var newUserCommand = new AddUserCommand
             {
+                Username = command.Username,
                 FirstName = command.FirstName,
                 LastName = command.LastName,
                 Email = command.Email,

@@ -16,7 +16,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class LogUserInWithCredentialsCommandHandler
         : ICommandHandler<LogUserInWithCredentialsCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
         

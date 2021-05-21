@@ -1,25 +1,36 @@
 :host {
-  display: contents;
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
 
-  .logo {
-    float: left;
-    color: rgba(255, 255, 255, 0.2);
-    padding: 0 20px;
+  .brand {
+    display: flex;
+    color: white;
+    padding: 1.5rem;
+    font-weight: bolder;
   }
 
-  .ant-layout {
+  .ant-layout-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  nz-sider {
+    overflow: auto;
     height: 100%;
-    overflow: hidden;
   }
 
-  .content-container {
+  .inner-layout {
+    padding: 0.5rem;
     position: relative;
 
-    .progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      max-height: 0.2rem;
+    ::ng-deep {
+      router-outlet~* {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }

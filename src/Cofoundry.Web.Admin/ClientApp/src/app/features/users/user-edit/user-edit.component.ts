@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+
 import { ActivatedRoute } from "@angular/router";
 import { User } from "@app/core";
 
@@ -16,6 +17,6 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.route.snapshot.data["user"];
+    this.user = this.route.snapshot.data.user;;
   }
 }

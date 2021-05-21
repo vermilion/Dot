@@ -14,7 +14,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class GetUserDetailsByIdQueryHandler 
         : IQueryHandler<GetUserDetailsByIdQuery, UserDetails>
-        , IIgnorePermissionCheckHandler
     {
         private readonly CofoundryDbContext _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;

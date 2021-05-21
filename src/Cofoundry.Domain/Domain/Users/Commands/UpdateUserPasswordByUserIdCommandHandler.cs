@@ -8,7 +8,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class UpdateUserPasswordByUserIdCommandHandler
         : ICommandHandler<UpdateUserPasswordByUserIdCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region construstor
 

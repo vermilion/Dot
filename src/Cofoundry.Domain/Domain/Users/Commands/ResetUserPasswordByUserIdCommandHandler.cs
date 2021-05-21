@@ -10,7 +10,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class ResetUserPasswordByUserIdCommandHandler 
         : ICommandHandler<ResetUserPasswordByUserIdCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region construstor
 

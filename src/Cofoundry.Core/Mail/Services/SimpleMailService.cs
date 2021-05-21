@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.Mail.Internal
@@ -32,6 +29,8 @@ namespace Cofoundry.Core.Mail.Internal
 
         public async Task SendAsync(string toEmail, string toDisplayName, IMailTemplate template)
         {
+            return;
+
             var toAddress = new MailAddress(toEmail, toDisplayName);
             var message = await _mailMessageRenderer.RenderAsync(template, toAddress);
 

@@ -8,7 +8,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class MarkAsSetUpCommandHandler 
         : ICommandHandler<MarkAsSetUpCommand>
-        , IIgnorePermissionCheckHandler
     {
         private const string SETTING_KEY = "IsSetup";
 

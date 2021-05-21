@@ -12,7 +12,7 @@ namespace Cofoundry.Domain.Installation
     /// Runs the RegisterEntityDefinitionsCommand at startup, adding new entity
     /// definitions defined in code to the system and initializing permissions.
     /// </summary>
-    public class RegisterPermissionsAndRolesUpdateCommandHandler : IAsyncAlwaysRunUpdateCommandHandler<RegisterPermissionsAndRolesUpdateCommand>
+    public class RegisterPermissionsAndRolesUpdateCommandHandler : IAlwaysRunUpdateCommandHandler<RegisterPermissionsAndRolesUpdateCommand>
     {
         private readonly ICommandExecutor _commandExecutor;
         private readonly IExecutionContextFactory _executionContextFactory;

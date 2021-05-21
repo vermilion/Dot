@@ -9,7 +9,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateGeneralSiteSettingsCommandQueryHandler 
         : IQueryHandler<GetUpdateCommandQuery<UpdateGeneralSiteSettingsCommand>, UpdateGeneralSiteSettingsCommand>
-        , IIgnorePermissionCheckHandler
     {
         private readonly IQueryExecutor _queryExecutor;
 

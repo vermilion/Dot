@@ -26,13 +26,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service", "samples\Web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformFramework.EFCore.Identity", "src\PlatformFramework.EFCore.Identity\PlatformFramework.EFCore.Identity.csproj", "{82F1F667-D97F-421B-97FD-37EE09449DB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Core", "src\Cofoundry.Core\Cofoundry.Core.csproj", "{ABD3A89F-E815-464C-9861-3A976300815C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Core", "src\Cofoundry.Core\Dot.Core.csproj", "{ABD3A89F-E815-464C-9861-3A976300815C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Domain", "src\Cofoundry.Domain\Cofoundry.Domain.csproj", "{38899794-18EA-486D-98BD-EA82FF6C1E7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Domain", "src\Cofoundry.Domain\Dot.Domain.csproj", "{38899794-18EA-486D-98BD-EA82FF6C1E7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Web", "src\Cofoundry.Web\Cofoundry.Web.csproj", "{6D5DBAB6-6DC8-4A84-9565-63A8DCDCF680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web", "src\Cofoundry.Web\Dot.Web.csproj", "{6D5DBAB6-6DC8-4A84-9565-63A8DCDCF680}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Web.Admin", "src\Cofoundry.Web.Admin\Cofoundry.Web.Admin.csproj", "{8CE3CA51-0A89-4EAC-9315-1A0CD8FA83A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web.Admin", "src\Cofoundry.Web.Admin\Dot.Web.Admin.csproj", "{8CE3CA51-0A89-4EAC-9315-1A0CD8FA83A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.Identity", "samples\Web.Service.Identity\Web.Service.Identity.csproj", "{8AC9C410-E71D-4AC0-8448-661AA72C202F}"
 EndProject

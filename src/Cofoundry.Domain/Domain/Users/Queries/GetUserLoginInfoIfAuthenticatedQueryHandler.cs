@@ -14,7 +14,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class GetUserLoginInfoIfAuthenticatedQueryHandler 
         : IQueryHandler<GetUserLoginInfoIfAuthenticatedQuery, UserLoginInfo>
-        , IIgnorePermissionCheckHandler
     {
         private readonly UserAuthenticationHelper _userAuthenticationHelper;
         private readonly CofoundryDbContext _dbContext;

@@ -58,23 +58,6 @@ namespace Cofoundry.Domain.Internal
         }
 
         /// <summary>
-        /// Checks to see if the user if logged in and throws a NotPermittedException if not.
-        /// </summary>
-        public virtual async Task EnforceIsLoggedInAsync()
-        {
-            var userContext = await _userContextService.GetCurrentContextAsync();
-            EnforceIsLoggedIn(userContext);
-        }
-
-        /// <summary>
-        /// Checks to see if the specified user context is logged in and throws a NotPermittedException if not.
-        /// </summary>
-        public virtual void EnforceIsLoggedIn(IUserContext userContext)
-        {
-            ThrowExceptionIfNotLoggedIn(userContext);
-        }
-
-        /// <summary>
         /// Determintes if the specified user id belongs to the current user or if the
         /// currenty logged in user has the specified permission. Useful for checking
         /// access to a user object when only an id is specified.
@@ -244,18 +227,5 @@ namespace Cofoundry.Domain.Internal
                 EnforcePermission(permission, userContext);
             }
         }
-
-        #region private helpers
-
-        private static void ThrowExceptionIfNotLoggedIn(IUserContext userContext)
-        {
-            if (userContext == null || !userContext.UserId.HasValue)
-            {
-                throw new NotPermittedException("This operation requires that a user is logged in");
-            }
-        }
-
-        #endregion
-        
     }
 }

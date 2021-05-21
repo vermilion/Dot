@@ -7,7 +7,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class LogFailedLoginAttemptCommandHandler
         : ICommandHandler<LogFailedLoginAttemptCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 
@@ -28,13 +27,12 @@ namespace Cofoundry.Domain.Internal
         {
             var connectionInfo = _clientConnectionService.GetConnectionInfo();
 
-            //TODO
-            /*await _dbContext.FailedAuthenticationAttempts.AddAsync(new FailedAuthenticationAttempt
+            await _dbContext.FailedAuthenticationAttempts.AddAsync(new FailedAuthenticationAttempt
             {
                 UserName = TextFormatter.Limit(command.Username, 150),
                 IPAddress = connectionInfo.IPAddress,
                 AttemptDate = executionContext.ExecutionDate
-            });*/
+            });
         }
     }
 }

@@ -51,6 +51,10 @@ export class UsersListComponent implements OnInit {
       });
   }
 
+  public addUser() {
+    this.router.navigate(["create"], { relativeTo: this.activatedRoute });
+  }
+
   public edit(item: User) {
     this.router.navigate(["user", item.id], { relativeTo: this.activatedRoute });
   }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.AutoUpdate
 {
-    public class CreateDirectoriesUpdateCommandHandler : ISyncVersionedUpdateCommandHandler<CreateDirectoriesUpdateCommand>
+    public class CreateDirectoriesUpdateCommandHandler : IVersionedUpdateCommandHandler<CreateDirectoriesUpdateCommand>
     {
-        IPathResolver _pathResolver;
+        private IPathResolver _pathResolver;
 
         public CreateDirectoriesUpdateCommandHandler(
             IPathResolver pathResolver
@@ -18,7 +14,7 @@ namespace Cofoundry.Core.AutoUpdate
             _pathResolver = pathResolver;
         }
         
-        public void Execute(CreateDirectoriesUpdateCommand command)
+        public async Task ExecuteAsync(CreateDirectoriesUpdateCommand command)
         {
             foreach (var path in command.Directories)
             {

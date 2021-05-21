@@ -65,7 +65,7 @@ namespace Cofoundry.Domain.Data
 
         public DbSet<UserPasswordResetRequest> UserPasswordResetRequests { get; set; }
 
-        //public DbSet<FailedAuthenticationAttempt> FailedAuthenticationAttempts { get; set; }
+        public DbSet<FailedAuthenticationAttempt> FailedAuthenticationAttempts { get; set; }
 
         /// <summary>
         /// Contains a record of a relation between one entitiy and another

@@ -18,21 +18,22 @@ namespace Cofoundry.Domain.CQS.Internal
         
         #region constructor
 
-        private readonly IModelValidationService _modelValidationService;
         private readonly IQueryHandlerFactory _queryHandlerFactory;
         private readonly IExecutionContextFactory _executionContextFactory;
+        private readonly IExecuteModelValidationService _executeModelValidationService;
         private readonly IExecutePermissionValidationService _executePermissionValidationService;
 
         public QueryExecutor(
             IModelValidationService modelValidationService,
             IQueryHandlerFactory queryHandlerFactory,
             IExecutionContextFactory executionContextFactory,
+            IExecuteModelValidationService executeModelValidationService,
             IExecutePermissionValidationService executePermissionValidationService
             )
         {
-            _modelValidationService = modelValidationService;
             _queryHandlerFactory = queryHandlerFactory;
             _executionContextFactory = executionContextFactory;
+            _executeModelValidationService = executeModelValidationService;
             _executePermissionValidationService = executePermissionValidationService;
         }
 
@@ -91,7 +92,7 @@ namespace Cofoundry.Domain.CQS.Internal
                 throw new MissingHandlerMappingException(typeof(TQuery));
             }
 
-            _modelValidationService.Validate(query);
+            _executeModelValidationService.Validate(query, handler, cx);
             _executePermissionValidationService.Validate(query, handler, cx);
             var result = await handler.ExecuteAsync(query, cx);
 

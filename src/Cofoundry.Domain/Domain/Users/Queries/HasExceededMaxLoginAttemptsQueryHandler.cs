@@ -6,7 +6,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class HasExceededMaxLoginAttemptsQueryHandler 
         : IQueryHandler<HasExceededMaxLoginAttemptsQuery, bool>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

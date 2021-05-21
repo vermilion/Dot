@@ -11,7 +11,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class ValidatePasswordResetRequestQueryHandler
         : IQueryHandler<ValidatePasswordResetRequestQuery, PasswordResetRequestAuthenticationResult>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

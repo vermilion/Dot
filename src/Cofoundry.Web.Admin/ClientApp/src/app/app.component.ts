@@ -1,6 +1,5 @@
-import { Component } from "@angular/core";
-
 import { AuthenticationService } from "./core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-root",
@@ -8,27 +7,6 @@ import { AuthenticationService } from "./core";
   styles: [],
 })
 export class AppComponent {
-
-  header: string;
-  menus: any[] = [
-    {
-      icon: "hpe-actions",
-      dropdown: [
-        {
-          header: true,
-          title: "", //this.user?.name,
-          divider: true
-        },
-        {
-          icon: "hpe-logout",
-          title: "Log out",
-          select: () => {
-            this.authService.logout();
-          }
-        }
-      ]
-    }
-  ];
 
   constructor(public authService: AuthenticationService) { }
 }

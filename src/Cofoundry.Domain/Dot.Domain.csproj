@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Cofoundry.Core\Cofoundry.Core.csproj" />
+		<ProjectReference Include="..\Cofoundry.Core\Dot.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

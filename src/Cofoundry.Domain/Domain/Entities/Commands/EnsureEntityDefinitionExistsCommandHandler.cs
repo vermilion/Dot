@@ -11,7 +11,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class EnsureEntityDefinitionExistsCommandHandler 
         : ICommandHandler<EnsureEntityDefinitionExistsCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

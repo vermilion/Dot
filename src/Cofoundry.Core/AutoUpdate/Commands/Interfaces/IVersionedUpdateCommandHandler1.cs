@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Cofoundry.Core.AutoUpdate
 {
@@ -10,7 +6,7 @@ namespace Cofoundry.Core.AutoUpdate
     /// Handler for executing IVersionedUpdateCommand asynchronously
     /// </summary>
     /// <typeparam name="TCommand">Type of command to execute</typeparam>
-    public interface IAsyncVersionedUpdateCommandHandler<in TCommand> : IVersionedUpdateCommandHandler<TCommand>  
+    public interface IVersionedUpdateCommandHandler<in TCommand>
         where TCommand : IVersionedUpdateCommand
     {
         /// <summary>

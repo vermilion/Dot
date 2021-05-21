@@ -16,6 +16,15 @@ namespace Cofoundry.Domain
     public sealed class AddCofoundryUserCommand : ICommand, ILoggableCommand
     {
         /// <summary>
+        /// The email address is required and is used as the login username
+        /// for the user.
+        /// </summary>
+        [Required]
+        [DataType(DataType.Text)]
+        public string Username { get; set; }
+
+
+        /// <summary>
         /// The first name is required.
         /// </summary>
         [Required]

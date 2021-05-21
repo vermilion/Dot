@@ -12,7 +12,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public class UpdateUnauthenticatedUserPasswordCommandHandler
         : ICommandHandler<UpdateUnauthenticatedUserPasswordCommand>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

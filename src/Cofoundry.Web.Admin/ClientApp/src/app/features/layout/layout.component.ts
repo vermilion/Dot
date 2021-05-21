@@ -4,32 +4,24 @@ import {
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router
+  Router,
+  RouterOutlet
 } from "@angular/router";
 import { AuthenticationService, User } from "@app/core";
 
 import { Component } from "@angular/core";
+import { fadeAnimation } from "@shared/animations/fade.animation";
 
 @Component({
   selector: "app-layout",
   templateUrl: "./layout.component.html",
-  styleUrls: ["./layout.component.scss"]
+  styleUrls: ["./layout.component.scss"],
+  animations: [fadeAnimation]
 })
 export class FeaturesLayoutComponent {
 
   public user: User;
   isLoading: boolean = false;
-
-  categories = [
-    {
-      link: "users",
-      title: "Users"
-    },
-    {
-      link: "roles",
-      title: "Roles"
-    }
-  ];
 
   constructor(
     router: Router,
@@ -59,6 +51,10 @@ export class FeaturesLayoutComponent {
         }
       }
     });
+  }
+
+  getRouterOutletState(outlet: RouterOutlet) {
+    return outlet.isActivated ? outlet.activatedRoute : "";
   }
 
   logout() {

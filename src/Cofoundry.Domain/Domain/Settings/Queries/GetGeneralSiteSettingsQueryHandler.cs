@@ -9,7 +9,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class GetGeneralSiteSettingsQueryHandler 
         : IQueryHandler<GetSettingsQuery<GeneralSiteSettings>, GeneralSiteSettings>
-        , IIgnorePermissionCheckHandler
     {
         #region constructor
 

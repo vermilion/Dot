@@ -4,7 +4,7 @@ import { Routes } from "@angular/router";
 
 export const featuresRoutes: Routes = [
   {
-    path: "main",
+    path: "",
     component: FeaturesLayoutComponent,
     children: [
       {
@@ -23,5 +23,5 @@ export const featuresRoutes: Routes = [
       }
     ]
   },
-  { path: "**", redirectTo: "main/users" },
+  { path: "**", redirectTo: "users" },
 ];

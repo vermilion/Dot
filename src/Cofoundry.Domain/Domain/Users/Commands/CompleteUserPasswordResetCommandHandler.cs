@@ -14,7 +14,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class CompleteUserPasswordResetCommandHandler 
         : ICommandHandler<CompleteUserPasswordResetCommand>
-        , IIgnorePermissionCheckHandler
     {
         private const int NUMHOURS_PASSWORD_RESET_VALID = 16;
 

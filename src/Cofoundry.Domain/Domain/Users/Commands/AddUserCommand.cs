@@ -33,8 +33,7 @@ namespace Cofoundry.Domain
         public string LastName { get; set; }
 
         /// <summary>
-        /// The password is required if the user area has AllowPasswordLogin set to 
-        /// true, otherwise it should be empty.
+        /// The password is required
         /// </summary>
         [StringLength(300, MinimumLength = 8)]
         [DataType(DataType.Password)]

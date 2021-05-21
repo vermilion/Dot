@@ -85,7 +85,7 @@ namespace Cofoundry.Domain.Internal
             }
 
             // Username
-            if (!string.IsNullOrWhiteSpace(command.Username))
+            if (string.IsNullOrWhiteSpace(command.Username))
             {
                 throw ValidationErrorException.CreateWithProperties("Username field is required", "Username");
             }

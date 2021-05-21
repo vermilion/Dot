@@ -22,7 +22,7 @@ namespace Cofoundry.Web.Admin
         #region queries
 
         [HttpPost]
-        public async Task<JsonResult> GetAll([FromQuery] SearchRolesQuery query)
+        public async Task<JsonResult> GetAll([FromBody] SearchRolesQuery query)
         {
             if (query == null) query = new SearchRolesQuery();
 

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Cofoundry.Core.AutoUpdate
 {
@@ -24,30 +19,14 @@ namespace Cofoundry.Core.AutoUpdate
 
         public IVersionedUpdateCommandHandler<TCommand> CreateVersionedCommand<TCommand>() where TCommand : IVersionedUpdateCommand
         {
-            var asyncCommand = _serviceProvider.GetService<IAsyncVersionedUpdateCommandHandler<TCommand>>();
-
-            if (asyncCommand != null)
-            {
-                return asyncCommand;
-            }
-            else
-            {
-                return _serviceProvider.GetRequiredService<ISyncVersionedUpdateCommandHandler<TCommand>>();
-            }
+            var asyncCommand = _serviceProvider.GetService<IVersionedUpdateCommandHandler<TCommand>>();
+            return asyncCommand;
         }
 
         public IAlwaysRunUpdateCommandHandler<TCommand> CreateAlwaysRunCommand<TCommand>() where TCommand : IAlwaysRunUpdateCommand
         {
-            var asyncCommand = _serviceProvider.GetService<IAsyncAlwaysRunUpdateCommandHandler<TCommand>>();
-
-            if (asyncCommand != null)
-            {
-                return asyncCommand;
-            }
-            else
-            {
-                return _serviceProvider.GetRequiredService<ISyncAlwaysRunUpdateCommandHandler<TCommand>>();
-            }
+            var asyncCommand = _serviceProvider.GetService<IAlwaysRunUpdateCommandHandler<TCommand>>();
+            return asyncCommand;
         }
     }
 }
