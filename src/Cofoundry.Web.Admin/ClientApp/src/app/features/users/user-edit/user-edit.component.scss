@@ -1,0 +1,27 @@
+:host {
+  display: contents;
+
+  nz-layout {
+    height: 100%;
+
+    nz-content {
+      nz-space {
+        width: 100%;
+      }
+    }
+
+    nz-footer {
+      text-align: end;
+      padding: 0.5rem;
+    }
+
+    ::ng-deep {
+
+      .ant-card-head,
+      .ant-card-head-title,
+      .ant-card-body {
+        padding: 0.5rem;
+      }
+    }
+  }
+}

@@ -10,13 +10,11 @@ import {
 import { AuthenticationService, User } from "@app/core";
 
 import { Component } from "@angular/core";
-import { fadeAnimation } from "@shared/animations/fade.animation";
 
 @Component({
   selector: "app-layout",
   templateUrl: "./layout.component.html",
-  styleUrls: ["./layout.component.scss"],
-  animations: [fadeAnimation]
+  styleUrls: ["./layout.component.scss"]
 })
 export class FeaturesLayoutComponent {
 
@@ -51,10 +49,6 @@ export class FeaturesLayoutComponent {
         }
       }
     });
-  }
-
-  getRouterOutletState(outlet: RouterOutlet) {
-    return outlet.isActivated ? outlet.activatedRoute : "";
   }
 
   logout() {

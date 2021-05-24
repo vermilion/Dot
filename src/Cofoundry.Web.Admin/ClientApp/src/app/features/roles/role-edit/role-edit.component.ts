@@ -2,16 +2,19 @@ import { HttpClient } from "@angular/common/http";
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Role } from "@app/features/interfaces";
 
 import { API_BASE_URL } from "@shared/constants";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 
 @Component({
-  selector: "app-user-create",
-  templateUrl: "./user-create.component.html",
-  styleUrls: ["./user-create.component.scss"]
+  selector: "app-role-edit",
+  templateUrl: "./role-edit.component.html",
+  styleUrls: ["./role-edit.component.scss"]
 })
-export class UserCreateComponent implements OnInit {
+export class RoleEditComponent implements OnInit {
+
+  private role: Role;
 
   form!: FormGroup;
   isLoading: boolean = false;
@@ -28,27 +31,24 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      username: [null, [Validators.required]],
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      email: [null, [Validators.required]],
       roleId: [null, [Validators.required]],
+      title: [null, [Validators.required]]
     });
 
-    this.fetchRoles();
+    this.role = this.activatedRoute.snapshot.data.role as Role;
+    this.form.patchValue(this.role);
   }
 
-  create() {
+  save() {
     this.isLoading = true;
 
-    const param = Object.assign(this.form.value, { roleId: 1 });
+    const param = Object.assign(this.role, this.form.value);
 
     this.http
-      .post(`${this.baseUrl}/api/usersApi/add`, param)
+      .post(`${this.baseUrl}/api/rolesApi/update`, param)
       .subscribe({
         next: res => {
-          this.notificationsService.success("Success", "User added");
-          this.back();
+          this.notificationsService.success("Success", "Role saved");
         },
         error: err => {
           console.log(err);
@@ -60,23 +60,5 @@ export class UserCreateComponent implements OnInit {
 
   back() {
     this.router.navigate([""], { relativeTo: this.activatedRoute });
-  }
-
-  private fetchRoles() {
-    this.isLoading = true;
-
-    this.http
-      .post<any>(`${this.baseUrl}/api/rolesApi/getAll`, {
-        excludeAnonymous: true
-      })
-      .subscribe({
-        next: res => {
-          this.rolesList = res.items;
-        },
-        error: err => {
-          console.log(err);
-        },
-        complete: () => this.isLoading = false
-      });
   }
 }

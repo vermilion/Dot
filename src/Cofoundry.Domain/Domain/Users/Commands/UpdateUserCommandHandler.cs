@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
-using Microsoft.EntityFrameworkCore;
+﻿using Cofoundry.Core;
 using Cofoundry.Core.Validation;
-using Cofoundry.Core;
+using Cofoundry.Domain.CQS;
+using Cofoundry.Domain.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -82,7 +79,7 @@ namespace Cofoundry.Domain.Internal
         private void ValidateCommand(UpdateUserCommand command)
         {
             // Username
-            if (!string.IsNullOrWhiteSpace(command.Username))
+            if (string.IsNullOrWhiteSpace(command.Username))
             {
                 throw ValidationErrorException.CreateWithProperties("Username field is required", "Username");
             }

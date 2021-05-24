@@ -7,11 +7,11 @@ import { API_BASE_URL } from "@shared/constants";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 
 @Component({
-  selector: "app-user-create",
-  templateUrl: "./user-create.component.html",
-  styleUrls: ["./user-create.component.scss"]
+  selector: "app-role-create",
+  templateUrl: "./role-create.component.html",
+  styleUrls: ["./role-create.component.scss"]
 })
-export class UserCreateComponent implements OnInit {
+export class RoleCreateComponent implements OnInit {
 
   form!: FormGroup;
   isLoading: boolean = false;
@@ -28,26 +28,20 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      username: [null, [Validators.required]],
-      firstName: [null, [Validators.required]],
-      lastName: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      roleId: [null, [Validators.required]],
+      title: [null, [Validators.required]],
     });
-
-    this.fetchRoles();
   }
 
   create() {
     this.isLoading = true;
 
-    const param = Object.assign(this.form.value, { roleId: 1 });
+    const param = Object.assign(this.form.value);
 
     this.http
-      .post(`${this.baseUrl}/api/usersApi/add`, param)
+      .post(`${this.baseUrl}/api/rolesApi/add`, param)
       .subscribe({
         next: res => {
-          this.notificationsService.success("Success", "User added");
+          this.notificationsService.success("Success", "Role added");
           this.back();
         },
         error: err => {
@@ -60,23 +54,5 @@ export class UserCreateComponent implements OnInit {
 
   back() {
     this.router.navigate([""], { relativeTo: this.activatedRoute });
-  }
-
-  private fetchRoles() {
-    this.isLoading = true;
-
-    this.http
-      .post<any>(`${this.baseUrl}/api/rolesApi/getAll`, {
-        excludeAnonymous: true
-      })
-      .subscribe({
-        next: res => {
-          this.rolesList = res.items;
-        },
-        error: err => {
-          console.log(err);
-        },
-        complete: () => this.isLoading = false
-      });
   }
 }

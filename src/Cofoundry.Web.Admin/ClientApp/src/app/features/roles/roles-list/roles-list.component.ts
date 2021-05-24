@@ -5,17 +5,17 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { API_BASE_URL } from "@shared/constants";
 
-import { PagingParam, PagingResult, User } from "../../interfaces";
+import { PagingParam, PagingResult, Role } from "../../interfaces";
 
 @Component({
-  selector: "app-users-list",
-  templateUrl: "./users-list.component.html",
-  styleUrls: ["./users-list.component.scss"],
+  selector: "app-roles-list",
+  templateUrl: "./roles-list.component.html",
+  styleUrls: ["./roles-list.component.scss"],
 })
-export class UsersListComponent implements OnInit {
+export class RolesListComponent implements OnInit {
 
   isLoading: boolean = false;
-  items: User[] = [];
+  items: Role[] = [];
 
   page: number = 1;
   quantity: number = 100;
@@ -41,7 +41,7 @@ export class UsersListComponent implements OnInit {
     };
 
     this.http
-      .post<PagingResult<User>>(`${this.baseUrl}/api/usersApi/getAll`, param)
+      .post<PagingResult<Role>>(`${this.baseUrl}/api/rolesApi/getAll`, param)
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -51,12 +51,12 @@ export class UsersListComponent implements OnInit {
       });
   }
 
-  public addUser() {
+  public addRole() {
     this.router.navigate(["create"], { relativeTo: this.activatedRoute });
   }
 
-  public edit(item: User) {
-    this.router.navigate(["user", item.userId], { relativeTo: this.activatedRoute });
+  public edit(item: Role) {
+    this.router.navigate(["role", item.roleId], { relativeTo: this.activatedRoute });
   }
 
   public remove(id: number) {
