@@ -8,29 +8,26 @@ namespace Cofoundry.Web.Admin
     public class AccountApiController : BaseApiController
     {
         private readonly IMediator _mediator;
-        private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IUserContextService _userContextService;
 
         public AccountApiController(
             IMediator mediator,
-            IApiResponseHelper apiResponseHelper,
             IUserContextService userContextService
             )
         {
             _mediator = mediator;
-            _apiResponseHelper = apiResponseHelper;
             _userContextService = userContextService;
         }
 
         #region queries
 
         [HttpGet]
-        public async Task<JsonResult> Get()
+        public async Task<IActionResult> Get()
         {
             var query = new GetCurrentUserAccountDetailsQuery();
 
-            var results = await _mediator.ExecuteAsync(query);
-            return _apiResponseHelper.SimpleQueryResponse(results);
+            var result = await _mediator.ExecuteAsync(query);
+            return Ok(result);
         }
         
         #endregion
@@ -38,21 +35,23 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public async Task<JsonResult> Update([FromBody] UpdateCurrentUserAccountCommand delta)
+        public async Task<IActionResult> Update([FromBody] UpdateCurrentUserAccountCommand model)
         {
-            return await _apiResponseHelper.RunCommandAsync(delta);
+            await _mediator.ExecuteAsync(model);
+            return Ok();
         }
 
         [HttpPost]
-        public Task<JsonResult> PutPassword([FromBody] UpdateCurrentUserPasswordCommandDto dto)
+        public async Task<IActionResult> PutPassword([FromBody] UpdateCurrentUserPasswordCommandDto model)
         {
             var command = new UpdateCurrentUserPasswordCommand()
             {
-                OldPassword = dto.OldPassword,
-                NewPassword = dto.NewPassword
+                OldPassword = model.OldPassword,
+                NewPassword = model.NewPassword
             };
 
-            return _apiResponseHelper.RunCommandAsync(command);
+            await _mediator.ExecuteAsync(command);
+            return Ok();
         }
 
         #endregion

@@ -7,7 +7,7 @@ namespace Cofoundry.Web.Admin
     //[AutoValidateAntiforgeryToken]
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class BaseApiController : ControllerBase
+    public abstract class BaseApiController : ControllerBase
     {
     }
 }

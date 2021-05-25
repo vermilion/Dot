@@ -14,8 +14,6 @@ namespace Cofoundry.Web.Registration
                 .Register<IUserSessionService, UserSessionService>(RegistrationOptions.Scoped())
                 .Register<IAuthCookieNamespaceProvider, AuthCookieNamespaceProvider>()
 
-                .Register<IApiResponseHelper, ApiResponseHelper>()
-
                 .Register<IPathResolver, SitePathResolver>(lowPriorityOverrideRegistrationOptions)
                 ;
         }

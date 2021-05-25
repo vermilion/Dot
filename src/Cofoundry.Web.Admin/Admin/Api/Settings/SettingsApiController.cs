@@ -8,15 +8,12 @@ namespace Cofoundry.Web.Admin
     public class SettingsApiController : BaseApiController
     {
         private readonly IMediator _mediator;
-        private readonly IApiResponseHelper _apiResponseHelper;
 
         public SettingsApiController(
-            IMediator mediator,
-            IApiResponseHelper apiResponseHelper
+            IMediator mediator
             )
         {
             _mediator = mediator;
-            _apiResponseHelper = apiResponseHelper;
         }
 
         #region queries
@@ -25,7 +22,7 @@ namespace Cofoundry.Web.Admin
         public async Task<IActionResult> GetGeneralSiteSettings()
         {
             var results = await _mediator.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
-            return _apiResponseHelper.SimpleQueryResponse(results);
+            return Ok(results);
         }
 
         #endregion
@@ -33,9 +30,10 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public Task<JsonResult> UpdateGeneralSiteSettings([FromBody] UpdateGeneralSiteSettingsCommand delta)
+        public async Task<IActionResult> UpdateGeneralSiteSettings([FromBody] UpdateGeneralSiteSettingsCommand delta)
         {
-            return _apiResponseHelper.RunCommandAsync(delta);
+            await _mediator.ExecuteAsync(delta);
+            return Ok();
         }
 
         #endregion

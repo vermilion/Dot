@@ -8,33 +8,30 @@ namespace Cofoundry.Web.Admin
     public class RolesApiController : BaseApiController
     {
         private readonly IMediator _mediator;
-        private readonly IApiResponseHelper _apiResponseHelper;
 
         public RolesApiController(
-            IMediator mediator,
-            IApiResponseHelper apiResponseHelper
+            IMediator mediator
             )
         {
             _mediator = mediator;
-            _apiResponseHelper = apiResponseHelper;
         }
 
         #region queries
 
         [HttpPost]
-        public async Task<JsonResult> GetAll([FromBody] SearchRolesQuery query)
+        public async Task<IActionResult> GetAll([FromBody] SearchRolesQuery query)
         {
             if (query == null) query = new SearchRolesQuery();
 
             var results = await _mediator.ExecuteAsync(query);
-            return _apiResponseHelper.SimpleQueryResponse(results);
+            return Ok(results);
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetById(int roleId)
+        public async Task<IActionResult> GetById(int roleId)
         {
             var result = await _mediator.ExecuteAsync(new GetRoleDetailsByIdQuery(roleId));
-            return _apiResponseHelper.SimpleQueryResponse(result);
+            return Ok(result);
         }
 
         #endregion
@@ -42,26 +39,29 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public Task<JsonResult> Add([FromBody] AddRoleCommand command)
+        public async Task<IActionResult> Add([FromBody] AddRoleCommand model)
         {
-            return _apiResponseHelper.RunCommandAsync(command);
+            await _mediator.ExecuteAsync(model);
+            return Ok();
         }
 
         [HttpPost]
-        public Task<JsonResult> Update([FromBody] UpdateRoleCommand delta)
+        public async Task<IActionResult> Update([FromBody] UpdateRoleCommand model)
         {
-            return _apiResponseHelper.RunCommandAsync(delta);
+            await _mediator.ExecuteAsync(model);
+            return Ok();
         }
 
         [HttpDelete]
-        public Task<JsonResult> Delete(int roleId)
+        public async Task<IActionResult> Delete(int roleId)
         {
-            var command = new DeleteRoleCommand
+            var request = new DeleteRoleCommand
             {
                 RoleId = roleId
             };
 
-            return _apiResponseHelper.RunCommandAsync(command);
+            await _mediator.ExecuteAsync(request);
+            return Ok();
         }
 
         #endregion

@@ -8,35 +8,32 @@ namespace Cofoundry.Web.Admin
     public class UsersApiController : BaseApiController
     {
         private readonly IMediator _mediator;
-        private readonly IApiResponseHelper _apiResponseHelper;
 
         public UsersApiController(
-            IMediator mediator,
-            IApiResponseHelper apiResponseHelper
+            IMediator mediator
             )
         {
             _mediator = mediator;
-            _apiResponseHelper = apiResponseHelper;
         }
 
         #region queries
 
         [HttpPost]
-        public async Task<JsonResult> GetAll([FromBody] SearchUserSummariesQuery query)
+        public async Task<IActionResult> GetAll([FromBody] SearchUserSummariesQuery query)
         {
             if (query == null) query = new SearchUserSummariesQuery();
 
             var results = await _mediator.ExecuteAsync(query);
-            return _apiResponseHelper.SimpleQueryResponse(results);
+            return Ok(results);
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetById(int userId)
+        public async Task<IActionResult> GetById(int userId)
         {
             var query = new GetUserDetailsByIdQuery(userId);
             var result = await _mediator.ExecuteAsync(query);
 
-            return _apiResponseHelper.SimpleQueryResponse(result);
+            return Ok(result);
         }
 
         #endregion
@@ -44,7 +41,7 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public async Task<JsonResult> Add([FromBody] AddUserCommand command)
+        public async Task<IActionResult> Add([FromBody] AddUserCommand command)
         {
             // TODO: We have a separate command here for adding Cofoundry Admin users, but we could re-use the same one
             // and separate the notification part out of the handler and make it a separate function in the admin panel.
@@ -57,24 +54,27 @@ namespace Cofoundry.Web.Admin
                 RoleId = command.RoleId
             };
 
-            return await _apiResponseHelper.RunCommandAsync(userCommand);
+            var result = await _mediator.ExecuteAsync(userCommand);
+            return Ok(result);
         }
 
         [HttpPost]
-        public Task<JsonResult> Update([FromBody] UpdateUserCommand delta)
+        public async Task<IActionResult> Update([FromBody] UpdateUserCommand delta)
         {
-            return _apiResponseHelper.RunCommandAsync(delta);
+            await _mediator.ExecuteAsync(delta);
+            return Ok();
         }
 
         [HttpDelete]
-        public Task<JsonResult> Delete(int userId)
+        public async Task<IActionResult> Delete(int userId)
         {
             var command = new DeleteUserCommand
             {
                 UserId = userId
             };
 
-            return _apiResponseHelper.RunCommandAsync(command);
+            await _mediator.ExecuteAsync(command);
+            return Ok();
         }
 
         #endregion

@@ -17,6 +17,7 @@ namespace Cofoundry.Core
         /// of the sql database type char. Psace padding is allowed but the string cannot
         /// be all spaces.
         /// </summary>
+        /// <param name="stringToValidate"></param>
         /// <param name="length">The fixed length of the string to validate.</param>
         public static bool IsValid(string stringToValidate, int length)
         {
