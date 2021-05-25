@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Core.DependencyInjection;
-using Cofoundry.Core.Validation;
-using Microsoft.Extensions.Options;
+﻿using Cofoundry.Core.Validation;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace Cofoundry.Core.Configuration
 {
@@ -43,18 +39,12 @@ namespace Cofoundry.Core.Configuration
             var settingsOptions = _serviceProvider.GetRequiredService<IOptions<TSettings>>();
             var settings = settingsOptions.Value;
 
-            if (settings is IFeatureEnableable featureEnableable && !featureEnableable.Enabled)
-            {
-                // feature is disabled, so skip validation.
-                return settings;
-            }
+            //var errors = _modelValidationService.GetErrors(settings);
 
-            var errors = _modelValidationService.GetErrors(settings);
-
-            if (!EnumerableHelper.IsNullOrEmpty(errors))
-            {
-                throw new InvalidConfigurationException(typeof(TSettings), errors);
-            }
+            //if (!EnumerableHelper.IsNullOrEmpty(errors))
+            //{
+            //    throw new InvalidConfigurationException(typeof(TSettings), errors);
+            //}
 
             return settings;
         }

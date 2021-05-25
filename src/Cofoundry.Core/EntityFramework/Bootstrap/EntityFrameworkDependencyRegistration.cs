@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.DependencyInjection;
+﻿using Cofoundry.Core.DependencyInjection;
 using Cofoundry.Core.EntityFramework.Internal;
+using Cofoundry.Domain.Data;
+using Cofoundry.Domain.Data.Internal;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Cofoundry.Core.EntityFramework.Registration
 {
@@ -12,8 +11,11 @@ namespace Cofoundry.Core.EntityFramework.Registration
     {
         public void Register(IContainerRegister container)
         {
-            //container
-            //    .Register<ICofoundryDbContextInitializer, CofoundryDbContextInitializer>();
+            container
+                .Register<CofoundryDbContext>(new Type[] { typeof(CofoundryDbContext), typeof(DbContext) }, RegistrationOptions.Scoped())
+                //.Register<ICofoundryDbContextInitializer, CofoundryDbContextInitializer>()
+                .Register<IDbUnstructuredDataSerializer, DbUnstructuredDataSerializer>()
+                ;
         }
     }
 }

@@ -29,9 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\PlatformFramework.EFCore.Identity\PlatformFramework.EFCore.Identity.csproj" />
 	  <ProjectReference Include="..\..\src\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj" />
-	  <ProjectReference Include="..\..\src\PlatformFramework\PlatformFramework.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -10,8 +10,4 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.6" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\PlatformFramework\PlatformFramework.csproj" />
-	</ItemGroup>
 </Project>

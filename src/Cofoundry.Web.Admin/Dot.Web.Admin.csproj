@@ -33,7 +33,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cofoundry.Core\Dot.Core.csproj" />
-		<ProjectReference Include="..\Cofoundry.Domain\Dot.Domain.csproj" />
 		<ProjectReference Include="..\Cofoundry.Web\Dot.Web.csproj" />
 	</ItemGroup>
 

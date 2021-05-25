@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Cofoundry.Core.Configuration;
+using Cofoundry.Domain.CQS;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.Validation
@@ -15,26 +14,12 @@ namespace Cofoundry.Core.Validation
         /// Validates the specific model and throws an exception if it is null or 
         /// contains any invalid properties.
         /// </summary>
-        /// <typeparam name="T">Type of the model to validate.</typeparam>
-        /// <param name="modelToValidate">The command to validate.</param>
-        void Validate<T>(T modelToValidate);
+        /// <typeparam name="TRequest">Type of the model to validate.</typeparam>
+        /// <param name="model">The command to validate.</param>
+        Task Validate<TRequest, TResponse>(TRequest model, IRequestHandler<TRequest, TResponse> handler, IExecutionContext executionContext)
+             where TRequest : IRequest<TResponse>;
 
-        /// <summary>
-        /// Validates the specified model and returns a collection of any errors discovered in
-        /// the validation process.
-        /// </summary>
-        /// <typeparam name="T">Type of model to validate.</typeparam>
-        /// <param name="modelToValidate">The object to validate.</param>
-        /// <returns>Enumerable collection of any errors found. Will be empty if the model is valid.</returns>
-        IEnumerable<ValidationError> GetErrors<T>(T modelToValidate);
-
-        /// <summary>
-        /// Validates the specified models and returns a collection of any errors discovered in
-        /// the validation process.
-        /// </summary>
-        /// <typeparam name="T">Type of model to validate.</typeparam>
-        /// <param name="modelsToValidate">Collection of objects to validate.</param>
-        /// <returns>Enumerable collection of any errors found. Will be empty if the model is valid.</returns>
-        IEnumerable<ValidationError> GetErrors<T>(IEnumerable<T> modelsToValidate);
+        //IReadOnlyCollection<ValidationError> GetErrors<TModel>(TModel settings) 
+        //    where TModel : class;
     }
 }
