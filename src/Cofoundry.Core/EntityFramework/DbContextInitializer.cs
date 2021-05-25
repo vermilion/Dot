@@ -11,13 +11,13 @@ namespace Cofoundry.Core.EntityFramework.Internal
     /// logger and use the shared Cofoundry connection so that any DbContext
     /// initialized this way can enlist in the same transaction.
     /// </summary>
-    public abstract class CofoundryDbContextInitializer : ICofoundryDbContextInitializer
+    public abstract class DbContextInitializer : IDbContextInitializer
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly ICofoundryDbConnectionManager _cofoundryDbConnectionFactory;
         private readonly DatabaseSettings _databaseSettings;
 
-        public CofoundryDbContextInitializer(
+        public DbContextInitializer(
             ILoggerFactory loggerFactory,
             ICofoundryDbConnectionManager cofoundryDbConnectionFactory,
             DatabaseSettings databaseSettings

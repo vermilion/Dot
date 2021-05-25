@@ -13,7 +13,7 @@ namespace Cofoundry.Core.EntityFramework.Registration
         {
             container
                 .Register<CofoundryDbContext>(new Type[] { typeof(CofoundryDbContext), typeof(DbContext) }, RegistrationOptions.Scoped())
-                //.Register<ICofoundryDbContextInitializer, CofoundryDbContextInitializer>()
+                //.Register<IDbContextInitializer, DbContextInitializer>()
                 .Register<IDbUnstructuredDataSerializer, DbUnstructuredDataSerializer>()
                 ;
         }

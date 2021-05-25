@@ -1,5 +1,4 @@
-﻿using System;
-using Cofoundry.Core.EntityFramework.Internal;
+﻿using Cofoundry.Core.EntityFramework.Internal;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using Microsoft.Extensions.Logging;
@@ -8,9 +7,9 @@ using Cofoundry.Core;
 
 namespace Cofoundry.BasicTestSite
 {
-    public class DbContextInitializer : CofoundryDbContextInitializer
+    public class AppDbContextInitializer : DbContextInitializer
     {
-        public DbContextInitializer(
+        public AppDbContextInitializer(
             ILoggerFactory loggerFactory,
             ICofoundryDbConnectionManager cofoundryDbConnectionFactory,
             DatabaseSettings databaseSettings)

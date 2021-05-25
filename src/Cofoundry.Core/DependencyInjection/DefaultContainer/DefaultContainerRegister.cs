@@ -67,7 +67,8 @@ namespace Cofoundry.Core.DependencyInjection
             return Register<TConcrete, TConcrete>(options);
         }
 
-        public IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null) where TConcrete : TRegisterAs
+        public IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null) 
+            where TConcrete : TRegisterAs
         {
             var fn = new Action(() =>
             {

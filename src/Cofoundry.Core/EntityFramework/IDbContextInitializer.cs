@@ -10,7 +10,7 @@ namespace Cofoundry.Core.EntityFramework
     /// logger and use the shared Cofoundry connection so that any DbContext
     /// initialized this way can enlist in the same transaction.
     /// </summary>
-    public interface ICofoundryDbContextInitializer
+    public interface IDbContextInitializer
     {
         /// <summary>
         /// Used to configure the default settings for an EF DbContext that connects 

@@ -13,10 +13,10 @@ namespace Cofoundry.Domain.Data
     /// </summary>
     public partial class CofoundryDbContext : DbContext
     {
-        private readonly ICofoundryDbContextInitializer _cofoundryDbContextInitializer;
+        private readonly IDbContextInitializer _cofoundryDbContextInitializer;
 
         public CofoundryDbContext(
-            ICofoundryDbContextInitializer cofoundryDbContextInitializer)
+            IDbContextInitializer cofoundryDbContextInitializer)
         {
             _cofoundryDbContextInitializer = cofoundryDbContextInitializer;
         }

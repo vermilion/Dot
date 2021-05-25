@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Core.DependencyInjection
 {
@@ -54,7 +51,8 @@ namespace Cofoundry.Core.DependencyInjection
         /// <typeparam name="TConcrete">Concrete type to register.</typeparam>
         /// <param name="options">Optional options argument.</param>
         /// <returns>The IContainerRegister instance for method chaining.</returns>
-        IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null) where TConcrete : TRegisterAs;
+        IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null) 
+            where TConcrete : TRegisterAs;
 
         /// <summary>
         /// Registers a service as part of a collection of services, so that when an array of TRegisterAs
@@ -63,7 +61,8 @@ namespace Cofoundry.Core.DependencyInjection
         /// <typeparam name="TRegisterAs">Type to register the service as</typeparam>
         /// <typeparam name="TConcrete">Concrete type to register.</typeparam>
         /// <returns>The IContainerRegister instance for method chaining.</returns>
-        IContainerRegister RegisterInCollection<TRegisterAs, TConcrete>(RegistrationOptions options = null) where TConcrete : TRegisterAs;
+        IContainerRegister RegisterInCollection<TRegisterAs, TConcrete>(RegistrationOptions options = null) 
+            where TConcrete : TRegisterAs;
 
         /// <summary>
         /// Registers all services that implement TToRegister as a registered collection of services.
