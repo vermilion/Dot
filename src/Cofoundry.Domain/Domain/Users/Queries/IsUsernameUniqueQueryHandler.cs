@@ -14,8 +14,8 @@ namespace Cofoundry.Domain.Internal
     /// Usernames only have to be unique per UserArea.
     /// </summary>
     public class IsUsernameUniqueQueryHandler 
-        : IQueryHandler<IsUsernameUniqueQuery, bool>
-        , IPermissionRestrictedQueryHandler<IsUsernameUniqueQuery, bool>
+        : IRequestHandler<IsUsernameUniqueQuery, bool>
+        , IPermissionRestrictedRequestHandler<IsUsernameUniqueQuery>
     {
         #region constructor
 

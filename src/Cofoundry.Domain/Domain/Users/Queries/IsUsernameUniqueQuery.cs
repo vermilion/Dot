@@ -6,7 +6,7 @@ namespace Cofoundry.Domain
     /// Determines if a username is unique within a specific UserArea.
     /// Usernames only have to be unique per UserArea.
     /// </summary>
-    public class IsUsernameUniqueQuery : IQuery<bool>
+    public class IsUsernameUniqueQuery : IRequest<bool>
     {
         /// <summary>
         /// Optional database id of an existing user to exclude from the uniqueness 

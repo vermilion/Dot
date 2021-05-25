@@ -10,17 +10,17 @@ namespace Cofoundry.Domain.Internal
     {
         #region Constructor
         
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IUserSessionService _userSessionService;
         private readonly IUserContextService _userContextService;
 
         public LoginService(
-            ICommandExecutor commandExecutor,
+            IMediator commandExecutor,
             IUserSessionService userSessionService,
             IUserContextService userContextService
             )
         {
-            _commandExecutor = commandExecutor;
+            _mediator = commandExecutor;
             _userContextService = userContextService;
             _userSessionService = userSessionService;
         }
@@ -48,7 +48,7 @@ namespace Cofoundry.Domain.Internal
 
             // Update the user record
             var command = new LogSuccessfulLoginCommand() { UserId = userId };
-            await _commandExecutor.ExecuteAsync(command);
+            await _mediator.ExecuteAsync(command);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Cofoundry.Domain.Internal
         public virtual async Task LogFailedLoginAttemptAsync(string username)
         {
             var command = new LogFailedLoginAttemptCommand(username);
-            await _commandExecutor.ExecuteAsync(command);
+            await _mediator.ExecuteAsync(command);
         }
 
         /// <summary>

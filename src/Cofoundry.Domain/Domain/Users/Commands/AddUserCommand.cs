@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Core.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -18,7 +15,7 @@ namespace Cofoundry.Domain
     /// explicitly and shouldn't allow any possible injection of passwords or
     /// user areas.
     /// </remarks>
-    public sealed class AddUserCommand : ICommand, ILoggableCommand
+    public sealed class AddUserCommand : IRequest<AddUserCommandResult>, ILoggableCommand
     {
         /// <summary>
         /// The first name is not required.
@@ -76,16 +73,14 @@ namespace Cofoundry.Domain
         [Required]
         [PositiveInteger]
         public int RoleId { get; set; }
+    }
 
-        #region Output
-
+    public class AddUserCommandResult
+    {
         /// <summary>
         /// The database id of the newly created user. This is set after the 
         /// command has been run.
         /// </summary>
-        [OutputValue]
-        public int OutputUserId { get; set; }
-
-        #endregion
+        public int UserId { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain
 {
-    public class ValidatePasswordResetRequestQuery : IQuery<PasswordResetRequestAuthenticationResult>
+    public class ValidatePasswordResetRequestQuery : IRequest<PasswordResetRequestAuthenticationResult>
     {
         [Required]
         public Guid UserPasswordResetRequestId { get; set; }

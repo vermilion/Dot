@@ -18,13 +18,13 @@ namespace Cofoundry.Domain.Internal
     /// permissions when an IRoleInitializer has been implemented.
     /// </summary>
     public class RegisterPermissionsAndRolesCommandHandler
-        : ICommandHandler<RegisterPermissionsAndRolesCommand>
-        , IPermissionRestrictedCommandHandler<RegisterPermissionsAndRolesCommand>
+        : IRequestHandler<RegisterPermissionsAndRolesCommand, Unit>
+        , IPermissionRestrictedRequestHandler<RegisterPermissionsAndRolesCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IRoleCache _roleCache;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly IEnumerable<IRoleDefinition> _roleDefinitions;
@@ -35,7 +35,7 @@ namespace Cofoundry.Domain.Internal
 
         public RegisterPermissionsAndRolesCommandHandler(
             CofoundryDbContext dbContext,
-            ICommandExecutor commandExecutor,
+            IMediator mediator,
             IRoleCache roleCache,
             IPermissionValidationService permissionValidationService,
             IEnumerable<IRoleDefinition> roleDefinitions,
@@ -46,7 +46,7 @@ namespace Cofoundry.Domain.Internal
             )
         {
             _dbContext = dbContext;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
             _roleCache = roleCache;
             _permissionValidationService = permissionValidationService;
             _roleDefinitions = roleDefinitions;
@@ -60,7 +60,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(RegisterPermissionsAndRolesCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(RegisterPermissionsAndRolesCommand command, IExecutionContext executionContext)
         {
             DetectDuplicateRoles();
 
@@ -127,6 +127,8 @@ namespace Cofoundry.Domain.Internal
 
             await _dbContext.SaveChangesAsync();
             _transactionScopeFactory.QueueCompletionTask(_dbContext, _roleCache.Clear);
+
+            return Unit.Value;
         }
 
         private void AddNewPermissionsToDb(

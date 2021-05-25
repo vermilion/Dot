@@ -15,7 +15,7 @@ namespace Cofoundry.Domain
     /// have a RoleCode if they have been generated from code
     /// rather than the GUI. For GUI generated roles use GetRoleDetailsByIdQuery.
     /// </summary>
-    public class GetRoleDetailsByRoleCodeQuery : IQuery<RoleDetails>
+    public class GetRoleDetailsByRoleCodeQuery : IRequest<RoleDetails>
     {
         public GetRoleDetailsByRoleCodeQuery()
         {

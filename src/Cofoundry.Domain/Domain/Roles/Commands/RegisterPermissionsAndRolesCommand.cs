@@ -11,7 +11,7 @@ namespace Cofoundry.Domain
     /// Registers new roles defined in code via IRoleDefinition and initializes
     /// permissions when an IRoleInitializer has been implemented.
     /// </summary>
-    public class RegisterPermissionsAndRolesCommand : ICommand, ILoggableCommand
+    public class RegisterPermissionsAndRolesCommand : IRequest<Unit>, ILoggableCommand
     {
         /// <summary>
         /// By default we don't update roles once they

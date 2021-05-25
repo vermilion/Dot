@@ -9,7 +9,7 @@ using Cofoundry.Core.Validation;
 
 namespace Cofoundry.Domain
 {
-    public class LogFailedLoginAttemptCommand : ICommand
+    public class LogFailedLoginAttemptCommand : IRequest<Unit>
     {
         public LogFailedLoginAttemptCommand()
         {

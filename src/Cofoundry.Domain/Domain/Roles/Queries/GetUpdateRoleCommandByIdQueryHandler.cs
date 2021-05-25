@@ -8,8 +8,8 @@ using Cofoundry.Domain.CQS;
 namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateRoleCommandByIdQueryHandler 
-        : IQueryHandler<GetUpdateCommandByIdQuery<UpdateRoleCommand>, UpdateRoleCommand>
-        , IPermissionRestrictedQueryHandler<GetUpdateCommandByIdQuery<UpdateRoleCommand>, UpdateRoleCommand>
+        : IRequestHandler<GetUpdateCommandByIdQuery<UpdateRoleCommand>, UpdateRoleCommand>
+        , IPermissionRestrictedRequestHandler<GetUpdateCommandByIdQuery<UpdateRoleCommand>>
     {
         #region constructor
 

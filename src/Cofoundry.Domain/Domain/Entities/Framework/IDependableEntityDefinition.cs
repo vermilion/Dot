@@ -18,6 +18,6 @@ namespace Cofoundry.Domain
         /// aggregate root is the page.
         /// </summary>
         /// <param name="ids">Ids of the entities to get</param>
-        IQuery<IDictionary<int, RootEntityMicroSummary>> CreateGetEntityMicroSummariesByIdRangeQuery(IEnumerable<int> ids);
+        IRequest<IDictionary<int, RootEntityMicroSummary>> CreateGetEntityMicroSummariesByIdRangeQuery(IEnumerable<int> ids);
     }
 }

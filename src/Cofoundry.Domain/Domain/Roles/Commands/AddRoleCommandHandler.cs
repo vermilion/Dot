@@ -14,29 +14,26 @@ namespace Cofoundry.Domain.Internal
     /// Adds a new role to a user area with a set of permissions.
     /// </summary>
     public class AddRoleCommandHandler 
-        : ICommandHandler<AddRoleCommand>
-        , IPermissionRestrictedCommandHandler<AddRoleCommand>
+        : IRequestHandler<AddRoleCommand, AddRoleCommandResult>
+        , IPermissionRestrictedRequestHandler<AddRoleCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public AddRoleCommandHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IPermissionRepository permissionRepository,
-            ICommandExecutor commandExecutor,
             IPermissionValidationService permissionValidationService
             )
         {
             _dbContext = dbContext;
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _permissionRepository = permissionRepository;
-            _commandExecutor = commandExecutor;
             _permissionValidationService = permissionValidationService;
         }
 
@@ -44,17 +41,17 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(AddRoleCommand command, IExecutionContext executionContext)
+        public async Task<AddRoleCommandResult> ExecuteAsync(AddRoleCommand command, IExecutionContext executionContext)
         {
             ValidatePermissions(command);
-            var isUnique = await _queryExecutor.ExecuteAsync(GetUniqueQuery(command), executionContext);
+            var isUnique = await _mediator.ExecuteAsync(GetUniqueQuery(command), executionContext);
             ValidateIsUnique(isUnique);
 
             var permissions = await GetCommandPermissionsAsync(command, executionContext);
             var role = MapAndAddRole(command, executionContext, permissions);
             await _dbContext.SaveChangesAsync();
 
-            command.OutputRoleId = role.RoleId;
+            return new AddRoleCommandResult { RoleId = role.RoleId };
         }
 
         #endregion
@@ -148,7 +145,7 @@ namespace Cofoundry.Domain.Internal
                         if (codePermission is IEntityPermission)
                         {
                             var definitionCode = ((IEntityPermission)codePermission).EntityDefinition.EntityDefinitionCode;
-                            await _commandExecutor.ExecuteAsync(new EnsureEntityDefinitionExistsCommand(definitionCode), executionContext);
+                            await _mediator.ExecuteAsync(new EnsureEntityDefinitionExistsCommand(definitionCode), executionContext);
                             dbPermission.EntityDefinitionCode = definitionCode;
                         }
                     }

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Core.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Domain
 {
-    public class UpdateUnstructuredDataDependenciesCommand : ICommand
+    public class UpdateUnstructuredDataDependenciesCommand : IRequest<Unit>
     {
         public UpdateUnstructuredDataDependenciesCommand(string rootEntityDefinitionCode, int rootEntityId, object model)
         {

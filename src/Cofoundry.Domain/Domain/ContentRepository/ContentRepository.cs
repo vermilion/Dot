@@ -1,8 +1,6 @@
 ﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Extendable;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
@@ -12,18 +10,15 @@ namespace Cofoundry.Domain.Internal
         , IAdvancedContentRepository
         , IExtendableContentRepository
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
 
         public ContentRepository(
             IServiceProvider serviceProvider,
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor
+            IMediator mediator
             )
         {
             ServiceProvider = serviceProvider;
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -37,18 +32,9 @@ namespace Cofoundry.Domain.Internal
         /// Handles the asynchronous execution the specified query.
         /// </summary>
         /// <param name="query">Query to execute.</param>
-        public virtual Task<TResult> ExecuteQueryAsync<TResult>(IQuery<TResult> query)
+        public virtual Task<TResult> ExecuteRequestAsync<TResult>(IRequest<TResult> query)
         {
-            return _queryExecutor.ExecuteAsync(query);
-        }
-
-        /// <summary>
-        /// Handles the execution of the specified command.
-        /// </summary>
-        /// <param name="command">Command to execute.</param>
-        public virtual Task ExecuteCommandAsync(ICommand command)
-        {
-            return _commandExecutor.ExecuteAsync(command);
+            return _mediator.ExecuteAsync(query);
         }
     }
 }

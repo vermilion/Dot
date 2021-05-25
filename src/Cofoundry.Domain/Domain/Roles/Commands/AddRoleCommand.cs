@@ -7,7 +7,7 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Adds a new role to a user area with a specific set of permissions.
     /// </summary>
-    public class AddRoleCommand : ICommand, ILoggableCommand
+    public class AddRoleCommand : IRequest<AddRoleCommandResult>, ILoggableCommand
     {
         /// <summary>
         /// A user friendly title for the role. Role titles must be unique 
@@ -21,16 +21,14 @@ namespace Cofoundry.Domain
         /// The permissions to add the role when it is created.
         /// </summary>
         public ICollection<PermissionCommandData> Permissions { get; set; }
+    }
 
-        #region Output
-
+    public class AddRoleCommandResult
+    {
         /// <summary>
         /// The database id of the newly created role. This is set after the command
         /// has been run.
         /// </summary>
-        [OutputValue]
-        public int OutputRoleId { get; set; }
-
-        #endregion
+        public int RoleId { get; set; }
     }
 }

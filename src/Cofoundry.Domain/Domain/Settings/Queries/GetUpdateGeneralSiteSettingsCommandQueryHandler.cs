@@ -8,12 +8,12 @@ using Cofoundry.Domain.CQS;
 namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateGeneralSiteSettingsCommandQueryHandler 
-        : IQueryHandler<GetUpdateCommandQuery<UpdateGeneralSiteSettingsCommand>, UpdateGeneralSiteSettingsCommand>
+        : IRequestHandler<GetUpdateCommandQuery<UpdateGeneralSiteSettingsCommand>, UpdateGeneralSiteSettingsCommand>
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
 
         public GetUpdateGeneralSiteSettingsCommandQueryHandler(
-            IQueryExecutor queryExecutor
+            IMediator queryExecutor
             )
         {
             _queryExecutor = queryExecutor;

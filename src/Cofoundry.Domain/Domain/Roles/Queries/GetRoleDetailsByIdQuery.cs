@@ -14,7 +14,7 @@ namespace Cofoundry.Domain
     /// is found, otherwise null. If no role id is specified then the anonymous 
     /// role is returned.
     /// </summary>
-    public class GetRoleDetailsByIdQuery : IQuery<RoleDetails>
+    public class GetRoleDetailsByIdQuery : IRequest<RoleDetails>
     {
         public GetRoleDetailsByIdQuery()
         {

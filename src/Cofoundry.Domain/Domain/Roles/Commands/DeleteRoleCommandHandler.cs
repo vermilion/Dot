@@ -15,8 +15,8 @@ namespace Cofoundry.Domain.Internal
     /// deleted if assigned to users.
     /// </summary>
     public class DeleteRoleCommandHandler 
-        : ICommandHandler<DeleteRoleCommand>
-        , IPermissionRestrictedCommandHandler<DeleteRoleCommand>
+        : IRequestHandler<DeleteRoleCommand, Unit>
+        , IPermissionRestrictedRequestHandler<DeleteRoleCommand>
     {
         #region constructor
 
@@ -40,7 +40,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(DeleteRoleCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(DeleteRoleCommand command, IExecutionContext executionContext)
         {
             var role = await _dbContext
                 .Roles
@@ -56,6 +56,8 @@ namespace Cofoundry.Domain.Internal
                 await _dbContext.SaveChangesAsync();
                 _transactionScopeFactory.QueueCompletionTask(_dbContext, () => _roleCache.Clear(command.RoleId));
             }
+
+            return Unit.Value;
         }
 
         private void ValidateCanDelete(Role role, DeleteRoleCommand command)

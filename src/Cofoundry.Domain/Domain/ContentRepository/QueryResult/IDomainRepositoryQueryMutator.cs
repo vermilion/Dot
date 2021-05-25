@@ -17,7 +17,7 @@ namespace Cofoundry.Domain
         /// <summary>
         /// The original query that is to be executed prior to mutation.
         /// </summary>
-        IQuery<TQueryResult> Query { get; }
+        IRequest<TQueryResult> Query { get; }
 
         /// <summary>
         /// Executes the query, applies any mutators and returns the result.

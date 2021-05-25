@@ -12,7 +12,7 @@ namespace Cofoundry.Domain
     /// A query that gets information about a user if the specified credentials
     /// pass an authentication check
     /// </summary>
-    public class GetUserLoginInfoIfAuthenticatedQuery : IQuery<UserLoginInfo>
+    public class GetUserLoginInfoIfAuthenticatedQuery : IRequest<UserLoginInfo>
     {
 
         public string Username { get; set; }

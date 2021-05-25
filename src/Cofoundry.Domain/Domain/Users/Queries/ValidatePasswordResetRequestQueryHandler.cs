@@ -10,7 +10,7 @@ using Cofoundry.Domain.CQS;
 namespace Cofoundry.Domain.Internal
 {
     public class ValidatePasswordResetRequestQueryHandler
-        : IQueryHandler<ValidatePasswordResetRequestQuery, PasswordResetRequestAuthenticationResult>
+        : IRequestHandler<ValidatePasswordResetRequestQuery, PasswordResetRequestAuthenticationResult>
     {
         #region constructor
 

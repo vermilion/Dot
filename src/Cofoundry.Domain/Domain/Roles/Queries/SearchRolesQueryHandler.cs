@@ -12,8 +12,8 @@ namespace Cofoundry.Domain.Internal
     /// Seaches roles based on simple filter criteria and returns a paged result. 
     /// </summary>
     public class SearchRolesQueryHandler 
-        : IQueryHandler<SearchRolesQuery, PagedQueryResult<RoleMicroSummary>>
-        , IPermissionRestrictedQueryHandler<SearchRolesQuery, PagedQueryResult<RoleMicroSummary>>
+        : IRequestHandler<SearchRolesQuery, PagedQueryResult<RoleMicroSummary>>
+        , IPermissionRestrictedRequestHandler<SearchRolesQuery>
     {
         #region constructor
 
@@ -22,7 +22,7 @@ namespace Cofoundry.Domain.Internal
 
         public SearchRolesQueryHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IRoleMicroSummaryMapper roleMicroSummaryMapper
             )
         {

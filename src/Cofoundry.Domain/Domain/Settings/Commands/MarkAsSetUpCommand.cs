@@ -6,7 +6,7 @@ using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain
 {
-    public class MarkAsSetUpCommand : ICommand, ILoggableCommand
+    public class MarkAsSetUpCommand : IRequest<Unit>, ILoggableCommand
     {
     }
 }

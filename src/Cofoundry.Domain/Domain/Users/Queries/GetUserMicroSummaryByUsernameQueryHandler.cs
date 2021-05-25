@@ -15,8 +15,8 @@ namespace Cofoundry.Domain.Internal
     /// user area, the username may be a copy of the email address.
     /// </summary>
     public class GetUserMicroSummaryByUsernameQueryHandler
-        : IQueryHandler<GetUserMicroSummaryByUsernameQuery, UserMicroSummary>
-        , IPermissionRestrictedQueryHandler<GetUserMicroSummaryByUsernameQuery, UserMicroSummary>
+        : IRequestHandler<GetUserMicroSummaryByUsernameQuery, UserMicroSummary>
+        , IPermissionRestrictedRequestHandler<GetUserMicroSummaryByUsernameQuery>
     {
         #region constructor
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateUserCommandByIdQueryHandler
-        : IQueryHandler<GetUpdateCommandByIdQuery<UpdateUserCommand>, UpdateUserCommand>
+        : IRequestHandler<GetUpdateCommandByIdQuery<UpdateUserCommand>, UpdateUserCommand>
     {
         private readonly CofoundryDbContext _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;

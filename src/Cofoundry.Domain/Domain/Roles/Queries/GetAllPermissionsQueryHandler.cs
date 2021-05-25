@@ -11,8 +11,8 @@ namespace Cofoundry.Domain.Internal
     /// Returns all IPermission instances registered with Cofoundry.
     /// </summary>
     public class GetAllPermissionsQueryHandler 
-        : IQueryHandler<GetAllPermissionsQuery, ICollection<IPermission>>
-        , IPermissionRestrictedQueryHandler<GetAllPermissionsQuery, ICollection<IPermission>>
+        : IRequestHandler<GetAllPermissionsQuery, ICollection<IPermission>>
+        , IPermissionRestrictedRequestHandler<GetAllPermissionsQuery>
     {
         #region constructor
 

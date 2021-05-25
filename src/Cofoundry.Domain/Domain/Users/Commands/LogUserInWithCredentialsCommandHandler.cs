@@ -15,15 +15,15 @@ namespace Cofoundry.Domain.Internal
     /// are thrown as ValidationExceptions.
     /// </summary>
     public class LogUserInWithCredentialsCommandHandler
-        : ICommandHandler<LogUserInWithCredentialsCommand>
+        : IRequestHandler<LogUserInWithCredentialsCommand, Unit>
     {
         #region constructor
         
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly ILoginService _loginService;
 
         public LogUserInWithCredentialsCommandHandler(
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             ILoginService loginService
             )
         {
@@ -33,9 +33,9 @@ namespace Cofoundry.Domain.Internal
 
         #endregion
 
-        public async Task ExecuteAsync(LogUserInWithCredentialsCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(LogUserInWithCredentialsCommand command, IExecutionContext executionContext)
         {
-            if (IsLoggedInAlready(command, executionContext)) return;
+            if (IsLoggedInAlready(command, executionContext)) return Unit.Value;
 
             var hasExceededMaxLoginAttempts = await _queryExecutor.ExecuteAsync(GetMaxLoginAttemptsQuery(command), executionContext);
             ValidateMaxLoginAttemptsNotExceeded(hasExceededMaxLoginAttempts);
@@ -55,6 +55,8 @@ namespace Cofoundry.Domain.Internal
             }
 
             await _loginService.LogAuthenticatedUserInAsync(user.UserId, command.RememberUser);
+
+            return Unit.Value;
         }
         
         private static bool IsLoggedInAlready(LogUserInWithCredentialsCommand command, IExecutionContext executionContext)

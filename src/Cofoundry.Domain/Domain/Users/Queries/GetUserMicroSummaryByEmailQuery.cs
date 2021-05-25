@@ -12,7 +12,7 @@ namespace Cofoundry.Domain
     /// returning null if the user could not be found. Note that if the user
     /// area does not support email addresses then the email field will be empty.
     /// </summary>
-    public class GetUserMicroSummaryByEmailQuery : IQuery<UserMicroSummary>
+    public class GetUserMicroSummaryByEmailQuery : IRequest<UserMicroSummary>
     {
         public GetUserMicroSummaryByEmailQuery() { }
 

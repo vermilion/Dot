@@ -13,8 +13,8 @@ namespace Cofoundry.Domain.Internal
     /// Determines if a role title is unique
     /// </summary>
     public class IsRoleTitleUniqueQueryHandler 
-        : IQueryHandler<IsRoleTitleUniqueQuery, bool>
-        , IPermissionRestrictedQueryHandler<IsRoleTitleUniqueQuery, bool>
+        : IRequestHandler<IsRoleTitleUniqueQuery, bool>
+        , IPermissionRestrictedRequestHandler<IsRoleTitleUniqueQuery>
     {
         #region constructor
 

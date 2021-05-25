@@ -13,7 +13,7 @@ namespace Cofoundry.Domain.Internal
     /// session.
     /// </summary>
     public class LogSuccessfulLoginCommandHandler 
-        : ICommandHandler<LogSuccessfulLoginCommand>
+        : IRequestHandler<LogSuccessfulLoginCommand, Unit>
     {
         #region constructor
 
@@ -31,7 +31,7 @@ namespace Cofoundry.Domain.Internal
 
         #endregion
 
-        public async Task ExecuteAsync(LogSuccessfulLoginCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(LogSuccessfulLoginCommand command, IExecutionContext executionContext)
         {
             var user = await Query(command.UserId).SingleOrDefaultAsync();
             EntityNotFoundException.ThrowIfNull(user, command.UserId);
@@ -46,6 +46,8 @@ namespace Cofoundry.Domain.Internal
                 new SqlParameter("IPAddress", connectionInfo.IPAddress),
                 new SqlParameter("DateTimeNow", executionContext.ExecutionDate)
                 );*/
+
+            return Unit.Value;
         }
 
         private IQueryable<User> Query(int userId)

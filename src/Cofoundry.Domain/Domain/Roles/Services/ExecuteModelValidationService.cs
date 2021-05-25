@@ -21,18 +21,7 @@ namespace Cofoundry.Domain.Internal
 
         #endregion
 
-        public virtual void Validate<TCommand>(TCommand command, ICommandHandler<TCommand> commandHandler, IExecutionContext executionContext) where TCommand : ICommand
-        {
-            _modelValidationService.Validate(command);
-
-            /*if (commandHandler is IPermissionRestrictedCommandHandler<TCommand>)
-            {
-                var permissions = ((IPermissionRestrictedCommandHandler<TCommand>)commandHandler).GetPermissions(command);
-                _modelValidationService.EnforcePermission(permissions, executionContext.UserContext);
-            }*/
-        }
-
-        public virtual void Validate<TQuery, TResult>(TQuery query, IQueryHandler<TQuery, TResult> queryHandler, IExecutionContext executionContext) where TQuery : IQuery<TResult>
+        public virtual void Validate<TRequest, TResponse>(TRequest query, IRequestHandler<TRequest, TResponse> queryHandler, IExecutionContext executionContext) where TRequest : IRequest<TResponse>
         {
             _modelValidationService.Validate(query);
 

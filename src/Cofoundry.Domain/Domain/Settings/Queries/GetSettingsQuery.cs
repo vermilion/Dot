@@ -6,7 +6,7 @@ using System.Text;
 namespace Cofoundry.Domain
 {
    public class GetSettingsQuery<TEntity>
-        : IQuery<TEntity>
+        : IRequest<TEntity>
         where TEntity : ICofoundrySettings
     {
     }

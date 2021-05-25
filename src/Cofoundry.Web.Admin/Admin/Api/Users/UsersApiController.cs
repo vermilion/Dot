@@ -7,15 +7,15 @@ namespace Cofoundry.Web.Admin
 {
     public class UsersApiController : BaseApiController
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public UsersApiController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _apiResponseHelper = apiResponseHelper;
         }
 
@@ -26,7 +26,7 @@ namespace Cofoundry.Web.Admin
         {
             if (query == null) query = new SearchUserSummariesQuery();
 
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _mediator.ExecuteAsync(query);
             return _apiResponseHelper.SimpleQueryResponse(results);
         }
 
@@ -34,7 +34,7 @@ namespace Cofoundry.Web.Admin
         public async Task<JsonResult> GetById(int userId)
         {
             var query = new GetUserDetailsByIdQuery(userId);
-            var result = await _queryExecutor.ExecuteAsync(query);
+            var result = await _mediator.ExecuteAsync(query);
 
             return _apiResponseHelper.SimpleQueryResponse(result);
         }

@@ -6,7 +6,7 @@ using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain
 {
-    public class UpdateUserPasswordByUserIdCommand : ICommand, ILoggableCommand
+    public class UpdateUserPasswordByUserIdCommand : IRequest<Unit>, ILoggableCommand
     {
         [Required]
         [PositiveInteger]

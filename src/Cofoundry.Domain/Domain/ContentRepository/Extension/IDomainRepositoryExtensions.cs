@@ -62,7 +62,7 @@ namespace Cofoundry.Domain
         /// <typeparam name="TResult">Query result type.</typeparam>
         /// <param name="query">Query to mutate.</param>
         /// <returns>A query context that allows chaining of mutator functions.</returns>
-        public static IDomainRepositoryQueryContext<TResult> WithQuery<TResult>(this IDomainRepository domainRepository, IQuery<TResult> query)
+        public static IDomainRepositoryQueryContext<TResult> WithQuery<TResult>(this IDomainRepository domainRepository, IRequest<TResult> query)
         {
             var extendableContentRepository = domainRepository.AsExtendableContentRepository();
 

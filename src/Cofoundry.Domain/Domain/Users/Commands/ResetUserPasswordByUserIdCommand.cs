@@ -5,7 +5,7 @@ using Cofoundry.Domain.MailTemplates;
 
 namespace Cofoundry.Domain
 {
-    public class ResetUserPasswordByUserIdCommand : ICommand, ILoggableCommand, IResetUserPasswordCommand
+    public class ResetUserPasswordByUserIdCommand : IRequest<Unit>, ILoggableCommand, IResetUserPasswordCommand
     {
         [Required]
         [PositiveInteger]

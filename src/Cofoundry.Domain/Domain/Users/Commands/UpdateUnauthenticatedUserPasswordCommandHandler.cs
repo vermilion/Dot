@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Cofoundry.Domain.CQS;
+using System;
 using System.Threading.Tasks;
-using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -11,22 +9,19 @@ namespace Cofoundry.Domain.Internal
     /// OldPassword field to authenticate the request.
     /// </summary>
     public class UpdateUnauthenticatedUserPasswordCommandHandler
-        : ICommandHandler<UpdateUnauthenticatedUserPasswordCommand>
+        : IRequestHandler<UpdateUnauthenticatedUserPasswordCommand, UpdateUnauthenticatedUserPasswordCommandResult>
     {
         #region constructor
 
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IExecutionContextFactory _executionContextFactory;
 
         public UpdateUnauthenticatedUserPasswordCommandHandler(
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor,
+            IMediator mediator,
             IExecutionContextFactory executionContextFactory
             )
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
             _executionContextFactory = executionContextFactory;
         }
 
@@ -34,7 +29,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
         
-        public async Task ExecuteAsync(UpdateUnauthenticatedUserPasswordCommand command, IExecutionContext executionContext)
+        public async Task<UpdateUnauthenticatedUserPasswordCommandResult> ExecuteAsync(UpdateUnauthenticatedUserPasswordCommand command, IExecutionContext executionContext)
         {
             if (IsLoggedInAlready(command, executionContext))
             {
@@ -48,7 +43,7 @@ namespace Cofoundry.Domain.Internal
             if (userLoginInfo == null)
             {
                 var failedLoginLogCommand = new LogFailedLoginAttemptCommand(command.Username);
-                await _commandExecutor.ExecuteAsync(failedLoginLogCommand);
+                await _mediator.ExecuteAsync(failedLoginLogCommand);
 
                 throw new InvalidCredentialsAuthenticationException(nameof(command.OldPassword));
             }
@@ -61,10 +56,9 @@ namespace Cofoundry.Domain.Internal
 
             // User is not logged in, so will need to elevate permissions here to change the password.
             var systemExecutionContext = await _executionContextFactory.CreateSystemUserExecutionContextAsync(executionContext);
-            await _commandExecutor.ExecuteAsync(updatePasswordCommand, systemExecutionContext);
+            await _mediator.ExecuteAsync(updatePasswordCommand, systemExecutionContext);
 
-            // We pass out the userid since we do the auth inside the command and it might be useful to the callee
-            command.OutputUserId = userLoginInfo.UserId;
+            return new UpdateUnauthenticatedUserPasswordCommandResult { UserId = userLoginInfo.UserId };
         }
 
         private Task<UserLoginInfo> GetUserLoginInfoAsync(
@@ -78,7 +72,7 @@ namespace Cofoundry.Domain.Internal
                 Password = command.OldPassword,
             };
 
-            return _queryExecutor.ExecuteAsync(query, executionContext);
+            return _mediator.ExecuteAsync(query, executionContext);
         }
 
         private static bool IsLoggedInAlready(UpdateUnauthenticatedUserPasswordCommand command, IExecutionContext executionContext)
@@ -95,7 +89,7 @@ namespace Cofoundry.Domain.Internal
                 Username = command.Username
             };
 
-            var hasAttemptsExceeded = await _queryExecutor.ExecuteAsync(query, executionContext);
+            var hasAttemptsExceeded = await _mediator.ExecuteAsync(query, executionContext);
             if (hasAttemptsExceeded)
             {
                 throw new TooManyFailedAttemptsAuthenticationException();

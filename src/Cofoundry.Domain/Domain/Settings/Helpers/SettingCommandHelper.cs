@@ -15,13 +15,13 @@ namespace Cofoundry.Domain.Internal
         private readonly CofoundryDbContext _dbContext;
         private readonly IDbUnstructuredDataSerializer _dbUnstructuredDataSerializer;
         private readonly EntityAuditHelper _entityAuditHelper;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
 
         public SettingCommandHelper(
             CofoundryDbContext dbContext,
             IDbUnstructuredDataSerializer dbUnstructuredDataSerializer,
             EntityAuditHelper entityAuditHelper,
-            IQueryExecutor queryExecutor
+            IMediator queryExecutor
             )
         {
             _dbContext = dbContext;

@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateUserCommandHandler
-        : ICommandHandler<UpdateUserCommand>
+        : IRequestHandler<UpdateUserCommand, Unit>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly UserCommandPermissionsHelper _userCommandPermissionsHelper;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public UpdateUserCommandHandler(
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             CofoundryDbContext dbContext,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IPermissionValidationService permissionValidationService
@@ -34,7 +34,7 @@ namespace Cofoundry.Domain.Internal
 
         #region Execution
 
-        public async Task ExecuteAsync(UpdateUserCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateUserCommand command, IExecutionContext executionContext)
         {
             // Get User
             var user = await _dbContext
@@ -64,6 +64,8 @@ namespace Cofoundry.Domain.Internal
 
             // Save
             await _dbContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
         private static void Map(UpdateUserCommand command, User user)

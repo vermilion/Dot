@@ -10,19 +10,19 @@ using Cofoundry.Core;
 namespace Cofoundry.Domain.Internal
 {
     public class GetEntityDependencySummaryByRelatedEntityHandler 
-        : IQueryHandler<GetEntityDependencySummaryByRelatedEntityQuery, ICollection<EntityDependencySummary>>
-        , IPermissionRestrictedQueryHandler<GetEntityDependencySummaryByRelatedEntityQuery, ICollection<EntityDependencySummary>>
+        : IRequestHandler<GetEntityDependencySummaryByRelatedEntityQuery, ICollection<EntityDependencySummary>>
+        , IPermissionRestrictedRequestHandler<GetEntityDependencySummaryByRelatedEntityQuery>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private IQueryExecutor _queryExecutor;
+        private IMediator _queryExecutor;
         private readonly IEntityDefinitionRepository _entityDefinitionRepository;
         private readonly IPermissionRepository _permissionRepository;
 
         public GetEntityDependencySummaryByRelatedEntityHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IEntityDefinitionRepository entityDefinitionRepository,
             IPermissionRepository permissionRepository
             )
@@ -57,7 +57,7 @@ namespace Cofoundry.Domain.Internal
             foreach (var dbDependencyGroup in dbDependencyGroups)
             {
                 var definition = _entityDefinitionRepository.GetByCode(dbDependencyGroup.Key) as IDependableEntityDefinition;
-                IQuery<IDictionary<int, RootEntityMicroSummary>> getEntitiesQuery;
+                IRequest<IDictionary<int, RootEntityMicroSummary>> getEntitiesQuery;
 
                 EntityNotFoundException.ThrowIfNull(definition, dbDependencyGroup.Key);
                 getEntitiesQuery = definition.CreateGetEntityMicroSummariesByIdRangeQuery(dbDependencyGroup.Select(e => e.RootEntityId));

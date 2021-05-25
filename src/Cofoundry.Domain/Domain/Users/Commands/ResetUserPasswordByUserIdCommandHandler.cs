@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cofoundry.Domain.Internal
 {
     public class ResetUserPasswordByUserIdCommandHandler 
-        : ICommandHandler<ResetUserPasswordByUserIdCommand>
+        : IRequestHandler<ResetUserPasswordByUserIdCommand, Unit>
     {
         #region construstor
 
@@ -32,12 +32,14 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(ResetUserPasswordByUserIdCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(ResetUserPasswordByUserIdCommand command, IExecutionContext executionContext)
         {
             await _resetUserPasswordCommandHelper.ValidateCommandAsync(command, executionContext);
             var user = await QueryUser(command, executionContext).SingleOrDefaultAsync();
             ValidatePermissions(user, executionContext);
             await _resetUserPasswordCommandHelper.ResetPasswordAsync(user, command, executionContext);
+
+            return Unit.Value;
         }
 
         #endregion

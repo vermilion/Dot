@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Core.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Domain
 {
-    public class DeleteUnstructuredDataDependenciesCommand : ICommand
+    public class DeleteUnstructuredDataDependenciesCommand : IRequest<Unit>
     {
         public DeleteUnstructuredDataDependenciesCommand(string rootEntityDefinitionCode, int rootEntityId)
         {

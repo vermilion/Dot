@@ -12,7 +12,7 @@ namespace Cofoundry.Domain
         private readonly Func<Task<TResult>> _modifier;
 
         public DomainRepositoryQueryMutator(
-            IQuery<TQueryResult> query,
+            IRequest<TQueryResult> query,
             Func<Task<TResult>> modifier 
             )
         {
@@ -20,7 +20,7 @@ namespace Cofoundry.Domain
             _modifier = modifier;
         }
 
-        public IQuery<TQueryResult> Query { get; }
+        public IRequest<TQueryResult> Query { get; }
 
         public Task<TResult> ExecuteAsync()
         {

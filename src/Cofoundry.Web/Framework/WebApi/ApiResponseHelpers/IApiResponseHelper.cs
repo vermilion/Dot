@@ -59,7 +59,7 @@ namespace Cofoundry.Web
         /// </summary>
         /// <typeparam name="TCommand">Type of the command to execute</typeparam>
         /// <param name="command">The command to execute</param>
-        Task<JsonResult> RunCommandAsync<TCommand>(TCommand command) where TCommand : ICommand;
+        Task<JsonResult> RunCommandAsync<TResponse>(IRequest<TResponse> command);
 
         #endregion
     }

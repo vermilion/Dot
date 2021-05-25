@@ -11,12 +11,12 @@ namespace Cofoundry.Domain.Internal
     /// user. If the user is not logged in then null is returned.
     /// </summary>
     public class GetCurrentUserDetailsQueryHandler
-        : IQueryHandler<GetCurrentUserDetailsQuery, UserDetails>
+        : IRequestHandler<GetCurrentUserDetailsQuery, UserDetails>
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
 
         public GetCurrentUserDetailsQueryHandler(
-            IQueryExecutor queryExecutor
+            IMediator queryExecutor
             )
         {
             _queryExecutor = queryExecutor;

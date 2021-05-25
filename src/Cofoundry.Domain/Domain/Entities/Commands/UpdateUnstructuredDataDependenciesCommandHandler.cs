@@ -10,34 +10,34 @@ using Cofoundry.Core;
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateUnstructuredDataDependenciesCommandHandler 
-        : ICommandHandler<UpdateUnstructuredDataDependenciesCommand>
-        , IPermissionRestrictedCommandHandler<UpdateUnstructuredDataDependenciesCommand>
+        : IRequestHandler<UpdateUnstructuredDataDependenciesCommand, Unit>
+        , IPermissionRestrictedRequestHandler<UpdateUnstructuredDataDependenciesCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
         private readonly IEntityDefinitionRepository _entityDefinitionRepository;
         private readonly IPermissionRepository _permissionRepository;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
 
         public UpdateUnstructuredDataDependenciesCommandHandler(
             CofoundryDbContext dbContext,
             IEntityDefinitionRepository entityDefinitionRepository,
             IPermissionRepository permissionRepository,
-            ICommandExecutor commandExecutor
+            IMediator mediator
             )
         {
             _dbContext = dbContext;
             _entityDefinitionRepository = entityDefinitionRepository;
             _permissionRepository = permissionRepository;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
         }
 
         #endregion
 
         #region Execute
 
-        public async Task ExecuteAsync(UpdateUnstructuredDataDependenciesCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateUnstructuredDataDependenciesCommand command, IExecutionContext executionContext)
         {
             var existingDependencies = await QueryDepenencies(command).ToListAsync();
             var relations = GetDistinctRelations(command.Model).ToList();
@@ -45,11 +45,13 @@ namespace Cofoundry.Domain.Internal
 
             foreach (var ensureEntityDefinitionExistsCommand in ensureEntityDefinitionExistsCommands)
             {
-                await _commandExecutor.ExecuteAsync(ensureEntityDefinitionExistsCommand, executionContext);
+                await _mediator.ExecuteAsync(ensureEntityDefinitionExistsCommand, executionContext);
             }
 
             ApplyChanges(command, existingDependencies, relations);
             await _dbContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
         private IQueryable<UnstructuredDataDependency> QueryDepenencies(UpdateUnstructuredDataDependenciesCommand command)

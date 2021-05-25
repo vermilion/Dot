@@ -5,7 +5,7 @@ using Cofoundry.Domain.Data;
 namespace Cofoundry.Domain.Internal
 {
     public class HasExceededMaxLoginAttemptsQueryHandler 
-        : IQueryHandler<HasExceededMaxLoginAttemptsQuery, bool>
+        : IRequestHandler<HasExceededMaxLoginAttemptsQuery, bool>
     {
         #region constructor
 

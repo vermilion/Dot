@@ -15,7 +15,7 @@ namespace Cofoundry.Domain
     /// as preventing excessive login attempts. Validation errors
     /// are thrown as ValidationExceptions.
     /// </summary>
-    public class LogUserInWithCredentialsCommand : ICommand
+    public class LogUserInWithCredentialsCommand : IRequest<Unit>
     {
         /// <summary>
         /// The username may be an email address or text string depending

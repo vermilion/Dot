@@ -13,7 +13,7 @@ namespace Cofoundry.Domain.Internal
     /// is found, otherwise null.
     /// </summary>
     public class GetUserDetailsByIdQueryHandler 
-        : IQueryHandler<GetUserDetailsByIdQuery, UserDetails>
+        : IRequestHandler<GetUserDetailsByIdQuery, UserDetails>
     {
         private readonly CofoundryDbContext _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;

@@ -9,19 +9,19 @@ using Cofoundry.Domain.Data;
 namespace Cofoundry.Domain.Internal
 {
     public class DeleteUnstructuredDataDependenciesCommandHandler 
-        : ICommandHandler<DeleteUnstructuredDataDependenciesCommand>
-        , IPermissionRestrictedCommandHandler<DeleteUnstructuredDataDependenciesCommand>
+        : IRequestHandler<DeleteUnstructuredDataDependenciesCommand, Unit>
+        , IPermissionRestrictedRequestHandler<DeleteUnstructuredDataDependenciesCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly IEntityDefinitionRepository _entityDefinitionRepository;
         private readonly IPermissionRepository _permissionRepository;
 
         public DeleteUnstructuredDataDependenciesCommandHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IEntityDefinitionRepository entityDefinitionRepository,
             IPermissionRepository permissionRepository
             )
@@ -36,7 +36,7 @@ namespace Cofoundry.Domain.Internal
 
         #region Execute
 
-        public async Task ExecuteAsync(DeleteUnstructuredDataDependenciesCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(DeleteUnstructuredDataDependenciesCommand command, IExecutionContext executionContext)
         {
             string entityName;
 
@@ -63,6 +63,8 @@ namespace Cofoundry.Domain.Internal
                     new SqlParameter("EntityDefinitionCode", command.RootEntityDefinitionCode),
                     new SqlParameter("EntityId", command.RootEntityId)
                     );*/
+
+            return Unit.Value;
         }
 
 

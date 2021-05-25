@@ -6,7 +6,7 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Updates the user account of the currently logged in user.
     /// </summary>
-    public class UpdateCurrentUserAccountCommand : ICommand, ILoggableCommand
+    public class UpdateCurrentUserAccountCommand : IRequest<Unit>, ILoggableCommand
     {
         /// <summary>
         /// The first name is required.

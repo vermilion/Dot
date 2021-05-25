@@ -5,7 +5,7 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Determines if a role title is unique
     /// </summary>
-    public class IsRoleTitleUniqueQuery : IQuery<bool>
+    public class IsRoleTitleUniqueQuery : IRequest<bool>
     {
         /// <summary>
         /// Optional database id of an existing role to exclude from the uniqueness 

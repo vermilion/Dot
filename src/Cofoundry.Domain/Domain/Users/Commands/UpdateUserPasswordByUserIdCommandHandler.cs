@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateUserPasswordByUserIdCommandHandler
-        : ICommandHandler<UpdateUserPasswordByUserIdCommand>
+        : IRequestHandler<UpdateUserPasswordByUserIdCommand, Unit>
     {
         #region construstor
 
@@ -27,7 +27,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(UpdateUserPasswordByUserIdCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateUserPasswordByUserIdCommand command, IExecutionContext executionContext)
         {
             var user = await GetUser(command.UserId);
             EntityNotFoundException.ThrowIfNull(user, command.UserId);
@@ -37,6 +37,8 @@ namespace Cofoundry.Domain.Internal
             _passwordUpdateCommandHelper.UpdatePassword(command.NewPassword, user, executionContext);
 
             await _dbContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
 

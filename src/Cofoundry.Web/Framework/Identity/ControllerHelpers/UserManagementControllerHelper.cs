@@ -14,14 +14,14 @@ namespace Cofoundry.Web.Identity
     /// </summary>
     public class UserManagementControllerHelper
     {
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         #region constructor
 
         public UserManagementControllerHelper(
-            ICommandExecutor commandExecutor
+            IMediator mediator
             )
         {
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
         }
 
         #endregion
@@ -35,7 +35,7 @@ namespace Cofoundry.Web.Identity
 
             if (controller.ModelState.IsValid)
             {
-                return _commandExecutor.ExecuteAsync(command);
+                return _mediator.ExecuteAsync(command);
             }
 
             throw new Exception();

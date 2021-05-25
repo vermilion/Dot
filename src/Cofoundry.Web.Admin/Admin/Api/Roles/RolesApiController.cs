@@ -7,15 +7,15 @@ namespace Cofoundry.Web.Admin
 {
     public class RolesApiController : BaseApiController
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public RolesApiController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _apiResponseHelper = apiResponseHelper;
         }
 
@@ -26,14 +26,14 @@ namespace Cofoundry.Web.Admin
         {
             if (query == null) query = new SearchRolesQuery();
 
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _mediator.ExecuteAsync(query);
             return _apiResponseHelper.SimpleQueryResponse(results);
         }
 
         [HttpGet]
         public async Task<JsonResult> GetById(int roleId)
         {
-            var result = await _queryExecutor.ExecuteAsync(new GetRoleDetailsByIdQuery(roleId));
+            var result = await _mediator.ExecuteAsync(new GetRoleDetailsByIdQuery(roleId));
             return _apiResponseHelper.SimpleQueryResponse(result);
         }
 

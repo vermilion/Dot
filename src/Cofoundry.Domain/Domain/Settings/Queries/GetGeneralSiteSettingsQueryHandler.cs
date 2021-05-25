@@ -8,7 +8,7 @@ using Cofoundry.Core.AutoUpdate;
 namespace Cofoundry.Domain.Internal
 {
     public class GetGeneralSiteSettingsQueryHandler 
-        : IQueryHandler<GetSettingsQuery<GeneralSiteSettings>, GeneralSiteSettings>
+        : IRequestHandler<GetSettingsQuery<GeneralSiteSettings>, GeneralSiteSettings>
     {
         #region constructor
 

@@ -5,7 +5,7 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Seaches roles based on simple filter criteria and returns a paged result. 
     /// </summary>
-    public class SearchRolesQuery : SimplePageableQuery, IQuery<PagedQueryResult<RoleMicroSummary>>
+    public class SearchRolesQuery : SimplePageableQuery, IRequest<PagedQueryResult<RoleMicroSummary>>
     {
         /// <summary>
         /// Text filtering that currently filters only on the title property.

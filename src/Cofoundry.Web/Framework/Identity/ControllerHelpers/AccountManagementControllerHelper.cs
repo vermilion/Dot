@@ -17,26 +17,23 @@ namespace Cofoundry.Web.Identity
     {
         #region constructor
 
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IUserContextService _userContextService;
         private readonly IMailService _mailService;
 
         public AccountManagementControllerHelper(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IMailService mailService,
-            ICommandExecutor commandExecutor,
             IUserContextService userContextService
             )
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
             _userContextService = userContextService;
             _mailService = mailService;
         }
 
         #endregion
-        
+
         #region change password
 
         public async Task InitViewModelAsync(ChangePasswordViewModel vm)
@@ -54,9 +51,9 @@ namespace Cofoundry.Web.Identity
         /// <param name="notificationTemplate">An IPasswordChangedNotificationTemplate to use when sending the notification</param>
         public async Task ChangePasswordAsync<TNotificationTemplate>(
             ControllerBase controller,
-            ChangePasswordViewModel vm, 
+            ChangePasswordViewModel vm,
             TNotificationTemplate notificationTemplate
-            ) 
+            )
             where TNotificationTemplate : IPasswordChangedTemplate
         {
             var userId = await ChangePasswordAsync(controller, vm);
@@ -68,7 +65,7 @@ namespace Cofoundry.Web.Identity
                     throw new Exception("UpdateUnauthenticatedUserPasswordCommand: OutputUserId not set");
                 }
 
-                var user = await _queryExecutor.ExecuteAsync(new GetUserMicroSummaryByIdQuery(userId.Value));
+                var user = await _mediator.ExecuteAsync(new GetUserMicroSummaryByIdQuery(userId.Value));
                 EntityNotFoundException.ThrowIfNull(user, userId.Value);
 
                 // In some configuratons, an email isn't always required, only a username
@@ -105,9 +102,9 @@ namespace Cofoundry.Web.Identity
                     OldPassword = vm.OldPassword
                 };
 
-                await _commandExecutor.ExecuteAsync(command);
+                var result = await _mediator.ExecuteAsync(command);
 
-                return command.OutputUserId;
+                return result.UserId;
             }
 
             return null;

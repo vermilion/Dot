@@ -16,20 +16,17 @@ namespace Cofoundry.Web.Identity
     {
         #region constructor
 
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly ILoginService _loginService;
         private readonly IUserContextService _userContextService;
 
         public AuthenticationControllerHelper(
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor,
+            IMediator mediator,
             ILoginService loginService,
             IUserContextService userContextService
             )
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
             _loginService = loginService;
             _userContextService = userContextService;
         }
@@ -56,7 +53,7 @@ namespace Cofoundry.Web.Identity
 
             try
             {
-                await _commandExecutor.ExecuteAsync(command);
+                await _mediator.ExecuteAsync(command);
             }
             catch (PasswordChangeRequiredException ex)
             {
@@ -95,7 +92,7 @@ namespace Cofoundry.Web.Identity
                 MailTemplate = notificationTemplate
             };
 
-            return _commandExecutor.ExecuteAsync(command);
+            return _mediator.ExecuteAsync(command);
         }
 
         public async Task<PasswordResetRequestAuthenticationResult> IsPasswordRequestValidAsync(ControllerBase controller, string requestId, string token)
@@ -125,7 +122,7 @@ namespace Cofoundry.Web.Identity
                 Token = Uri.UnescapeDataString(token),
             };
 
-            result = await _queryExecutor.ExecuteAsync(query);
+            result = await _mediator.ExecuteAsync(query);
 
             return result;
         }
@@ -148,7 +145,7 @@ namespace Cofoundry.Web.Identity
             command.MailTemplate = notificationTemplate;
             command.UserPasswordResetRequestId = requestGuid;
 
-            return _commandExecutor.ExecuteAsync(command);
+            return _mediator.ExecuteAsync(command);
         }
 
         private static void AddPasswordRequestInvalidError(ControllerBase controller)

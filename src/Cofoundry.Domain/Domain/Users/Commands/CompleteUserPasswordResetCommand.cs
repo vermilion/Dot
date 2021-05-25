@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace Cofoundry.Domain
 {
-    public class CompleteUserPasswordResetCommand : ICommand, ILoggableCommand
+    public class CompleteUserPasswordResetCommand : IRequest<Unit>, ILoggableCommand
     {
         [Required]
         public Guid UserPasswordResetRequestId { get; set; }

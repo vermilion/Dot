@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cofoundry.Domain.Internal
 {
     public class EnsureEntityDefinitionExistsCommandHandler 
-        : ICommandHandler<EnsureEntityDefinitionExistsCommand>
+        : IRequestHandler<EnsureEntityDefinitionExistsCommand, Unit>
     {
         #region constructor
 
@@ -30,7 +30,7 @@ namespace Cofoundry.Domain.Internal
 
         #region Execute
 
-        public async Task ExecuteAsync(EnsureEntityDefinitionExistsCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(EnsureEntityDefinitionExistsCommand command, IExecutionContext executionContext)
         {
             var entityDefinition = _entityDefinitionRepository.GetByCode(command.EntityDefinitionCode);
 
@@ -49,6 +49,8 @@ namespace Cofoundry.Domain.Internal
                 _dbContext.EntityDefinitions.Add(dbDefinition);
                 await _dbContext.SaveChangesAsync();
             }
+
+            return Unit.Value;
         }
 
         #endregion

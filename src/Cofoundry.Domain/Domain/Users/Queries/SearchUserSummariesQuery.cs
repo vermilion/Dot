@@ -10,7 +10,7 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Searches users based on simple filter criteria and returns a paged result. 
     /// </summary>
-    public class SearchUserSummariesQuery : SimplePageableQuery, IQuery<PagedQueryResult<UserSummary>>
+    public class SearchUserSummariesQuery : SimplePageableQuery, IRequest<PagedQueryResult<UserSummary>>
     {
         /// <summary>
         /// Filter by first or last name.

@@ -12,19 +12,19 @@ namespace Cofoundry.Web.Admin
     {
         #region Constructors
 
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IUserContextService _userContextService;
         private readonly AuthenticationControllerHelper _authenticationHelper;
         private readonly AccountManagementControllerHelper _accountManagementControllerHelper;
 
         public AuthController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IUserContextService userContextService,
             AuthenticationControllerHelper authenticationHelper,
             AccountManagementControllerHelper accountManagementControllerHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _authenticationHelper = authenticationHelper;
             _userContextService = userContextService;
             _accountManagementControllerHelper = accountManagementControllerHelper;
@@ -76,7 +76,7 @@ namespace Cofoundry.Web.Admin
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel command)
         {
             var template = new ResetPasswordTemplate();
-            var settings = await _queryExecutor.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
+            var settings = await _mediator.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
             template.ApplicationName = settings.ApplicationName;
 
             await _authenticationHelper.SendPasswordResetNotificationAsync(this, command, template);
@@ -91,7 +91,7 @@ namespace Cofoundry.Web.Admin
         public async Task<ActionResult> ResetPassword(CompletePasswordResetViewModel vm)
         {
             var template = new PasswordChangedTemplate();
-            var settings = await _queryExecutor.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
+            var settings = await _mediator.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
             template.ApplicationName = settings.ApplicationName;
 
             await _authenticationHelper.CompletePasswordResetAsync(this, vm, template);

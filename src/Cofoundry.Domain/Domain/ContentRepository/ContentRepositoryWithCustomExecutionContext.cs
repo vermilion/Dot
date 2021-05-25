@@ -8,19 +8,16 @@ namespace Cofoundry.Domain.Internal
         : ContentRepository
         , IContentRepositoryWithCustomExecutionContext
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private IExecutionContext _executionContext = null;
 
         public ContentRepositoryWithCustomExecutionContext(
             IServiceProvider serviceProvider,
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor
+            IMediator mediator
             )
-            : base(serviceProvider, queryExecutor, commandExecutor)
+            : base(serviceProvider, mediator)
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -41,18 +38,9 @@ namespace Cofoundry.Domain.Internal
         /// Handles the asynchronous execution the specified query.
         /// </summary>
         /// <param name="query">Query to execute.</param>
-        public override Task<TResult> ExecuteQueryAsync<TResult>(IQuery<TResult> query)
+        public override Task<TResult> ExecuteRequestAsync<TResult>(IRequest<TResult> query)
         {
-            return _queryExecutor.ExecuteAsync(query, _executionContext);
-        }
-
-        /// <summary>
-        /// Handles the execution of the specified command.
-        /// </summary>
-        /// <param name="command">Command to execute.</param>
-        public override Task ExecuteCommandAsync(ICommand command)
-        {
-            return _commandExecutor.ExecuteAsync(command, _executionContext);
+            return _mediator.ExecuteAsync(query, _executionContext);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Cofoundry.Domain
     /// Updates the password of the currently logged in user, using the
     /// OldPassword field to authenticate the request.
     /// </summary>
-    public class UpdateCurrentUserPasswordCommand : ICommand, ILoggableCommand
+    public class UpdateCurrentUserPasswordCommand : IRequest<Unit>, ILoggableCommand
     {
         [Required]
         [DataType(DataType.Password)]

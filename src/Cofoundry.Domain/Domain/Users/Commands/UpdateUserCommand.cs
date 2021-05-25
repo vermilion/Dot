@@ -8,7 +8,7 @@ namespace Cofoundry.Domain
     /// A generic user update command for use with Cofoundry users and
     /// other non-Cofoundry users.
     /// </summary>
-    public class UpdateUserCommand : ICommand, ILoggableCommand
+    public class UpdateUserCommand : IRequest<Unit>, ILoggableCommand
     {
         /// <summary>
         /// Database id of the user to update.

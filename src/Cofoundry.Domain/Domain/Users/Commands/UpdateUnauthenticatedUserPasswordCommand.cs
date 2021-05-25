@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cofoundry.Domain.CQS;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Domain.CQS;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 
@@ -13,7 +9,7 @@ namespace Cofoundry.Domain
     /// Updates the password of an unathenticated user, using the
     /// credentials in the command to authenticate the request.
     /// </summary>
-    public class UpdateUnauthenticatedUserPasswordCommand : ICommand, ILoggableCommand
+    public class UpdateUnauthenticatedUserPasswordCommand : IRequest<UpdateUnauthenticatedUserPasswordCommandResult>, ILoggableCommand
     {
         [Required]
         public string Username { get; set; }
@@ -30,16 +26,14 @@ namespace Cofoundry.Domain
         [IgnoreDataMember]
         [JsonIgnore]
         public string NewPassword { get; set; }
+    }
 
-        #region Output
-
+    public class UpdateUnauthenticatedUserPasswordCommandResult
+    {
         /// <summary>
         /// The database id of the updated user. This is set after the command
         /// has been run.
         /// </summary>
-        [OutputValue]
-        public int OutputUserId { get; set; }
-
-        #endregion
+        public int UserId { get; set; }
     }
 }

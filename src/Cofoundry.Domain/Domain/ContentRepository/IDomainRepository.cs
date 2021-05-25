@@ -14,16 +14,10 @@ namespace Cofoundry.Domain
     public interface IDomainRepository
     {
         /// <summary>
-        /// Directly executes an IQuery instance and returns
+        /// Directly executes an IRequest instance and returns
         /// the results.
         /// </summary>
-        /// <param name="query">Query to execute.</param>
-        Task<TResult> ExecuteQueryAsync<TResult>(IQuery<TResult> query);
-
-        /// <summary>
-        /// Directly executes an ICommand instance.
-        /// </summary>
-        /// <param name="command">Command to execute.</param>
-        Task ExecuteCommandAsync(ICommand command);
+        /// <param name="query">Request to execute.</param>
+        Task<TResult> ExecuteRequestAsync<TResult>(IRequest<TResult> query);
     }
 }

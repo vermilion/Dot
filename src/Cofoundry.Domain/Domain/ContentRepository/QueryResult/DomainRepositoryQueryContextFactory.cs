@@ -18,7 +18,7 @@ namespace Cofoundry.Domain
         /// with the standard constructor.
         /// </summary>
         public static DomainRepositoryQueryContext<TResult> Create<TResult>(
-            IQuery<TResult> query,
+            IRequest<TResult> query,
             IExtendableContentRepository extendableRepository
             )
         {

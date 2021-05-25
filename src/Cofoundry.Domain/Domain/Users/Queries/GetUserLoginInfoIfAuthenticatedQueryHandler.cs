@@ -13,7 +13,7 @@ namespace Cofoundry.Domain.Internal
     /// pass an authentication check
     /// </summary>
     public class GetUserLoginInfoIfAuthenticatedQueryHandler 
-        : IQueryHandler<GetUserLoginInfoIfAuthenticatedQuery, UserLoginInfo>
+        : IRequestHandler<GetUserLoginInfoIfAuthenticatedQuery, UserLoginInfo>
     {
         private readonly UserAuthenticationHelper _userAuthenticationHelper;
         private readonly CofoundryDbContext _dbContext;

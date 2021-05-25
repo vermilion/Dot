@@ -13,7 +13,7 @@ namespace Cofoundry.Domain
     /// Finds a user by it's database id, returning a UserDetails object if it 
     /// is found, otherwise null.
     /// </summary>
-    public class GetUserDetailsByIdQuery : IQuery<UserDetails>
+    public class GetUserDetailsByIdQuery : IRequest<UserDetails>
     {
         public GetUserDetailsByIdQuery()
         {

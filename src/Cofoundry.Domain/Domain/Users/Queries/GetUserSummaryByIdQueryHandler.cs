@@ -14,7 +14,7 @@ namespace Cofoundry.Domain.Internal
     /// is found, otherwise null.
     /// </summary>
     public class GetUserSummaryByIdQueryHandler 
-        : IQueryHandler<GetUserSummaryByIdQuery, UserSummary>
+        : IRequestHandler<GetUserSummaryByIdQuery, UserSummary>
     {
         #region constructor
         

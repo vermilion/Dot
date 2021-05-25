@@ -13,21 +13,21 @@ using Cofoundry.Core;
 namespace Cofoundry.Domain.Internal
 {
     public class CompleteUserPasswordResetCommandHandler 
-        : ICommandHandler<CompleteUserPasswordResetCommand>
+        : IRequestHandler<CompleteUserPasswordResetCommand, Unit>
     {
         private const int NUMHOURS_PASSWORD_RESET_VALID = 16;
 
         #region construstor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly IMailService _mailService;
         private readonly ITransactionScopeManager _transactionScopeFactory;
         private readonly IPasswordUpdateCommandHelper _passwordUpdateCommandHelper;
 
         public CompleteUserPasswordResetCommandHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IMailService mailService,
             ITransactionScopeManager transactionScopeFactory,
             IPasswordUpdateCommandHelper passwordUpdateCommandHelper
@@ -44,7 +44,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(CompleteUserPasswordResetCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(CompleteUserPasswordResetCommand command, IExecutionContext executionContext)
         {
             var validationResult = await _queryExecutor.ExecuteAsync(CreateValidationQuery(command), executionContext);
             ValidatePasswordRequest(validationResult);
@@ -62,6 +62,8 @@ namespace Cofoundry.Domain.Internal
 
                 await scope.CompleteAsync();
             }
+
+            return Unit.Value;
         }
 
         #endregion

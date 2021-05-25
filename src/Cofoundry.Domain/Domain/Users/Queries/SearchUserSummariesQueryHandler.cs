@@ -12,18 +12,18 @@ namespace Cofoundry.Domain.Internal
     /// Seaches users based on simple filter criteria and returns a paged result. 
     /// </summary>
     public class SearchUserSummariesQueryHandler 
-        : IQueryHandler<SearchUserSummariesQuery, PagedQueryResult<UserSummary>>
-        , IPermissionRestrictedQueryHandler<SearchUserSummariesQuery, PagedQueryResult<UserSummary>>
+        : IRequestHandler<SearchUserSummariesQuery, PagedQueryResult<UserSummary>>
+        , IPermissionRestrictedRequestHandler<SearchUserSummariesQuery>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly IUserSummaryMapper _userSummaryMapper;
 
         public SearchUserSummariesQueryHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IUserSummaryMapper userSummaryMapper
             )
         {

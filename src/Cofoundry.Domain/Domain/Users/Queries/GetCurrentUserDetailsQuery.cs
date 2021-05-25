@@ -11,7 +11,7 @@ namespace Cofoundry.Domain
     /// Gets a UserSummary object representing the currently logged in 
     /// user. If the user is not logged in then null is returned.
     /// </summary>
-    public class GetCurrentUserDetailsQuery : IQuery<UserDetails>
+    public class GetCurrentUserDetailsQuery : IRequest<UserDetails>
     {
     }
 }

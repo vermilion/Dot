@@ -15,8 +15,8 @@ namespace Cofoundry.Domain.Internal
     /// area does not support email addresses then the email field will be empty.
     /// </summary>
     public class GetUserMicroSummaryByEmailQueryHandler 
-        : IQueryHandler<GetUserMicroSummaryByEmailQuery, UserMicroSummary>
-        , IPermissionRestrictedQueryHandler<GetUserMicroSummaryByEmailQuery, UserMicroSummary>
+        : IRequestHandler<GetUserMicroSummaryByEmailQuery, UserMicroSummary>
+        , IPermissionRestrictedRequestHandler<GetUserMicroSummaryByEmailQuery>
     {
         #region constructor
 

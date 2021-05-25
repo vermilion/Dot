@@ -7,15 +7,15 @@ namespace Cofoundry.Web.Admin
 {
     public class SettingsApiController : BaseApiController
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public SettingsApiController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _apiResponseHelper = apiResponseHelper;
         }
 
@@ -24,7 +24,7 @@ namespace Cofoundry.Web.Admin
         [HttpGet]
         public async Task<IActionResult> GetGeneralSiteSettings()
         {
-            var results = await _queryExecutor.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
+            var results = await _mediator.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>());
             return _apiResponseHelper.SimpleQueryResponse(results);
         }
 

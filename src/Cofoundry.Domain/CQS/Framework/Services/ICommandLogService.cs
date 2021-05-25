@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.CQS
@@ -15,8 +12,8 @@ namespace Cofoundry.Domain.CQS
     /// </remarks>
     public interface ICommandLogService
     {
-        Task LogAsync<TCommand>(TCommand command, IExecutionContext executionContext) where TCommand : ICommand;
+        Task LogAsync<TCommand>(TCommand command, IExecutionContext executionContext) where TCommand : IRequest;
 
-        Task LogFailedAsync<TCommand>(TCommand command, IExecutionContext executionContext, Exception ex = null) where TCommand : ICommand;
+        Task LogFailedAsync<TCommand>(TCommand command, IExecutionContext executionContext, Exception ex = null) where TCommand : IRequest;
     }
 }

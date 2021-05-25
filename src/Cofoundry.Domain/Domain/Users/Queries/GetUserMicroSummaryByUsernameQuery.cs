@@ -12,7 +12,7 @@ namespace Cofoundry.Domain
     /// returning null if the user could not be found. Note that depending on the
     /// user area, the username may be a copy of the email address.
     /// </summary>
-    public class GetUserMicroSummaryByUsernameQuery : IQuery<UserMicroSummary>
+    public class GetUserMicroSummaryByUsernameQuery : IRequest<UserMicroSummary>
     {
         public GetUserMicroSummaryByUsernameQuery() { }
 

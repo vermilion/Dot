@@ -11,8 +11,8 @@ using Cofoundry.Core.Data;
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateGeneralSiteSettingsCommandHandler 
-        : ICommandHandler<UpdateGeneralSiteSettingsCommand>
-        , IPermissionRestrictedCommandHandler<UpdateGeneralSiteSettingsCommand>
+        : IRequestHandler<UpdateGeneralSiteSettingsCommand, Unit>
+        , IPermissionRestrictedRequestHandler<UpdateGeneralSiteSettingsCommand>
     {
         #region constructor
 
@@ -41,7 +41,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execute
 
-        public async Task ExecuteAsync(UpdateGeneralSiteSettingsCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateGeneralSiteSettingsCommand command, IExecutionContext executionContext)
         {
             var allSettings = await _dbContext
                 .Settings
@@ -58,6 +58,8 @@ namespace Cofoundry.Domain.Internal
             }
 
             _transactionScopeFactory.QueueCompletionTask(_dbContext, _settingCache.Clear);
+
+            return Unit.Value;
         }
 
         #endregion

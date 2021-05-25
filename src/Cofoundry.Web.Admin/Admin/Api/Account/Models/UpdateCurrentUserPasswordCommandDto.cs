@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cofoundry.Domain.CQS;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Cofoundry.Web.Admin
     /// Dto used because json ignore on password properties prevent them
     /// from being serialized.
     /// </summary>
-    public class UpdateCurrentUserPasswordCommandDto
+    public class UpdateCurrentUserPasswordCommandDto : IRequest<Unit>
     {
         [Required]
         public string OldPassword { get; set; }

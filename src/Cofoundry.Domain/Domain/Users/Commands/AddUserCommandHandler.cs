@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+﻿using Cofoundry.Core.Mail;
 using Cofoundry.Core.Validation;
-using Cofoundry.Core.Mail;
+using Cofoundry.Domain.CQS;
+using Cofoundry.Domain.Data;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -16,13 +12,13 @@ namespace Cofoundry.Domain.Internal
     /// other non-Cofoundry users. Does not send any email notifications.
     /// </summary>
     public class AddUserCommandHandler
-        : ICommandHandler<AddUserCommand>
-        , IPermissionRestrictedCommandHandler<AddUserCommand>
+        : IRequestHandler<AddUserCommand, AddUserCommandResult>
+        , IPermissionRestrictedRequestHandler<AddUserCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly IPasswordCryptographyService _passwordCryptographyService;
         private readonly IPasswordGenerationService _passwordGenerationService;
         private readonly IMailService _mailService;
@@ -31,7 +27,7 @@ namespace Cofoundry.Domain.Internal
 
         public AddUserCommandHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             IPasswordCryptographyService passwordCryptographyService,
             IPasswordGenerationService passwordGenerationService,
             IMailService mailService,
@@ -52,7 +48,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(AddUserCommand command, IExecutionContext executionContext)
+        public async Task<AddUserCommandResult> ExecuteAsync(AddUserCommand command, IExecutionContext executionContext)
         {
             ValidateCommand(command);
             var isUnique = await _queryExecutor.ExecuteAsync(GetUniqueQuery(command), executionContext);
@@ -63,7 +59,7 @@ namespace Cofoundry.Domain.Internal
             var user = MapAndAddUser(command, executionContext, newRole);
             await _dbContext.SaveChangesAsync();
 
-            command.OutputUserId = user.UserId;
+            return new AddUserCommandResult { UserId = user.UserId };
         }
 
         #endregion

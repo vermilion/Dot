@@ -21,51 +21,26 @@ namespace Cofoundry.Domain.Internal
 
         #endregion
 
-        public virtual void Validate<TCommand>(TCommand command, ICommandHandler<TCommand> commandHandler, IExecutionContext executionContext) where TCommand : ICommand
-        {
-            ValidateCommmandImplementation<TCommand>(commandHandler);
-
-            if (commandHandler is IPermissionRestrictedCommandHandler<TCommand>)
-            {
-                var permissions = ((IPermissionRestrictedCommandHandler<TCommand>)commandHandler).GetPermissions(command);
-                _permissionValidationService.EnforcePermission(permissions, executionContext.UserContext);
-            }
-        }
-
-        public virtual void Validate<TQuery, TResult>(TQuery query, IQueryHandler<TQuery, TResult> queryHandler, IExecutionContext executionContext) where TQuery : IQuery<TResult>
+        public virtual void Validate<TQuery, TResult>(TQuery query, IRequestHandler<TQuery, TResult> queryHandler, IExecutionContext executionContext) where TQuery : IRequest<TResult>
         {
             ValidateQueryImplementation<TQuery, TResult>(queryHandler);
 
-            if (queryHandler is IPermissionRestrictedQueryHandler<TQuery, TResult>)
+            if (queryHandler is IPermissionRestrictedRequestHandler<TQuery>)
             {
-                var permissions = ((IPermissionRestrictedQueryHandler<TQuery, TResult>)queryHandler).GetPermissions(query);
+                var permissions = ((IPermissionRestrictedRequestHandler<TQuery>)queryHandler).GetPermissions(query);
                 _permissionValidationService.EnforcePermission(permissions, executionContext.UserContext);
             }
         }
 
         #region private
 
-        protected void ValidateCommmandImplementation<TCommand>(object handler)
-            where TCommand : ICommand
-        {
-            if (handler is IPermissionRestrictedCommandHandler)
-            {
-                // Check for invalid implementation
-                if (!(handler is IPermissionRestrictedCommandHandler<TCommand>))
-                {
-                    var msg = string.Format("Invalid implementation: {0} implements IPermissionRestrictedCommandHandler but not IPermissionRestrictedCommandHandler<{1}>", handler.GetType().FullName, typeof(TCommand).FullName);
-                    throw new InvalidOperationException(msg);
-                }
-            }
-        }
-
         protected void ValidateQueryImplementation<TQuery, TResult>(object handler)
-            where TQuery : IQuery<TResult>
+            where TQuery : IRequest<TResult>
         {
-            if (handler is IPermissionRestrictedQueryHandler)
+            if (handler is IPermissionRestrictedRequestHandler)
             {
                 // Check for invalid implementation
-                if (!(handler is IPermissionRestrictedQueryHandler<TQuery, TResult>))
+                if (!(handler is IPermissionRestrictedRequestHandler<TQuery>))
                 {
                     var msg = string.Format("Invalid implementation: {0} imeplements IPermissionRestrictedCommandHandler but not IPermissionRestrictedCommandHandler<{1}>", handler.GetType().FullName, typeof(TQuery).FullName);
                     throw new InvalidOperationException(msg);

@@ -18,7 +18,8 @@ namespace Cofoundry.Domain.CQS.Internal
             _logger = logger;
         }
 
-        public Task LogAsync<TCommand>(TCommand command, IExecutionContext executionContext) where TCommand : ICommand
+        public Task LogAsync<TCommand>(TCommand command, IExecutionContext executionContext) 
+            where TCommand : IRequest
         {
             _logger.LogInformation(
                 "{ExecutionDate} SUCCESS executing command {CommandName}. User {UserId}",
@@ -30,7 +31,8 @@ namespace Cofoundry.Domain.CQS.Internal
             return Task.CompletedTask;
         }
 
-        public Task LogFailedAsync<TCommand>(TCommand command, IExecutionContext executionContext, Exception ex = null) where TCommand : ICommand
+        public Task LogFailedAsync<TCommand>(TCommand command, IExecutionContext executionContext, Exception ex = null) 
+            where TCommand : IRequest
         {
             if (command is ILoggableCommand)
             {

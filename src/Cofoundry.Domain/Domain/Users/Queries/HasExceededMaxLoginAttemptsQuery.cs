@@ -8,7 +8,7 @@ using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain
 {
-    public class HasExceededMaxLoginAttemptsQuery : IQuery<bool>
+    public class HasExceededMaxLoginAttemptsQuery : IRequest<bool>
     {
         [Required]
         public string Username { get; set; }

@@ -13,7 +13,7 @@ namespace Cofoundry.Domain
     /// the successful login. Does not do anything to login a user
     /// session.
     /// </summary>
-    public class LogSuccessfulLoginCommand : ICommand
+    public class LogSuccessfulLoginCommand : IRequest<Unit>
     {
         /// <summary>
         /// The database id of the user to mark as logged in.

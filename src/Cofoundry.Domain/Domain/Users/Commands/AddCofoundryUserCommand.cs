@@ -13,7 +13,7 @@ namespace Cofoundry.Domain
     /// explicitly and shouldn't allow any possible injection of passwords or
     /// user areas.
     /// </remarks>
-    public sealed class AddCofoundryUserCommand : ICommand, ILoggableCommand
+    public sealed class AddCofoundryUserCommand : IRequest<AddCofoundryUserCommandResult>, ILoggableCommand
     {
         /// <summary>
         /// The email address is required and is used as the login username
@@ -56,16 +56,14 @@ namespace Cofoundry.Domain
         [Required]
         [PositiveInteger]
         public int RoleId { get; set; }
+    }
 
-        #region Output
-
+    public class AddCofoundryUserCommandResult
+    {
         /// <summary>
         /// The database id of the newly created user. This is set after the command
         /// has been run.
         /// </summary>
-        [OutputValue]
-        public int OutputUserId { get; set; }
-
-        #endregion
+        public int UserId { get; set; }
     }
 }

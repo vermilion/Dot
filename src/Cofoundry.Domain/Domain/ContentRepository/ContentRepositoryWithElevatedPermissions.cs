@@ -9,20 +9,17 @@ namespace Cofoundry.Domain.Internal
         : ContentRepository
         , IContentRepositoryWithElevatedPermissions
     {
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly Lazy<Task<IExecutionContext>> _elevatedExecutionContextAsync;
         
         public ContentRepositoryWithElevatedPermissions(
             IServiceProvider serviceProvider,
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor,
+            IMediator mediator,
             IExecutionContextFactory executionContextFactory
             )
-            : base(serviceProvider, queryExecutor, commandExecutor)
+            : base(serviceProvider, mediator)
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
 
             _elevatedExecutionContextAsync = new Lazy<Task<IExecutionContext>>(() =>
             {
@@ -34,20 +31,10 @@ namespace Cofoundry.Domain.Internal
         /// Handles the asynchronous execution the specified query.
         /// </summary>
         /// <param name="query">Query to execute.</param>
-        public override async Task<TResult> ExecuteQueryAsync<TResult>(IQuery<TResult> query)
+        public override async Task<TResult> ExecuteRequestAsync<TResult>(IRequest<TResult> query)
         {
             var executionContext = await _elevatedExecutionContextAsync.Value;
-            return await _queryExecutor.ExecuteAsync(query, executionContext);
-        }
-
-        /// <summary>
-        /// Handles the execution of the specified command.
-        /// </summary>
-        /// <param name="command">Command to execute.</param>
-        public override async Task ExecuteCommandAsync(ICommand command)
-        {
-            var executionContext = await _elevatedExecutionContextAsync.Value;
-            await _commandExecutor.ExecuteAsync(command, executionContext);
+            return await _mediator.ExecuteAsync(query, executionContext);
         }
     }
 }

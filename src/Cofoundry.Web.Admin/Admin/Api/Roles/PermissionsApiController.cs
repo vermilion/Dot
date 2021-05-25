@@ -10,22 +10,22 @@ namespace Cofoundry.Web.Admin
 {
     public class PermissionsApiController : BaseApiController
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public PermissionsApiController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _apiResponseHelper = apiResponseHelper;
         }
 
         [HttpGet]
         public async Task<JsonResult> Get()
         {
-            var results = await _queryExecutor.ExecuteAsync(new GetAllPermissionsQuery());
+            var results = await _mediator.ExecuteAsync(new GetAllPermissionsQuery());
             return _apiResponseHelper.SimpleQueryResponse(results);
         }
     }

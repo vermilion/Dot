@@ -20,18 +20,15 @@ namespace Cofoundry.Web
     {
         #region constructor
 
-        private readonly IQueryExecutor _queryExecutor;
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IModelValidationService _commandValidationService;
 
         public ApiResponseHelper(
-            IQueryExecutor queryExecutor,
-            ICommandExecutor commandExecutor,
+            IMediator queryExecutor,
             IModelValidationService commandValidationService
             )
         {
-            _queryExecutor = queryExecutor;
-            _commandExecutor = commandExecutor;
+            _mediator = queryExecutor;
             _commandValidationService = commandValidationService;
         }
 
@@ -141,17 +138,18 @@ namespace Cofoundry.Web
         /// errors and permission errors. If the command has a property with the OutputValueAttribute
         /// the value is extracted and returned in the response.
         /// </summary>
-        /// <typeparam name="TCommand">Type of the command to execute</typeparam>
+        /// <typeparam name="TResponse">Type of the command to execute</typeparam>
         /// <param name="command">The command to execute</param>
-        public async Task<JsonResult> RunCommandAsync<TCommand>(TCommand command) where TCommand : ICommand
+        public async Task<JsonResult> RunCommandAsync<TResponse>(IRequest<TResponse> command) 
         {
             var errors = _commandValidationService.GetErrors(command).ToList();
+            object result = null;
 
             if (!errors.Any())
             {
                 try
                 {
-                    await _commandExecutor.ExecuteAsync(command);
+                    result= await _mediator.ExecuteAsync(command);
                 }
                 catch (ValidationException ex)
                 {
@@ -163,12 +161,11 @@ namespace Cofoundry.Web
                 }
             }
 
-            var outputValue = GetCommandOutputValue(command);
-
-            if (outputValue != null)
+            if (result != null)
             {
-                return SimpleCommandResponse(errors, outputValue);
+                return SimpleCommandResponse(errors, result);
             }
+
             return SimpleCommandResponse(errors);
         }
 
@@ -184,18 +181,6 @@ namespace Cofoundry.Web
             }
 
             return jsonResult;
-        }
-
-        private object GetCommandOutputValue<TCommand>(TCommand command) where TCommand : ICommand
-        {
-            var property = typeof(TCommand)
-                .GetTypeInfo()
-                .GetProperties()
-                .SingleOrDefault(p => p.IsDefined(typeof(OutputValueAttribute)));
-
-            if (property == null) return null;
-
-            return property.GetValue(command);
         }
 
         private void AddValidationExceptionToErrorList(ValidationException ex, List<ValidationError> errors)

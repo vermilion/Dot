@@ -8,7 +8,7 @@ namespace Cofoundry.Domain
     /// Deletes a role with the specified database id. Roles cannot be
     /// deleted if assigned to users.
     /// </summary>
-    public class DeleteRoleCommand : ICommand, ILoggableCommand
+    public class DeleteRoleCommand : IRequest<Unit>, ILoggableCommand
     {
         public DeleteRoleCommand() { }
 

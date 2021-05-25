@@ -13,8 +13,8 @@ namespace Cofoundry.Domain.Internal
     /// OldPassword field to authenticate the request.
     /// </summary>
     public class UpdateCurrentUserPasswordCommandHandler 
-        : ICommandHandler<UpdateCurrentUserPasswordCommand>
-        , IPermissionRestrictedCommandHandler<UpdateCurrentUserPasswordCommand>
+        : IRequestHandler<UpdateCurrentUserPasswordCommand, Unit>
+        , IPermissionRestrictedRequestHandler<UpdateCurrentUserPasswordCommand>
     {
         #region constructor
 
@@ -40,11 +40,13 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
         
-        public async Task ExecuteAsync(UpdateCurrentUserPasswordCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateCurrentUserPasswordCommand command, IExecutionContext executionContext)
         {
             var user = await GetUser(command, executionContext);
             UpdatePassword(command, executionContext, user);
             await _dbContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
         private void UpdatePassword(UpdateCurrentUserPasswordCommand command, IExecutionContext executionContext, User user)

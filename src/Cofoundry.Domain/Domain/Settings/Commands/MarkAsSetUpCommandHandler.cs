@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Domain.Internal
 {
     public class MarkAsSetUpCommandHandler 
-        : ICommandHandler<MarkAsSetUpCommand>
+        : IRequestHandler<MarkAsSetUpCommand, Unit>
     {
         private const string SETTING_KEY = "IsSetup";
 
@@ -36,7 +36,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execute
 
-        public async Task ExecuteAsync(MarkAsSetUpCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(MarkAsSetUpCommand command, IExecutionContext executionContext)
         {
             _permissionValidationService.EnforceIsSuperAdminRole(executionContext.UserContext);
 
@@ -60,6 +60,8 @@ namespace Cofoundry.Domain.Internal
 
             await _dbContext.SaveChangesAsync();
             _transactionScopeFactory.QueueCompletionTask(_dbContext, _settingCache.Clear);
+
+            return Unit.Value;
         }
 
         #endregion

@@ -7,8 +7,8 @@ using Cofoundry.Domain.CQS;
 namespace Cofoundry.Domain.Internal
 {
     public class GetRoleDetailsByIdQueryHandler 
-        : IQueryHandler<GetRoleDetailsByIdQuery, RoleDetails>
-        , IPermissionRestrictedQueryHandler<GetRoleDetailsByIdQuery, RoleDetails>
+        : IRequestHandler<GetRoleDetailsByIdQuery, RoleDetails>
+        , IPermissionRestrictedRequestHandler<GetRoleDetailsByIdQuery>
     {
         #region constructor
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.CQS
 {
@@ -10,8 +7,8 @@ namespace Cofoundry.Domain.CQS
     /// </summary>
     /// <typeparam name="TQuery">Type of IQuery object to execute</typeparam>
     /// <typeparam name="TResult">The type of the result to be returned from the query</typeparam>
-    public interface IQueryHandler<TQuery, TResult>
-         where TQuery : IQuery<TResult>
+    public interface IRequestHandler<TQuery, TResult>
+         where TQuery : IRequest<TResult>
     {
         /// <summary>
         /// Executes the specified query using the specified ExecutionContext.

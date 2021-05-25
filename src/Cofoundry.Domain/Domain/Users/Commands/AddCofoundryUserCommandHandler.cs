@@ -11,45 +11,44 @@ namespace Cofoundry.Domain.Internal
     /// Adds a user to the Cofoundry user area and sends a welcome notification.
     /// </summary>
     public class AddCofoundryUserCommandHandler
-        : ICommandHandler<AddCofoundryUserCommand>
-        , IPermissionRestrictedCommandHandler<AddCofoundryUserCommand>
+        : IRequestHandler<AddCofoundryUserCommand, AddCofoundryUserCommandResult>
+        , IPermissionRestrictedRequestHandler<AddCofoundryUserCommand>
     {
         #region constructor
 
-        private readonly ICommandExecutor _commandExecutor;
         private readonly IPasswordCryptographyService _passwordCryptographyService;
         private readonly IPasswordGenerationService _passwordGenerationService;
         private readonly IMailService _mailService;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
 
         public AddCofoundryUserCommandHandler(
-            ICommandExecutor commandExecutor,
             IPasswordCryptographyService passwordCryptographyService,
             IPasswordGenerationService passwordGenerationService,
             IMailService mailService,
-            IQueryExecutor queryExecutor
+            IMediator mediator
             )
         {
-            _commandExecutor = commandExecutor;
             _passwordCryptographyService = passwordCryptographyService;
             _passwordGenerationService = passwordGenerationService;
             _mailService = mailService;
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
         }
 
         #endregion
 
         #region execution
 
-        public async Task ExecuteAsync(AddCofoundryUserCommand command, IExecutionContext executionContext)
+        public async Task<AddCofoundryUserCommandResult> ExecuteAsync(AddCofoundryUserCommand command, IExecutionContext executionContext)
         {
             var newUserCommand = MapCommand(command, executionContext);
-            await _commandExecutor.ExecuteAsync(newUserCommand, executionContext);
+            var result = await _mediator.ExecuteAsync(newUserCommand, executionContext);
 
             var siteSettingsQuery = new GetSettingsQuery<GeneralSiteSettings>();
-            var siteSettings = await _queryExecutor.ExecuteAsync(siteSettingsQuery);
+            var siteSettings = await _mediator.ExecuteAsync(siteSettingsQuery);
             var emailTemplate = MapEmailTemplate(newUserCommand, siteSettings);
             await _mailService.SendAsync(newUserCommand.Email, GetDisplayName(newUserCommand), emailTemplate);
+
+            return new AddCofoundryUserCommandResult { UserId = result.UserId };
         }
 
         #endregion

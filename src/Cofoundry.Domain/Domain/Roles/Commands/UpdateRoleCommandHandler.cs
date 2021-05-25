@@ -13,32 +13,29 @@ using Cofoundry.Core.Data;
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateRoleCommandHandler 
-        : ICommandHandler<UpdateRoleCommand>
-        , IPermissionRestrictedCommandHandler<UpdateRoleCommand>
+        : IRequestHandler<UpdateRoleCommand, Unit>
+        , IPermissionRestrictedRequestHandler<UpdateRoleCommand>
     {
         #region constructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IRoleCache _roleCache;
-        private readonly ICommandExecutor _commandExecutor;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public UpdateRoleCommandHandler(
             CofoundryDbContext dbContext,
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IPermissionRepository permissionRepository,
             IRoleCache roleCache,
-            ICommandExecutor commandExecutor,
             ITransactionScopeManager transactionScopeFactory
             )
         {
             _dbContext = dbContext;
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _permissionRepository = permissionRepository;
             _roleCache = roleCache;
-            _commandExecutor = commandExecutor;
             _transactionScopeFactory = transactionScopeFactory;
         }
 
@@ -46,14 +43,14 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(UpdateRoleCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateRoleCommand command, IExecutionContext executionContext)
         {
             ValidatePermissions(command);
 
             var role = await QueryRole(command).SingleOrDefaultAsync();
             EntityNotFoundException.ThrowIfNull(role, command.RoleId);
 
-            var isUnique = await _queryExecutor.ExecuteAsync(GetUniqueQuery(command, role), executionContext);
+            var isUnique = await _mediator.ExecuteAsync(GetUniqueQuery(command, role), executionContext);
             ValidateIsUnique(isUnique);
 
             MapRole(command, role);
@@ -61,6 +58,8 @@ namespace Cofoundry.Domain.Internal
             await _dbContext.SaveChangesAsync();
 
             _transactionScopeFactory.QueueCompletionTask(_dbContext, () => _roleCache.Clear(command.RoleId));
+
+            return Unit.Value;
         }
 
         private void MapRole(UpdateRoleCommand command, Role role)
@@ -150,7 +149,7 @@ namespace Cofoundry.Domain.Internal
                         if (codePermission is IEntityPermission)
                         {
                             var definitionCode = ((IEntityPermission)codePermission).EntityDefinition.EntityDefinitionCode;
-                            await _commandExecutor.ExecuteAsync(new EnsureEntityDefinitionExistsCommand(definitionCode), executionContext);
+                            await _mediator.ExecuteAsync(new EnsureEntityDefinitionExistsCommand(definitionCode), executionContext);
                             dbPermission.EntityDefinitionCode = definitionCode;
                         }
                     }

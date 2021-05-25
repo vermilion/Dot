@@ -6,7 +6,7 @@ using Cofoundry.Domain.Data;
 namespace Cofoundry.Domain.Internal
 {
     public class LogFailedLoginAttemptCommandHandler
-        : ICommandHandler<LogFailedLoginAttemptCommand>
+        : IRequestHandler<LogFailedLoginAttemptCommand, Unit>
     {
         #region constructor
 
@@ -23,7 +23,7 @@ namespace Cofoundry.Domain.Internal
         }
         #endregion
 
-        public async Task ExecuteAsync(LogFailedLoginAttemptCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(LogFailedLoginAttemptCommand command, IExecutionContext executionContext)
         {
             var connectionInfo = _clientConnectionService.GetConnectionInfo();
 
@@ -33,6 +33,8 @@ namespace Cofoundry.Domain.Internal
                 IPAddress = connectionInfo.IPAddress,
                 AttemptDate = executionContext.ExecutionDate
             });
+
+            return Unit.Value;
         }
     }
 }

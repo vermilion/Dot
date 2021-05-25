@@ -14,22 +14,22 @@ namespace Cofoundry.Domain.Installation
     /// </summary>
     public class RegisterPermissionsAndRolesUpdateCommandHandler : IAlwaysRunUpdateCommandHandler<RegisterPermissionsAndRolesUpdateCommand>
     {
-        private readonly ICommandExecutor _commandExecutor;
+        private readonly IMediator _mediator;
         private readonly IExecutionContextFactory _executionContextFactory;
 
         public RegisterPermissionsAndRolesUpdateCommandHandler(
-            ICommandExecutor commandExecutor,
+            IMediator mediator,
             IExecutionContextFactory executionContextFactory
             )
         {
-            _commandExecutor = commandExecutor;
+            _mediator = mediator;
             _executionContextFactory = executionContextFactory;
         }
 
         public async Task ExecuteAsync(RegisterPermissionsAndRolesUpdateCommand command)
         {
             var cx = await _executionContextFactory.CreateSystemUserExecutionContextAsync();
-            await _commandExecutor.ExecuteAsync(new RegisterPermissionsAndRolesCommand(), cx);
+            await _mediator.ExecuteAsync(new RegisterPermissionsAndRolesCommand(), cx);
         }
     }
 }

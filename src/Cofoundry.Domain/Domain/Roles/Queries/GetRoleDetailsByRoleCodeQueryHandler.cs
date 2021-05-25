@@ -17,8 +17,8 @@ namespace Cofoundry.Domain.Internal
     /// rather than the GUI. For GUI generated roles use GetRoleDetailsByIdQuery.
     /// </summary>
     public class GetRoleDetailsByRoleCodeQueryHandler
-        : IQueryHandler<GetRoleDetailsByRoleCodeQuery, RoleDetails>
-        , IPermissionRestrictedQueryHandler<GetRoleDetailsByRoleCodeQuery, RoleDetails>
+        : IRequestHandler<GetRoleDetailsByRoleCodeQuery, RoleDetails>
+        , IPermissionRestrictedRequestHandler<GetRoleDetailsByRoleCodeQuery>
     {
         #region constructor
 

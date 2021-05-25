@@ -7,17 +7,17 @@ namespace Cofoundry.Web.Admin
 {
     public class AccountApiController : BaseApiController
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IUserContextService _userContextService;
 
         public AccountApiController(
-            IQueryExecutor queryExecutor,
+            IMediator mediator,
             IApiResponseHelper apiResponseHelper,
             IUserContextService userContextService
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = mediator;
             _apiResponseHelper = apiResponseHelper;
             _userContextService = userContextService;
         }
@@ -29,7 +29,7 @@ namespace Cofoundry.Web.Admin
         {
             var query = new GetCurrentUserAccountDetailsQuery();
 
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _mediator.ExecuteAsync(query);
             return _apiResponseHelper.SimpleQueryResponse(results);
         }
         

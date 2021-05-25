@@ -13,17 +13,17 @@ namespace Cofoundry.Domain.Internal
     /// Updates the user account of the currently logged in user.
     /// </summary>
     public class UpdateCurrentUserAccountCommandHandler 
-        : ICommandHandler<UpdateCurrentUserAccountCommand>
-        , IPermissionRestrictedCommandHandler<UpdateCurrentUserAccountCommand>
+        : IRequestHandler<UpdateCurrentUserAccountCommand, Unit>
+        , IPermissionRestrictedRequestHandler<UpdateCurrentUserAccountCommand>
     {
         #region consructor
 
         private readonly CofoundryDbContext _dbContext;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IMediator _queryExecutor;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public UpdateCurrentUserAccountCommandHandler(
-            IQueryExecutor queryExecutor,
+            IMediator queryExecutor,
             CofoundryDbContext dbContext,
             IPermissionValidationService permissionValidationService
             )
@@ -37,7 +37,7 @@ namespace Cofoundry.Domain.Internal
 
         #region execution
 
-        public async Task ExecuteAsync(UpdateCurrentUserAccountCommand command, IExecutionContext executionContext)
+        public async Task<Unit> ExecuteAsync(UpdateCurrentUserAccountCommand command, IExecutionContext executionContext)
         {
             var userId = executionContext.UserContext.UserId.Value;
 
@@ -54,6 +54,8 @@ namespace Cofoundry.Domain.Internal
             user.LastName = command.LastName.Trim();
 
             await _dbContext.SaveChangesAsync();
+
+            return Unit.Value;
         }
 
         #endregion

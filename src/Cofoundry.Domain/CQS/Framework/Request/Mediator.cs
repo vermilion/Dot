@@ -7,25 +7,22 @@ using Cofoundry.Core.Validation;
 namespace Cofoundry.Domain.CQS.Internal
 {
     /// <summary>
-    /// Handles the execution IQuery instances.
+    /// Handles the execution IRequest instances.
     /// </summary>
-    /// <remarks>
-    /// See http://www.cuttingedge.it/blogs/steven/pivot/entry.php?id=92
-    /// </remarks>
-    public class QueryExecutor : IQueryExecutor
+    public class Mediator : IMediator
     {
-        private static readonly MethodInfo _executeAsyncMethod = typeof(QueryExecutor).GetMethod(nameof(ExecuteQueryAsync), BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly MethodInfo _executeAsyncMethod = typeof(Mediator).GetMethod(nameof(ExecuteRequestAsync), BindingFlags.NonPublic | BindingFlags.Instance);
         
         #region constructor
 
-        private readonly IQueryHandlerFactory _queryHandlerFactory;
+        private readonly IRequestHandlerFactory _queryHandlerFactory;
         private readonly IExecutionContextFactory _executionContextFactory;
         private readonly IExecuteModelValidationService _executeModelValidationService;
         private readonly IExecutePermissionValidationService _executePermissionValidationService;
 
-        public QueryExecutor(
+        public Mediator(
             IModelValidationService modelValidationService,
-            IQueryHandlerFactory queryHandlerFactory,
+            IRequestHandlerFactory queryHandlerFactory,
             IExecutionContextFactory executionContextFactory,
             IExecuteModelValidationService executeModelValidationService,
             IExecutePermissionValidationService executePermissionValidationService
@@ -45,20 +42,11 @@ namespace Cofoundry.Domain.CQS.Internal
         /// Handles the asynchronous execution the specified query.
         /// </summary>
         /// <param name="query">Query to execute.</param>
-        public async Task<TResult> ExecuteAsync<TResult>(IQuery<TResult> query)
-        {
-            return await ExecuteAsync(query, null);
-        }
-
-        /// <summary>
-        /// Handles the asynchronous execution the specified query.
-        /// </summary>
-        /// <param name="query">Query to execute.</param>
         /// <param name="executionContext">
         /// Optional custom execution context which can be used to impersonate/elevate permissions 
         /// or change the execution date.
         /// </param>
-        public async Task<TResult> ExecuteAsync<TResult>(IQuery<TResult> query, IExecutionContext executionContext = null)
+        public async Task<TResult> ExecuteAsync<TResult>(IRequest<TResult> query, IExecutionContext executionContext = null)
         {
             TResult result;
 
@@ -79,22 +67,23 @@ namespace Cofoundry.Domain.CQS.Internal
             return result;
         }
 
-        private async Task<TResult> ExecuteQueryAsync<TQuery, TResult>(TQuery query, IExecutionContext executionContext) where TQuery : IQuery<TResult>
+        private async Task<TResponse> ExecuteRequestAsync<TRequest, TResponse>(TRequest request, IExecutionContext executionContext) 
+            where TRequest : IRequest<TResponse>
         {
-            if (query == null) 
+            if (request == null) 
                 return default;
 
-            var cx = await CreateExecutionContextAsync(executionContext);
+            var ctx = await CreateExecutionContextAsync(executionContext);
 
-            var handler = _queryHandlerFactory.CreateAsyncHandler<TQuery, TResult>();
+            var handler = _queryHandlerFactory.CreateAsyncHandler<TRequest, TResponse>();
             if (handler == null)
             {
-                throw new MissingHandlerMappingException(typeof(TQuery));
+                throw new MissingHandlerMappingException(typeof(TRequest));
             }
 
-            _executeModelValidationService.Validate(query, handler, cx);
-            _executePermissionValidationService.Validate(query, handler, cx);
-            var result = await handler.ExecuteAsync(query, cx);
+            _executeModelValidationService.Validate(request, handler, ctx);
+            _executePermissionValidationService.Validate(request, handler, ctx);
+            var result = await handler.ExecuteAsync(request, ctx);
 
             return result;
         }

@@ -10,7 +10,7 @@ namespace Cofoundry.Domain
     public class DomainRepositoryQueryContext<TResult> : IDomainRepositoryQueryContext<TResult>
     {
         public DomainRepositoryQueryContext(
-            IQuery<TResult> query,
+            IRequest<TResult> query,
             IExtendableContentRepository extendableRepository
             )
         {
@@ -20,11 +20,11 @@ namespace Cofoundry.Domain
 
         public IExtendableContentRepository ExtendableContentRepository { get; }
 
-        public IQuery<TResult> Query { get; }
+        public IRequest<TResult> Query { get; }
 
         public async Task<TResult> ExecuteAsync()
         {
-            var result = await ExtendableContentRepository.ExecuteQueryAsync(Query);
+            var result = await ExtendableContentRepository.ExecuteRequestAsync(Query);
 
             return result;
         }

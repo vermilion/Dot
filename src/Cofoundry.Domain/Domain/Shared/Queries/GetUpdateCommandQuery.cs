@@ -11,8 +11,8 @@ namespace Cofoundry.Domain.CQS
     /// </summary>
     /// <typeparam name="TEntity">type of entity to return</typeparam>
     public class GetUpdateCommandQuery<TEntity> 
-        : IQuery<TEntity>
-        where TEntity : ICommand
+        : IRequest<TEntity>
+        where TEntity : IRequest
     {
     }
 }

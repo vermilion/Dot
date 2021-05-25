@@ -12,7 +12,7 @@ namespace Cofoundry.Domain
     /// Finds a user by it's database id, returning a UserSummary object if it 
     /// is found, otherwise null.
     /// </summary>
-    public class GetUserSummaryByIdQuery : IQuery<UserSummary>
+    public class GetUserSummaryByIdQuery : IRequest<UserSummary>
     {
         public GetUserSummaryByIdQuery()
         {
