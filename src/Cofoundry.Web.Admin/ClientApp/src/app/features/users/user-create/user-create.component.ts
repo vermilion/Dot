@@ -28,11 +28,14 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      userId: [0, [Validators.required]],
       username: [null, [Validators.required]],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      roleId: [null, [Validators.required]],
+      role: this.fb.group({
+        roleId: [null, [Validators.required]]
+      })
     });
 
     this.fetchRoles();
@@ -41,10 +44,8 @@ export class UserCreateComponent implements OnInit {
   create() {
     this.isLoading = true;
 
-    const param = Object.assign(this.form.value, { roleId: 1 });
-
     this.http
-      .post(`${this.baseUrl}/api/usersApi/add`, param)
+      .post(`${this.baseUrl}/api/usersApi/add`, this.form.value)
       .subscribe({
         next: res => {
           this.notificationsService.success("Success", "User added");

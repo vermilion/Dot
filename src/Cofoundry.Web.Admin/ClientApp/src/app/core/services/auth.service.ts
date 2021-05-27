@@ -1,3 +1,4 @@
+import { User } from "@app/features/interfaces";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
@@ -5,8 +6,6 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { API_BASE_URL } from "@shared/constants";
-
-import { User } from "../models/application-user";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {

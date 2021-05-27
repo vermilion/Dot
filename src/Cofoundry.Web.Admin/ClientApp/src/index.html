@@ -1,126 +1,191 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Dot Admin</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <style>
-    .preloader-container {
-      display: flex;
-      height: 100vh;
-      align-items: center;
-      overflow: hidden;
-    }
+  <head>
+    <meta charset="utf-8">
+    <title>Dot Admin</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    .sk-cube-grid {
-      width: 40px;
-      height: 40px;
-      margin: 100px auto;
-    }
-
-    .sk-cube-grid .sk-cube {
-      width: 33%;
-      height: 33%;
-      background-color: #4e73df;
-      float: left;
-      -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
-      animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
-    }
-
-    .sk-cube-grid .sk-cube1 {
-      -webkit-animation-delay: 0.2s;
-      animation-delay: 0.2s;
-    }
-
-    .sk-cube-grid .sk-cube2 {
-      -webkit-animation-delay: 0.3s;
-      animation-delay: 0.3s;
-    }
-
-    .sk-cube-grid .sk-cube3 {
-      -webkit-animation-delay: 0.4s;
-      animation-delay: 0.4s;
-    }
-
-    .sk-cube-grid .sk-cube4 {
-      -webkit-animation-delay: 0.1s;
-      animation-delay: 0.1s;
-    }
-
-    .sk-cube-grid .sk-cube5 {
-      -webkit-animation-delay: 0.2s;
-      animation-delay: 0.2s;
-    }
-
-    .sk-cube-grid .sk-cube6 {
-      -webkit-animation-delay: 0.3s;
-      animation-delay: 0.3s;
-    }
-
-    .sk-cube-grid .sk-cube7 {
-      -webkit-animation-delay: 0s;
-      animation-delay: 0s;
-    }
-
-    .sk-cube-grid .sk-cube8 {
-      -webkit-animation-delay: 0.1s;
-      animation-delay: 0.1s;
-    }
-
-    .sk-cube-grid .sk-cube9 {
-      -webkit-animation-delay: 0.2s;
-      animation-delay: 0.2s;
-    }
-
-    @-webkit-keyframes sk-cubeGridScaleDelay {
-
-      0%,
-      70%,
-      100% {
-        -webkit-transform: scale3D(1, 1, 1);
-        transform: scale3D(1, 1, 1);
+    <style>
+      .preloader-container {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        overflow: hidden;
       }
 
-      35% {
-        -webkit-transform: scale3D(0, 0, 1);
-        transform: scale3D(0, 0, 1);
-      }
-    }
-
-    @keyframes sk-cubeGridScaleDelay {
-
-      0%,
-      70%,
-      100% {
-        -webkit-transform: scale3D(1, 1, 1);
-        transform: scale3D(1, 1, 1);
+      .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 7.33333em;
+        height: 7.33333em;
+        margin-left: -3.66667em;
+        margin-top: -3.66667em;
       }
 
-      35% {
-        -webkit-transform: scale3D(0, 0, 1);
-        transform: scale3D(0, 0, 1);
+      .loader-block {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        opacity: 0;
+        width: 2em;
+        height: 2em;
+        background: #4e73df;
+        -webkit-animation: show 0.88s step-end infinite alternate, pulse 0.88s linear infinite alternate;
+        animation: show 0.88s step-end infinite alternate, pulse 0.88s linear infinite alternate;
       }
-    }
-  </style>
-</head>
-<body>
-  <app-root>
-    <div class="preloader-container">
-      <div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
+
+      .loader-block:nth-child(1) {
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+        transform: translate(0, 0);
+        -webkit-animation-delay: 0.065s;
+        animation-delay: 0.065s;
+      }
+
+      .loader-block:nth-child(2) {
+        -moz-transform: translate(2.66667em, 0);
+        -ms-transform: translate(2.66667em, 0);
+        -webkit-transform: translate(2.66667em, 0);
+        transform: translate(2.66667em, 0);
+        -webkit-animation-delay: 0.13s;
+        animation-delay: 0.13s;
+      }
+
+      .loader-block:nth-child(3) {
+        -moz-transform: translate(5.33333em, 0);
+        -ms-transform: translate(5.33333em, 0);
+        -webkit-transform: translate(5.33333em, 0);
+        transform: translate(5.33333em, 0);
+        -webkit-animation-delay: 0.195s;
+        animation-delay: 0.195s;
+      }
+
+      .loader-block:nth-child(4) {
+        -moz-transform: translate(0, 2.66667em);
+        -ms-transform: translate(0, 2.66667em);
+        -webkit-transform: translate(0, 2.66667em);
+        transform: translate(0, 2.66667em);
+        -webkit-animation-delay: 0.325s;
+        animation-delay: 0.325s;
+      }
+
+      .loader-block:nth-child(5) {
+        -moz-transform: translate(2.66667em, 2.66667em);
+        -ms-transform: translate(2.66667em, 2.66667em);
+        -webkit-transform: translate(2.66667em, 2.66667em);
+        transform: translate(2.66667em, 2.66667em);
+        -webkit-animation-delay: 0.13s;
+        animation-delay: 0.13s;
+      }
+
+      .loader-block:nth-child(6) {
+        -moz-transform: translate(5.33333em, 2.66667em);
+        -ms-transform: translate(5.33333em, 2.66667em);
+        -webkit-transform: translate(5.33333em, 2.66667em);
+        transform: translate(5.33333em, 2.66667em);
+        -webkit-animation-delay: 0.455s;
+        animation-delay: 0.455s;
+      }
+
+      .loader-block:nth-child(7) {
+        -moz-transform: translate(0, 5.33333em);
+        -ms-transform: translate(0, 5.33333em);
+        -webkit-transform: translate(0, 5.33333em);
+        transform: translate(0, 5.33333em);
+        -webkit-animation-delay: 0.39s;
+        animation-delay: 0.39s;
+      }
+
+      .loader-block:nth-child(8) {
+        -moz-transform: translate(2.66667em, 5.33333em);
+        -ms-transform: translate(2.66667em, 5.33333em);
+        -webkit-transform: translate(2.66667em, 5.33333em);
+        transform: translate(2.66667em, 5.33333em);
+        -webkit-animation-delay: 0.26s;
+        animation-delay: 0.26s;
+      }
+
+      .loader-block:nth-child(9) {
+        -moz-transform: translate(5.33333em, 5.33333em);
+        -ms-transform: translate(5.33333em, 5.33333em);
+        -webkit-transform: translate(5.33333em, 5.33333em);
+        transform: translate(5.33333em, 5.33333em);
+      }
+
+      @-webkit-keyframes pulse {
+
+        from,
+        40% {
+          background: #4e73df;
+        }
+
+        to {
+          background: #ffffff;
+        }
+      }
+
+      @-webkit-keyframes show {
+
+        from,
+        40% {
+          opacity: 0;
+        }
+
+        41%,
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+
+        from,
+        40% {
+          background: #4e73df;
+        }
+
+        to {
+          background: #ffffff;
+        }
+      }
+
+      @keyframes show {
+
+        from,
+        40% {
+          opacity: 0;
+        }
+
+        41%,
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <app-root>
+      <div class="preloader-container">
+        <div class="loader">
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+          <span class="loader-block"></span>
+        </div>
       </div>
-    </div>
-  </app-root>
-</body>
+    </app-root>
+  </body>
+
 </html>

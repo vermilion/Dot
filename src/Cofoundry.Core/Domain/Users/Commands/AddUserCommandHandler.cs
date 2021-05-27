@@ -20,7 +20,6 @@ namespace Cofoundry.Domain.Internal
         private readonly CofoundryDbContext _dbContext;
         private readonly IMediator _queryExecutor;
         private readonly IPasswordCryptographyService _passwordCryptographyService;
-        private readonly IPasswordGenerationService _passwordGenerationService;
         private readonly IMailService _mailService;
         private readonly UserCommandPermissionsHelper _userCommandPermissionsHelper;
         private readonly IPermissionValidationService _permissionValidationService;
@@ -29,7 +28,6 @@ namespace Cofoundry.Domain.Internal
             CofoundryDbContext dbContext,
             IMediator queryExecutor,
             IPasswordCryptographyService passwordCryptographyService,
-            IPasswordGenerationService passwordGenerationService,
             IMailService mailService,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IPermissionValidationService permissionValidationService
@@ -41,7 +39,6 @@ namespace Cofoundry.Domain.Internal
             _mailService = mailService;
             _userCommandPermissionsHelper = userCommandPermissionsHelper;
             _permissionValidationService = permissionValidationService;
-            _passwordGenerationService = passwordGenerationService;
         }
 
         #endregion
@@ -75,7 +72,7 @@ namespace Cofoundry.Domain.Internal
             // Password
             var isPasswordEmpty = string.IsNullOrWhiteSpace(command.Password);
 
-            if (isPasswordEmpty && !command.GeneratePassword)
+            if (isPasswordEmpty)
             {
                 throw ValidationErrorException.CreateWithProperties("Password field is required", "Password");
             }
@@ -89,9 +86,7 @@ namespace Cofoundry.Domain.Internal
 
         private User MapAndAddUser(AddUserCommand command, IExecutionContext executionContext, Role role)
         {
-            var password = command.GeneratePassword ? _passwordGenerationService.Generate() : command.Password;
-
-            var hashResult = _passwordCryptographyService.CreateHash(password);
+            var hashResult = _passwordCryptographyService.CreateHash(command.Password);
 
             var user = new User
             {

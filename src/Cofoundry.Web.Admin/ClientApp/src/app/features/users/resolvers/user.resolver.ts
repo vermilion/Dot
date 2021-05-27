@@ -3,7 +3,7 @@ import { Inject, Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
 import { API_BASE_URL } from "@shared/constants";
 
-import { User } from "@app/features/interfaces";
+import { UserSummary } from "@app/features/interfaces";
 
 @Injectable()
 export class UserResolver implements Resolve<any> {
@@ -16,6 +16,6 @@ export class UserResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot) {
     const userId = route.paramMap.get("id");
 
-    return this.http.get<User>(`${this.baseUrl}/api/usersApi/getById?userId=${userId}`);
+    return this.http.get<UserSummary>(`${this.baseUrl}/api/usersApi/getById?userId=${userId}`);
   }
 }

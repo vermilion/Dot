@@ -41,17 +41,17 @@ namespace Cofoundry.Web.Admin
         #region commands
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddUserCommand command)
+        public async Task<IActionResult> Add([FromBody] UserSummary model)
         {
             // TODO: We have a separate command here for adding Cofoundry Admin users, but we could re-use the same one
             // and separate the notification part out of the handler and make it a separate function in the admin panel.
             var userCommand = new AddCofoundryUserCommand
             {
-                Username = command.Username,
-                Email = command.Email,
-                FirstName = command.FirstName,
-                LastName = command.LastName,
-                RoleId = command.RoleId
+                Username = model.Username,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                RoleId = model.Role.RoleId
             };
 
             var result = await _mediator.ExecuteAsync(userCommand);
@@ -59,9 +59,21 @@ namespace Cofoundry.Web.Admin
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromBody] UpdateUserCommand delta)
+        public async Task<IActionResult> Update([FromBody] UserSummary model)
         {
-            await _mediator.ExecuteAsync(delta);
+            var command = new UpdateUserCommand
+            {
+                UserId = model.UserId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Username = model.Username,
+                RequirePasswordChange = false,
+
+                RoleId = model.Role.RoleId
+            };
+
+            await _mediator.ExecuteAsync(command);
             return Ok();
         }
 

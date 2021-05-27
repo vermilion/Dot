@@ -5,7 +5,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { API_BASE_URL } from "@shared/constants";
 
-import { PagingParam, PagingResult, User } from "../../interfaces";
+import { PagingParam, PagingResult, UserSummary } from "@app/features/interfaces";
 
 @Component({
   selector: "app-users-list",
@@ -15,7 +15,7 @@ import { PagingParam, PagingResult, User } from "../../interfaces";
 export class UsersListComponent implements OnInit {
 
   isLoading: boolean = false;
-  items: User[] = [];
+  items: UserSummary[] = [];
 
   page: number = 1;
   quantity: number = 100;
@@ -41,7 +41,7 @@ export class UsersListComponent implements OnInit {
     };
 
     this.http
-      .post<PagingResult<User>>(`${this.baseUrl}/api/usersApi/getAll`, param)
+      .post<PagingResult<UserSummary>>(`${this.baseUrl}/api/usersApi/getAll`, param)
       .pipe(
         finalize(() => this.isLoading = false)
       )
@@ -55,7 +55,7 @@ export class UsersListComponent implements OnInit {
     this.router.navigate(["create"], { relativeTo: this.activatedRoute });
   }
 
-  public edit(item: User) {
+  public edit(item: UserSummary) {
     this.router.navigate(["user", item.userId], { relativeTo: this.activatedRoute });
   }
 

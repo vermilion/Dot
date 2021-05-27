@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { User } from "@app/core";
+import { UserSummary } from "@app/features/interfaces";
 
 import { API_BASE_URL } from "@shared/constants";
 import { NzNotificationService } from "ng-zorro-antd/notification";
@@ -34,12 +34,14 @@ export class UserEditComponent implements OnInit {
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       email: [null, [Validators.required]],
-      roleId: [null, [Validators.required]],
+      role: this.fb.group({
+        roleId: [null, [Validators.required]]
+      })
     });
 
     this.fetchRoles();
 
-    const user = this.activatedRoute.snapshot.data.user as User;
+    const user = this.activatedRoute.snapshot.data.user as UserSummary;
     this.form.patchValue(user);
   }
 

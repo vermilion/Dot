@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Cofoundry.Domain.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -30,7 +27,7 @@ namespace Cofoundry.Domain.Internal
         {
             if (dbRole == null) return null;
 
-            var role = new RoleDetails()
+            var role = new RoleDetails
             {
                 IsAnonymousRole = dbRole.RoleCode == AnonymousRole.AnonymousRoleCode,
                 IsSuperAdministrator = dbRole.RoleCode == SuperAdminRole.SuperAdminRoleCode,

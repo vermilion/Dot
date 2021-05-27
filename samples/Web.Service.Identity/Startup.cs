@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace Cofoundry.BasicTestSite
 {
@@ -49,7 +50,13 @@ namespace Cofoundry.BasicTestSite
 
             services
                 .AddControllers()
-                .AddCofoundry(Configuration);
+                .AddCofoundry(Configuration)
+                .AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.WriteIndented = true;
+                    o.JsonSerializerOptions.IgnoreNullValues = true;
+                    o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
 
             // configure openapi
             services.AddSwaggerGen(c =>

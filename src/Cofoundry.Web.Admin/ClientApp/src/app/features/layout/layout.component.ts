@@ -4,11 +4,10 @@ import {
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router,
-  RouterOutlet
+  Router
 } from "@angular/router";
-import { AuthenticationService, User } from "@app/core";
 
+import { AuthenticationService } from "@app/core";
 import { Component } from "@angular/core";
 
 @Component({
@@ -18,7 +17,6 @@ import { Component } from "@angular/core";
 })
 export class FeaturesLayoutComponent {
 
-  public user: User;
   isLoading: boolean = false;
 
   constructor(
@@ -26,7 +24,8 @@ export class FeaturesLayoutComponent {
     private authenticationService: AuthenticationService,
     private _route: ActivatedRoute) {
 
-    this.authenticationService.user.subscribe(x => this.user = x);
+    this.authenticationService.user.subscribe(x => {
+    });
 
     // perform initial navigation - required in a hybrid application
     router.initialNavigation();

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text.Json;
+using System.Threading.Tasks;
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,7 @@ namespace Cofoundry.Web.Admin
         public async Task<IActionResult> GetById(int roleId)
         {
             var result = await _mediator.ExecuteAsync(new GetRoleDetailsByIdQuery(roleId));
+
             return Ok(result);
         }
 

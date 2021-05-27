@@ -3,23 +3,24 @@ using Cofoundry.Core;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Abstractions;
 
 namespace Cofoundry.Domain.Internal
 {
     public class UpdateUserPasswordByUserIdCommandHandler
         : IRequestHandler<UpdateUserPasswordByUserIdCommand, Unit>
     {
+        private readonly IPasswordUpdateCommandHelper _passwordUpdateCommandHelper;
+        private readonly IUnitOfWork _unitOfWork;
+        
         #region construstor
 
-        private readonly CofoundryDbContext _dbContext;
-        private readonly IPasswordUpdateCommandHelper _passwordUpdateCommandHelper;
-
         public UpdateUserPasswordByUserIdCommandHandler(
-            CofoundryDbContext dbContext,
+            IUnitOfWork unitOfWork,
             IPasswordUpdateCommandHelper passwordUpdateCommandHelper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _passwordUpdateCommandHelper = passwordUpdateCommandHelper;
         }
 
@@ -36,23 +37,20 @@ namespace Cofoundry.Domain.Internal
 
             _passwordUpdateCommandHelper.UpdatePassword(command.NewPassword, user, executionContext);
 
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }
 
-
         #endregion
         
-
         private Task<User> GetUser(int userId)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .FilterById(userId)
                 .FilterCanLogIn()
                 .SingleOrDefaultAsync();
         }
-       
     }
 }
