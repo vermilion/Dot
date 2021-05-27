@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.MessageAggregator
@@ -12,7 +9,7 @@ namespace Cofoundry.Core.MessageAggregator
     /// handling a messages in batch.
     /// </summary>
     /// <typeparam name="TMessage">Type of message that this handler can process (could be an interface rather than concrete type)</typeparam>
-    public interface IBatchMessageHandler<TMessage> : IMessageHandler<TMessage>
+    public interface IBatchNotificationHandler<TMessage> : INotificationHandler<TMessage>
     {
         /// <summary>
         /// Method to invoke when a batch of messages of type TMessage are published

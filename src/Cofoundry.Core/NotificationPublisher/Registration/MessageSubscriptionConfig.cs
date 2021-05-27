@@ -11,10 +11,10 @@ namespace Cofoundry.Core.MessageAggregator.Internal
     /// </summary>
     public class MessageSubscriptionConfig : IMessageSubscriptionConfig
     {
-        private readonly IMessageAggregator _messageAggregator;
+        private readonly INotificationPublisher _messageAggregator;
 
         public MessageSubscriptionConfig(
-            IMessageAggregator messageAggregator
+            INotificationPublisher messageAggregator
             )
         {
             _messageAggregator = messageAggregator;
@@ -33,7 +33,7 @@ namespace Cofoundry.Core.MessageAggregator.Internal
         /// <typeparam name="TMessageHandler">The handler to invoke when the message is published</typeparam>
         public IMessageSubscriptionConfig Subscribe<TMessage, TMessageHandler>()
             where TMessage : class
-            where TMessageHandler : IMessageHandler<TMessage>
+            where TMessageHandler : INotificationHandler<TMessage>
         {
             _messageAggregator.Subscribe<TMessage, TMessageHandler>();
 

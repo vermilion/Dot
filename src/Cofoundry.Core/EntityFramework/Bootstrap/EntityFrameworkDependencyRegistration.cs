@@ -3,6 +3,8 @@ using Cofoundry.Core.EntityFramework.Internal;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.Data.Internal;
 using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Abstractions;
+using PlatformFramework.EFCore.Context;
 using System;
 
 namespace Cofoundry.Core.EntityFramework.Registration
@@ -13,6 +15,7 @@ namespace Cofoundry.Core.EntityFramework.Registration
         {
             container
                 .Register<CofoundryDbContext>(new Type[] { typeof(CofoundryDbContext), typeof(DbContext) }, RegistrationOptions.Scoped())
+                .Register<IUnitOfWork, UnitOfWork>()
                 //.Register<IDbContextInitializer, DbContextInitializer>()
                 .Register<IDbUnstructuredDataSerializer, DbUnstructuredDataSerializer>()
                 ;

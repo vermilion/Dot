@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Cofoundry.Core.DependencyInjection;
 
 namespace Cofoundry.Core.MessageAggregator
 {
     /// <summary>
     /// A simple Message Aggregator (Event Bus) to allow subscribable message communication.
     /// </summary>
-    public interface IMessageAggregator
+    public interface INotificationPublisher
     {
         /// <summary>
         /// Publishes the specified message, invoking any handlers subscribed to
@@ -42,6 +38,6 @@ namespace Cofoundry.Core.MessageAggregator
         /// <typeparam name="TMessageHandler">The handler to invoke when the message is published</typeparam>
         void Subscribe<TMessage, TMessageHandler>()
             where TMessage : class
-            where TMessageHandler : IMessageHandler<TMessage>;
+            where TMessageHandler : INotificationHandler<TMessage>;
     }
 }

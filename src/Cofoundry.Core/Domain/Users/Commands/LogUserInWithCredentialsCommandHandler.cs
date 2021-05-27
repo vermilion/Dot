@@ -20,7 +20,7 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
         
-        private readonly IMediator _queryExecutor;
+        private readonly IMediator _mediator;
         private readonly ILoginService _loginService;
 
         public LogUserInWithCredentialsCommandHandler(
@@ -28,7 +28,7 @@ namespace Cofoundry.Domain.Internal
             ILoginService loginService
             )
         {
-            _queryExecutor = queryExecutor;
+            _mediator = queryExecutor;
             _loginService = loginService;
         }
 
@@ -38,7 +38,7 @@ namespace Cofoundry.Domain.Internal
         {
             if (IsLoggedInAlready(command, executionContext)) return Unit.Value;
 
-            var hasExceededMaxLoginAttempts = await _queryExecutor.ExecuteAsync(GetMaxLoginAttemptsQuery(command), executionContext);
+            var hasExceededMaxLoginAttempts = await _mediator.ExecuteAsync(GetMaxLoginAttemptsQuery(command), executionContext);
             ValidateMaxLoginAttemptsNotExceeded(hasExceededMaxLoginAttempts);
 
             var user = await GetUserLoginInfoAsync(command, executionContext);
@@ -91,7 +91,7 @@ namespace Cofoundry.Domain.Internal
                 Password = command.Password,
             };
 
-            return _queryExecutor.ExecuteAsync(query, executionContext);
+            return _mediator.ExecuteAsync(query, executionContext);
         }
     }
 }

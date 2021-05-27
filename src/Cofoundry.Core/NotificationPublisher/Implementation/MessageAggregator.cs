@@ -10,13 +10,13 @@ namespace Cofoundry.Core.MessageAggregator.Internal
     /// <summary>
     /// A simple Message Aggregator (Event Bus) implementation to allow subscribable message communication.
     /// </summary>
-    public class MessageAggregator : IMessageAggregator
+    public class MessageAggregator : INotificationPublisher
     {
-        private readonly IMessageAggregatorState _state;
+        private readonly INotificationPublisherState _state;
         private readonly IServiceProvider _serviceProvider;
 
         public MessageAggregator(
-            IMessageAggregatorState state,
+            INotificationPublisherState state,
             IServiceProvider serviceProvider
             )
         {
@@ -53,9 +53,9 @@ namespace Cofoundry.Core.MessageAggregator.Internal
 
             foreach (var subscription in subs)
             {
-                if (subscription is IBatchMessageHandler<TMessage>)
+                if (subscription is IBatchNotificationHandler<TMessage>)
                 {
-                    await ((IBatchMessageHandler<TMessage>)subscription).HandleBatchAsync(messages);
+                    await ((IBatchNotificationHandler<TMessage>)subscription).HandleBatchAsync(messages);
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace Cofoundry.Core.MessageAggregator.Internal
         /// <typeparam name="TMessageHandler">The handler to invoke when the message is published</typeparam>
         public void Subscribe<TMessage, TMessageHandler>() 
             where TMessage : class
-            where TMessageHandler : IMessageHandler<TMessage>
+            where TMessageHandler : INotificationHandler<TMessage>
         {
             _state.Subscribe(new MessageSubscription<TMessage, TMessageHandler>());
         }

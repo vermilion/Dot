@@ -8,12 +8,12 @@ namespace Cofoundry.Core.MessageAggregator.Registration
         public void Register(IContainerRegister container)
         {
             container
-                .RegisterSingleton<IMessageAggregatorState>(new MessageAggregatorState())
+                .RegisterSingleton<INotificationPublisherState>(new MessageAggregatorState())
                 .Register<IMessageSubscriptionInitializer, MessageSubscriptionInitializer>()
-                .Register<IMessageAggregator, Internal.MessageAggregator>()
+                .Register<INotificationPublisher, Internal.MessageAggregator>()
                 .Register<IMessageSubscriptionConfig, MessageSubscriptionConfig>()
                 .RegisterAll<IMessageSubscriptionRegistration>()
-                .RegisterAllGenericImplementations(typeof(IMessageHandler<>))
+                .RegisterAllGenericImplementations(typeof(INotificationHandler<>))
                 ;
         }
     }

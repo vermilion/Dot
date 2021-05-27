@@ -24,6 +24,6 @@ namespace Cofoundry.Core.MessageAggregator
         /// <typeparam name="TMessageHandler">The handler to invoke when the message is published</typeparam>
         IMessageSubscriptionConfig Subscribe<TMessage, TMessageHandler>()
             where TMessage : class
-            where TMessageHandler : IMessageHandler<TMessage>;
+            where TMessageHandler : INotificationHandler<TMessage>;
     }
 }

@@ -16,10 +16,12 @@ namespace Cofoundry.Domain.Data
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
 
-            var result = new PagedQueryResult<T>();
-            result.TotalItems = await source.CountAsync();
-            result.Items = await source.Page(query).ToArrayAsync();
-            PagingQueryExtensions.MapPagingData<T>(query, result);
+            var result = new PagedQueryResult<T>
+            {
+                TotalItems = await source.CountAsync(),
+                Items = await source.Page(query).ToArrayAsync()
+            };
+            PagingQueryExtensions.MapPagingData(query, result);
 
             return result;
         }

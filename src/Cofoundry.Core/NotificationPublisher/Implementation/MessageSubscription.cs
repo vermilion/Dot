@@ -15,9 +15,9 @@ namespace Cofoundry.Core.MessageAggregator.Internal
     /// <typeparam name="TMessageSubscribedTo">Type of message subscribed to</typeparam>
     /// <typeparam name="TMessageHandler">Type of handler to invoke when a message is published</typeparam>
     public class MessageSubscription<TMessageSubscribedTo, TMessageHandler>
-        : IMessageSubscription
+        : INotificationSubscription
         where TMessageSubscribedTo : class
-        where TMessageHandler : IMessageHandler<TMessageSubscribedTo>
+        where TMessageHandler : INotificationHandler<TMessageSubscribedTo>
     {
         public bool CanDeliver<TMessage>()
         {

@@ -67,13 +67,6 @@ namespace Cofoundry.Domain.Data
 
         public DbSet<FailedAuthenticationAttempt> FailedAuthenticationAttempts { get; set; }
 
-        /// <summary>
-        /// Contains a record of a relation between one entitiy and another
-        /// when it's defined in unstructured data. Also contains information on how deletions
-        /// should cascade for the relationship.
-        /// </summary>
-        public DbSet<UnstructuredDataDependency> UnstructuredDataDependencies { get; set; }
-
         #endregion
     }
 }

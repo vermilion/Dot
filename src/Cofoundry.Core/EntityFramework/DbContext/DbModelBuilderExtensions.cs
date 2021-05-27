@@ -56,8 +56,7 @@ namespace Cofoundry.Domain.Data
         {
             modelBuilder
                 .MapCofoundryUsers()
-                .ApplyConfiguration(new EntityDefinitionMap())
-                .ApplyConfiguration(new UnstructuredDataDependencyMap());
+                .ApplyConfiguration(new EntityDefinitionMap());
 
             return modelBuilder;
         }

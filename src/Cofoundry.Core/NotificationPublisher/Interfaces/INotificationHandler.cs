@@ -7,7 +7,7 @@ namespace Cofoundry.Core.MessageAggregator
     /// a certain type is received. (could be an interface rather than concrete type)
     /// </summary>
     /// <typeparam name="TMessage">Type of message that this handler can process</typeparam>
-    public interface IMessageHandler<TMessage>
+    public interface INotificationHandler<TMessage>
     {
         /// <summary>
         /// Method to invoke when a message of type TMessage is published 

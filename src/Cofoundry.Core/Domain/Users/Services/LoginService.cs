@@ -55,7 +55,6 @@ namespace Cofoundry.Domain.Internal
         /// Logs a failed login attempt. A history of logins is used
         /// to prevent brute force login attacks.
         /// </summary>
-        /// <param name="userAreaCode">The code of the user area attempting to be logged into.</param>
         /// <param name="username">The username attempting to be logged in with.</param>
         public virtual async Task LogFailedLoginAttemptAsync(string username)
         {
@@ -66,7 +65,6 @@ namespace Cofoundry.Domain.Internal
         /// <summary>
         /// Signs the user out of the application and ends the session.
         /// </summary>
-        /// <param name="userAreaCode">The code of the user area to log out of.</param>
         public virtual async Task SignOutAsync()
         {
             await _userSessionService.LogUserOutAsync();

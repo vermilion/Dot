@@ -44,7 +44,7 @@ namespace Cofoundry.Web.Identity
 
             if (!controller.ModelState.IsValid) return result;
 
-            var command = new LogUserInWithCredentialsCommand()
+            var command = new LogUserInWithCredentialsCommand
             {
                 Username = vm.Username,
                 Password = vm.Password,

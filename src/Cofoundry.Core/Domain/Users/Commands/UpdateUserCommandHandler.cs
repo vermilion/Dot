@@ -3,6 +3,8 @@ using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Abstractions;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
@@ -12,20 +14,20 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _queryExecutor;
         private readonly UserCommandPermissionsHelper _userCommandPermissionsHelper;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public UpdateUserCommandHandler(
             IMediator queryExecutor,
-            CofoundryDbContext dbContext,
+            IUnitOfWork unitOfWork,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IPermissionValidationService permissionValidationService
             )
         {
             _queryExecutor = queryExecutor;
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _userCommandPermissionsHelper = userCommandPermissionsHelper;
             _permissionValidationService = permissionValidationService;
         }
@@ -37,11 +39,12 @@ namespace Cofoundry.Domain.Internal
         public async Task<Unit> ExecuteAsync(UpdateUserCommand command, IExecutionContext executionContext)
         {
             // Get User
-            var user = await _dbContext
-                .Users
+            var user = await _unitOfWork
+                .Users()
                 .FilterCanLogIn()
                 .FilterById(command.UserId)
                 .SingleOrDefaultAsync();
+
             EntityNotFoundException.ThrowIfNull(user, command.UserId);
 
             // Validate
@@ -63,7 +66,7 @@ namespace Cofoundry.Domain.Internal
             Map(command, user);
 
             // Save
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }

@@ -10,7 +10,6 @@ namespace Cofoundry.Web
         /// Cofoundry StartupTasks.
         /// </summary>
         /// <param name="application">Application configuration.</param>
-        /// <param name="configBuilder">Additional configuration options.</param>
         public static void UseCofoundry(this IApplicationBuilder application)
         {
             using (var childContext = application.ApplicationServices.CreateScope())

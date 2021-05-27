@@ -90,8 +90,8 @@ namespace Cofoundry.Core.Data.Internal
         /// <param name="isolationLevel">This is defaulted to IsolationLevel.ReadCommitted.</param>
         /// <returns>ITransactionScope, which is IDisposable and must be disposed.</returns>
         public ITransactionScope Create(DbConnection dbConnection,
-                System.Transactions.TransactionScopeOption transactionScopeOption = System.Transactions.TransactionScopeOption.Required,
-                System.Transactions.IsolationLevel isolationLevel = System.Transactions.IsolationLevel.ReadCommitted
+                TransactionScopeOption transactionScopeOption = TransactionScopeOption.Required,
+                IsolationLevel isolationLevel = IsolationLevel.ReadCommitted
             )
         {
             var transactionScopeFactory = CreateScopeFactory(transactionScopeOption, isolationLevel);
