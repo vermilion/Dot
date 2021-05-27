@@ -42,7 +42,16 @@ export class RoleEditComponent implements OnInit {
   save() {
     this.isLoading = true;
 
-    const param = Object.assign(this.role, this.form.value);
+    const data = this.form.value as { roleId: number, title: string };
+    const param = {
+      roleId: data.roleId,
+      title: data.title,
+      permissions: this.role.permissions.map(x => {
+        return {
+          permissionCode: x.permissionType.code
+        };
+      })
+    };
 
     this.http
       .post(`${this.baseUrl}/api/rolesApi/update`, param)

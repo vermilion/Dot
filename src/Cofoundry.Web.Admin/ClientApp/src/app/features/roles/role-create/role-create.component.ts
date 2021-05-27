@@ -28,6 +28,7 @@ export class RoleCreateComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      roleId:  [0, [Validators.required]],
       title: [null, [Validators.required]],
     });
   }

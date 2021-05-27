@@ -1879,3 +1879,562 @@ ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
 2021-05-27 11:41:19.454 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 5749.6903ms
 2021-05-27 11:41:19.458 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
 2021-05-27 11:41:19.473 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - - - 200 - application/json;+charset=utf-8 6119.8998ms
+2021-05-27 12:51:40.200 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 12:51:40.715 +03:00 [INF] Starting service
+2021-05-27 12:51:42.402 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 12:51:42.402 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 12:51:42.403 +03:00 [INF] Hosting environment: Development
+2021-05-27 12:51:42.403 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 12:51:43.453 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:51:44.371 +03:00 [INF] Executed DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 12:51:44.725 +03:00 [INF] Executed DbCommand (90ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 12:51:44.821 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 12:51:44.940 +03:00 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 12:51:45.247 +03:00 [INF] Executed DbCommand (172ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 12:51:45.576 +03:00 [INF] Process completed
+2021-05-27 12:58:16.421 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - -
+2021-05-27 12:58:16.444 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:58:16.706 +03:00 [INF] Authorization was successful.
+2021-05-27 12:58:16.708 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 12:58:16.792 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 12:58:16.987 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 12:58:17.043 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:58:17.135 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 12:58:17.224 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 12:58:17.315 +03:00 [INF] Executed DbCommand (69ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 12:58:21.293 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 4300.2865ms.
+2021-05-27 12:58:21.303 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 12:58:21.459 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 4651.5839ms
+2021-05-27 12:58:21.463 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 12:58:21.472 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - - - 200 - application/json;+charset=utf-8 5056.8191ms
+2021-05-27 12:58:26.750 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/update - -
+2021-05-27 12:58:26.753 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:58:26.755 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/update - - - 204 - - 4.3932ms
+2021-05-27 12:58:26.777 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/update application/json 351
+2021-05-27 12:58:26.779 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:58:26.796 +03:00 [INF] Authorization was successful.
+2021-05-27 12:58:26.797 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin)'
+2021-05-27 12:58:26.802 +03:00 [INF] Route matched with {action = "Update", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Cofoundry.Domain.UpdateRoleCommand) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 12:58:26.867 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 12:58:26.881 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:58:26.941 +03:00 [INF] Executed DbCommand (58ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 12:58:27.021 +03:00 [INF] Executed DbCommand (51ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(2) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 12:58:27.108 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[@__query_RoleId_0='?' (DbType = Int32), @__query_Title_1='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Cofoundry].[Role] AS [r]
+        WHERE ([r].[RoleId] <> @__query_RoleId_0) AND ([r].[Title] = @__query_Title_1)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2021-05-27 12:59:36.143 +03:00 [INF] Executed DbCommand (101ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Int32), @p21='?' (DbType = Int32), @p22='?' (DbType = Int32), @p23='?' (DbType = Int32), @p24='?' (DbType = Int32), @p25='?' (DbType = Int32), @p26='?' (DbType = Int32), @p27='?' (DbType = Int32), @p28='?' (DbType = Int32), @p29='?' (DbType = Int32), @p30='?' (DbType = Int32), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = Int32), @p34='?' (DbType = Int32), @p35='?' (DbType = Int32), @p36='?' (DbType = Int32), @p37='?' (DbType = Int32), @p38='?' (DbType = Int32), @p39='?' (DbType = Int32), @p40='?' (DbType = Int32), @p41='?' (DbType = Int32), @p42='?' (DbType = Int32), @p43='?' (DbType = Int32), @p44='?' (DbType = Int32), @p45='?' (DbType = Int32), @p46='?' (DbType = Int32), @p47='?' (DbType = Int32), @p48='?' (DbType = Int32), @p49='?' (DbType = Int32), @p50='?' (DbType = Int32), @p51='?' (DbType = Int32), @p52='?' (DbType = Int32), @p53='?' (DbType = Int32), @p54='?' (DbType = Int32), @p55='?' (DbType = Int32), @p56='?' (DbType = Int32), @p57='?' (DbType = Int32), @p58='?' (DbType = Int32), @p59='?' (DbType = Int32), @p60='?' (DbType = Int32), @p61='?' (DbType = Int32), @p62='?' (DbType = Int32), @p63='?' (DbType = Int32), @p64='?' (DbType = Int32), @p65='?' (DbType = Int32), @p66='?' (DbType = Int32), @p67='?' (DbType = Int32), @p68='?' (DbType = Int32), @p69='?' (DbType = Int32), @p70='?' (DbType = Int32), @p71='?' (DbType = Int32), @p72='?' (DbType = Int32), @p73='?' (DbType = Int32), @p74='?' (DbType = Int32), @p75='?' (DbType = Int32), @p76='?' (DbType = Int32), @p77='?' (DbType = Int32), @p78='?' (DbType = Int32), @p79='?' (DbType = Int32), @p80='?' (DbType = Int32), @p81='?' (DbType = Int32), @p82='?' (DbType = Int32), @p83='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p0 AND [RoleId] = @p1;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p2 AND [RoleId] = @p3;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p4 AND [RoleId] = @p5;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p6 AND [RoleId] = @p7;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p8 AND [RoleId] = @p9;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p10 AND [RoleId] = @p11;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p12 AND [RoleId] = @p13;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p14 AND [RoleId] = @p15;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p16 AND [RoleId] = @p17;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p18 AND [RoleId] = @p19;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p20 AND [RoleId] = @p21;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p22 AND [RoleId] = @p23;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p24 AND [RoleId] = @p25;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p26 AND [RoleId] = @p27;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p28 AND [RoleId] = @p29;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p30 AND [RoleId] = @p31;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p32 AND [RoleId] = @p33;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p34 AND [RoleId] = @p35;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p36 AND [RoleId] = @p37;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p38 AND [RoleId] = @p39;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p40 AND [RoleId] = @p41;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p42 AND [RoleId] = @p43;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p44 AND [RoleId] = @p45;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p46 AND [RoleId] = @p47;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p48 AND [RoleId] = @p49;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p50 AND [RoleId] = @p51;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p52 AND [RoleId] = @p53;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p54 AND [RoleId] = @p55;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p56 AND [RoleId] = @p57;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p58 AND [RoleId] = @p59;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p60 AND [RoleId] = @p61;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p62 AND [RoleId] = @p63;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p64 AND [RoleId] = @p65;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p66 AND [RoleId] = @p67;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p68 AND [RoleId] = @p69;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p70 AND [RoleId] = @p71;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p72 AND [RoleId] = @p73;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p74 AND [RoleId] = @p75;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p76 AND [RoleId] = @p77;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p78 AND [RoleId] = @p79;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p80 AND [RoleId] = @p81;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p82 AND [RoleId] = @p83;
+SELECT @@ROWCOUNT;
+2021-05-27 12:59:36.210 +03:00 [INF] Executed DbCommand (28ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Int32), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Int32), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Int32), @p21='?' (DbType = Int32), @p22='?' (DbType = Int32), @p23='?' (DbType = Int32), @p24='?' (DbType = Int32), @p25='?' (DbType = Int32), @p26='?' (DbType = Int32), @p27='?' (DbType = Int32), @p28='?' (DbType = Int32), @p29='?' (DbType = Int32), @p30='?' (DbType = Int32), @p31='?' (DbType = Int32), @p32='?' (DbType = Int32), @p33='?' (DbType = Int32), @p34='?' (DbType = Int32), @p35='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p0 AND [RoleId] = @p1;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p2 AND [RoleId] = @p3;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p4 AND [RoleId] = @p5;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p6 AND [RoleId] = @p7;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p8 AND [RoleId] = @p9;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p10 AND [RoleId] = @p11;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p12 AND [RoleId] = @p13;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p14 AND [RoleId] = @p15;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p16 AND [RoleId] = @p17;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p18 AND [RoleId] = @p19;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p20 AND [RoleId] = @p21;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p22 AND [RoleId] = @p23;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p24 AND [RoleId] = @p25;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p26 AND [RoleId] = @p27;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p28 AND [RoleId] = @p29;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p30 AND [RoleId] = @p31;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p32 AND [RoleId] = @p33;
+SELECT @@ROWCOUNT;
+
+DELETE FROM [Cofoundry].[RolePermission]
+WHERE [PermissionId] = @p34 AND [RoleId] = @p35;
+SELECT @@ROWCOUNT;
+2021-05-27 12:59:40.654 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkResult in 73781.6188ms.
+2021-05-27 12:59:40.676 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-05-27 12:59:40.685 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin) in 73872.9967ms
+2021-05-27 12:59:40.687 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin)'
+2021-05-27 12:59:40.689 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/update application/json 351 - 200 0 - 73911.7877ms
+2021-05-27 12:59:46.980 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - -
+2021-05-27 12:59:47.082 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:59:47.123 +03:00 [INF] Authorization was successful.
+2021-05-27 12:59:47.146 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 12:59:47.170 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 12:59:47.315 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 12:59:47.332 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:59:47.438 +03:00 [INF] Executed DbCommand (101ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 12:59:47.543 +03:00 [INF] Executed DbCommand (96ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 12:59:47.550 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 218.965ms.
+2021-05-27 12:59:47.553 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 12:59:47.555 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 382.3602ms
+2021-05-27 12:59:47.558 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 12:59:47.570 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - - - 200 - application/json;+charset=utf-8 589.8920ms
+2021-05-27 12:59:52.046 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 12:59:52.052 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:59:52.053 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 7.4000ms
+2021-05-27 12:59:52.058 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 12:59:52.059 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:59:52.060 +03:00 [INF] Authorization was successful.
+2021-05-27 12:59:52.060 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 12:59:52.064 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 12:59:52.103 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 12:59:52.106 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:59:52.151 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 12:59:52.243 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 12:59:52.298 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 12:59:52.305 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 200.4188ms.
+2021-05-27 12:59:52.307 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 12:59:52.310 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 242.3088ms
+2021-05-27 12:59:52.311 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 12:59:52.313 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 255.3448ms
+2021-05-27 12:59:59.181 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/add - -
+2021-05-27 12:59:59.183 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:59:59.187 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/add - - - 204 - - 5.6412ms
+2021-05-27 12:59:59.195 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/add application/json 29
+2021-05-27 12:59:59.198 +03:00 [INF] CORS policy execution successful.
+2021-05-27 12:59:59.199 +03:00 [INF] Authorization was successful.
+2021-05-27 12:59:59.202 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.Add (Dot.Web.Admin)'
+2021-05-27 12:59:59.206 +03:00 [INF] Route matched with {action = "Add", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Add(Cofoundry.Domain.AddRoleCommand) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 12:59:59.235 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.Add (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 12:59:59.239 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 12:59:59.279 +03:00 [INF] Executed DbCommand (38ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 12:59:59.347 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[@__query_Title_1='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Cofoundry].[Role] AS [r]
+        WHERE [r].[Title] = @__query_Title_1) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2021-05-27 12:59:59.416 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@p0='?' (Size = 3) (DbType = AnsiStringFixedLength), @p1='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Cofoundry].[Role] ([RoleCode], [Title])
+VALUES (@p0, @p1);
+SELECT [RoleId]
+FROM [Cofoundry].[Role]
+WHERE @@ROWCOUNT = 1 AND [RoleId] = scope_identity();
+2021-05-27 12:59:59.439 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.Add (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkResult in 201.2516ms.
+2021-05-27 12:59:59.442 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-05-27 12:59:59.443 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.Add (Dot.Web.Admin) in 235.1703ms
+2021-05-27 12:59:59.444 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.Add (Dot.Web.Admin)'
+2021-05-27 12:59:59.445 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/add application/json 29 - 200 0 - 249.9162ms
+2021-05-27 13:00:01.727 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 13:00:01.729 +03:00 [INF] CORS policy execution successful.
+2021-05-27 13:00:01.729 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 2.6870ms
+2021-05-27 13:00:01.736 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 13:00:01.744 +03:00 [INF] CORS policy execution successful.
+2021-05-27 13:00:01.746 +03:00 [INF] Authorization was successful.
+2021-05-27 13:00:01.747 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 13:00:01.749 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 13:00:01.784 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 13:00:01.786 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 13:00:01.837 +03:00 [INF] Executed DbCommand (49ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 13:00:01.891 +03:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 13:00:01.950 +03:00 [INF] Executed DbCommand (51ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 13:00:01.955 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 168.7443ms.
+2021-05-27 13:00:01.967 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 13:00:01.970 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 214.013ms
+2021-05-27 13:00:01.976 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 13:00:01.977 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 241.9167ms
+2021-05-27 13:00:04.568 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - -
+2021-05-27 13:00:04.572 +03:00 [INF] CORS policy execution successful.
+2021-05-27 13:00:04.581 +03:00 [INF] Authorization was successful.
+2021-05-27 13:00:04.582 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 13:00:04.585 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 13:00:04.643 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 13:00:04.646 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 13:00:04.723 +03:00 [INF] Executed DbCommand (74ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 13:00:04.783 +03:00 [INF] Executed DbCommand (54ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 13:00:04.787 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 142.0079ms.
+2021-05-27 13:00:04.789 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 13:00:04.790 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 190.8575ms
+2021-05-27 13:00:04.798 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 13:00:04.800 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - - - 200 - application/json;+charset=utf-8 232.0752ms
+2021-05-27 13:00:07.591 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/update - -
+2021-05-27 13:00:07.593 +03:00 [INF] CORS policy execution successful.
+2021-05-27 13:00:07.601 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/update - - - 204 - - 10.1160ms
+2021-05-27 13:00:07.606 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/update application/json 46
+2021-05-27 13:00:07.608 +03:00 [INF] CORS policy execution successful.
+2021-05-27 13:00:07.609 +03:00 [INF] Authorization was successful.
+2021-05-27 13:00:07.610 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin)'
+2021-05-27 13:00:07.612 +03:00 [INF] Route matched with {action = "Update", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(Cofoundry.Domain.UpdateRoleCommand) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 13:00:07.647 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 13:00:07.652 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 13:00:07.700 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 13:00:07.748 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(2) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 13:00:07.789 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@__query_RoleId_0='?' (DbType = Int32), @__query_Title_1='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Cofoundry].[Role] AS [r]
+        WHERE ([r].[RoleId] <> @__query_RoleId_0) AND ([r].[Title] = @__query_Title_1)) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2021-05-27 13:00:21.428 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkResult in 13776.3019ms.
+2021-05-27 13:00:21.433 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-05-27 13:00:21.434 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin) in 13814.4294ms
+2021-05-27 13:00:21.435 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin)'
+2021-05-27 13:00:21.436 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/update application/json 46 - 200 0 - 13830.7105ms
