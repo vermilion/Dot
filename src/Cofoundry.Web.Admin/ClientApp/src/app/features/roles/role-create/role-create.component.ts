@@ -54,6 +54,6 @@ export class RoleCreateComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate([""], { relativeTo: this.activatedRoute });
+    this.router.navigate(["roles"]);
   }
 }

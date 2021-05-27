@@ -12,7 +12,7 @@ using Cofoundry.Core.Data;
 
 namespace Cofoundry.Domain.Internal
 {
-    public class UpdateRoleCommandHandler 
+    public class UpdateRoleCommandHandler
         : IRequestHandler<UpdateRoleCommand, Unit>
         , IPermissionRestrictedRequestHandler<UpdateRoleCommand>
     {
@@ -98,8 +98,8 @@ namespace Cofoundry.Domain.Internal
             // Deletions
             var permissionsToRemove = role
                 .RolePermissions
-                .Where(p => !command.Permissions.Any(cp => 
-                            cp.PermissionCode == p.Permission.PermissionCode 
+                .Where(p => !command.Permissions.Any(cp =>
+                            cp.PermissionCode == p.Permission.PermissionCode
                             && (string.IsNullOrWhiteSpace(p.Permission.EntityDefinitionCode) || cp.EntityDefinitionCode == p.Permission.EntityDefinitionCode)
                             ))
                 .ToList();
@@ -112,10 +112,10 @@ namespace Cofoundry.Domain.Internal
             // Additions
             var permissionsToAdd = command
                 .Permissions
-                .Where(p => !role.RolePermissions.Any(cp => 
-                            cp.Permission.PermissionCode == p.PermissionCode 
+                .Where(p => !role.RolePermissions.Any(cp =>
+                            cp.Permission.PermissionCode == p.PermissionCode
                             && (string.IsNullOrWhiteSpace(p.EntityDefinitionCode) || cp.Permission.EntityDefinitionCode == p.EntityDefinitionCode)));
-            
+
             if (permissionsToAdd.Any())
             {
                 // create a unique token to use for lookup
@@ -126,8 +126,7 @@ namespace Cofoundry.Domain.Internal
                 // Get permissions from the db
                 var dbPermissions = await _dbContext
                     .Permissions
-                    .Where(p => 
-                        permissionToAddTokens.Contains((p.EntityDefinitionCode ?? "") + p.PermissionCode))
+                    .Where(p => permissionToAddTokens.Contains((p.EntityDefinitionCode ?? "") + p.PermissionCode))
                     .ToListAsync();
 
                 foreach (var permissionToAdd in permissionsToAdd)
@@ -143,19 +142,23 @@ namespace Cofoundry.Domain.Internal
                     if (dbPermission == null)
                     {
                         var codePermission = _permissionRepository.GetByCode(permissionToAdd.PermissionCode, permissionToAdd.EntityDefinitionCode);
-                        dbPermission = new Permission();
-                        dbPermission.PermissionCode = codePermission.PermissionType.Code;
-
-                        if (codePermission is IEntityPermission)
+                        dbPermission = new Permission
                         {
-                            var definitionCode = ((IEntityPermission)codePermission).EntityDefinition.EntityDefinitionCode;
+                            PermissionCode = codePermission.PermissionType.Code
+                        };
+
+                        if (codePermission is IEntityPermission permission)
+                        {
+                            var definitionCode = permission.EntityDefinition.EntityDefinitionCode;
                             await _mediator.ExecuteAsync(new EnsureEntityDefinitionExistsCommand(definitionCode), executionContext);
                             dbPermission.EntityDefinitionCode = definitionCode;
                         }
                     }
 
-                    var rolePermission = new RolePermission();
-                    rolePermission.Permission = dbPermission;
+                    var rolePermission = new RolePermission
+                    {
+                        Permission = dbPermission
+                    };
                     role.RolePermissions.Add(rolePermission);
                 }
             }

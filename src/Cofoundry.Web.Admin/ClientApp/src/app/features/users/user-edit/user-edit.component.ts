@@ -65,7 +65,7 @@ export class UserEditComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate([""], { relativeTo: this.activatedRoute });
+    this.router.navigate(["users"]);
   }
 
   private fetchRoles() {

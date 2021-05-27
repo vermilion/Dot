@@ -2438,3 +2438,1513 @@ END
 2021-05-27 13:00:21.434 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin) in 13814.4294ms
 2021-05-27 13:00:21.435 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.Update (Dot.Web.Admin)'
 2021-05-27 13:00:21.436 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/update application/json 46 - 200 0 - 13830.7105ms
+2021-05-27 14:24:05.319 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - -
+2021-05-27 14:24:05.336 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:24:05.338 +03:00 [INF] Authorization was successful.
+2021-05-27 14:24:05.340 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:24:05.344 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:24:05.399 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:24:05.405 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:24:05.534 +03:00 [INF] Executed DbCommand (59ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:24:05.615 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:24:05.625 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 222.6597ms.
+2021-05-27 14:24:05.627 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:24:05.630 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 282.7021ms
+2021-05-27 14:24:05.633 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:24:05.635 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - - - 200 - application/json;+charset=utf-8 315.7843ms
+2021-05-27 14:27:02.329 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 14:27:02.520 +03:00 [INF] Starting service
+2021-05-27 14:27:03.688 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 14:27:03.689 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 14:27:03.689 +03:00 [INF] Hosting environment: Development
+2021-05-27 14:27:03.689 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 14:27:05.734 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:27:06.821 +03:00 [INF] Executed DbCommand (104ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 14:27:07.486 +03:00 [INF] Executed DbCommand (120ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:27:07.688 +03:00 [INF] Executed DbCommand (68ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 14:27:07.861 +03:00 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 14:27:08.047 +03:00 [INF] Executed DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 14:27:08.315 +03:00 [INF] Process completed
+2021-05-27 14:27:54.252 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - -
+2021-05-27 14:27:54.274 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:27:54.441 +03:00 [INF] Authorization was successful.
+2021-05-27 14:27:54.444 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:27:54.502 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:27:54.654 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:27:54.704 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:27:54.830 +03:00 [INF] Executed DbCommand (103ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:27:54.922 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:27:55.051 +03:00 [INF] Executed DbCommand (102ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:27:55.072 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 407.5991ms.
+2021-05-27 14:27:55.090 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:27:55.226 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 711.9386ms
+2021-05-27 14:27:55.230 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:27:55.244 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=5 - - - 200 - application/json;+charset=utf-8 994.7516ms
+2021-05-27 14:28:02.885 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:28:02.888 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:02.890 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 5.0048ms
+2021-05-27 14:28:02.908 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:28:02.913 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:02.931 +03:00 [INF] Authorization was successful.
+2021-05-27 14:28:02.938 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:28:02.978 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:28:03.053 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:28:03.069 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:28:03.164 +03:00 [INF] Executed DbCommand (78ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:28:03.331 +03:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:28:03.429 +03:00 [INF] Executed DbCommand (73ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:28:03.443 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 384.6256ms.
+2021-05-27 14:28:03.446 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:28:03.454 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 465.2466ms
+2021-05-27 14:28:03.456 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:28:03.459 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 550.6810ms
+2021-05-27 14:28:07.845 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - -
+2021-05-27 14:28:07.848 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:07.855 +03:00 [INF] Authorization was successful.
+2021-05-27 14:28:07.858 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:28:07.874 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:28:07.922 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:28:07.926 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:28:07.989 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:28:08.060 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:28:08.067 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 142.1164ms.
+2021-05-27 14:28:08.069 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:28:08.073 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 196.2528ms
+2021-05-27 14:28:08.089 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:28:08.093 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=3 - - - 200 - application/json;+charset=utf-8 247.9053ms
+2021-05-27 14:28:27.289 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:28:27.293 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:27.307 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 18.2515ms
+2021-05-27 14:28:27.336 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:28:27.337 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:27.341 +03:00 [INF] Authorization was successful.
+2021-05-27 14:28:27.348 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:28:27.350 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:28:27.390 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:28:27.392 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:28:27.486 +03:00 [INF] Executed DbCommand (91ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:28:27.597 +03:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:28:27.667 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:28:27.691 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 299.3362ms.
+2021-05-27 14:28:27.694 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:28:27.697 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 343.5958ms
+2021-05-27 14:28:27.700 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:28:27.725 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 389.3964ms
+2021-05-27 14:28:29.864 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:28:29.870 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:28:29.879 +03:00 [INF] Authorization was successful.
+2021-05-27 14:28:29.881 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:28:29.884 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:28:29.940 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:28:29.945 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:28:30.033 +03:00 [INF] Executed DbCommand (84ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:28:30.067 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 123.3012ms.
+2021-05-27 14:28:30.070 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:28:30.077 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 189.0079ms
+2021-05-27 14:28:30.099 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:28:30.102 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 238.1161ms
+2021-05-27 14:29:00.258 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:29:00.262 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:29:00.270 +03:00 [INF] Authorization was successful.
+2021-05-27 14:29:00.270 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:29:00.272 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:29:00.312 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:29:00.317 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:29:00.386 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:29:00.396 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 79.5269ms.
+2021-05-27 14:29:00.398 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:29:00.411 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 129.6083ms
+2021-05-27 14:29:00.427 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:29:00.435 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 177.6431ms
+2021-05-27 14:29:10.261 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:29:10.266 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:29:10.272 +03:00 [INF] Authorization was successful.
+2021-05-27 14:29:10.281 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:29:10.289 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:29:10.356 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:29:10.360 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:29:10.440 +03:00 [INF] Executed DbCommand (77ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:29:10.446 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 86.5831ms.
+2021-05-27 14:29:10.447 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:29:10.449 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 150.4501ms
+2021-05-27 14:29:10.451 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:29:10.453 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 191.7743ms
+2021-05-27 14:31:12.224 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:31:12.227 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:31:12.229 +03:00 [INF] Authorization was successful.
+2021-05-27 14:31:12.230 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:31:12.233 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:31:12.268 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:31:12.272 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:31:12.382 +03:00 [INF] Executed DbCommand (101ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:31:12.410 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 140.0336ms.
+2021-05-27 14:31:12.413 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:31:12.416 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 181.3357ms
+2021-05-27 14:31:12.418 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:31:12.421 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 197.1226ms
+2021-05-27 14:32:32.546 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:32:32.575 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:32:32.596 +03:00 [INF] Authorization was successful.
+2021-05-27 14:32:32.597 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:32:32.599 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:32:32.683 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:32:32.697 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:32:32.781 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:32:32.788 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 93.0356ms.
+2021-05-27 14:32:32.790 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:32:32.801 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 165.5254ms
+2021-05-27 14:32:32.804 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:32:32.816 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 269.7535ms
+2021-05-27 14:32:45.515 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:32:45.521 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:32:45.527 +03:00 [INF] Authorization was successful.
+2021-05-27 14:32:45.529 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:32:45.531 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:32:45.561 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:32:45.563 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:32:45.640 +03:00 [INF] Executed DbCommand (73ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:32:45.649 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 86.5995ms.
+2021-05-27 14:32:45.660 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:32:45.662 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 129.6893ms
+2021-05-27 14:32:45.671 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:32:45.677 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 161.9158ms
+2021-05-27 14:33:11.101 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:33:11.117 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:33:11.135 +03:00 [INF] Authorization was successful.
+2021-05-27 14:33:11.135 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:33:11.155 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:33:11.219 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:33:11.226 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:33:11.293 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:33:11.317 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 91.8628ms.
+2021-05-27 14:33:11.319 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:33:11.321 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 144.52ms
+2021-05-27 14:33:11.325 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:33:11.333 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 231.8874ms
+2021-05-27 14:34:24.842 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:34:24.856 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:34:24.862 +03:00 [INF] Authorization was successful.
+2021-05-27 14:34:24.866 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:34:24.874 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:34:24.933 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:34:24.937 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:34:25.027 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:34:25.033 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 97.0097ms.
+2021-05-27 14:34:25.044 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:34:25.046 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 153.6528ms
+2021-05-27 14:34:25.049 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:34:25.055 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 212.8303ms
+2021-05-27 14:36:59.765 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:36:59.779 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:36:59.781 +03:00 [INF] Authorization was successful.
+2021-05-27 14:36:59.793 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:36:59.797 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:36:59.833 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:36:59.839 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:36:59.923 +03:00 [INF] Executed DbCommand (66ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:36:59.962 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 126.0572ms.
+2021-05-27 14:36:59.983 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:37:00.007 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 207.0392ms
+2021-05-27 14:37:00.033 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:37:00.056 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 291.8089ms
+2021-05-27 14:38:06.491 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:38:06.508 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:38:06.512 +03:00 [INF] Authorization was successful.
+2021-05-27 14:38:06.513 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:38:06.522 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:38:06.575 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:38:06.578 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:38:06.658 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:38:06.666 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 88.1858ms.
+2021-05-27 14:38:06.671 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:38:06.688 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 160.1161ms
+2021-05-27 14:38:06.691 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:38:06.696 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 206.9023ms
+2021-05-27 14:39:14.542 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - -
+2021-05-27 14:39:14.555 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:39:14.557 +03:00 [INF] Authorization was successful.
+2021-05-27 14:39:14.568 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:39:14.571 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:39:14.700 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:39:14.707 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:39:14.800 +03:00 [INF] Executed DbCommand (75ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:39:14.805 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 98.8797ms.
+2021-05-27 14:39:14.809 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:39:14.822 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 228.1752ms
+2021-05-27 14:39:14.824 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:39:14.828 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=1 - - - 200 - application/json;+charset=utf-8 285.0022ms
+2021-05-27 14:39:16.414 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:39:16.418 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:39:16.424 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 10.1306ms
+2021-05-27 14:39:16.445 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:39:16.447 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:39:16.461 +03:00 [INF] Authorization was successful.
+2021-05-27 14:39:16.462 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:39:16.486 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:39:16.539 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:39:16.549 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:39:16.626 +03:00 [INF] Executed DbCommand (71ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:39:16.720 +03:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:39:16.792 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:39:16.808 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 261.4693ms.
+2021-05-27 14:39:16.818 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:39:16.845 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 353.2765ms
+2021-05-27 14:39:16.851 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:39:16.873 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 424.2552ms
+2021-05-27 14:43:37.136 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:43:37.149 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:37.163 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 26.6343ms
+2021-05-27 14:43:37.182 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:43:37.186 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:37.194 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:37.195 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:37.199 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:43:37.284 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:37.292 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:37.459 +03:00 [INF] Executed DbCommand (69ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:37.574 +03:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:43:37.642 +03:00 [INF] Executed DbCommand (59ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:43:37.648 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 360.5769ms.
+2021-05-27 14:43:37.649 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:43:37.651 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 442.4239ms
+2021-05-27 14:43:37.653 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:37.662 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 479.7085ms
+2021-05-27 14:43:38.977 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:43:38.981 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:38.982 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 4.8315ms
+2021-05-27 14:43:38.990 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:43:38.992 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:39.001 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:39.002 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:39.011 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:43:39.053 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:39.062 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:39.123 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:39.212 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:43:39.270 +03:00 [INF] Executed DbCommand (53ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:43:39.275 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 213.2778ms.
+2021-05-27 14:43:39.279 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:43:39.283 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 266.9434ms
+2021-05-27 14:43:39.295 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:39.301 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 309.1339ms
+2021-05-27 14:43:44.899 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:43:44.907 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:44.909 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 9.9366ms
+2021-05-27 14:43:44.916 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:43:44.919 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:44.925 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:44.927 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:44.938 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:43:44.977 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:44.982 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:45.048 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:45.116 +03:00 [INF] Executed DbCommand (50ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:43:45.166 +03:00 [INF] Executed DbCommand (42ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:43:45.185 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 204.1633ms.
+2021-05-27 14:43:45.224 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:43:45.240 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 299.2797ms
+2021-05-27 14:43:45.258 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:45.283 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 366.7425ms
+2021-05-27 14:43:46.631 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - -
+2021-05-27 14:43:46.636 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:46.639 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:46.644 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:43:46.656 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:43:46.717 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:46.721 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:46.790 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:46.859 +03:00 [INF] Executed DbCommand (63ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:43:46.866 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 146.3068ms.
+2021-05-27 14:43:46.876 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:43:46.878 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 209.2287ms
+2021-05-27 14:43:46.880 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:43:46.893 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - - - 200 - application/json;+charset=utf-8 262.0819ms
+2021-05-27 14:43:48.500 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:43:48.507 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:48.520 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 20.2381ms
+2021-05-27 14:43:48.528 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:43:48.534 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:48.550 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:48.553 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:48.555 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:43:48.593 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:48.611 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:48.675 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:48.762 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:43:48.828 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:43:48.851 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 240.5546ms.
+2021-05-27 14:43:48.853 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:43:48.856 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 296.8581ms
+2021-05-27 14:43:48.859 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:48.880 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 351.8441ms
+2021-05-27 14:43:50.794 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:43:50.813 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:50.819 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 23.8294ms
+2021-05-27 14:43:50.829 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:43:50.835 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:43:50.837 +03:00 [INF] Authorization was successful.
+2021-05-27 14:43:50.839 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:50.847 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:43:50.885 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:43:50.887 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:43:50.949 +03:00 [INF] Executed DbCommand (53ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:43:51.055 +03:00 [INF] Executed DbCommand (82ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:43:51.115 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:43:51.118 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 232.3062ms.
+2021-05-27 14:43:51.120 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:43:51.135 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 284.7078ms
+2021-05-27 14:43:51.144 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:43:51.146 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 316.9369ms
+2021-05-27 14:44:59.048 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:44:59.050 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:44:59.063 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 16.0538ms
+2021-05-27 14:44:59.150 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:44:59.158 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:44:59.159 +03:00 [INF] Authorization was successful.
+2021-05-27 14:44:59.160 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:44:59.162 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:44:59.250 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:44:59.266 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:44:59.365 +03:00 [INF] Executed DbCommand (89ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:44:59.456 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:44:59.503 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:44:59.508 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 242.7075ms.
+2021-05-27 14:44:59.510 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:44:59.520 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 346.9922ms
+2021-05-27 14:44:59.534 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:44:59.536 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 385.9341ms
+2021-05-27 14:45:01.744 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:45:01.747 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:01.748 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 4.8964ms
+2021-05-27 14:45:01.767 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:45:01.769 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:01.770 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:01.771 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:01.785 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:45:01.834 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:01.844 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:01.899 +03:00 [INF] Executed DbCommand (51ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:01.970 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:45:02.033 +03:00 [INF] Executed DbCommand (58ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:45:02.043 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 199.5561ms.
+2021-05-27 14:45:02.051 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:45:02.052 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 256.1216ms
+2021-05-27 14:45:02.062 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:02.069 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 301.6466ms
+2021-05-27 14:45:03.337 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:45:03.340 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:03.342 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 5.3389ms
+2021-05-27 14:45:03.351 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:45:03.364 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:03.371 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:03.372 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:03.375 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:45:03.420 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:03.423 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:03.473 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:03.556 +03:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:45:03.632 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:45:03.638 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 215.5085ms.
+2021-05-27 14:45:03.644 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:45:03.656 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 277.239ms
+2021-05-27 14:45:03.659 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:03.664 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 313.2113ms
+2021-05-27 14:45:04.893 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:45:04.897 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:04.899 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 5.5791ms
+2021-05-27 14:45:04.907 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:45:04.912 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:04.914 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:04.915 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:04.918 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:45:04.961 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:04.962 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:05.015 +03:00 [INF] Executed DbCommand (50ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:05.098 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:45:05.162 +03:00 [INF] Executed DbCommand (57ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:45:05.173 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 211.2506ms.
+2021-05-27 14:45:05.191 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:45:05.195 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 264.6276ms
+2021-05-27 14:45:05.197 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:05.206 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 298.6532ms
+2021-05-27 14:45:06.647 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/usersApi/getById?userId=9 - -
+2021-05-27 14:45:06.654 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:06.661 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:06.663 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:45:06.673 +03:00 [INF] Route matched with {action = "GetById", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:45:06.716 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:06.721 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:06.794 +03:00 [INF] Executed DbCommand (69ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:06.904 +03:00 [INF] Executed DbCommand (60ms) [Parameters=[@__query_UserId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [u0].[UserId], [u0].[CreateDate], [u0].[CreatorId], [u0].[Email], [u0].[FirstName], [u0].[IsDeleted], [u0].[IsEmailConfirmed], [u0].[IsSystemAccount], [u0].[LastLoginDate], [u0].[LastName], [u0].[LastPasswordChangeDate], [u0].[Password], [u0].[PreviousLoginDate], [u0].[RequirePasswordChange], [u0].[RoleId], [u0].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+LEFT JOIN [Cofoundry].[User] AS [u0] ON [u].[CreatorId] = [u0].[UserId]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE [u].[UserId] = @__query_UserId_0
+2021-05-27 14:45:06.914 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 195.3276ms.
+2021-05-27 14:45:06.917 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.UserDetails'.
+2021-05-27 14:45:06.928 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetById (Dot.Web.Admin) in 253.0552ms
+2021-05-27 14:45:06.932 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:45:06.942 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/usersApi/getById?userId=9 - - - 200 - application/json;+charset=utf-8 295.0289ms
+2021-05-27 14:45:07.003 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:45:07.005 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:07.007 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 4.6802ms
+2021-05-27 14:45:07.018 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 25
+2021-05-27 14:45:07.021 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:07.023 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:07.024 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:07.033 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:45:07.387 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:07.466 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:07.672 +03:00 [INF] Executed DbCommand (118ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:07.737 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+WHERE ([r].[RoleCode] <> 'ANO') OR [r].[RoleCode] IS NULL
+2021-05-27 14:45:07.786 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+WHERE ([r].[RoleCode] <> 'ANO') OR [r].[RoleCode] IS NULL
+ORDER BY [r].[Title]
+2021-05-27 14:45:07.790 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 327.2802ms.
+2021-05-27 14:45:07.792 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:45:07.799 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 763.2484ms
+2021-05-27 14:45:07.801 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:07.803 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 25 - 200 - application/json;+charset=utf-8 785.3252ms
+2021-05-27 14:45:10.891 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:45:10.893 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:10.894 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 3.3539ms
+2021-05-27 14:45:10.899 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:45:10.907 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:45:10.909 +03:00 [INF] Authorization was successful.
+2021-05-27 14:45:10.910 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:10.913 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:45:10.942 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:45:10.945 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:45:10.992 +03:00 [INF] Executed DbCommand (44ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:45:11.049 +03:00 [INF] Executed DbCommand (43ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:45:11.093 +03:00 [INF] Executed DbCommand (39ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:45:11.098 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 154.1509ms.
+2021-05-27 14:45:11.103 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:45:11.114 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 198.5675ms
+2021-05-27 14:45:11.116 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:45:11.137 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 238.3662ms
+2021-05-27 14:46:28.572 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:46:28.599 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:28.632 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 60.0091ms
+2021-05-27 14:46:28.641 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:46:28.644 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:28.661 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:28.662 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:28.664 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:46:28.702 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:28.706 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:28.802 +03:00 [INF] Executed DbCommand (93ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:28.919 +03:00 [INF] Executed DbCommand (106ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:46:28.978 +03:00 [INF] Executed DbCommand (53ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:46:28.985 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 280.2209ms.
+2021-05-27 14:46:28.989 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:28.998 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 331.8256ms
+2021-05-27 14:46:29.000 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:29.005 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 364.8633ms
+2021-05-27 14:46:34.086 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:46:34.089 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:34.091 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 4.8396ms
+2021-05-27 14:46:34.096 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:46:34.097 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:34.099 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:34.099 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:34.100 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:46:34.138 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:34.141 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:34.249 +03:00 [INF] Executed DbCommand (106ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:34.372 +03:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:46:34.428 +03:00 [INF] Executed DbCommand (50ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:46:34.439 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 299.0894ms.
+2021-05-27 14:46:34.442 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:34.445 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 343.0828ms
+2021-05-27 14:46:34.447 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:34.452 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 356.0444ms
+2021-05-27 14:46:37.349 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:46:37.351 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:37.352 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 3.4266ms
+2021-05-27 14:46:37.360 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:46:37.362 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:37.363 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:37.364 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:37.366 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:46:37.412 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:37.419 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:37.493 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:37.556 +03:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:46:37.596 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:46:37.602 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 183.5485ms.
+2021-05-27 14:46:37.605 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:37.607 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 238.8925ms
+2021-05-27 14:46:37.622 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:37.626 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 265.9556ms
+2021-05-27 14:46:38.953 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:46:38.959 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:38.977 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 23.4213ms
+2021-05-27 14:46:38.993 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:46:38.998 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:39.000 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:39.001 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:39.011 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:46:39.045 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:39.047 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:39.095 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:39.201 +03:00 [INF] Executed DbCommand (80ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:46:39.287 +03:00 [INF] Executed DbCommand (79ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:46:39.301 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 254.0424ms.
+2021-05-27 14:46:39.302 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:39.304 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 285.8739ms
+2021-05-27 14:46:39.312 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:39.315 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 322.7347ms
+2021-05-27 14:46:41.169 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:46:41.173 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:41.174 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 5.3348ms
+2021-05-27 14:46:41.180 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:46:41.189 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:41.190 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:41.191 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:41.193 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:46:41.234 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:41.237 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:41.294 +03:00 [INF] Executed DbCommand (54ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:41.358 +03:00 [INF] Executed DbCommand (59ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:46:41.405 +03:00 [INF] Executed DbCommand (41ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:46:41.412 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 175.5705ms.
+2021-05-27 14:46:41.417 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:41.427 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 222.6761ms
+2021-05-27 14:46:41.434 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:41.446 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 264.7748ms
+2021-05-27 14:46:43.458 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - -
+2021-05-27 14:46:43.474 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:43.479 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:43.490 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:46:43.491 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:46:43.537 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:43.542 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:43.615 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:43.627 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 86.1286ms.
+2021-05-27 14:46:43.629 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:46:43.633 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 131.4564ms
+2021-05-27 14:46:43.637 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:46:43.654 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - - - 200 - application/json;+charset=utf-8 196.3971ms
+2021-05-27 14:46:45.286 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:46:45.296 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:45.298 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 11.4424ms
+2021-05-27 14:46:45.303 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:46:45.305 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:45.306 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:45.307 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:45.308 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 14:46:45.342 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:45.346 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:45.405 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:45.462 +03:00 [INF] Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 14:46:45.512 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 14:46:45.517 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 172.0376ms.
+2021-05-27 14:46:45.520 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:45.521 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 210.8517ms
+2021-05-27 14:46:45.531 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:45.534 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 230.4581ms
+2021-05-27 14:46:48.458 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:46:48.462 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:48.465 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 6.6008ms
+2021-05-27 14:46:48.477 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:46:48.488 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:46:48.493 +03:00 [INF] Authorization was successful.
+2021-05-27 14:46:48.494 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:48.499 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:46:48.559 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:46:48.577 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:46:48.643 +03:00 [INF] Executed DbCommand (56ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:46:48.711 +03:00 [INF] Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:46:48.764 +03:00 [INF] Executed DbCommand (37ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:46:48.783 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 206.2684ms.
+2021-05-27 14:46:48.791 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:46:48.819 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 298.261ms
+2021-05-27 14:46:48.845 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:46:48.848 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 371.7137ms
+2021-05-27 14:47:02.293 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:47:02.299 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:47:02.300 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 7.3576ms
+2021-05-27 14:47:02.314 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:47:02.319 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:47:02.330 +03:00 [INF] Authorization was successful.
+2021-05-27 14:47:02.335 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:47:02.339 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:47:02.402 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:47:02.413 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:47:02.512 +03:00 [INF] Executed DbCommand (86ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:47:02.626 +03:00 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:47:02.708 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:47:02.720 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 308.6435ms.
+2021-05-27 14:47:02.722 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:47:02.725 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 371.2851ms
+2021-05-27 14:47:02.738 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:47:02.741 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 426.9726ms
+2021-05-27 14:47:03.532 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - -
+2021-05-27 14:47:03.536 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:47:03.538 +03:00 [INF] Authorization was successful.
+2021-05-27 14:47:03.547 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:47:03.549 +03:00 [INF] Route matched with {action = "GetById", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:47:03.596 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:47:03.599 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:47:03.657 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:47:03.661 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 62.4384ms.
+2021-05-27 14:47:03.662 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.RoleDetails'.
+2021-05-27 14:47:03.664 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin) in 110.0546ms
+2021-05-27 14:47:03.675 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetById (Dot.Web.Admin)'
+2021-05-27 14:47:03.677 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/rolesApi/getById?roleId=2 - - - 200 - application/json;+charset=utf-8 145.3949ms
+2021-05-27 14:47:05.470 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:47:05.473 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:47:05.474 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 4.6468ms
+2021-05-27 14:47:05.481 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:47:05.484 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:47:05.490 +03:00 [INF] Authorization was successful.
+2021-05-27 14:47:05.490 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:47:05.492 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:47:05.542 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:47:05.564 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:47:05.626 +03:00 [INF] Executed DbCommand (53ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:47:05.688 +03:00 [INF] Executed DbCommand (55ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:47:05.739 +03:00 [INF] Executed DbCommand (47ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:47:05.742 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 178.8537ms.
+2021-05-27 14:47:05.755 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:47:05.757 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 247.3422ms
+2021-05-27 14:47:05.768 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:47:05.783 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 301.7916ms
+2021-05-27 14:48:19.656 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:48:19.677 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:19.679 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 41.6631ms
+2021-05-27 14:48:19.718 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:48:19.722 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:19.725 +03:00 [INF] Authorization was successful.
+2021-05-27 14:48:19.728 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:48:19.734 +03:00 [INF] Route matched with {action = "GetAll", controller = "RolesApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchRolesQuery) on controller Cofoundry.Web.Admin.RolesApiController (Dot.Web.Admin).
+2021-05-27 14:48:19.800 +03:00 [INF] Executing action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 14:48:19.814 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:48:19.911 +03:00 [INF] Executed DbCommand (92ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 14:48:20.098 +03:00 [INF] Executed DbCommand (155ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[Role] AS [r]
+2021-05-27 14:48:20.234 +03:00 [INF] Executed DbCommand (122ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[Role] AS [r]
+ORDER BY [r].[Title]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2021-05-27 14:48:20.239 +03:00 [INF] Executed action method Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 425.7552ms.
+2021-05-27 14:48:20.241 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.RoleMicroSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 14:48:20.243 +03:00 [INF] Executed action Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin) in 506.2869ms
+2021-05-27 14:48:20.256 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.RolesApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 14:48:20.270 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 552.3006ms
+2021-05-27 14:48:33.773 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:48:33.777 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:33.781 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 7.8214ms
+2021-05-27 14:48:33.790 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:48:33.798 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:33.800 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:48:33.814 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:48:33.817 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 302 0 - 26.4252ms
+2021-05-27 14:48:33.884 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - -
+2021-05-27 14:48:33.892 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:33.897 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - - - 204 - - 13.0716ms
+2021-05-27 14:48:33.906 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json -
+2021-05-27 14:48:33.908 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:48:33.921 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json - - 404 0 - 15.3693ms
+2021-05-27 14:50:35.605 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 14:50:35.865 +03:00 [INF] Starting service
+2021-05-27 14:50:36.995 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 14:50:36.997 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 14:50:36.998 +03:00 [INF] Hosting environment: Development
+2021-05-27 14:50:36.999 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 14:50:38.457 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:50:39.262 +03:00 [INF] Executed DbCommand (161ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 14:50:39.856 +03:00 [INF] Executed DbCommand (192ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:50:40.087 +03:00 [INF] Executed DbCommand (162ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 14:50:40.247 +03:00 [INF] Executed DbCommand (102ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 14:50:40.413 +03:00 [INF] Executed DbCommand (108ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 14:50:40.673 +03:00 [INF] Process completed
+2021-05-27 14:50:46.735 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:50:46.754 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:46.780 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 50.7554ms
+2021-05-27 14:50:46.819 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:50:46.826 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:47.023 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:50:47.045 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:50:47.054 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 302 0 - 235.4553ms
+2021-05-27 14:50:47.070 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - -
+2021-05-27 14:50:47.073 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:47.076 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - - - 204 - - 5.4437ms
+2021-05-27 14:50:47.091 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json -
+2021-05-27 14:50:47.093 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:47.110 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json - - 404 0 - 18.8407ms
+2021-05-27 14:50:51.038 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:50:51.044 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:51.049 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 10.3951ms
+2021-05-27 14:50:51.057 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:50:51.061 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:51.086 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:50:51.091 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:50:51.093 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 302 0 - 35.8329ms
+2021-05-27 14:50:51.114 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll - -
+2021-05-27 14:50:51.117 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:51.119 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll - - - 204 - - 5.4903ms
+2021-05-27 14:50:51.128 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll application/json -
+2021-05-27 14:50:51.140 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:50:51.143 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll application/json - - 404 0 - 15.0017ms
+2021-05-27 14:51:30.275 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:51:30.293 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:30.296 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 21.8291ms
+2021-05-27 14:51:30.421 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:51:30.437 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:30.447 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:51:30.449 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:51:30.450 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 302 0 - 29.1106ms
+2021-05-27 14:51:30.469 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - -
+2021-05-27 14:51:30.471 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:30.473 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - - - 204 - - 3.2728ms
+2021-05-27 14:51:30.480 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json -
+2021-05-27 14:51:30.483 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:30.497 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json - - 404 0 - 16.2509ms
+2021-05-27 14:51:39.796 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:51:39.798 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:39.799 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 2.5657ms
+2021-05-27 14:51:39.804 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:51:39.805 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:39.807 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:51:39.808 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:51:39.809 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 302 0 - 5.3665ms
+2021-05-27 14:51:39.832 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll - -
+2021-05-27 14:51:39.834 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:39.834 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll - - - 204 - - 2.1235ms
+2021-05-27 14:51:39.847 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll application/json -
+2021-05-27 14:51:39.850 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:51:39.856 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FusersApi%2FgetAll application/json - - 404 0 - 9.6238ms
+2021-05-27 14:52:57.983 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 14:52:58.174 +03:00 [INF] Starting service
+2021-05-27 14:52:59.354 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 14:52:59.355 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 14:52:59.355 +03:00 [INF] Hosting environment: Development
+2021-05-27 14:52:59.356 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 14:53:00.857 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:53:01.584 +03:00 [INF] Executed DbCommand (127ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 14:53:02.447 +03:00 [INF] Executed DbCommand (192ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:53:02.642 +03:00 [INF] Executed DbCommand (107ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 14:53:02.807 +03:00 [INF] Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 14:53:03.102 +03:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 14:53:03.402 +03:00 [INF] Process completed
+2021-05-27 14:53:15.285 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - -
+2021-05-27 14:53:15.306 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:53:15.333 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/rolesApi/getAll - - - 204 - - 57.4759ms
+2021-05-27 14:53:15.377 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31
+2021-05-27 14:53:15.382 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:53:15.570 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:53:15.593 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:53:15.598 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/rolesApi/getAll application/json 31 - 302 0 - 222.1031ms
+2021-05-27 14:53:15.646 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - -
+2021-05-27 14:53:15.654 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:53:15.671 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll - - - 204 - - 24.6671ms
+2021-05-27 14:53:15.685 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json -
+2021-05-27 14:53:15.699 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:53:15.747 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/Account/Login?ReturnUrl=%2Fapi%2FrolesApi%2FgetAll application/json - - 404 0 - 62.2201ms
+2021-05-27 14:56:36.891 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 14:56:37.090 +03:00 [INF] Starting service
+2021-05-27 14:56:38.180 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 14:56:38.181 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 14:56:38.181 +03:00 [INF] Hosting environment: Development
+2021-05-27 14:56:38.182 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 14:56:39.744 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 14:56:40.744 +03:00 [INF] Executed DbCommand (162ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 14:56:41.657 +03:00 [INF] Executed DbCommand (206ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 14:56:41.863 +03:00 [INF] Executed DbCommand (138ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 14:56:42.041 +03:00 [INF] Executed DbCommand (112ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 14:56:42.261 +03:00 [INF] Executed DbCommand (138ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 14:56:42.575 +03:00 [INF] Process completed
+2021-05-27 14:56:42.789 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:56:42.814 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:56:42.847 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 64.2151ms
+2021-05-27 14:56:42.865 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:56:42.876 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:56:43.063 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:56:47.016 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:56:47.054 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 4188.5123ms
+2021-05-27 14:57:31.197 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:57:31.200 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:57:31.210 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 12.6873ms
+2021-05-27 14:57:31.216 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:57:31.236 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:57:31.293 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:57:31.300 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:57:31.302 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 86.6953ms
+2021-05-27 14:58:10.648 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 14:58:10.664 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:58:10.665 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 16.3155ms
+2021-05-27 14:58:10.732 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 14:58:10.773 +03:00 [INF] CORS policy execution successful.
+2021-05-27 14:58:10.783 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 14:58:10.798 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 14:58:10.800 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 68.0627ms
+2021-05-27 15:00:17.627 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 15:00:17.640 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:00:17.640 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 31.8555ms
+2021-05-27 15:00:17.679 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 15:00:17.687 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:00:17.689 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 15:00:17.691 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 15:00:17.693 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 13.4661ms
+2021-05-27 15:01:33.491 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 15:01:33.505 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:01:33.519 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 30.5008ms
+2021-05-27 15:01:33.555 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 15:01:33.578 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:01:33.579 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 15:01:33.582 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 15:01:33.585 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 32.1517ms
+2021-05-27 15:02:00.414 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 15:02:00.419 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:00.421 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 6.9019ms
+2021-05-27 15:02:00.450 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 15:02:00.452 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:00.453 +03:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2021-05-27 15:02:00.455 +03:00 [INF] AuthenticationScheme: Cookies was challenged.
+2021-05-27 15:02:00.456 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 401 0 - 6.0586ms
+2021-05-27 15:02:03.114 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - -
+2021-05-27 15:02:03.115 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:03.117 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/auth/login - - - 204 - - 2.6151ms
+2021-05-27 15:02:03.127 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login application/json 67
+2021-05-27 15:02:03.134 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:03.158 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.AuthController.Login (Dot.Web.Admin)'
+2021-05-27 15:02:03.227 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] Login(Cofoundry.Web.Identity.LoginViewModel) on controller Cofoundry.Web.Admin.AuthController (Dot.Web.Admin).
+2021-05-27 15:02:03.453 +03:00 [INF] Executing action method Cofoundry.Web.Admin.AuthController.Login (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 15:02:03.617 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 15:02:03.786 +03:00 [INF] Executed DbCommand (149ms) [Parameters=[@__query_Username_0='?' (Size = 150)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+FROM [Cofoundry].[User] AS [u]
+WHERE (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND ([u].[Username] = @__query_Username_0)
+2021-05-27 15:02:03.952 +03:00 [INF] AuthenticationScheme: Cookies signed out.
+2021-05-27 15:02:03.972 +03:00 [INF] AuthenticationScheme: Cookies signed in.
+2021-05-27 15:02:04.136 +03:00 [INF] Executed DbCommand (148ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 15:02:04.322 +03:00 [INF] Executed DbCommand (141ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+FROM [Cofoundry].[User] AS [u]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 15:02:04.730 +03:00 [INF] Executed DbCommand (187ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Cofoundry].[User] SET [LastLoginDate] = @p0, [PreviousLoginDate] = @p1
+WHERE [UserId] = @p2;
+SELECT @@ROWCOUNT;
+2021-05-27 15:02:04.833 +03:00 [INF] Executed action method Cofoundry.Web.Admin.AuthController.Login (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkResult in 1360.8691ms.
+2021-05-27 15:02:04.856 +03:00 [INF] Executing HttpStatusCodeResult, setting HTTP status code 200
+2021-05-27 15:02:04.879 +03:00 [INF] Executed action Cofoundry.Web.Admin.AuthController.Login (Dot.Web.Admin) in 1627.8062ms
+2021-05-27 15:02:04.884 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.AuthController.Login (Dot.Web.Admin)'
+2021-05-27 15:02:04.906 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login application/json 67 - 200 0 - 1779.4813ms
+2021-05-27 15:02:07.067 +03:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - -
+2021-05-27 15:02:07.075 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:07.077 +03:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5000/api/usersApi/getAll - - - 204 - - 9.3673ms
+2021-05-27 15:02:07.092 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31
+2021-05-27 15:02:07.119 +03:00 [INF] CORS policy execution successful.
+2021-05-27 15:02:07.134 +03:00 [INF] Authorization was successful.
+2021-05-27 15:02:07.137 +03:00 [INF] Executing endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 15:02:07.151 +03:00 [INF] Route matched with {action = "GetAll", controller = "UsersApi"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Cofoundry.Domain.SearchUserSummariesQuery) on controller Cofoundry.Web.Admin.UsersApiController (Dot.Web.Admin).
+2021-05-27 15:02:07.224 +03:00 [INF] Executing action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) - Validation state: "Valid"
+2021-05-27 15:02:07.251 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 15:02:07.418 +03:00 [INF] Executed DbCommand (153ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE (([u].[UserId] = @__id_0) AND ([u].[IsDeleted] <> CAST(1 AS bit))) AND (([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit)))
+2021-05-27 15:02:07.589 +03:00 [INF] Executed DbCommand (138ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 15:02:07.813 +03:00 [INF] Executed DbCommand (149ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Cofoundry].[User] AS [u]
+WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+2021-05-27 15:02:07.986 +03:00 [INF] Executed DbCommand (102ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserId], [t].[CreateDate], [t].[CreatorId], [t].[Email], [t].[FirstName], [t].[IsDeleted], [t].[IsEmailConfirmed], [t].[IsSystemAccount], [t].[LastLoginDate], [t].[LastName], [t].[LastPasswordChangeDate], [t].[Password], [t].[PreviousLoginDate], [t].[RequirePasswordChange], [t].[RoleId], [t].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM (
+    SELECT [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username]
+    FROM [Cofoundry].[User] AS [u]
+    WHERE ([u].[IsSystemAccount] <> CAST(1 AS bit)) AND ([u].[IsDeleted] <> CAST(1 AS bit))
+    ORDER BY [u].[LastName]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [t].[RoleId] = [r].[RoleId]
+ORDER BY [t].[LastName]
+2021-05-27 15:02:08.023 +03:00 [INF] Executed action method Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 796.4952ms.
+2021-05-27 15:02:08.042 +03:00 [INF] Executing OkObjectResult, writing value of type 'Cofoundry.Domain.PagedQueryResult`1[[Cofoundry.Domain.UserSummary, Dot.Core, Version=0.7.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-05-27 15:02:08.197 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 1036.6496ms
+2021-05-27 15:02:08.200 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
+2021-05-27 15:02:08.206 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 1113.2735ms

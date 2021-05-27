@@ -1,11 +1,13 @@
 :host {
-    display: contents;
+  display: block;
+  height: 100%;
+  padding: 0.5rem;
 
-    &>.card {
-      flex: 1;
+  &>.card {
+    flex: 1;
 
-      .card-body {
-        padding: 0;
-      }
+    .card-body {
+      padding: 0;
     }
   }
+}

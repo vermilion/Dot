@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Web
 {
@@ -26,12 +28,24 @@ namespace Cofoundry.Web
             var cookieNamespace = _authCookieNamespaceProvider.GetNamespace();
 
             authBuilder
-                .AddCookie(cookieOptions =>
+                .AddCookie(options =>
                 {
-                    cookieOptions.Cookie.Name = cookieNamespace;
-                    cookieOptions.Cookie.HttpOnly = true;
-                    cookieOptions.Cookie.IsEssential = true;
-                    cookieOptions.Cookie.SameSite = SameSiteMode.Lax;
+                    options.Cookie.Name = cookieNamespace;
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.IsEssential = true;
+                    options.Cookie.SameSite = SameSiteMode.Lax;
+
+                    options.Events.OnRedirectToLogin = context =>
+                   {
+                       context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                       return Task.CompletedTask;
+                   };
+
+                    options.Events.OnRedirectToAccessDenied = context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                        return Task.CompletedTask;
+                    };
                 });
 
             mvcBuilder.Services.AddAuthorization();

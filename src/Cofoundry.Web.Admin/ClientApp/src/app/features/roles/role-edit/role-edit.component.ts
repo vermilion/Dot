@@ -68,6 +68,6 @@ export class RoleEditComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate([""], { relativeTo: this.activatedRoute });
+    this.router.navigate(["roles"]);
   }
 }

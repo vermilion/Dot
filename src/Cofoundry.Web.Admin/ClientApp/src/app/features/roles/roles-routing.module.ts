@@ -4,39 +4,32 @@ import { NgModule } from "@angular/core";
 import { RoleCreateComponent } from "./role-create/role-create.component";
 import { RoleEditComponent } from "./role-edit/role-edit.component";
 import { RoleResolver } from "./resolvers/role.resolver";
-import { RolesComponent } from "./roles.component";
 import { RolesListComponent } from "./roles-list/roles-list.component";
 
 const routes: Routes = [
   {
     path: "",
-    component: RolesComponent,
-    children: [
-      {
-        path: "",
-        component: RolesListComponent,
-        data: {
-          breadcrumb: "Roles List"
-        },
-      },
-      {
-        path: "create",
-        component: RoleCreateComponent,
-        data: {
-          breadcrumb: "Role Create"
-        },
-      },
-      {
-        path: "role/:id",
-        component: RoleEditComponent,
-        data: {
-          breadcrumb: "Role Edit"
-        },
-        resolve: {
-          role: RoleResolver
-        }
-      }
-    ]
+    component: RolesListComponent,
+    data: {
+      breadcrumb: "Roles List"
+    },
+  },
+  {
+    path: "create",
+    component: RoleCreateComponent,
+    data: {
+      breadcrumb: "Role Create"
+    },
+  },
+  {
+    path: "role/:id",
+    component: RoleEditComponent,
+    data: {
+      breadcrumb: "Role Edit"
+    },
+    resolve: {
+      role: RoleResolver
+    }
   }
 ];
 

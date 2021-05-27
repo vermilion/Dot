@@ -10,6 +10,24 @@
             </nz-form-control>
           </nz-form-item>
         </nz-card>
+
+        <nz-table *nzSpaceItem #table [nzFrontPagination]="false" [nzShowPagination]="false" nzTableLayout="fixed" [nzData]="role.permissions">
+          <thead>
+            <tr>
+              <th>Permission Name</th>
+              <th nzWidth="70px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of table.data">
+              <td>
+                {{ row.permissionType.description }}
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
       </nz-space>
 
     </form>

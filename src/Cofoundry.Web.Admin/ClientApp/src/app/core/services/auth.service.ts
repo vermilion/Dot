@@ -45,8 +45,12 @@ export class AuthenticationService {
     this.http
       .post(`${this.baseUrl}/api/auth/logout`, {})
       .subscribe(x => {
-        this.userSubject.next(null);
-        this.router.navigate(["/login"]);
+        this.redirectToLogin();
       });
+  }
+
+  redirectToLogin() {
+    this.userSubject.next(null);
+    this.router.navigate(["/auth/login"]);
   }
 }

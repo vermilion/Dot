@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 
 import { API_BASE_URL } from "@shared/constants";
 import { NzNotificationService } from "ng-zorro-antd/notification";
@@ -21,7 +21,6 @@ export class UserCreateComponent implements OnInit {
     @Inject(API_BASE_URL) private baseUrl: string,
     private notificationsService: NzNotificationService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private http: HttpClient) {
   }
@@ -60,7 +59,7 @@ export class UserCreateComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate([""], { relativeTo: this.activatedRoute });
+    this.router.navigate(["users"]);
   }
 
   private fetchRoles() {
