@@ -2,23 +2,24 @@
 using Cofoundry.Core;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using PlatformFramework.EFCore.Abstractions;
 
 namespace Cofoundry.Domain.Internal
 {
     public class LogFailedLoginAttemptCommandHandler
         : IRequestHandler<LogFailedLoginAttemptCommand, Unit>
     {
+        private readonly IUnitOfWork _unitOfWork;
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
         private readonly IClientConnectionService _clientConnectionService;
 
         public LogFailedLoginAttemptCommandHandler(
-            CofoundryDbContext dbContext,
+            IUnitOfWork unitOfWork,
             IClientConnectionService clientConnectionService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _clientConnectionService = clientConnectionService;
         }
         #endregion
@@ -27,7 +28,7 @@ namespace Cofoundry.Domain.Internal
         {
             var connectionInfo = _clientConnectionService.GetConnectionInfo();
 
-            await _dbContext.FailedAuthenticationAttempts.AddAsync(new FailedAuthenticationAttempt
+            await _unitOfWork.FailedAuthenticationAttempts().AddAsync(new FailedAuthenticationAttempt
             {
                 UserName = TextFormatter.Limit(command.Username, 150),
                 IPAddress = connectionInfo.IPAddress,

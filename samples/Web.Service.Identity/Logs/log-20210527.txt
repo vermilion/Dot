@@ -3948,3 +3948,348 @@ ORDER BY [t].[LastName]
 2021-05-27 15:02:08.197 +03:00 [INF] Executed action Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin) in 1036.6496ms
 2021-05-27 15:02:08.200 +03:00 [INF] Executed endpoint 'Cofoundry.Web.Admin.UsersApiController.GetAll (Dot.Web.Admin)'
 2021-05-27 15:02:08.206 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usersApi/getAll application/json 31 - 200 - application/json;+charset=utf-8 1113.2735ms
+2021-05-27 16:04:35.233 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:04:35.521 +03:00 [INF] Starting service
+2021-05-27 16:04:36.928 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:04:36.929 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:04:36.930 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:04:36.930 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:04:41.043 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 16:04:41.570 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 16:04:41.983 +03:00 [INF] Executed DbCommand (93ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 16:04:42.134 +03:00 [INF] Executed DbCommand (70ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 16:04:42.225 +03:00 [INF] Executed DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 16:04:42.353 +03:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 16:04:42.536 +03:00 [INF] Process completed
+2021-05-27 16:06:52.561 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:06:52.735 +03:00 [INF] Starting service
+2021-05-27 16:06:53.642 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:06:53.643 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:06:53.643 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:06:53.644 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:06:54.968 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 16:06:55.513 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 16:06:55.799 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 16:06:55.903 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 16:06:55.943 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 16:06:56.000 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 16:07:16.611 +03:00 [ERR] Failed executing DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[DistributedLockId], [d].[ExpiryDate], [d].[LockDate], [d].[LockedByLockingId], [d].[RequestedLockingId]
+FROM [Cofoundry].[DistributedLock] AS [d]
+2021-05-27 16:07:16.738 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'Cofoundry.Domain.Data.CofoundryDbContext'.
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockedByLockingId'.
+Invalid column name 'RequestedLockingId'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:2f1dfe5e-9399-472f-9d26-a6bfc8345ab5
+Error Number:207,State:1,Class:16
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockedByLockingId'.
+Invalid column name 'RequestedLockingId'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:2f1dfe5e-9399-472f-9d26-a6bfc8345ab5
+Error Number:207,State:1,Class:16
+2021-05-27 16:07:17.215 +03:00 [ERR] Error executing update
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockedByLockingId'.
+Invalid column name 'RequestedLockingId'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at Cofoundry.Core.DistributedLocks.Internal.DistributedLockManager.UnlockAsync(DistributedLock distributedLock) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\DistributedLocks\Services\DistributedLockManager.cs:line 119
+   at Cofoundry.Core.AutoUpdate.Internal.AutoUpdateDistributedLockManager.UnlockAsync(DistributedLock distributedLock) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\AutoUpdate\DistributedLock\AutoUpdateDistributedLockManager.cs:line 59
+   at Cofoundry.Core.AutoUpdate.Internal.AutoUpdateService.UpdateAsync(Nullable`1 cancellationToken) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\AutoUpdate\Services\AutoUpdateService.cs:line 103
+   at Cofoundry.Web.AutoUpdateHostedService.TryUpdate(CancellationToken stoppingToken) in C:\work\Github\PlatformFramework\src\Cofoundry.Web\App_Start\AutoUpdate\AutoUpdateHostedService.cs:line 86
+ClientConnectionId:2f1dfe5e-9399-472f-9d26-a6bfc8345ab5
+Error Number:207,State:1,Class:16
+2021-05-27 16:07:17.341 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:07:18.770 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:07:20.006 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:07:21.195 +03:00 [INF] Process failed, retrying in 5 seconds
+2021-05-27 16:07:26.523 +03:00 [INF] Process failed, retrying in 5 seconds
+2021-05-27 16:12:38.388 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:12:38.606 +03:00 [INF] Starting service
+2021-05-27 16:12:39.673 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:12:39.673 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:12:39.674 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:12:39.674 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:12:42.876 +03:00 [ERR] Error executing update
+System.InvalidOperationException: The entity type 'DistributedLockEntity' requires a primary key to be defined. If you intended to use a keyless entity type, call 'HasNoKey' in 'OnModelCreating'. For more information on keyless entity types, see https://go.microsoft.com/fwlink/?linkid=2141943.
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.ValidateNonNullPrimaryKeys(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Infrastructure.RelationalModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.SqlServer.Internal.SqlServerModelValidator.Validate(IModel model, IDiagnosticsLogger`1 logger)
+   at Microsoft.EntityFrameworkCore.Metadata.Conventions.ValidatingConvention.ProcessModelFinalized(IModel model)
+   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.ImmediateConventionScope.OnModelFinalized(IModel model)
+   at Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal.ConventionDispatcher.OnModelFinalized(IModel model)
+   at Microsoft.EntityFrameworkCore.Metadata.Internal.Model.FinalizeModel()
+   at Microsoft.EntityFrameworkCore.ModelBuilder.FinalizeModel()
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.CreateModel(DbContext context, IConventionSetBuilder conventionSetBuilder, ModelDependencies modelDependencies)
+   at Microsoft.EntityFrameworkCore.Infrastructure.ModelSource.GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder, ModelDependencies modelDependencies)
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.CreateModel()
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.get_Model()
+   at Microsoft.EntityFrameworkCore.Infrastructure.EntityFrameworkServicesBuilder.<>c.<TryAddCoreServices>b__7_3(IServiceProvider p)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite singletonCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite singletonCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass1_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.Set[TEntity]()
+   at PlatformFramework.EFCore.Context.UnitOfWork.Set[TEntity]() in C:\work\Github\PlatformFramework\src\Cofoundry.Core\EntityFramework\UoW\UnitOfWork.cs:line 38
+   at Cofoundry.Domain.Data.UnitOfWorkExtensions.DistributedLocks(IUnitOfWork unitOfWork) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\DistributedLocks\Models\UnitOfWorkExtensions.cs:line 11
+   at Cofoundry.Core.DistributedLocks.Internal.DistributedLockManager.UnlockAsync(DistributedLock distributedLock) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\DistributedLocks\Services\DistributedLockManager.cs:line 119
+   at Cofoundry.Core.AutoUpdate.Internal.AutoUpdateDistributedLockManager.UnlockAsync(DistributedLock distributedLock) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\AutoUpdate\DistributedLock\AutoUpdateDistributedLockManager.cs:line 59
+   at Cofoundry.Core.AutoUpdate.Internal.AutoUpdateService.UpdateAsync(Nullable`1 cancellationToken) in C:\work\Github\PlatformFramework\src\Cofoundry.Core\AutoUpdate\Services\AutoUpdateService.cs:line 103
+   at Cofoundry.Web.AutoUpdateHostedService.TryUpdate(CancellationToken stoppingToken) in C:\work\Github\PlatformFramework\src\Cofoundry.Web\App_Start\AutoUpdate\AutoUpdateHostedService.cs:line 86
+2021-05-27 16:12:43.115 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:15:16.084 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:15:16.342 +03:00 [INF] Starting service
+2021-05-27 16:15:17.792 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:15:17.831 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:15:17.832 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:15:17.833 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:15:17.834 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:15:19.140 +03:00 [INF] Process failed, retrying in 1 seconds
+2021-05-27 16:15:21.320 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 16:15:22.352 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 16:15:23.001 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 16:15:23.067 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 16:15:23.134 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 16:15:23.228 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 16:15:25.887 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[DistributedLockId], [d].[ExpiryDate], [d].[LockDate], [d].[LockingId], [d].[Name]
+FROM [Cofoundry].[DistributedLock] AS [d]
+2021-05-27 16:18:51.934 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:18:52.109 +03:00 [INF] Starting service
+2021-05-27 16:18:53.328 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:18:53.329 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:18:53.329 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:18:53.329 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:18:54.758 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 16:18:55.245 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 16:18:55.514 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 16:18:55.550 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 16:18:55.581 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 16:18:55.630 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 16:18:58.005 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [d].[DistributedLockId], [d].[ExpiryDate], [d].[LockDate], [d].[LockingId], [d].[Name]
+FROM [Cofoundry].[DistributedLock] AS [d]
+WHERE [d].[DistributedLockId] = @__p_0
+2021-05-27 16:21:33.067 +03:00 [INF] User profile is available. Using 'C:\Users\Max\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-05-27 16:21:33.273 +03:00 [INF] Starting service
+2021-05-27 16:21:34.198 +03:00 [INF] Now listening on: http://localhost:5000
+2021-05-27 16:21:34.199 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-05-27 16:21:34.200 +03:00 [INF] Hosting environment: Development
+2021-05-27 16:21:34.201 +03:00 [INF] Content root path: C:\work\Github\PlatformFramework\samples\Web.Service.Identity
+2021-05-27 16:21:35.594 +03:00 [INF] Entity Framework Core 5.0.6 initialized 'CofoundryDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: None
+2021-05-27 16:21:36.108 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[UserId], [u].[CreateDate], [u].[CreatorId], [u].[Email], [u].[FirstName], [u].[IsDeleted], [u].[IsEmailConfirmed], [u].[IsSystemAccount], [u].[LastLoginDate], [u].[LastName], [u].[LastPasswordChangeDate], [u].[Password], [u].[PreviousLoginDate], [u].[RequirePasswordChange], [u].[RoleId], [u].[Username], [r].[RoleId], [r].[RoleCode], [r].[Title]
+FROM [Cofoundry].[User] AS [u]
+INNER JOIN [Cofoundry].[Role] AS [r] ON [u].[RoleId] = [r].[RoleId]
+WHERE ([u].[IsDeleted] <> CAST(1 AS bit)) AND ([u].[IsSystemAccount] = CAST(1 AS bit))
+2021-05-27 16:21:36.392 +03:00 [INF] Executed DbCommand (8ms) [Parameters=[@__roleId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[RoleId], [t].[RoleCode], [t].[Title], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0], [t0].[EntityDefinitionCode], [t0].[PermissionCode]
+FROM (
+    SELECT TOP(1) [r].[RoleId], [r].[RoleCode], [r].[Title]
+    FROM [Cofoundry].[Role] AS [r]
+    WHERE [r].[RoleId] = @__roleId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t0] ON [t].[RoleId] = [t0].[RoleId]
+ORDER BY [t].[RoleId], [t0].[RoleId], [t0].[PermissionId], [t0].[PermissionId0]
+2021-05-27 16:21:36.443 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [e].[EntityDefinitionCode], [e].[Name]
+FROM [Cofoundry].[EntityDefinition] AS [e]
+2021-05-27 16:21:36.497 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[PermissionId], [p].[EntityDefinitionCode], [p].[PermissionCode]
+FROM [Cofoundry].[Permission] AS [p]
+2021-05-27 16:21:36.562 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [r].[RoleId], [r].[RoleCode], [r].[Title], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0], [t].[EntityDefinitionCode], [t].[PermissionCode]
+FROM [Cofoundry].[Role] AS [r]
+LEFT JOIN (
+    SELECT [r0].[RoleId], [r0].[PermissionId], [p].[PermissionId] AS [PermissionId0], [p].[EntityDefinitionCode], [p].[PermissionCode]
+    FROM [Cofoundry].[RolePermission] AS [r0]
+    INNER JOIN [Cofoundry].[Permission] AS [p] ON [r0].[PermissionId] = [p].[PermissionId]
+) AS [t] ON [r].[RoleId] = [t].[RoleId]
+ORDER BY [r].[RoleId], [t].[RoleId], [t].[PermissionId], [t].[PermissionId0]
+2021-05-27 16:21:40.283 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__distributedLock_LockedByLockingId_0='?' (DbType = Guid), @__distributedLock_DistributedLockId_1='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT [d].[DistributedLockId], [d].[ExpiryDate], [d].[LockDate], [d].[LockingId], [d].[Name]
+FROM [Cofoundry].[DistributedLock] AS [d]
+WHERE ([d].[LockingId] = @__distributedLock_LockedByLockingId_0) AND ([d].[DistributedLockId] = @__distributedLock_DistributedLockId_1)
+2021-05-27 16:21:52.597 +03:00 [INF] Executed DbCommand (69ms) [Parameters=[@p3='?' (Size = 450), @p0='?' (DbType = DateTime2), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Cofoundry].[DistributedLock] SET [ExpiryDate] = @p0, [LockDate] = @p1, [LockingId] = @p2
+WHERE [DistributedLockId] = @p3;
+SELECT @@ROWCOUNT;

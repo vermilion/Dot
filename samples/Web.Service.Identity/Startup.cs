@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Web;
 using Cofoundry.Web.Admin;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -70,15 +71,15 @@ namespace Cofoundry.BasicTestSite
 
                 /*var securityScheme = new OpenApiSecurityScheme
                 {
-                    Name = "JWT Authentication",
-                    Description = "Enter JWT Bearer token **_only_**",
-                    In = ParameterLocation.Header,
+                    Name = "Cookie Authentication",
+                    Description = "Enter Cookie contents **_only_**",
+                    In = ParameterLocation.Cookie,
                     Type = SecuritySchemeType.Http,
-                    Scheme = "bearer", // must be lower case
+                    Scheme = CookieAuthenticationDefaults.AuthenticationScheme, // must be lower case
                     BearerFormat = "JWT",
                     Reference = new OpenApiReference
                     {
-                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Id = CookieAuthenticationDefaults.AuthenticationScheme,
                         Type = ReferenceType.SecurityScheme
                     }
                 };

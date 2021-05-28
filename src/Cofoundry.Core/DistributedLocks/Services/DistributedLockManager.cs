@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using PlatformFramework.EFCore.Abstractions;
+using Cofoundry.Domain.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Core.DistributedLocks.Internal
 {
@@ -25,14 +28,17 @@ namespace Cofoundry.Core.DistributedLocks.Internal
     public class DistributedLockManager : IDistributedLockManager
     {
         private readonly ICofoundryDatabase _db;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IDistributedLockDefinitionRepository _distributedLockDefinitionRepository;
 
         public DistributedLockManager(
+            IUnitOfWork unitOfWork,
             ICofoundryDatabase db,
             IDistributedLockDefinitionRepository distributedLockDefinitionRepository
             )
         {
             _db = db;
+            _unitOfWork = unitOfWork;
             _distributedLockDefinitionRepository = distributedLockDefinitionRepository;
         }
 
@@ -107,20 +113,22 @@ namespace Cofoundry.Core.DistributedLocks.Internal
         /// The distributed lock entry to unlock. This should be the instance
         /// you received from a call to the LockAsync method.
         /// </param>
-        public Task UnlockAsync(DistributedLock distributedLock)
+        public async Task UnlockAsync(DistributedLock distributedLock)
         {
             if (distributedLock == null) throw new ArgumentNullException(nameof(distributedLock));
 
-            var sql = @"
-                update Cofoundry.DistributedLock 
-                set LockingId = null, LockDate = null, ExpiryDate = null
-                where LockingId = @LockingId and DistributedLockId = @DistributedLockId
-                ";
+            var existingLocks = await _unitOfWork.DistributedLocks()
+                .Where(x => x.LockingId == distributedLock.LockingId && x.DistributedLockId == distributedLock.DistributedLockId)
+                .ToListAsync();
 
-            return _db.ExecuteAsync(sql, 
-                new SqlParameter("LockingId", distributedLock.LockedByLockingId),
-                new SqlParameter("DistributedLockId", distributedLock.DistributedLockId)
-                );
+            foreach (var existingLock in existingLocks)
+            {
+                existingLock.LockingId = null;
+                existingLock.LockDate = null;
+                existingLock.ExpiryDate = null;
+            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
 
         private DistributedLock MapDistributedLock(SqlDataReader reader)
@@ -129,7 +137,7 @@ namespace Cofoundry.Core.DistributedLocks.Internal
             if (reader[nameof(result.DistributedLockId)] == null) return null;
 
             result.DistributedLockId = reader["DistributedLockId"] as string;
-            result.LockedByLockingId = reader["LockingId"] as Guid?;
+            result.LockingId = reader["LockingId"] as Guid?;
             result.LockDate = reader["LockDate"] as DateTime?;
             result.ExpiryDate = reader["ExpiryDate"] as DateTime?;
 

@@ -31,7 +31,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.aliyun.min.css",
               "src/styles.scss"
             ],
             "scripts": [],

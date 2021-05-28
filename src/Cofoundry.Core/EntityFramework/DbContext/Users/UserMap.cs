@@ -11,6 +11,8 @@ namespace Cofoundry.Domain.Data
         {
             builder.ToTable("User", DbConstants.CofoundrySchema);
 
+            builder.HasKey(x => x.UserId);
+
             builder.Property(s => s.FirstName)
                 .HasMaxLength(32);
 

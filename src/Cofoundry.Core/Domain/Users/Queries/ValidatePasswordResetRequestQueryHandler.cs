@@ -6,26 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
+using PlatformFramework.EFCore.Abstractions;
 
 namespace Cofoundry.Domain.Internal
 {
     public class ValidatePasswordResetRequestQueryHandler
         : IRequestHandler<ValidatePasswordResetRequestQuery, PasswordResetRequestAuthenticationResult>
     {
+        private readonly IUnitOfWork _unitOfWork;
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
         private readonly AuthenticationSettings _authenticationSettings;
 
         public ValidatePasswordResetRequestQueryHandler(
-            CofoundryDbContext dbContext,
+            IUnitOfWork unitOfWork,
             AuthenticationSettings authenticationSettings
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _authenticationSettings = authenticationSettings;
         }
-        
+
         #endregion
 
         #region execution
@@ -44,8 +45,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<UserPasswordResetRequest> GetRequest(ValidatePasswordResetRequestQuery query)
         {
-            return _dbContext
-                .UserPasswordResetRequests
+            return _unitOfWork
+                .UserPasswordResetRequests()
                 .AsNoTracking()
                 .Include(r => r.User)
                 .Where(r => r.UserPasswordResetRequestId == query.UserPasswordResetRequestId);

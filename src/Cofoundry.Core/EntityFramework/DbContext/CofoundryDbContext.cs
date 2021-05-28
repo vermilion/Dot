@@ -63,10 +63,6 @@ namespace Cofoundry.Domain.Data
         /// </summary>
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserPasswordResetRequest> UserPasswordResetRequests { get; set; }
-
-        public DbSet<FailedAuthenticationAttempt> FailedAuthenticationAttempts { get; set; }
-
         #endregion
     }
 }

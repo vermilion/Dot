@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cofoundry.Core.Data;
 using Cofoundry.Core.Mail;
 using Cofoundry.Core;
+using PlatformFramework.EFCore.Abstractions;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -16,27 +16,24 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<CompleteUserPasswordResetCommand, Unit>
     {
         private const int NUMHOURS_PASSWORD_RESET_VALID = 16;
+        private readonly IUnitOfWork _unitOfWork;
 
         #region construstor
 
-        private readonly CofoundryDbContext _dbContext;
         private readonly IMediator _queryExecutor;
         private readonly IMailService _mailService;
-        private readonly ITransactionScopeManager _transactionScopeFactory;
         private readonly IPasswordUpdateCommandHelper _passwordUpdateCommandHelper;
 
         public CompleteUserPasswordResetCommandHandler(
-            CofoundryDbContext dbContext,
+            IUnitOfWork unitOfWork,
             IMediator queryExecutor,
             IMailService mailService,
-            ITransactionScopeManager transactionScopeFactory,
             IPasswordUpdateCommandHelper passwordUpdateCommandHelper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _queryExecutor = queryExecutor;
             _mailService = mailService;
-            _transactionScopeFactory = transactionScopeFactory;
             _passwordUpdateCommandHelper = passwordUpdateCommandHelper;
         }
 
@@ -55,9 +52,9 @@ namespace Cofoundry.Domain.Internal
             UpdatePasswordAndSetComplete(request, command, executionContext);
             SetMailTemplate(command, request.User);
 
-            using (var scope = _transactionScopeFactory.Create(_dbContext))
+            using (var scope = _unitOfWork.BeginTransaction())
             {
-                await _dbContext.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
                 await _mailService.SendAsync(request.User.Email, request.User.GetFullName(), command.MailTemplate);
 
                 await scope.CompleteAsync();
@@ -79,8 +76,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<UserPasswordResetRequest> QueryPasswordRequestIfToken(CompleteUserPasswordResetCommand command)
         {
-            return _dbContext
-                .UserPasswordResetRequests
+            return _unitOfWork
+                .UserPasswordResetRequests()
                 .Include(r => r.User)
                 .Where(r => r.UserPasswordResetRequestId == command.UserPasswordResetRequestId
                     && !r.User.IsSystemAccount
@@ -89,9 +86,11 @@ namespace Cofoundry.Domain.Internal
 
         private ValidatePasswordResetRequestQuery CreateValidationQuery(CompleteUserPasswordResetCommand command)
         {
-            var query = new ValidatePasswordResetRequestQuery();
-            query.UserPasswordResetRequestId = command.UserPasswordResetRequestId;
-            query.Token = command.Token;
+            var query = new ValidatePasswordResetRequestQuery
+            {
+                UserPasswordResetRequestId = command.UserPasswordResetRequestId,
+                Token = command.Token
+            };
 
             return query;
         }

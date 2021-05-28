@@ -56,6 +56,7 @@ namespace Cofoundry.Domain.Data
         {
             modelBuilder
                 .MapCofoundryUsers()
+                .ApplyConfiguration(new DistributedLockMap())
                 .ApplyConfiguration(new EntityDefinitionMap());
 
             return modelBuilder;
