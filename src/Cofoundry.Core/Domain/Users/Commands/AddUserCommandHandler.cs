@@ -17,7 +17,7 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _queryExecutor;
         private readonly IPasswordCryptographyService _passwordCryptographyService;
         private readonly IMailService _mailService;
@@ -25,7 +25,7 @@ namespace Cofoundry.Domain.Internal
         private readonly IPermissionValidationService _permissionValidationService;
 
         public AddUserCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator queryExecutor,
             IPasswordCryptographyService passwordCryptographyService,
             IMailService mailService,

@@ -23,7 +23,7 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _mediator;
         private readonly IRoleCache _roleCache;
         private readonly IPermissionValidationService _permissionValidationService;
@@ -34,7 +34,7 @@ namespace Cofoundry.Domain.Internal
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public RegisterPermissionsAndRolesCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator mediator,
             IRoleCache roleCache,
             IPermissionValidationService permissionValidationService,

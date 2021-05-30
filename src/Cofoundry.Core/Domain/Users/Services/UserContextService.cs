@@ -20,12 +20,12 @@ namespace Cofoundry.Domain.Internal
 
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IUserSessionService _userSessionService;
         private readonly UserContextMapper _userContextMapper;
 
         public UserContextService(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IUserSessionService userSessionService,
             UserContextMapper userContextMapper
             )

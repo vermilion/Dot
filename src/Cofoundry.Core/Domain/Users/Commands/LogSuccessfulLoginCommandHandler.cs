@@ -17,11 +17,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IClientConnectionService _clientConnectionService;
 
         public LogSuccessfulLoginCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IClientConnectionService clientConnectionService
             )
         {

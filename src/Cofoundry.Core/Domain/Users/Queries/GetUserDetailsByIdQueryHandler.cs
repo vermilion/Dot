@@ -15,12 +15,12 @@ namespace Cofoundry.Domain.Internal
     public class GetUserDetailsByIdQueryHandler 
         : IRequestHandler<GetUserDetailsByIdQuery, UserDetails>
     {
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly IUserDetailsMapper _userDetailsMapper;
 
         public GetUserDetailsByIdQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IPermissionValidationService permissionValidationService,
             IUserDetailsMapper userDetailsMapper
             )

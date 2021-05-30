@@ -12,11 +12,11 @@ namespace Cofoundry.Domain.Internal
     public class GetUpdateCurrentUserAccountCommandByIdQueryHandler 
         : IRequestHandler<GetUpdateCommandByIdQuery<UpdateCurrentUserAccountCommand>, UpdateCurrentUserAccountCommand>
     {
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public GetUpdateCurrentUserAccountCommandByIdQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IPermissionValidationService permissionValidationService
             )
         {

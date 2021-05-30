@@ -11,11 +11,11 @@ namespace PlatformFramework.EFCore.Context
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private CofoundryDbContext _context;
+        private DbContextCore _context;
         private readonly ITransactionScopeManager _transactionScopeManager;
 
         public UnitOfWork(
-            CofoundryDbContext context,
+            DbContextCore context,
             ITransactionScopeManager transactionScopeManager)
         {
             _context = context;

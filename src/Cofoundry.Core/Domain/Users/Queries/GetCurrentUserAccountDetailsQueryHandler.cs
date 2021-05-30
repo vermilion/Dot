@@ -15,11 +15,11 @@ namespace Cofoundry.Domain.Internal
     public class GetCurrentUserAccountDetailsQueryHandler 
         : IRequestHandler<GetCurrentUserAccountDetailsQuery, UserAccountDetails>
     {
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IUserAccountDetailsMapper _userAccountDetailsMapper;
 
         public GetCurrentUserAccountDetailsQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IUserAccountDetailsMapper userAccountDetailsMapper
             )
         {

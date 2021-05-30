@@ -18,10 +18,10 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
 
         public IsRoleTitleUniqueQueryHandler(
-            CofoundryDbContext dbContext
+            DbContextCore dbContext
             )
         {
             _dbContext = dbContext;

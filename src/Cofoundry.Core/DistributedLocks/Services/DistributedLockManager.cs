@@ -1,13 +1,10 @@
 ﻿using Cofoundry.Core.Data.SimpleDatabase;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using PlatformFramework.EFCore.Abstractions;
 using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using PlatformFramework.EFCore.Abstractions;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Core.DistributedLocks.Internal
 {
@@ -66,7 +63,35 @@ namespace Cofoundry.Core.DistributedLocks.Internal
             EntityNotFoundException.ThrowIfNull(distributedLockDefinition, typeof(TDefinition));
 
             var lockingId = Guid.NewGuid();
-            var query = @" 
+            var now = DateTime.Now;
+
+            var distributedLock = await _unitOfWork.DistributedLocks()
+                .Where(x => x.DistributedLockId == distributedLockDefinition.DistributedLockId)
+                .SingleOrDefaultAsync();
+
+            if (distributedLock == null)
+            {
+                distributedLock = new DistributedLockEntity
+                {
+                    DistributedLockId = distributedLockDefinition.DistributedLockId,
+                    Name = distributedLockDefinition.Name
+                };
+
+                await _unitOfWork.DistributedLocks().AddAsync(distributedLock);
+            }
+
+            if (distributedLock.ExpiryDate.GetValueOrDefault(DateTime.MinValue) < now)
+            {
+                distributedLock.LockingId = lockingId;
+                distributedLock.LockDate = now;
+                distributedLock.ExpiryDate = now.AddSeconds(distributedLockDefinition.Timeout.TotalSeconds);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
+
+            return new DistributedLock(distributedLock) { RequestedLockingId = lockingId };
+
+            /*var query = @" 
                 declare @DateNow datetime2(7) = GetUtcDate();
 
                 with data as (select @DistributedLockId as DistributedLockId, @DistributedLockName as [Name])
@@ -99,10 +124,7 @@ namespace Cofoundry.Core.DistributedLocks.Internal
             {
                 throw new Exception($"Unknown error creating a distributed lock with a DistributedLockId of '{distributedLockDefinition.DistributedLockId}'");
             }
-
-            distributedLock.RequestedLockingId = lockingId;
-
-            return distributedLock;
+            */
         }
 
         /// <summary>
@@ -118,30 +140,12 @@ namespace Cofoundry.Core.DistributedLocks.Internal
             if (distributedLock == null) throw new ArgumentNullException(nameof(distributedLock));
 
             var existingLocks = await _unitOfWork.DistributedLocks()
-                .Where(x => x.LockingId == distributedLock.LockingId && x.DistributedLockId == distributedLock.DistributedLockId)
+                .Where(x => x.LockingId == distributedLock.Entity.LockingId && x.DistributedLockId == distributedLock.Entity.DistributedLockId)
                 .ToListAsync();
 
-            foreach (var existingLock in existingLocks)
-            {
-                existingLock.LockingId = null;
-                existingLock.LockDate = null;
-                existingLock.ExpiryDate = null;
-            }
+            _unitOfWork.DistributedLocks().RemoveRange(existingLocks);
 
             await _unitOfWork.SaveChangesAsync();
-        }
-
-        private DistributedLock MapDistributedLock(SqlDataReader reader)
-        {
-            var result = new DistributedLock();
-            if (reader[nameof(result.DistributedLockId)] == null) return null;
-
-            result.DistributedLockId = reader["DistributedLockId"] as string;
-            result.LockingId = reader["LockingId"] as Guid?;
-            result.LockDate = reader["LockDate"] as DateTime?;
-            result.ExpiryDate = reader["ExpiryDate"] as DateTime?;
-
-            return result;
         }
     }
 }

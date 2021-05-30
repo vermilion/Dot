@@ -1,6 +1,7 @@
 ﻿using Cofoundry.BasicTestSite;
 using Cofoundry.Core.DependencyInjection;
 using Cofoundry.Core.EntityFramework;
+using Cofoundry.Domain.Data;
 
 namespace Cofoundry.Core.Validation.Registration
 {
@@ -11,7 +12,7 @@ namespace Cofoundry.Core.Validation.Registration
             var highPriorityOverrideRegistrationOptions = RegistrationOptions.Override(RegistrationOverridePriority.High);
 
             container
-                .Register<IDbContextInitializer, AppDbContextInitializer>(highPriorityOverrideRegistrationOptions)
+                .Register<DbContextCore, AppDbContext>(highPriorityOverrideRegistrationOptions)
                 ;
         }
     }

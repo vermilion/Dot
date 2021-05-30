@@ -1,7 +1,5 @@
 ﻿using Cofoundry.Core.DistributedLocks;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cofoundry.Core.AutoUpdate
 {
@@ -25,7 +23,7 @@ namespace Cofoundry.Core.AutoUpdate
         private static string FormatMessage(DistributedLock distributedLock)
         {
             return $"The auto-update process cannot be started because it has been locked by another " +
-                $"machine on {distributedLock.LockDate}. The lock is due to expire on {distributedLock.ExpiryDate}.";
+                $"machine on {distributedLock.Entity.LockDate}. The lock is due to expire on {distributedLock.Entity.ExpiryDate}.";
         }
     }
 }

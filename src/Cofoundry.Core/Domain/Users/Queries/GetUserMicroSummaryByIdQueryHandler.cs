@@ -18,12 +18,12 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
         
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly IUserMicroSummaryMapper _userMicroSummaryMapper;
 
         public GetUserMicroSummaryByIdQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IPermissionValidationService permissionValidationService,
             IUserMicroSummaryMapper userMicroSummaryMapper
             )

@@ -18,13 +18,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region consructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _queryExecutor;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public UpdateCurrentUserAccountCommandHandler(
             IMediator queryExecutor,
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IPermissionValidationService permissionValidationService
             )
         {

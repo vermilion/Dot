@@ -11,11 +11,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IInternalRoleRepository _internalRoleRepository;
 
         public UserCommandPermissionsHelper(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IInternalRoleRepository internalRoleRepository
             )
         {

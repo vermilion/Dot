@@ -16,11 +16,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly ISettingCache _settingsCache;
 
         public InternalSettingsRepository(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             ISettingCache settingsCache
             )
         {

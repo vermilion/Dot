@@ -20,11 +20,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IUserMicroSummaryMapper _userMicroSummaryMapper;
 
         public GetUserMicroSummaryByUsernameQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IUserMicroSummaryMapper userMicroSummaryMapper
             )
         {

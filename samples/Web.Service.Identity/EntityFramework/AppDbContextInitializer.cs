@@ -1,15 +1,15 @@
-﻿using Cofoundry.Core.EntityFramework.Internal;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using Microsoft.Extensions.Logging;
 using Cofoundry.Core.Data;
 using Cofoundry.Core;
+using Cofoundry.Domain.Data;
 
 namespace Cofoundry.BasicTestSite
 {
-    public class AppDbContextInitializer : DbContextInitializer
+    public class AppDbContext : DbContextCore
     {
-        public AppDbContextInitializer(
+        public AppDbContext(
             ILoggerFactory loggerFactory,
             ICofoundryDbConnectionManager cofoundryDbConnectionFactory,
             DatabaseSettings databaseSettings)

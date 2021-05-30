@@ -16,14 +16,14 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly SettingCommandHelper _settingCommandHelper;
         private readonly ISettingCache _settingCache;
         private readonly IAutoUpdateService _autoUpdateService;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public UpdateGeneralSiteSettingsCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             SettingCommandHelper settingCommandHelper,
             ISettingCache settingCache,
             IAutoUpdateService autoUpdateService,

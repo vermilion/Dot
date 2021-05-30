@@ -17,12 +17,12 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _queryExecutor;
         private readonly IUserSummaryMapper _userSummaryMapper;
 
         public SearchUserSummariesQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator queryExecutor,
             IUserSummaryMapper userSummaryMapper
             )

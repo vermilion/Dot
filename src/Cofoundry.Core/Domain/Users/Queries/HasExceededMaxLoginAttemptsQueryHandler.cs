@@ -9,12 +9,12 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly AuthenticationSettings _authenticationSettings;
         private readonly IClientConnectionService _clientConnectionService;
 
         public HasExceededMaxLoginAttemptsQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             AuthenticationSettings authenticationSettings,
             IClientConnectionService clientConnectionService
             )

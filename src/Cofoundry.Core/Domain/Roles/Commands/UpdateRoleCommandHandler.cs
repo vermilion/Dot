@@ -18,14 +18,14 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IRoleCache _roleCache;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public UpdateRoleCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator mediator,
             IPermissionRepository permissionRepository,
             IRoleCache roleCache,

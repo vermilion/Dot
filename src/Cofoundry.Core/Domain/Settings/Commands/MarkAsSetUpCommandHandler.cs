@@ -13,13 +13,13 @@ namespace Cofoundry.Domain.Internal
 
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly ISettingCache _settingCache;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public MarkAsSetUpCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             SettingCommandHelper settingCommandHelper,
             ISettingCache settingCache,
             IPermissionValidationService permissionValidationService,

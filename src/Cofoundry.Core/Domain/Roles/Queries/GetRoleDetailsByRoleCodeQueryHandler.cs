@@ -22,12 +22,12 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IInternalRoleRepository _internalRoleRepository;
         private readonly IRoleCache _roleCache;
 
         public GetRoleDetailsByRoleCodeQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IInternalRoleRepository internalRoleRepository,
             IRoleCache roleCache
             )

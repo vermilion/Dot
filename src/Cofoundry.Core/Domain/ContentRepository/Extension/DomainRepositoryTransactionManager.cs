@@ -16,7 +16,7 @@ namespace Cofoundry.Domain.Internal
     {
         public DomainRepositoryTransactionManager(
             ITransactionScopeManager transactionScopeManager,
-            CofoundryDbContext dbContext
+            DbContextCore dbContext
             )
         {
             TransactionScopeManager = transactionScopeManager;

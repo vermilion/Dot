@@ -14,11 +14,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IEntityDefinitionRepository _entityDefinitionRepository;
 
         public EnsureEntityDefinitionExistsCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IEntityDefinitionRepository entityDefinitionRepository
             )
         {

@@ -20,12 +20,12 @@ namespace Cofoundry.Domain.Internal
         #region constructor
 
         private readonly IRoleCache _roleCache;
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IRoleDetailsMapper _roleMappingHelper;
 
         public InternalRoleRepository(
             IRoleCache roleCache,
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IRoleDetailsMapper roleMappingHelper
             )
         {

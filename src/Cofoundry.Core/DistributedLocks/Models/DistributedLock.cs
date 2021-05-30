@@ -30,24 +30,31 @@ namespace Cofoundry.Core.DistributedLocks
     /// Represents the state of the distributed lock at the point at
     /// which a new locking request has been made.
     /// </summary>
-    public class DistributedLock : DistributedLockEntity
+    public class DistributedLock
     {
+        public DistributedLock(DistributedLockEntity entity)
+        {
+            Entity = entity;
+        }
+
         /// <summary>
         /// The locking id that was used to attempt the lock.
         /// </summary>
         public Guid RequestedLockingId { get; set; }
+
+        public DistributedLockEntity Entity { get; }
 
         public bool IsLocked()
         {
             // We shouldn't check expiry date here as this will
             // have been detected when record was fetched from the db 
             // and may not be up to date.
-            return LockingId.HasValue &&  LockDate.HasValue;
+            return Entity.LockingId.HasValue && Entity.LockDate.HasValue;
         }
 
         public bool IsLockedByAnotherProcess()
         {
-            return IsLocked() && RequestedLockingId != LockingId;
+            return IsLocked() && RequestedLockingId != Entity.LockingId;
         }
     }
 }

@@ -20,12 +20,12 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IRoleCache _roleCache;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public DeleteRoleCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IRoleCache roleCache,
             ITransactionScopeManager transactionScopeFactory

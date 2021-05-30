@@ -18,12 +18,12 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<DeleteUserCommand, Unit>
         , IPermissionRestrictedRequestHandler<DeleteUserCommand>
     {
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly UserCommandPermissionsHelper _userCommandPermissionsHelper;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public DeleteUserCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IPermissionValidationService permissionValidationService
             )

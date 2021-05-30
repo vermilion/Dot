@@ -19,13 +19,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public AddRoleCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator mediator,
             IPermissionRepository permissionRepository,
             IPermissionValidationService permissionValidationService

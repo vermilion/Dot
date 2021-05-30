@@ -12,13 +12,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IDbUnstructuredDataSerializer _dbUnstructuredDataSerializer;
         private readonly EntityAuditHelper _entityAuditHelper;
         private readonly IMediator _queryExecutor;
 
         public SettingCommandHelper(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IDbUnstructuredDataSerializer dbUnstructuredDataSerializer,
             EntityAuditHelper entityAuditHelper,
             IMediator queryExecutor

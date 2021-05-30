@@ -17,11 +17,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IRoleMicroSummaryMapper _roleMicroSummaryMapper;
 
         public SearchRolesQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IMediator queryExecutor,
             IRoleMicroSummaryMapper roleMicroSummaryMapper
             )

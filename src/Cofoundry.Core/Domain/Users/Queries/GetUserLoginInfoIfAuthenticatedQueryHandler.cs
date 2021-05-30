@@ -16,10 +16,10 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<GetUserLoginInfoIfAuthenticatedQuery, UserLoginInfo>
     {
         private readonly UserAuthenticationHelper _userAuthenticationHelper;
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
 
         public GetUserLoginInfoIfAuthenticatedQueryHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             UserAuthenticationHelper userAuthenticationHelper
             )
         {

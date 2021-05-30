@@ -13,11 +13,11 @@ namespace Cofoundry.Domain.Internal
     {
         #region construstor
         
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly IResetUserPasswordCommandHelper _resetUserPasswordCommandHelper;
 
         public ResetUserPasswordByUsernameCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             IResetUserPasswordCommandHelper resetUserPasswordCommandHelper
             )
         {

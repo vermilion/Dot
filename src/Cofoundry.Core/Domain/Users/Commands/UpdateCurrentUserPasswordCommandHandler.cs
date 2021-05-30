@@ -18,13 +18,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly CofoundryDbContext _dbContext;
+        private readonly DbContextCore _dbContext;
         private readonly UserAuthenticationHelper _userAuthenticationHelper;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly IPasswordUpdateCommandHelper _passwordUpdateCommandHelper;
 
         public UpdateCurrentUserPasswordCommandHandler(
-            CofoundryDbContext dbContext,
+            DbContextCore dbContext,
             UserAuthenticationHelper userAuthenticationHelper,
             IPermissionValidationService permissionValidationService,
             IPasswordUpdateCommandHelper passwordUpdateCommandHelper
