@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { AuthenticationService } from "../../core";
-import { finalize } from "rxjs/operators";
+import { NzNotificationService } from "ng-zorro-antd/notification";
 
 @Component({
   selector: "app-login",
@@ -12,6 +12,7 @@ import { finalize } from "rxjs/operators";
 })
 export class LoginComponent implements OnInit, OnDestroy {
   validateForm!: FormGroup;
+  isLoading: boolean = false;
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthenticationService,
-    private fb: FormBuilder) {}
+    private notificationsService: NzNotificationService,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -35,10 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       remember: [true]
     });
   }
-
-
-  isLoading: boolean = false;
-  loginError = false;
 
   login() {
     if (!this.validateForm.valid) {
@@ -51,15 +49,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     const returnUrl = this.route.snapshot.queryParams.returnUrl || "";
     this.authService
       .login(value.userName, value.password, value.remember)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      )
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.router.navigate([returnUrl]);
         },
-        () => { this.loginError = true; }
-      );
+        error: err => {
+          this.notificationsService.error("Error", err.error?.title);
+        },
+        complete: () => this.isLoading = false
+      });
   }
 
   ngOnDestroy(): void {

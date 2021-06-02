@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Cofoundry.Core.DistributedLocks.Internal
 {
@@ -37,16 +36,6 @@ namespace Cofoundry.Core.DistributedLocks.Internal
             {
                 var message = "Duplicate IDistributedLockDefinition.DistributedLockId: " + dulpicateIds.Key;
                 throw new InvalidDistributedLockDefinitionException(message, dulpicateIds.First(), definitions);
-            }
-
-            var notValidCode = definitions
-                .Where(d => !SqlCharValidator.IsValid(d.DistributedLockId, 6))
-                .FirstOrDefault();
-
-            if (notValidCode != null)
-            {
-                var message = notValidCode.GetType().Name + " has an invalid DistributedLockId. The id must be 6 characters in length and can include only non-unicode characters.";
-                throw new InvalidDistributedLockDefinitionException(message, notValidCode, definitions);
             }
         }
 

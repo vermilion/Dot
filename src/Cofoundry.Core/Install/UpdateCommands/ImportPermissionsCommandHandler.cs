@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Cofoundry.Core.AutoUpdate;
 using Cofoundry.Core.Data;
-using Cofoundry.Core.Data.SimpleDatabase;
 
 namespace Cofoundry.Domain.Installation
 {
@@ -13,17 +12,14 @@ namespace Cofoundry.Domain.Installation
     /// </summary>
     public class ImportPermissionsCommandHandler : IVersionedUpdateCommandHandler<ImportPermissionsCommand>
     {
-        private readonly ICofoundryDatabase _db;
         private readonly ITransactionScopeManager _transactionScopeManager;
         private readonly IPermissionRepository _permissionRepository;
 
         public ImportPermissionsCommandHandler(
-            ICofoundryDatabase db,
             IPermissionRepository permissionRepository,
             ITransactionScopeManager transactionScopeManager
             )
         {
-            _db = db;
             _permissionRepository = permissionRepository;
             _transactionScopeManager = transactionScopeManager;
         }
@@ -52,10 +48,11 @@ namespace Cofoundry.Domain.Installation
             }
 
             var sql = sb.ToString();
-            using (var scope = _transactionScopeManager.Create(_db))
+            //using (var scope = _transactionScopeManager.Create(_db))
             {
-                await _db.ExecuteAsync(sql);
-                await scope.CompleteAsync();
+                // TODO: use EFCore
+                //await _db.ExecuteAsync(sql);
+                //await scope.CompleteAsync();
             }
         }
     }

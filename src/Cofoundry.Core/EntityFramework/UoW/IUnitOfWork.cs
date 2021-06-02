@@ -20,6 +20,12 @@ namespace PlatformFramework.EFCore.Abstractions
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 
         /// <summary>
+        /// Gets an underlying context
+        /// </summary>
+        /// <returns></returns>
+        DbContext Context();
+
+        /// <summary>
         /// Gets <paramref name="entity"/> metadata
         /// </summary>
         /// <typeparam name="TEntity">Type of entity</typeparam>

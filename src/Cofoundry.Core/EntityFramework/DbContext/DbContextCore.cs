@@ -1,8 +1,6 @@
 using Cofoundry.Core;
-using Cofoundry.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace Cofoundry.Domain.Data
 {
@@ -16,28 +14,24 @@ namespace Cofoundry.Domain.Data
     public class DbContextCore : DbContext
     {
         private readonly ILoggerFactory _loggerFactory;
-        private readonly ICofoundryDbConnectionManager _cofoundryDbConnectionFactory;
-        private readonly DatabaseSettings _databaseSettings;
+        protected DatabaseSettings DatabaseSettings { get; }
 
         public DbContextCore(
             ILoggerFactory loggerFactory,
-            ICofoundryDbConnectionManager cofoundryDbConnectionFactory,
             DatabaseSettings databaseSettings)
         {
             _loggerFactory = loggerFactory;
-            _cofoundryDbConnectionFactory = cofoundryDbConnectionFactory;
-            _databaseSettings = databaseSettings;
+            DatabaseSettings = databaseSettings;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(_loggerFactory);
 
-            var connection = _cofoundryDbConnectionFactory.GetShared();
-            ConfigureAction(optionsBuilder, connection);
+            ConfigureAction(optionsBuilder);
         }
 
-        public virtual void ConfigureAction(DbContextOptionsBuilder builder, DbConnection connection)
+        public virtual void ConfigureAction(DbContextOptionsBuilder builder)
         {
         }
 

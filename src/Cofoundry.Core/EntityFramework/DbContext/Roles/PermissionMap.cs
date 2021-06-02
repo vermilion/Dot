@@ -14,10 +14,10 @@ namespace Cofoundry.Domain.Data
 
             builder.Property(s => s.PermissionCode)
                 .IsRequired()
-                .IsCharType(6);
+                .HasMaxLength(6);
 
             builder.Property(s => s.EntityDefinitionCode)
-                .IsCharType(6);
+                .HasMaxLength(6);
 
             builder.HasOne(s => s.EntityDefinition)
                 .WithMany(d => d.Permissions)

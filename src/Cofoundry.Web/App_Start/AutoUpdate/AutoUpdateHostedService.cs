@@ -19,7 +19,7 @@ namespace Cofoundry.Web
     public class AutoUpdateHostedService : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public AutoUpdateHostedService(
             IServiceProvider serviceProvider,

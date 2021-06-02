@@ -2,7 +2,6 @@ using Cofoundry.Core;
 using Cofoundry.Core.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Cofoundry.Domain.Data
 {
@@ -12,8 +11,7 @@ namespace Cofoundry.Domain.Data
         {
             builder.ToTable("UserPasswordResetRequest", DbConstants.CofoundrySchema);
 
-            builder.Property(s => s.Token)
-                .IsVarCharMaxType();
+            builder.Property(s => s.Token);
 
             builder.Property(s => s.IPAddress)
                 .IsUnicode(false)

@@ -1,6 +1,5 @@
 import { User } from "@app/features/interfaces";
-import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable } from "@angular/core";
@@ -9,20 +8,12 @@ import { API_BASE_URL } from "@shared/constants";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
-  private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
   constructor(
     @Inject(API_BASE_URL) private baseUrl: string,
     private router: Router,
     private http: HttpClient) {
-
-    this.userSubject = new BehaviorSubject<User>(null);
-    this.user = this.userSubject.asObservable();
-  }
-
-  public get userValue(): User {
-    return this.userSubject.value;
   }
 
   login(userName: string, password: string, rememberMe: boolean) {
@@ -31,14 +22,7 @@ export class AuthenticationService {
         userName,
         password,
         rememberMe
-      })
-      .pipe(
-        map(user => {
-          this.userSubject.next(user);
-
-          return user;
-        })
-      );
+      });
   }
 
   logout() {
@@ -50,7 +34,6 @@ export class AuthenticationService {
   }
 
   redirectToLogin() {
-    this.userSubject.next(null);
     this.router.navigate(["/auth/login"]);
   }
 }

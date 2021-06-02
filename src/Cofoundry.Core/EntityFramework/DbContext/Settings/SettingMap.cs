@@ -19,8 +19,7 @@ namespace Cofoundry.Domain.Data
                 .HasMaxLength(32);
 
             builder.Property(s => s.SettingValue)
-                .IsRequired()
-                .IsNVarCharMaxType();
+                .IsRequired();
         }
     }
 }

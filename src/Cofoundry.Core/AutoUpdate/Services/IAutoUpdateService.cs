@@ -16,7 +16,7 @@ namespace Cofoundry.Core.AutoUpdate
         /// Optional cancellation token that can be used to try and stop the update early, although
         /// a unit of updates will attempt to be completed before stopping.
         /// </param>
-        Task UpdateAsync(CancellationToken? cancellationToken = null);
+        Task UpdateAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Runs a query to work out whether the database is locked for 

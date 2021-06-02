@@ -1,5 +1,4 @@
-﻿using Cofoundry.Core.Data.SimpleDatabase;
-using Cofoundry.Domain.Data;
+﻿using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using PlatformFramework.EFCore.Abstractions;
 using System;
@@ -24,17 +23,14 @@ namespace Cofoundry.Core.DistributedLocks.Internal
     /// </remarks>
     public class DistributedLockManager : IDistributedLockManager
     {
-        private readonly ICofoundryDatabase _db;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDistributedLockDefinitionRepository _distributedLockDefinitionRepository;
 
         public DistributedLockManager(
             IUnitOfWork unitOfWork,
-            ICofoundryDatabase db,
             IDistributedLockDefinitionRepository distributedLockDefinitionRepository
             )
         {
-            _db = db;
             _unitOfWork = unitOfWork;
             _distributedLockDefinitionRepository = distributedLockDefinitionRepository;
         }

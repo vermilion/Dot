@@ -1,28 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PlatformFramework.EFCore.Exceptions;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace PlatformFramework.EFCore.Context.Migrations
 {
-    internal static class DbHealthChecker
+    public class DbHealthChecker : IDbHealthChecker
     {
-        public static async Task TestConnection(DbContext context, CancellationToken cancellationToken = default)
-        {
-            const int maxAttemps = 10;
-            const int delay = 5000;
+        protected virtual int MaxAttepmts { get { return 10; } }
 
-            for (var i = 0; i < maxAttemps; i++)
+        protected virtual int Delay { get { return 5000; } }
+
+        public async Task TestConnection(DbContext context, CancellationToken cancellationToken = default)
+        {
+            for (var i = 0; i < MaxAttepmts; i++)
             {
                 var canConnect = await CanConnect(context, cancellationToken);
                 if (canConnect)
                     return;
 
-                await Task.Delay(delay, cancellationToken);
+                await Task.Delay(Delay, cancellationToken);
             }
 
             // after a few attemps we give up
-            throw new DbException("Error waiting database. Check ConnectionString and ensure database exist", null!);
+            throw new Exception("Error waiting database. Check ConnectionString and ensure database exist", null!);
         }
 
         private static async Task<bool> CanConnect(DbContext context, CancellationToken cancellationToken)

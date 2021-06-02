@@ -11,15 +11,15 @@ namespace Cofoundry.BasicTestSite
     {
         public AppDbContext(
             ILoggerFactory loggerFactory,
-            ICofoundryDbConnectionManager cofoundryDbConnectionFactory,
             DatabaseSettings databaseSettings)
-            : base(loggerFactory, cofoundryDbConnectionFactory, databaseSettings)
+            : base(loggerFactory, databaseSettings)
         {
         }
 
-        public override void ConfigureAction(DbContextOptionsBuilder builder, DbConnection connection)
+        public override void ConfigureAction(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(connection);
+            var connectionString = DatabaseSettings.ConnectionString;
+            builder.UseNpgsql(connectionString);
         }
     }
 }

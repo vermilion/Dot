@@ -1,5 +1,5 @@
 import { HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable, throwError } from "rxjs";
 
 import { AuthenticationService } from "../services/auth.service";
 import { Injectable } from "@angular/core";
@@ -14,17 +14,17 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
     return next.handle(request).pipe(catchError(err => {
-      if ([401, 403].includes(err.status) && this.authenticationService.userValue) {
+      if ([401, 403].includes(err.status)) {
         // auto logout if 401 or 403 response returned from api
         this.authenticationService.logout();
       }
 
-      const error = (err && err.error && err.error.message) || err.statusText;
       console.error(err);
 
       this.authenticationService.redirectToLogin();
 
-      return of("Unauthorized");
+      // handle your auth error or rethrow
+      return throwError(() => err);
     }));
   }
 }

@@ -106,6 +106,8 @@ namespace Cofoundry.BasicTestSite
 
             app.UseResponseCompression();
 
+            app.UseExceptionHandler(err => err.UseCustomErrors(env));
+
             app.UseCors("Default");
 
             app.UseCookiePolicy();

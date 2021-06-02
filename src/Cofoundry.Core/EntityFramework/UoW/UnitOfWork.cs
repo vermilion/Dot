@@ -38,6 +38,11 @@ namespace PlatformFramework.EFCore.Context
             return _context.Set<TEntity>();
         }
 
+        public DbContext Context()
+        {
+            return _context;
+        }
+
         public EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
             where TEntity : class
         {

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformFramework.EFCore", "src\PlatformFramework.EFCore\PlatformFramework.EFCore.csproj", "{7E7F4CEE-AB68-4AE5-AB4E-EE8084FFB630}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D2401F5E-96D5-44AB-BFF7-2A3435E58370}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{255E2052-F4FB-4B16-92C5-6C2851D48203}"
@@ -32,10 +30,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7E7F4CEE-AB68-4AE5-AB4E-EE8084FFB630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E7F4CEE-AB68-4AE5-AB4E-EE8084FFB630}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E7F4CEE-AB68-4AE5-AB4E-EE8084FFB630}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E7F4CEE-AB68-4AE5-AB4E-EE8084FFB630}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ABD3A89F-E815-464C-9861-3A976300815C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABD3A89F-E815-464C-9861-3A976300815C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD3A89F-E815-464C-9861-3A976300815C}.Release|Any CPU.ActiveCfg = Release|Any CPU

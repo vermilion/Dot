@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Core.AutoUpdate.Internal;
 using Cofoundry.Core.DependencyInjection;
+using PlatformFramework.EFCore.Context.Migrations;
 
 namespace Cofoundry.Core.AutoUpdate.Registration
 {
@@ -12,9 +13,8 @@ namespace Cofoundry.Core.AutoUpdate.Registration
                 .RegisterAllGenericImplementations(typeof(IAlwaysRunUpdateCommandHandler<>))
                 .Register<IUpdateCommandHandlerFactory, UpdateCommandHandlerFactory>()
                 .Register<IAutoUpdateService, AutoUpdateService>()
-                .Register<IUpdatePackageOrderer, UpdatePackageOrderer>()
+                .Register<IDbHealthChecker, DbHealthChecker>()
                 .Register<IAutoUpdateDistributedLockManager, AutoUpdateDistributedLockManager>()
-                .RegisterAll<IUpdatePackageFactory>()
                 ;
         }
     }

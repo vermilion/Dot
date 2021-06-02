@@ -1,7 +1,4 @@
 ﻿using Cofoundry.Core.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cofoundry.Core.AutoUpdate
 {
@@ -16,9 +13,6 @@ namespace Cofoundry.Core.AutoUpdate
             ProcessLockTimeoutInSeconds = 600;
             RequestWaitForCompletionTimeInSeconds = 15;
         }
-
-        [Obsolete("Please use 'Disabled' which is more inline with naming of this functionality in other settings files.")]
-        public bool IsDisabled { private get; set; }
 
         /// <summary>
         /// Disables the auto-update process entirely.

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Cofoundry.Core.Validation
 {
@@ -50,7 +48,7 @@ namespace Cofoundry.Core.Validation
         public ValidationErrorException(ValidationError validationError)
             : base(new ValidationResult(validationError?.Message, validationError?.Properties), null, null)
         {
-            ErrorCode = validationError.ErrorCode;
+            ErrorCode = validationError?.ErrorCode;
         }
 
         /// <summary>

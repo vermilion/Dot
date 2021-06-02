@@ -35,6 +35,8 @@ namespace Cofoundry.Domain.Internal
                 AttemptDate = executionContext.ExecutionDate
             });
 
+            await _unitOfWork.SaveChangesAsync();
+
             return Unit.Value;
         }
     }

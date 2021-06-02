@@ -17,7 +17,7 @@ namespace Cofoundry.Domain.Data
                 .HasMaxLength(50);
 
             builder.Property(s => s.RoleCode)
-                .IsCharType(3);
+                .HasMaxLength(3);
 
             // Relationships
 

@@ -1,10 +1,5 @@
-﻿using Cofoundry.Core.Data.SimpleDatabase;
-using Cofoundry.Core.DistributedLocks;
+﻿using Cofoundry.Core.DistributedLocks;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.AutoUpdate.Internal
@@ -21,24 +16,19 @@ namespace Cofoundry.Core.AutoUpdate.Internal
     public class AutoUpdateDistributedLockManager : IAutoUpdateDistributedLockManager
     {
         private readonly IDistributedLockManager _distributedLockManager;
-        private readonly ICofoundryDatabase _db;
         private readonly AutoUpdateSettings _autoUpdateSettings;
 
         public AutoUpdateDistributedLockManager(
             IDistributedLockManager distributedLockManager,
-            AutoUpdateSettings autoUpdateSettings,
-            ICofoundryDatabase db
+            AutoUpdateSettings autoUpdateSettings
             )
         {
             _distributedLockManager = distributedLockManager;
             _autoUpdateSettings = autoUpdateSettings;
-            _db = db;
         }
 
         public async Task<DistributedLock> LockAsync()
         {
-            await EnsureDistributedLockInfrastructureExistsAsync();
-            
             var distributedLock = await _distributedLockManager.LockAsync<AutoUpdateDistributedLockDefinition>();
 
             if (distributedLock == null || !distributedLock.IsLocked())
@@ -58,32 +48,5 @@ namespace Cofoundry.Core.AutoUpdate.Internal
         {
             return _distributedLockManager.UnlockAsync(distributedLock);
         }
-
-        private async Task EnsureDistributedLockInfrastructureExistsAsync()
-        {
-            await _db.ExecuteAsync(@"
-                if not exists (select schema_name from information_schema.schemata where schema_name = 'Cofoundry')
-                begin
-	                exec sp_executesql N'create schema Cofoundry'
-                end");
-
-            await _db.ExecuteAsync(@"
-                if (not exists (select * 
-                    from information_schema.tables 
-                    where table_schema = 'Cofoundry' 
-                    and  table_name = 'DistributedLock'))
-                begin
-	                create table Cofoundry.DistributedLock (
-		                DistributedLockId char(6) not null,
-		                [Name] varchar(100) not null,
-		                LockingId uniqueidentifier null,
-		                LockDate datetime2(7) null,
-		                ExpiryDate datetime2(7) null,
-
-		                constraint PK_DistributedLock primary key (DistributedLockId)
-	                )
-                end");
-        }
-
     }
 }

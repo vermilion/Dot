@@ -26,8 +26,7 @@ namespace Cofoundry.Domain.Data
                 .IsRequired()
                 .HasMaxLength(150);
 
-            builder.Property(s => s.Password)
-                .IsNVarCharMaxType();
+            builder.Property(s => s.Password);
 
             // Relationships
 
