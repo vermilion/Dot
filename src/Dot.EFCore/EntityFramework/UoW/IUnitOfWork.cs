@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.EFCore.Abstractions
+namespace Dot.EFCore.UnitOfWork
 {
     /// <summary>
     /// Unit-of-work abstraction hiding real DbContext type

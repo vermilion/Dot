@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Cofoundry.Core.AutoUpdate;
+using Dot.EFCore.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context.Migrations;
 using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cofoundry.Core.AutoUpdate.Internal
+namespace Dot.EFCore.AutoUpdate.Services
 {
     /// <summary>
     /// Service to update applications and modules. Typically this is

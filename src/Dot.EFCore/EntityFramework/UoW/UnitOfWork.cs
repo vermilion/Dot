@@ -2,12 +2,11 @@
 using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using PlatformFramework.EFCore.Abstractions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.EFCore.Context
+namespace Dot.EFCore.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

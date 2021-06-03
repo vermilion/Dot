@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-namespace Cofoundry.Core.AutoUpdate
+
+namespace Dot.EFCore.AutoUpdate.Services
 {
     /// <summary>
     /// Service to update applications and modules.

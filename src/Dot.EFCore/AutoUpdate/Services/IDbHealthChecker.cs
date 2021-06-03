@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlatformFramework.EFCore.Context.Migrations
+namespace Dot.EFCore.AutoUpdate.Services
 {
     public interface IDbHealthChecker
     {

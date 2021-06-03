@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PlatformFramework.EFCore.Abstractions;
+﻿using Dot.EFCore.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Data
 {

@@ -32,7 +32,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Dot.Web\Dot.Web.csproj" />
+	  <ProjectReference Include="..\Dot.EFCore\Dot.EFCore.csproj" />
+	  <ProjectReference Include="..\Dot\Dot.csproj" />
 	</ItemGroup>
 
 </Project>

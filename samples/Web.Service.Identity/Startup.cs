@@ -51,7 +51,7 @@ namespace Cofoundry.BasicTestSite
 
             services
                 .AddControllers()
-                .AddCofoundry(Configuration)
+                .AddDot<AppStartup>(Configuration)
                 .AddJsonOptions(o =>
                 {
                     o.JsonSerializerOptions.WriteIndented = true;

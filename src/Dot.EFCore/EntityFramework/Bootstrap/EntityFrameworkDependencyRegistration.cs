@@ -1,9 +1,8 @@
 ﻿using Cofoundry.Core.DependencyInjection;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.Data.Internal;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using PlatformFramework.EFCore.Abstractions;
-using PlatformFramework.EFCore.Context;
 using System;
 
 namespace Cofoundry.Core.EntityFramework.Registration
