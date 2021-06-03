@@ -16,13 +16,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Cofoundry.Core\Dot.Core.csproj" />
-		<ProjectReference Include="..\..\src\Cofoundry.Web.Admin\Dot.Web.Admin.csproj" />
-		<ProjectReference Include="..\..\src\Cofoundry.Web\Dot.Web.csproj" />
+		<Folder Include="Controllers\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\" />
+	  <ProjectReference Include="..\..\src\Dot.Web.Admin\Dot.Web.Admin.csproj" />
 	</ItemGroup>
 
 </Project>

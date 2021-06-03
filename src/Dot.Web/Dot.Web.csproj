@@ -32,11 +32,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Cofoundry.Core\Dot.Core.csproj" />
+		<EmbeddedResource Include="**\*.cshtml;**\*.html;**\*.png;**\*.jpg;**\*.svg;**\*.ico;**\*.swf;**\*.gif;**\*.css;**\*.js;**\*.woff;**\*.eot;**\*.ttf;" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="**\*.cshtml;**\*.html;**\*.png;**\*.jpg;**\*.svg;**\*.ico;**\*.swf;**\*.gif;**\*.css;**\*.js;**\*.woff;**\*.eot;**\*.ttf;" />
+	  <ProjectReference Include="..\Dot\Dot.csproj" />
 	</ItemGroup>
 
 </Project>

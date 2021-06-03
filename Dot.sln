@@ -14,15 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Core", "src\Cofoundry.Core\Dot.Core.csproj", "{ABD3A89F-E815-464C-9861-3A976300815C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot", "src\Dot\Dot.csproj", "{ABD3A89F-E815-464C-9861-3A976300815C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web", "src\Cofoundry.Web\Dot.Web.csproj", "{6D5DBAB6-6DC8-4A84-9565-63A8DCDCF680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web", "src\Dot.Web\Dot.Web.csproj", "{6D5DBAB6-6DC8-4A84-9565-63A8DCDCF680}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web.Admin", "src\Cofoundry.Web.Admin\Dot.Web.Admin.csproj", "{8CE3CA51-0A89-4EAC-9315-1A0CD8FA83A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Web.Admin", "src\Dot.Web.Admin\Dot.Web.Admin.csproj", "{8CE3CA51-0A89-4EAC-9315-1A0CD8FA83A8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.Identity", "samples\Web.Service.Identity\Web.Service.Identity.csproj", "{8AC9C410-E71D-4AC0-8448-661AA72C202F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Validation.FluentValidation", "src\Dot.Validation.FluentValidation\Dot.Validation.FluentValidation.csproj", "{10473153-25D6-4399-82BF-CCD9448F7EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.EFCore", "src\Dot.EFCore\Dot.EFCore.csproj", "{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{10473153-25D6-4399-82BF-CCD9448F7EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10473153-25D6-4399-82BF-CCD9448F7EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10473153-25D6-4399-82BF-CCD9448F7EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
