@@ -1,5 +1,4 @@
 ﻿using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,7 +26,7 @@ namespace Cofoundry.Core.Validation.Internal
         /// </summary>
         /// <typeparam name="TRequest">Type of the model to validate.</typeparam>
         /// <param name="model">The command to validate.</param>
-        public async Task Validate<TRequest, TResponse>(TRequest model, IRequestHandler<TRequest, TResponse> handler, IExecutionContext executionContext)
+        /*public async Task Validate<TRequest, TResponse>(TRequest model, IRequestHandler<TRequest, TResponse> handler, IExecutionContext executionContext)
             where TRequest : IRequest<TResponse>
         {
             if (model == null)
@@ -42,9 +41,9 @@ namespace Cofoundry.Core.Validation.Internal
                     await ValidateAndThrow(model, fluentValidationHandler);
                 }
             }
-        }
+        }*/
 
-        private async Task ValidateAndThrow<TRequest>(TRequest request, IFluentModelValidationHandler<TRequest> handler)
+        /*private async Task ValidateAndThrow<TRequest>(TRequest request, IFluentModelValidationHandler<TRequest> handler)
             where TRequest : IRequest
         {
             var validator = new InlineValidator<TRequest>();
@@ -60,6 +59,6 @@ namespace Cofoundry.Core.Validation.Internal
 
             var errors = validationResults.Errors.Select(x => new ValidationError(x.PropertyName, x.ErrorMessage));
             throw new ValidationFailedException("Validation failed", errors);
-        }
+        }*/
     }
 }

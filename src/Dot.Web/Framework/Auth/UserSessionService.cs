@@ -49,14 +49,15 @@ namespace Cofoundry.Web
             if (userIdClaim == null) return null;
 
             // Otherwise get it from the Identity
-            var userId = IntParser.ParseOrNull(userIdClaim.Value);
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                return null;
+
             return userId;
         }
 
         /// <summary>
         /// Logs the specified UserId into the current session.
         /// </summary>
-        /// <param name="userAreaCode">Unique code of the user area to log the user into (required).</param>
         /// <param name="userId">UserId belonging to the owner of the current session.</param>
         /// <param name="rememberUser">
         /// True if the session should last indefinately; false if the 

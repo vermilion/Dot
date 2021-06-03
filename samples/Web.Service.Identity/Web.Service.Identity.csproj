@@ -20,6 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\src\Dot.EFCore\Dot.EFCore.csproj" />
 	  <ProjectReference Include="..\..\src\Dot.Web.Admin\Dot.Web.Admin.csproj" />
 	</ItemGroup>
 

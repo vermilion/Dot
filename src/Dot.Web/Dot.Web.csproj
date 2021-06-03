@@ -36,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Dot\Dot.csproj" />
+	  <ProjectReference Include="..\Dot.EFCore\Dot.EFCore.csproj" />
 	</ItemGroup>
 
 </Project>

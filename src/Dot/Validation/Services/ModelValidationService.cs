@@ -1,9 +1,4 @@
-﻿using Cofoundry.Domain.CQS;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-
-namespace Cofoundry.Core.Validation.Internal
+﻿namespace Cofoundry.Core.Validation.Internal
 {
     /// <summary>
     /// Service for validating models using DataAnnotation validation.
@@ -16,7 +11,7 @@ namespace Cofoundry.Core.Validation.Internal
         /// </summary>
         /// <typeparam name="TRequest">Type of the model to validate.</typeparam>
         /// <param name="model">The command to validate.</param>
-        public virtual async Task Validate<TRequest, TResponse>(TRequest model, IRequestHandler<TRequest, TResponse> handler, IExecutionContext executionContext)
+        /*public virtual async Task Validate<TRequest, TResponse>(TRequest model, IRequestHandler<TRequest, TResponse> handler, IExecutionContext executionContext)
              where TRequest : IRequest<TResponse>
         {
             if (model == null)
@@ -26,6 +21,6 @@ namespace Cofoundry.Core.Validation.Internal
 
             var cx = new ValidationContext(model);
             Validator.ValidateObject(model, cx, true);
-        }
+        }*/
     }
 }

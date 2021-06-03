@@ -1,6 +1,4 @@
-﻿using Cofoundry.Domain.CQS;
-using FluentValidation;
-using System.Collections.Generic;
+﻿using FluentValidation;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Domain
@@ -15,9 +13,9 @@ namespace Cofoundry.Domain
     /// <summary>
     /// Used to ensure a user has a specific set of permissions before the handler is executed
     /// </summary>
-    public interface IFluentModelValidationHandler<TRequest> : IFluentModelValidationHandler
-        where TRequest : IRequest
+    public interface IFluentModelValidationHandler<TModel> : IFluentModelValidationHandler
+        where TModel : class
     {
-        Task Validate(InlineValidator<TRequest> validator);
+        Task Validate(InlineValidator<TModel> validator);
     }
 }
