@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
+﻿using Cofoundry.Domain.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -38,19 +35,6 @@ namespace Cofoundry.Domain.Internal
                     .Settings
                     .AsNoTracking()
                     .ToDictionaryAsync(k => k.SettingKey, v => v.SettingValue);
-            });
-
-            return settings;
-        }
-
-        public Dictionary<string, string> GetAllSettings()
-        {
-            var settings = _settingsCache.GetOrAddSettingsTable(() =>
-            {
-                return _dbContext
-                    .Settings
-                    .AsNoTracking()
-                    .ToDictionary(k => k.SettingKey, v => v.SettingValue);
             });
 
             return settings;

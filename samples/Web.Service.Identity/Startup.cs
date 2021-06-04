@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace Cofoundry.BasicTestSite
@@ -112,7 +113,8 @@ namespace Cofoundry.BasicTestSite
 
             app.UseCookiePolicy();
 
-            app.UseCofoundry();
+            app.UseDot();
+            app.UseDotUI();
 
             if (env.IsDevelopment())
             {

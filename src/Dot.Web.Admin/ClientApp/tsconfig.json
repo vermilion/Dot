@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -8,9 +7,9 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "skipLibCheck": true,
     "target": "es2015",
     "module": "es2020",
     "lib": [
@@ -18,18 +17,13 @@
       "dom"
     ],
     "paths": {
-      "@shared/*": [
-        "src/app/shared/*"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@core/*": [
-        "src/app/core/*"
-      ],
-      "@env/*": [
-        "src/environments/*"
+      "tools": [
+        "projects/tools/src/lib"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": false,
+    "strictInjectionParameters": false
   }
 }

@@ -28,7 +28,7 @@
 		<Content Remove="ClientApp\**" />
 		<EmbeddedResource Remove="ClientApp\**" />
 		<None Remove="ClientApp\**" />
-		<EmbeddedResource Include="ClientApp\dist\**" />
+		<EmbeddedResource Include="ClientApp\output\**" />
 	</ItemGroup>
 
 	<ItemGroup>

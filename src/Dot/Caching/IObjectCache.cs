@@ -32,17 +32,6 @@ namespace Cofoundry.Core.Caching
         /// </summary>
         /// <typeparam name="T">Type of the cache entry.</typeparam>
         /// <param name="key">Unique key of the cache entry</param>
-        /// <param name="getter">A function that returns an entry to insert into the cache if it is empty</param>
-        /// <param name="expiry">An optional absolute expiry time of the cache entry.</param>
-        /// <returns>The value of the cache entry if it exists; otherwise the result of the getter function.</returns>
-        T GetOrAdd<T>(string key, Func<T> getter, DateTimeOffset? expiry = null);
-
-        /// <summary>
-        /// Gets an entry from the cache or creates and interts a new item, into the cache 
-        /// if it does not exist.
-        /// </summary>
-        /// <typeparam name="T">Type of the cache entry.</typeparam>
-        /// <param name="key">Unique key of the cache entry</param>
         /// <param name="getter">An async function that returns an entry to insert into the cache if it is empty</param>
         /// <param name="expiry">An optional absolute expiry time of the cache entry.</param>
         /// <returns>The value of the cache entry if it exists; otherwise the result of the getter function.</returns>

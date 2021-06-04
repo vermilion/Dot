@@ -33,7 +33,7 @@ namespace Cofoundry.Domain.Internal
                 info.IPAddress = context?.Connection?.RemoteIpAddress?.ToString();
                 if (context?.Request?.Headers != null)
                 {
-                    if (context.Request.Headers.TryGetValue("User-Agent", out var value) == true)
+                    if (context.Request.Headers.TryGetValue("User-Agent", out var value))
                     {
                         info.UserAgent = value;
                     }

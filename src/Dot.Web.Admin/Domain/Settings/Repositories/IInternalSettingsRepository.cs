@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
@@ -12,7 +11,6 @@ namespace Cofoundry.Domain.Internal
     /// </summary>
     public interface IInternalSettingsRepository
     {
-        Dictionary<string, string> GetAllSettings();
         Task<Dictionary<string, string>> GetAllSettingsAsync();
     }
 }
