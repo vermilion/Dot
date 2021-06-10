@@ -23,7 +23,7 @@
     }
   },
   "angularCompilerOptions": {
-    "strictTemplates": false,
-    "strictInjectionParameters": false
+    "strictTemplates": true,
+    "strictInjectionParameters": true
   }
 }

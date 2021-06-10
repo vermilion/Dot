@@ -2,19 +2,18 @@ import { HttpClient } from "@angular/common/http";
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Role } from "@app/features/interfaces";
-
-import { API_BASE_URL } from "@shared/constants";
 import { NzNotificationService } from "ng-zorro-antd/notification";
+import { API_BASE_URL } from "../../../shared/constants";
+import { Role } from "../../interfaces";
 
 @Component({
-  selector: "app-role-edit",
+  selector: "tls-role-edit",
   templateUrl: "./role-edit.component.html",
   styleUrls: ["./role-edit.component.scss"]
 })
 export class RoleEditComponent implements OnInit {
 
-  private role: Role;
+  role: Role;
 
   form!: FormGroup;
   isLoading: boolean = false;
