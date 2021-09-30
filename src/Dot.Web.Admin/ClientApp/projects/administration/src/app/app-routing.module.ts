@@ -1,30 +1,35 @@
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes } from '@angular/router';
 
-import { NgModule } from "@angular/core";
-import { featuresRoutes } from "./features/features.routes";
+import { NgModule } from '@angular/core';
+import { featuresRoutes } from './features/features.routes';
 
 const routes: Routes = [
   {
-    path: "auth",
+    path: 'auth',
     children: [
       {
-        path: "login",
-        loadChildren: () => import("./auth/login/login.module").then(m => m.LoginModule)
+        path: 'login',
+        loadChildren: () =>
+          import('./auth/login/login.module').then((m) => m.LoginModule),
       },
       {
-        path: "register",
-        loadChildren: () => import("./auth/register/register.module").then(m => m.RegisterModule)
-      }
-    ]
+        path: 'register',
+        loadChildren: () =>
+          import('./auth/register/register.module').then(
+            (m) => m.RegisterModule
+          ),
+      },
+    ],
   },
-  ...featuresRoutes
+  ...featuresRoutes,
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    //enableTracing: true,
-    relativeLinkResolution: "legacy"
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      //enableTracing: true,
+    }),
+  ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

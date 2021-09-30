@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Domain.CQS;
-using Cofoundry.Core.AutoUpdate;
+﻿using Cofoundry.Domain.CQS;
 using Dot.EFCore.AutoUpdate.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {

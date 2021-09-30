@@ -23,6 +23,13 @@ namespace Cofoundry.Web
                 FileProvider = new EmbeddedFileProvider(assembly, assembly.GetName().Name + ".ClientApp.output.administration"),
                 EnableDirectoryBrowsing = true
             });
+
+            app.UseFileServer(new FileServerOptions
+            {
+                RequestPath = new PathString("/setup"),
+                FileProvider = new EmbeddedFileProvider(assembly, assembly.GetName().Name + ".ClientApp.output.administration"),
+                EnableDirectoryBrowsing = true
+            });
         }
     }
 }

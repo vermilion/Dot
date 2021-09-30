@@ -10,29 +10,9 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/setup/tsconfig.app.json",
-          "projects/setup/tsconfig.spec.json",
-          "projects/setup/e2e/tsconfig.json"
+          "projects/administration/tsconfig.app.json"
         ],
         "createDefaultProgram": true
-      },
-      "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ]
       }
     },
     {

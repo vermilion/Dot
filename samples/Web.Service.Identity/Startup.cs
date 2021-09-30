@@ -1,4 +1,6 @@
-﻿using Cofoundry.Web;
+﻿using Cofoundry.Domain;
+using Cofoundry.Domain.CQS;
+using Cofoundry.Web;
 using Cofoundry.Web.Admin;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -114,6 +116,9 @@ namespace Cofoundry.BasicTestSite
             app.UseCookiePolicy();
 
             app.UseDot();
+
+            app.UseMiddleware<IsSetupMiddleware>();
+
             app.UseDotUI();
 
             if (env.IsDevelopment())

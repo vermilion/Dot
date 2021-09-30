@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Cofoundry.Domain.Data;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -27,10 +23,10 @@ namespace Cofoundry.Domain.Internal
 
         public T FindSetting<T>(string key, Dictionary<string, string> allSettings)
         {
-            if (!allSettings.ContainsKey(key)) return default(T);
+            if (!allSettings.ContainsKey(key)) return default;
             var setting = allSettings[key];
 
-            if (string.IsNullOrWhiteSpace(setting)) return default(T);
+            if (string.IsNullOrWhiteSpace(setting)) return default;
 
             var value = _dbUnstructuredDataSerializer.Deserialize<T>(setting);
 
