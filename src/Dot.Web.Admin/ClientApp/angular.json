@@ -1,41 +1,24 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
   "projects": {
     "administration": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "root": "projects/administration",
-      "sourceRoot": "projects/administration/src",
-      "prefix": "adm",
+      "root": "apps/administration",
+      "sourceRoot": "apps/administration/src",
+      "prefix": "client-app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "output/administration",
-            "index": "projects/administration/src/index.html",
-            "main": "projects/administration/src/main.ts",
-            "polyfills": "projects/administration/src/polyfills.ts",
-            "tsConfig": "projects/administration/tsconfig.app.json",
-            "assets": [
-              "projects/administration/src/favicon.ico",
-              "projects/administration/src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
-            ],
-            "styles": [
-              "projects/administration/src/styles.scss",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.aliyun.min.css",
-              "theme.less"
-            ],
+            "outputPath": "dist/apps/administration",
+            "index": "apps/administration/src/index.html",
+            "main": "apps/administration/src/main.ts",
+            "polyfills": "apps/administration/src/polyfills.ts",
+            "tsConfig": "apps/administration/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/administration/src/favicon.ico", "apps/administration/src/assets"],
+            "styles": ["node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/administration/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -43,8 +26,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1mb",
-                  "maximumError": "10mb"
+                  "maximumWarning": "1500kb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -54,8 +37,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/administration/src/environments/environment.ts",
-                  "with": "projects/administration/src/environments/environment.prod.ts"
+                  "replace": "apps/administration/src/environments/environment.ts",
+                  "with": "apps/administration/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -69,18 +52,19 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "administration:build"
-          },
           "configurations": {
             "production": {
               "browserTarget": "administration:build:production"
+            },
+            "development": {
+              "browserTarget": "administration:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -89,75 +73,39 @@
           }
         },
         "lint": {
-          "builder": "@angular-eslint/builder:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "projects/administration/**/*.ts",
-              "projects/administration/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "tools": {
-      "projectType": "library",
-      "root": "projects/tools",
-      "sourceRoot": "projects/tools/src",
-      "prefix": "tls",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/tools/tsconfig.lib.json",
-            "project": "projects/tools/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/tools/tsconfig.lib.prod.json"
-            }
+            "lintFilePatterns": ["apps/administration/src/**/*.ts", "apps/administration/src/**/*.html"]
           }
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/administration"],
           "options": {
-            "lintFilePatterns": [
-              "projects/tools/**/*.ts",
-              "projects/tools/**/*.html"
-            ]
+            "jestConfig": "apps/administration/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
     },
     "setup": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "projects/setup",
-      "sourceRoot": "projects/setup/src",
-      "prefix": "app",
+      "root": "apps/setup",
+      "sourceRoot": "apps/setup/src",
+      "prefix": "client-app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "output/setup",
-            "index": "projects/setup/src/index.html",
-            "main": "projects/setup/src/main.ts",
-            "polyfills": "projects/setup/src/polyfills.ts",
-            "tsConfig": "projects/setup/tsconfig.app.json",
+            "outputPath": "dist/apps/setup",
+            "index": "apps/setup/src/index.html",
+            "main": "apps/setup/src/main.ts",
+            "polyfills": "apps/setup/src/polyfills.ts",
+            "tsConfig": "apps/setup/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/setup/src/favicon.ico",
-              "projects/setup/src/assets"
-            ],
-            "styles": [
-              "projects/setup/src/styles.scss"
-            ],
+            "assets": ["apps/setup/src/favicon.ico", "apps/setup/src/assets"],
+            "styles": ["node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/setup/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -165,8 +113,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1500kb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -176,8 +124,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/setup/src/environments/environment.ts",
-                  "with": "projects/setup/src/environments/environment.prod.ts"
+                  "replace": "apps/setup/src/environments/environment.ts",
+                  "with": "apps/setup/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -191,7 +139,7 @@
               "namedChunks": true
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -212,19 +160,66 @@
           }
         },
         "lint": {
-          "builder": "@angular-eslint/builder:lint",
+          "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "projects/setup/**/*.ts",
-              "projects/setup/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/setup/src/**/*.ts", "apps/setup/src/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/setup"],
+          "options": {
+            "jestConfig": "apps/setup/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tools": {
+      "projectType": "library",
+      "root": "libs/tools",
+      "sourceRoot": "libs/tools/src",
+      "prefix": "client-app",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/tools/src/**/*.ts", "libs/tools/src/**/*.html"]
           }
         }
       }
     }
   },
-  "defaultProject": "none",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "none"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "administration"
 }
