@@ -1,8 +1,5 @@
-﻿using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
-using Cofoundry.Web;
+﻿using Cofoundry.Web;
 using Cofoundry.Web.Admin;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace Cofoundry.BasicTestSite
@@ -58,7 +54,7 @@ namespace Cofoundry.BasicTestSite
                 .AddJsonOptions(o =>
                 {
                     o.JsonSerializerOptions.WriteIndented = true;
-                    o.JsonSerializerOptions.IgnoreNullValues = true;
+                    o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                     o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
 

@@ -8,8 +8,6 @@ namespace Cofoundry.Domain.Internal
 {
     public class SettingQueryHelper
     {
-        #region constructor
-
         private readonly IDbUnstructuredDataSerializer _dbUnstructuredDataSerializer;
 
         public SettingQueryHelper(
@@ -18,8 +16,6 @@ namespace Cofoundry.Domain.Internal
         {
             _dbUnstructuredDataSerializer = dbUnstructuredDataSerializer;
         }
-
-        #endregion
 
         public T FindSetting<T>(string key, Dictionary<string, string> allSettings)
         {
@@ -38,8 +34,6 @@ namespace Cofoundry.Domain.Internal
             Expression<Func<TSource, TProperty>> propertyLambda,
             Dictionary<string, string> allSettings)
         {
-            Type type = typeof(TSource);
-
             var member = propertyLambda.Body as MemberExpression;
             var propInfo = member.Member as PropertyInfo;
 

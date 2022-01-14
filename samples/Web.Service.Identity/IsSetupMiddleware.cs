@@ -29,6 +29,9 @@ namespace Cofoundry.BasicTestSite
             var allSettings = await _internalSettingsRepository.GetAllSettingsAsync();
             var setting = MapSettings(allSettings);
 
+            await _next(httpContext);
+            return;
+
             var isSetupRoute = httpContext.Request.Path.StartsWithSegments(new PathString("/setup"));
 
             if (!setting.IsSetup)
