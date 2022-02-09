@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+
+  .brand {
+    display: flex;
+    color: white;
+    padding: 1.5rem;
+    font-weight: bolder;
+  }
+
+  .ant-layout-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  nz-sider {
+    overflow: auto;
+    height: 100%;
+  }
+}

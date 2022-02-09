@@ -1,0 +1,33 @@
+<nz-layout>
+  <nz-sider nzTheme="dark" nzWidth="200px">
+    <div class="brand">
+      <span class="brand-text font-weight-light">Dot Admin</span>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item nzMatchRouter routerLink="/users">
+        <i nz-icon nzType="user"></i>
+        <span>Users</span>
+      </li>
+      <li nz-menu-item nzMatchRouter routerLink="/roles">
+        <i nz-icon nzType="control"></i>
+        <span>Roles</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <nz-breadcrumb [nzAutoGenerate]="true">
+        <nz-breadcrumb-item>
+          <i nz-icon nzType="home"></i>
+        </nz-breadcrumb-item>
+      </nz-breadcrumb>
+
+      <nz-layout>
+        <nz-content>
+          <router-outlet #o="outlet"></router-outlet>
+        </nz-content>
+      </nz-layout>
+
+    </nz-content>
+  </nz-layout>
+</nz-layout>

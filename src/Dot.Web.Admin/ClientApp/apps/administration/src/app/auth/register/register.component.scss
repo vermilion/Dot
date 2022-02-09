@@ -1,0 +1,13 @@
+:host {
+  display: contents;
+
+  .wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    & > .ant-row {
+      width: 100%;
+    }
+  }
+}

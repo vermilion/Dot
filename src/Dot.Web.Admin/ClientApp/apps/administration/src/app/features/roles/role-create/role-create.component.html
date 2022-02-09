@@ -1,0 +1,23 @@
+<nz-layout>
+  <nz-content>
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+      <nz-space nzDirection="vertical">
+        <nz-card *nzSpaceItem nzTitle="General">
+          <nz-form-item>
+            <nz-form-label nzRequired>Title</nz-form-label>
+            <nz-form-control nzErrorTip="Please input Title">
+              <input type="text" nz-input formControlName="title" placeholder="Title" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-card>
+      </nz-space>
+
+    </form>
+  </nz-content>
+  <nz-footer>
+    <nz-space nzDirection="horizontal">
+      <button *nzSpaceItem nz-button nzType="primary" (click)="create()">Create</button>
+      <button *nzSpaceItem nz-button (click)="back()">Cancel</button>
+    </nz-space>
+  </nz-footer>
+</nz-layout>

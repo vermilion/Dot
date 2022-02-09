@@ -1,4 +1,6 @@
-# PlatformFramework ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/vermilion/PlatformFramework/.NET%20Core?style=flat-square) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/vermilion/PlatformFramework?style=flat-square)
+![image](https://user-images.githubusercontent.com/2167823/118759050-ed321200-b878-11eb-8c00-59e17cab63ad.png)
+
+# Dot Framework ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/vermilion/PlatformFramework/.NET%20Core?style=flat-square) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/vermilion/PlatformFramework?style=flat-square)
 
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework?logo=nuget&label=PlatformFramework&style=flat-square)](https://www.nuget.org/packages/PlatformFramework) An application framework for building applications on ASP.NET Core
 
@@ -6,29 +8,20 @@
 
 [![Nuget](https://img.shields.io/nuget/v/PlatformFramework.EFCore.Identity?logo=nuget&label=PlatformFramework.EFCore.Identity&style=flat-square)](https://www.nuget.org/packages/PlatformFramework.EFCore.Identity) / A Identity part of framework on top of the PlatformFramework.EFCore
 
-## Work in Progress
-
-- [ ] add tests
-- [ ] stabilize Hooks Api
-- [ ] review Auth code and features
-- [ ] add tenancy
-- [ ] add tenant Angular template project
-
 ## Technologies
 
 * [.NET 5](https://dotnet.microsoft.com/download)
 * [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core)
-* [Entity Framework Core 3.1](https://docs.microsoft.com/en-us/ef/core)
-* [C# 8.0](https://docs.microsoft.com/en-us/dotnet/csharp)
-* [AutoMapper](https://automapper.org/)
+* [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core)
+* [C# 9.0](https://docs.microsoft.com/en-us/dotnet/csharp)
 
 ## Installing
 
 From the Package Manager Console:
 
-    PM> Install-Package PlatformFramework
-    PM> Install-Package PlatformFramework.EFCore
-    PM> Install-Package PlatformFramework.EFCore.Identity
+    PM> Install-Package Dot
+    PM> Install-Package Dot.EFCore
+    PM> Install-Package Dot.EFCore.Identity
 
 ### Getting Started
 #### PlatformFramework

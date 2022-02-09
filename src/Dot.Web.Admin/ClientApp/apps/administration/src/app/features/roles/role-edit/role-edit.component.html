@@ -1,0 +1,41 @@
+<nz-layout>
+  <nz-content>
+    <form nz-form nzLayout="vertical" [formGroup]="form">
+      <nz-space nzDirection="vertical">
+        <nz-card *nzSpaceItem nzTitle="General">
+          <nz-form-item>
+            <nz-form-label nzRequired>Title</nz-form-label>
+            <nz-form-control nzErrorTip="Please input Title">
+              <input type="text" nz-input formControlName="title" placeholder="Title" />
+            </nz-form-control>
+          </nz-form-item>
+        </nz-card>
+
+        <nz-table *nzSpaceItem #table [nzFrontPagination]="false" [nzShowPagination]="false" nzTableLayout="fixed" [nzData]="role.permissions">
+          <thead>
+            <tr>
+              <th>Permission Name</th>
+              <th nzWidth="70px"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of table.data">
+              <td>
+                {{ row.permissionType.description }}
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </nz-space>
+
+    </form>
+  </nz-content>
+  <nz-footer>
+    <nz-space nzDirection="horizontal">
+      <button *nzSpaceItem nz-button nzType="primary" (click)="save()">Save</button>
+      <button *nzSpaceItem nz-button (click)="back()">Cancel</button>
+    </nz-space>
+  </nz-footer>
+</nz-layout>

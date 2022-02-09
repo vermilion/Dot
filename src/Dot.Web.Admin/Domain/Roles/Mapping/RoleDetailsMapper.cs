@@ -1,0 +1,63 @@
+﻿using Cofoundry.Domain.Data;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Cofoundry.Domain.Internal
+{
+    /// <summary>
+    /// Simple mapper for mapping to RoleDetails objects.
+    /// </summary>
+    public class RoleDetailsMapper : IRoleDetailsMapper
+    {
+        private readonly IPermissionRepository _permissionRepository;
+
+        public RoleDetailsMapper(
+            IPermissionRepository permissionRepository
+            )
+        {
+            _permissionRepository = permissionRepository;
+        }
+
+        /// <summary>
+        /// Maps an EF Role record from the db into an RoleDetails 
+        /// object. If the db record is null then null is returned.
+        /// </summary>
+        /// <param name="dbRole">Role record from the database.</param>
+        public virtual RoleDetails Map(Role dbRole)
+        {
+            if (dbRole == null) return null;
+
+            var role = new RoleDetails
+            {
+                IsAnonymousRole = dbRole.RoleCode == AnonymousRole.AnonymousRoleCode,
+                IsSuperAdministrator = dbRole.RoleCode == SuperAdminRole.SuperAdminRoleCode,
+                RoleId = dbRole.RoleId,
+                RoleCode = dbRole.RoleCode,
+                Title = dbRole.Title
+            };
+
+            if (role.IsSuperAdministrator)
+            {
+                // Grant super users all permissions
+                role.Permissions = _permissionRepository.GetAll().ToArray();
+            }
+            else
+            {
+                var permissions = new List<IPermission>(dbRole.RolePermissions.Count);
+
+                foreach (var dbPermission in dbRole.RolePermissions.Select(rp => rp.Permission))
+                {
+                    var permission = _permissionRepository.GetByCode(dbPermission.PermissionCode, dbPermission.EntityDefinitionCode);
+                    if (permission != null)
+                    {
+                        permissions.Add(permission);
+                    }
+                }
+
+                role.Permissions = permissions.ToArray();
+            }
+
+            return role;
+        }
+    }
+}

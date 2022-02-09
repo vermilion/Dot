@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<PackageId>Cofoundry.Web.Admin</PackageId>
+		<Description>
+			Adds the Cofoundry admin panel to a website.
+		</Description>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Copyright>Copyright © Cofoundry.org</Copyright>
+		<PackageTags>Cofoundry Web Admin CMS</PackageTags>
+
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FastEndpoints" Version="3.4.0" />
+		<PackageReference Include="FastEndpoints.Security" Version="3.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
+
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="ClientApp\**" />
+		<Content Remove="ClientApp\**" />
+		<EmbeddedResource Remove="ClientApp\**" />
+		<None Remove="ClientApp\**" />
+		<EmbeddedResource Include="ClientApp\output\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dot.EFCore\Dot.EFCore.csproj" />
+	  <ProjectReference Include="..\Dot\Dot.csproj" />
+	</ItemGroup>
+
+</Project>

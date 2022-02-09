@@ -1,0 +1,38 @@
+<nz-space nzDirection="vertical">
+  <div *nzSpaceItem>
+    <button nz-button (click)="addUser()">Add User</button>
+  </div>
+
+  <nz-table *nzSpaceItem #table [nzFrontPagination]="false" [nzShowPagination]="false" [nzLoading]="isLoading" nzTableLayout="fixed" [nzData]="items">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th nzWidth="200px">Role</th>
+        <th nzWidth="150px">Last Logged In</th>
+        <th nzWidth="150px">Created</th>
+        <th nzWidth="70px"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of table.data">
+        <td>
+          {{ row.username }}
+        </td>
+        <td>
+          {{ row.role?.title }}
+        </td>
+        <td>
+          {{ row.lastLoginDate | date }}
+        </td>
+        <td>
+          {{ row.auditData?.createDate | date }}
+        </td>
+        <td>
+          <button nz-button nzType="default" (click)="edit(row)">
+            <i nz-icon nzType="edit"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-space>
