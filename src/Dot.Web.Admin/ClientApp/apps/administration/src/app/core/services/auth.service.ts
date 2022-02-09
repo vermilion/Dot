@@ -19,7 +19,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.http.post(`${this.baseUrl}/api/auth/logout`, {}).subscribe((x) => {
+    this.http.post(`${this.baseUrl}/api/auth/logout`, {}).subscribe(() => {
       this.redirectToLogin();
     });
   }

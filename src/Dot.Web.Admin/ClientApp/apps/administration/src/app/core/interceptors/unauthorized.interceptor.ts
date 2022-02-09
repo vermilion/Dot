@@ -14,7 +14,8 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       catchError((err) => {
         if ([401, 403].includes(err.status)) {
           // auto logout if 401 or 403 response returned from api
-          this.authenticationService.logout();
+          //this.authenticationService.logout();
+          //return throwError(() => err);
         }
 
         console.error(err);

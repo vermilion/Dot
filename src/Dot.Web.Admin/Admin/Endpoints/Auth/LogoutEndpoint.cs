@@ -1,22 +1,21 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Cofoundry.Domain;
-using Cofoundry.Web.Identity;
 using FastEndpoints;
 
 namespace Cofoundry.Web.Admin
 {
-    public class LogoutEndpoint : Endpoint<LoginViewModel>
+    public class LogoutEndpoint : EndpointWithoutRequest
     {
         public IUserContextService UserContextService { get; set; }
         public IUserSessionService UserSessionService { get; set; }
 
         public override void Configure()
         {
-            Post("/api/auth/logout");
+            Post("/api/Auth/Logout");
         }
 
-        public override async Task HandleAsync(LoginViewModel req, CancellationToken ct)
+        public override async Task HandleAsync(CancellationToken ct)
         {
             await SignOutAsync();
 

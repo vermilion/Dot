@@ -8,20 +8,9 @@ import { NzSelectModule } from "ng-zorro-antd/select";
 import { ReactiveFormsModule } from "@angular/forms";
 import { RegisterComponent } from "./register.component";
 import { RegisterRoutingModule } from "./register-routing.module";
-import { TlsSharedModule } from "@client-app/tools";
 
 @NgModule({
   declarations: [RegisterComponent],
-  imports: [
-    CommonModule,
-    RegisterRoutingModule,
-    ReactiveFormsModule,
-    NzFormModule,
-    NzSelectModule,
-    NzInputModule,
-    NzCheckboxModule,
-    NzButtonModule,
-    TlsSharedModule
-  ]
+  imports: [CommonModule, RegisterRoutingModule, ReactiveFormsModule, NzFormModule, NzSelectModule, NzInputModule, NzCheckboxModule, NzButtonModule]
 })
 export class RegisterModule {}

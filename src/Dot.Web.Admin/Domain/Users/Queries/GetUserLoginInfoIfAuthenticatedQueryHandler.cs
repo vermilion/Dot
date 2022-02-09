@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cofoundry.Domain.CQS;
+using Cofoundry.Domain.Data;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
-using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -40,7 +38,7 @@ namespace Cofoundry.Domain.Internal
         {
             if (_userAuthenticationHelper.IsPasswordCorrect(user, query.Password))
             {
-                var result = new UserLoginInfo()
+                var result = new UserLoginInfo
                 {
                     RequirePasswordChange = user.RequirePasswordChange,
                     UserId = user.UserId

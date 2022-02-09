@@ -1,6 +1,8 @@
 ﻿using Cofoundry.Web;
 using Cofoundry.Web.Admin;
 using FastEndpoints;
+using FastEndpoints.Security;
+using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
 namespace Cofoundry.BasicTestSite
@@ -35,6 +36,7 @@ namespace Cofoundry.BasicTestSite
             });
 
             services.AddFastEndpoints();
+            services.AddAuthenticationJWTBearer("my_super_simple_jwt_bearer_key");
 
             services.AddCors(options =>
             {
@@ -62,36 +64,12 @@ namespace Cofoundry.BasicTestSite
                 });
 
             // configure openapi
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerDoc(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "API ",
-                    Description = "Swagger"
-                });
-
-                /*var securityScheme = new OpenApiSecurityScheme
-                {
-                    Name = "Cookie Authentication",
-                    Description = "Enter Cookie contents **_only_**",
-                    In = ParameterLocation.Cookie,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = CookieAuthenticationDefaults.AuthenticationScheme, // must be lower case
-                    BearerFormat = "JWT",
-                    Reference = new OpenApiReference
-                    {
-                        Id = CookieAuthenticationDefaults.AuthenticationScheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                };
-
-                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    { securityScheme, System.Array.Empty<string>() }
-                });*/
-            });
+                c.Title = "API";
+                c.Version = "v1";
+                c.Description = "Swagger";
+            }, tagIndex: 2, addJWTBearerAuth: false);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -99,6 +77,9 @@ namespace Cofoundry.BasicTestSite
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                app.UseOpenApi();
+                app.UseSwaggerUi3(s => s.ConfigureDefaults());
             }
             else
             {
@@ -108,33 +89,18 @@ namespace Cofoundry.BasicTestSite
 
             app.UseResponseCompression();
 
-            app.UseExceptionHandler(err => err.UseCustomErrors(env));
+            app.UseDefaultExceptionHandler();
 
             app.UseCors("Default");
 
-            app.UseCookiePolicy();
-
             app.UseDot();
-
-            //app.UseMiddleware<IsSetupMiddleware>();
-
             app.UseDotUI();
-
-            if (env.IsDevelopment())
-            {
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
-                    c.DefaultModelsExpandDepth(-1);
-                });
-
-                app.UseSwagger();
-            }
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication(); //add this
             app.UseAuthorization();
+            MainExtensions.UseFastEndpointsMiddleware(app);
 
             app.UseEndpoints(options =>
             {

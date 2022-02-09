@@ -13,7 +13,6 @@ namespace Cofoundry.Domain
     {
         public LogFailedLoginAttemptCommand()
         {
-
         }
 
         public LogFailedLoginAttemptCommand(string username)

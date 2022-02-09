@@ -5,6 +5,7 @@ import { NzCardModule } from "ng-zorro-antd/card";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzLayoutModule } from "ng-zorro-antd/layout";
+import { NzNotificationModule } from "ng-zorro-antd/notification";
 import { NzSelectModule } from "ng-zorro-antd/select";
 import { NzSpaceModule } from "ng-zorro-antd/space";
 import { NzTableModule } from "ng-zorro-antd/table";
@@ -22,6 +23,7 @@ import { UsersRoutingModule } from "./users-routing.module";
     UsersRoutingModule,
 
     ReactiveFormsModule,
+    NzNotificationModule,
     NzSelectModule,
     NzLayoutModule,
     NzFormModule,
@@ -31,7 +33,6 @@ import { UsersRoutingModule } from "./users-routing.module";
     NzSpaceModule,
     NzTableModule
   ],
-  exports: [],
   providers: [UserResolver]
 })
 export class UsersModule {}

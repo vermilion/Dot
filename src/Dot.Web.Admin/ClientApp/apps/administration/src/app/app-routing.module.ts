@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 
 import { NgModule } from "@angular/core";
-import { featuresRoutes } from "./features/features.routes";
 
 const routes: Routes = [
   {
@@ -14,15 +13,21 @@ const routes: Routes = [
       {
         path: "register",
         loadChildren: () => import("./auth/register/register.module").then((m) => m.RegisterModule)
-      }
+      },
+      { path: "**", redirectTo: "login" }
     ]
   },
-  ...featuresRoutes
+  {
+    path: "",
+    loadChildren: () => import("./features/layout/layout.module").then((m) => m.FeaturesLayoutModule)
+  },
+  { path: "**", redirectTo: "auth" }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
+      useHash: true
       //enableTracing: true,
     })
   ],

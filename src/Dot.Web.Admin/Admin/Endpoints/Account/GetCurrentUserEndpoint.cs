@@ -13,7 +13,6 @@ namespace Cofoundry.Web.Admin
     public class GetCurrentUserEndpoint : Endpoint<object>
     {
         public IUserContextService UserContextService { get; set; }
-        public IUserSessionService UserSessionService { get; set; }
         public IUnitOfWork UnitOfWork { get; set; }
         public IUserAccountDetailsMapper UserAccountDetailsMapper { get; set; }
 
