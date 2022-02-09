@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Core;
+﻿using Cofoundry.Core;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Microsoft.EntityFrameworkCore;
+using Dot.EFCore.UnitOfWork;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -12,52 +12,41 @@ namespace Cofoundry.Domain.Internal
     /// the successful login. Does not do anything to login a user
     /// session.
     /// </summary>
-    public class LogSuccessfulLoginCommandHandler 
+    public class LogSuccessfulLoginCommandHandler
         : IRequestHandler<LogSuccessfulLoginCommand, Unit>
     {
-        #region constructor
-
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IClientConnectionService _clientConnectionService;
 
         public LogSuccessfulLoginCommandHandler(
-            DbContextCore dbContext,
-            IClientConnectionService clientConnectionService
-            )
+            IUnitOfWork unitOfWork,
+            IClientConnectionService clientConnectionService)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _clientConnectionService = clientConnectionService;
         }
 
-        #endregion
-
         public async Task<Unit> ExecuteAsync(LogSuccessfulLoginCommand command, IExecutionContext executionContext)
         {
-            var user = await Query(command.UserId).SingleOrDefaultAsync();
+            var user = _unitOfWork.Users()
+                .WithSpecification(new UserByIdSpec(command.UserId))
+                .SingleOrDefault();
+
             EntityNotFoundException.ThrowIfNull(user, command.UserId);
 
             var connectionInfo = _clientConnectionService.GetConnectionInfo();
             SetLoggedIn(user, executionContext);
-            await _dbContext.SaveChangesAsync();
 
-            /*await _sqlExecutor.ExecuteCommandAsync(_dbContext,
-                "Cofoundry.UserLoginLog_Add",
-                new SqlParameter("UserId", user.UserId),
-                new SqlParameter("IPAddress", connectionInfo.IPAddress),
-                new SqlParameter("DateTimeNow", executionContext.ExecutionDate)
-                );*/
+            await _unitOfWork.UserLoginLogs().AddAsync(new UserLoginLog
+            {
+                UserId = command.UserId,
+                IPAddress = connectionInfo.IPAddress,
+                AttemptDate = executionContext.ExecutionDate
+            });
+
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
-        }
-
-        private IQueryable<User> Query(int userId)
-        {
-            var user = _dbContext
-                .Users
-                .FilterById(userId)
-                .FilterCanLogIn();
-
-            return user;
         }
 
         private void SetLoggedIn(User user, IExecutionContext executionContext)

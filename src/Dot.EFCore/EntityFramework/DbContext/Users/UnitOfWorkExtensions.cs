@@ -5,6 +5,11 @@ namespace Cofoundry.Domain.Data
 {
     public static class UserUnitOfWorkExtensions
     {
+        public static DbSet<UserLoginLog> UserLoginLogs(this IUnitOfWork unitOfWork)
+        {
+            return unitOfWork.Set<UserLoginLog>();
+        }
+
         public static DbSet<FailedAuthenticationAttempt> FailedAuthenticationAttempts(this IUnitOfWork unitOfWork)
         {
             return unitOfWork.Set<FailedAuthenticationAttempt>();

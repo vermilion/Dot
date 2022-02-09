@@ -27,12 +27,13 @@
     overflow: hidden;
     white-space: nowrap;
     &:before {
-      content: '';
+      content: "";
       position: absolute;
-      right: 0; top: 0;
+      right: 0;
+      top: 0;
       width: 20px;
       height: 100%;
-      background: linear-gradient(to right, rgba(255, 255, 255,1), #ffffff 100%);
+      background: linear-gradient(to right, rgba(255, 255, 255, 1), #ffffff 100%);
     }
     &:focus {
       outline: none;
@@ -80,7 +81,7 @@
     white-space: nowrap;
     z-index: 3;
     border: 1px solid transparent;
-    box-shadow: rgba(0,0,0,0.2) 0 2px 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 8px;
     .ae-picker-item {
       cursor: pointer;
       display: block;

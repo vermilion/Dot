@@ -9,21 +9,16 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<LogFailedLoginAttemptCommand, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
-        
-        #region constructor
-
         private readonly IClientConnectionService _clientConnectionService;
 
         public LogFailedLoginAttemptCommandHandler(
             IUnitOfWork unitOfWork,
-            IClientConnectionService clientConnectionService
-            )
+            IClientConnectionService clientConnectionService)
         {
             _unitOfWork = unitOfWork;
             _clientConnectionService = clientConnectionService;
         }
-        #endregion
-
+        
         public async Task<Unit> ExecuteAsync(LogFailedLoginAttemptCommand command, IExecutionContext executionContext)
         {
             var connectionInfo = _clientConnectionService.GetConnectionInfo();

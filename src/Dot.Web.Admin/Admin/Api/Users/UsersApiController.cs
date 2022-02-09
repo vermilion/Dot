@@ -16,28 +16,6 @@ namespace Cofoundry.Web.Admin
             _mediator = mediator;
         }
 
-        #region queries
-
-        [HttpPost]
-        public async Task<IActionResult> GetAll([FromBody] SearchUserSummariesQuery query)
-        {
-            if (query == null) query = new SearchUserSummariesQuery();
-
-            var results = await _mediator.ExecuteAsync(query);
-            return Ok(results);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetById(int userId)
-        {
-            var query = new GetUserDetailsByIdQuery(userId);
-            var result = await _mediator.ExecuteAsync(query);
-
-            return Ok(result);
-        }
-
-        #endregion
-
         #region commands
 
         [HttpPost]

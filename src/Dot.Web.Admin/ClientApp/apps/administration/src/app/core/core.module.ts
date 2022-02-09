@@ -14,8 +14,8 @@ import { UnauthorizedInterceptor } from "./interceptors/unauthorized.interceptor
       provide: HTTP_INTERCEPTORS,
       useClass: UnauthorizedInterceptor,
       multi: true
-    },
-  ],
+    }
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() core: CoreModule) {

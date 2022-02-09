@@ -7,24 +7,23 @@ import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
-
-  constructor(
-    private authenticationService: AuthenticationService) {
-  }
+  constructor(private authenticationService: AuthenticationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    return next.handle(request).pipe(catchError(err => {
-      if ([401, 403].includes(err.status)) {
-        // auto logout if 401 or 403 response returned from api
-        this.authenticationService.logout();
-      }
+    return next.handle(request).pipe(
+      catchError((err) => {
+        if ([401, 403].includes(err.status)) {
+          // auto logout if 401 or 403 response returned from api
+          this.authenticationService.logout();
+        }
 
-      console.error(err);
+        console.error(err);
 
-      this.authenticationService.redirectToLogin();
+        this.authenticationService.redirectToLogin();
 
-      // handle your auth error or rethrow
-      return throwError(() => err);
-    }));
+        // handle your auth error or rethrow
+        return throwError(() => err);
+      })
+    );
   }
 }

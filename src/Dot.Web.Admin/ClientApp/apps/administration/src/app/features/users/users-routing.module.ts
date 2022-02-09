@@ -12,14 +12,14 @@ const routes: Routes = [
     component: UsersListComponent,
     data: {
       breadcrumb: "User List"
-    },
+    }
   },
   {
     path: "create",
     component: UserCreateComponent,
     data: {
       breadcrumb: "User Create"
-    },
+    }
   },
   {
     path: "user/:id",
@@ -37,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UsersRoutingModule { }
+export class UsersRoutingModule {}

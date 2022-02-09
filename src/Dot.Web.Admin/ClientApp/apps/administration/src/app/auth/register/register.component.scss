@@ -1,13 +1,13 @@
 :host {
-    display: contents;
+  display: contents;
 
-    .wrapper {
-      display: flex;
-      height: 100%;
-      align-items: center;
+  .wrapper {
+    display: flex;
+    height: 100%;
+    align-items: center;
 
-      &>.ant-row {
-        width: 100%;
-      }
+    & > .ant-row {
+      width: 100%;
     }
   }
+}

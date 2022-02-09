@@ -18,23 +18,40 @@
       }
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
   },
-  "projects": {
-    "administration": {
-      "tags": []
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint",
+        "prefix": "app"
+      },
+      "library": {
+        "linter": "eslint",
+        "prefix": "gui"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
     },
-    "setup": {
-      "tags": []
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none"
     },
-    "tools": {
-      "tags": []
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "none"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    },
+    "@schematics/angular:component": {
+      "style": "scss"
     }
-  }
+  },
+  "defaultProject": "administration"
 }

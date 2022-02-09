@@ -1,131 +1,145 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, Output, Renderer2, ViewChild } from '@angular/core';
-import { AngularEditorService } from './angular-editor.service';
-import { HttpResponse, HttpEvent } from '@angular/common/http';
-import { DOCUMENT } from '@angular/common';
-import { CustomClass } from './config';
-import { SelectOption } from './ag-select/ag-select.component';
-import { Observable } from 'rxjs';
+import { Component, ElementRef, EventEmitter, Inject, Input, Output, Renderer2, ViewChild } from "@angular/core";
+import { AngularEditorService } from "./angular-editor.service";
+import { HttpResponse, HttpEvent } from "@angular/common/http";
+import { DOCUMENT } from "@angular/common";
+import { CustomClass } from "./config";
+import { SelectOption } from "./ag-select/ag-select.component";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'tls-editor-toolbar',
-  templateUrl: './ag-editor-toolbar.component.html',
-  styleUrls: ['./ag-editor-toolbar.component.scss'],
+  selector: "tls-editor-toolbar",
+  templateUrl: "./ag-editor-toolbar.component.html",
+  styleUrls: ["./ag-editor-toolbar.component.scss"]
 })
-
 export class AngularEditorToolbarComponent {
   htmlMode = false;
   linkSelected = false;
-  block = 'default';
-  fontName = 'Times New Roman';
-  fontSize = '3';
+  block = "default";
+  fontName = "Times New Roman";
+  fontSize = "3";
   foreColour;
   backColor;
 
   headings: SelectOption[] = [
     {
-      label: 'Heading 1',
-      value: 'h1',
+      label: "Heading 1",
+      value: "h1"
     },
     {
-      label: 'Heading 2',
-      value: 'h2',
+      label: "Heading 2",
+      value: "h2"
     },
     {
-      label: 'Heading 3',
-      value: 'h3',
+      label: "Heading 3",
+      value: "h3"
     },
     {
-      label: 'Heading 4',
-      value: 'h4',
+      label: "Heading 4",
+      value: "h4"
     },
     {
-      label: 'Heading 5',
-      value: 'h5',
+      label: "Heading 5",
+      value: "h5"
     },
     {
-      label: 'Heading 6',
-      value: 'h6',
+      label: "Heading 6",
+      value: "h6"
     },
     {
-      label: 'Heading 7',
-      value: 'h7',
+      label: "Heading 7",
+      value: "h7"
     },
     {
-      label: 'Paragraph',
-      value: 'p',
+      label: "Paragraph",
+      value: "p"
     },
     {
-      label: 'Predefined',
-      value: 'pre'
+      label: "Predefined",
+      value: "pre"
     },
     {
-      label: 'Standard',
-      value: 'div'
+      label: "Standard",
+      value: "div"
     },
     {
-      label: 'default',
-      value: 'default'
+      label: "default",
+      value: "default"
     }
   ];
 
   fontSizes: SelectOption[] = [
     {
-      label: '1',
-      value: '1',
+      label: "1",
+      value: "1"
     },
     {
-      label: '2',
-      value: '2',
+      label: "2",
+      value: "2"
     },
     {
-      label: '3',
-      value: '3',
+      label: "3",
+      value: "3"
     },
     {
-      label: '4',
-      value: '4',
+      label: "4",
+      value: "4"
     },
     {
-      label: '5',
-      value: '5',
+      label: "5",
+      value: "5"
     },
     {
-      label: '6',
-      value: '6',
+      label: "6",
+      value: "6"
     },
     {
-      label: '7',
-      value: '7',
+      label: "7",
+      value: "7"
     }
   ];
 
-  customClassId = '-1';
+  customClassId = "-1";
   // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
   _customClasses: CustomClass[];
-  customClassList: SelectOption[] = [{ label: '', value: '' }];
+  customClassList: SelectOption[] = [{ label: "", value: "" }];
   // uploadUrl: string;
 
   tagMap = {
-    BLOCKQUOTE: 'indent',
-    A: 'link'
+    BLOCKQUOTE: "indent",
+    A: "link"
   };
 
-  select = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'PRE', 'DIV'];
+  select = ["H1", "H2", "H3", "H4", "H5", "H6", "P", "PRE", "DIV"];
 
-  buttons = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'justifyLeft', 'justifyCenter',
-    'justifyRight', 'justifyFull', 'indent', 'outdent', 'insertUnorderedList', 'insertOrderedList', 'link'];
+  buttons = [
+    "bold",
+    "italic",
+    "underline",
+    "strikeThrough",
+    "subscript",
+    "superscript",
+    "justifyLeft",
+    "justifyCenter",
+    "justifyRight",
+    "justifyFull",
+    "indent",
+    "outdent",
+    "insertUnorderedList",
+    "insertOrderedList",
+    "link"
+  ];
 
   @Input() id: string;
   @Input() upload: (file: File) => Observable<any>;
   @Input() showToolbar: boolean;
-  @Input() fonts: SelectOption[] = [{ label: '', value: '' }];
+  @Input() fonts: SelectOption[] = [{ label: "", value: "" }];
 
   @Input()
   set customClasses(classes: CustomClass[]) {
     if (classes) {
       this._customClasses = classes;
       this.customClassList = this._customClasses.map((x, i) => ({ label: x.name, value: i.toString() }));
-      this.customClassList.unshift({ label: 'Clear Class', value: '-1' });
+      this.customClassList.unshift({ label: "Clear Class", value: "-1" });
     }
   }
 
@@ -147,19 +161,13 @@ export class AngularEditorToolbarComponent {
 
   @Output() execute: EventEmitter<string> = new EventEmitter<string>();
 
-  @ViewChild('fileInput', { static: true }) myInputFile: ElementRef;
+  @ViewChild("fileInput", { static: true }) myInputFile: ElementRef;
 
   public get isLinkButtonDisabled(): boolean {
     return this.htmlMode || !Boolean(this.editorService.selectedText);
   }
 
-  constructor(
-    private r: Renderer2,
-    private editorService: AngularEditorService,
-    private er: ElementRef,
-    @Inject(DOCUMENT) private doc: any
-  ) {
-  }
+  constructor(private r: Renderer2, private editorService: AngularEditorService, private er: ElementRef, @Inject(DOCUMENT) private doc: any) {}
 
   /**
    * Trigger command from editor header buttons
@@ -176,13 +184,13 @@ export class AngularEditorToolbarComponent {
     if (!this.showToolbar) {
       return;
     }
-    this.buttons.forEach(e => {
+    this.buttons.forEach((e) => {
       const result = this.doc.queryCommandState(e);
-      const elementById = this.doc.getElementById(e + '-' + this.id);
+      const elementById = this.doc.getElementById(e + "-" + this.id);
       if (result) {
-        this.r.addClass(elementById, 'active');
+        this.r.addClass(elementById, "active");
       } else {
-        this.r.removeClass(elementById, 'active');
+        this.r.removeClass(elementById, "active");
       }
     });
   }
@@ -194,24 +202,24 @@ export class AngularEditorToolbarComponent {
     if (!this.showToolbar) {
       return;
     }
-    this.linkSelected = nodes.findIndex(x => x.nodeName === 'A') > -1;
+    this.linkSelected = nodes.findIndex((x) => x.nodeName === "A") > -1;
     let found = false;
-    this.select.forEach(y => {
-      const node = nodes.find(x => x.nodeName === y);
+    this.select.forEach((y) => {
+      const node = nodes.find((x) => x.nodeName === y);
       if (node !== undefined && y === node.nodeName) {
         if (found === false) {
           this.block = node.nodeName.toLowerCase();
           found = true;
         }
       } else if (found === false) {
-        this.block = 'default';
+        this.block = "default";
       }
     });
 
     found = false;
     if (this._customClasses) {
       this._customClasses.forEach((y, index) => {
-        const node = nodes.find(x => {
+        const node = nodes.find((x) => {
           if (x instanceof Element) {
             return x.className === y.class;
           }
@@ -222,41 +230,41 @@ export class AngularEditorToolbarComponent {
             found = true;
           }
         } else if (found === false) {
-          this.customClassId = '-1';
+          this.customClassId = "-1";
         }
       });
     }
 
-    Object.keys(this.tagMap).map(e => {
-      const elementById = this.doc.getElementById(this.tagMap[e] + '-' + this.id);
-      const node = nodes.find(x => x.nodeName === e);
+    Object.keys(this.tagMap).map((e) => {
+      const elementById = this.doc.getElementById(this.tagMap[e] + "-" + this.id);
+      const node = nodes.find((x) => x.nodeName === e);
       if (node !== undefined && e === node.nodeName) {
-        this.r.addClass(elementById, 'active');
+        this.r.addClass(elementById, "active");
       } else {
-        this.r.removeClass(elementById, 'active');
+        this.r.removeClass(elementById, "active");
       }
     });
 
-    this.foreColour = this.doc.queryCommandValue('ForeColor');
-    this.fontSize = this.doc.queryCommandValue('FontSize');
-    this.fontName = this.doc.queryCommandValue('FontName').replace(/"/g, '');
-    this.backColor = this.doc.queryCommandValue('backColor');
+    this.foreColour = this.doc.queryCommandValue("ForeColor");
+    this.fontSize = this.doc.queryCommandValue("FontSize");
+    this.fontName = this.doc.queryCommandValue("FontName").replace(/"/g, "");
+    this.backColor = this.doc.queryCommandValue("backColor");
   }
 
   /**
    * insert URL link
    */
   insertUrl() {
-    let url = 'https:\/\/';
+    let url = "https://";
     const selection = this.editorService.savedSelection;
-    if (selection && selection.commonAncestorContainer.parentElement.nodeName === 'A') {
+    if (selection && selection.commonAncestorContainer.parentElement.nodeName === "A") {
       const parent = selection.commonAncestorContainer.parentElement as HTMLAnchorElement;
-      if (parent.href !== '') {
+      if (parent.href !== "") {
         url = parent.href;
       }
     }
-    url = prompt('Insert URL link', url);
-    if (url && url !== '' && url !== 'https://') {
+    url = prompt("Insert URL link", url);
+    if (url && url !== "" && url !== "https://") {
       this.editorService.createLink(url);
     }
   }
@@ -264,7 +272,7 @@ export class AngularEditorToolbarComponent {
   /** insert color */
   insertColor(color: string, where: string) {
     this.editorService.insertColor(color, where);
-    this.execute.emit('');
+    this.execute.emit("");
   }
 
   /**
@@ -273,7 +281,7 @@ export class AngularEditorToolbarComponent {
    */
   setFontName(foreColor: string): void {
     this.editorService.setFontName(foreColor);
-    this.execute.emit('');
+    this.execute.emit("");
   }
 
   /**
@@ -282,7 +290,7 @@ export class AngularEditorToolbarComponent {
    */
   setFontSize(fontSize: string): void {
     this.editorService.setFontSize(fontSize);
-    this.execute.emit('');
+    this.execute.emit("");
   }
 
   /**
@@ -290,11 +298,11 @@ export class AngularEditorToolbarComponent {
    * @param m boolean
    */
   setEditorMode(m: boolean) {
-    const toggleEditorModeButton = this.doc.getElementById('toggleEditorMode' + '-' + this.id);
+    const toggleEditorModeButton = this.doc.getElementById("toggleEditorMode" + "-" + this.id);
     if (m) {
-      this.r.addClass(toggleEditorModeButton, 'active');
+      this.r.addClass(toggleEditorModeButton, "active");
     } else {
-      this.r.removeClass(toggleEditorModeButton, 'active');
+      this.r.removeClass(toggleEditorModeButton, "active");
     }
     this.htmlMode = m;
   }
@@ -304,7 +312,7 @@ export class AngularEditorToolbarComponent {
    */
   onFileChanged(event) {
     const file = event.target.files[0];
-    if (file.type.includes('image/')) {
+    if (file.type.includes("image/")) {
       if (this.upload) {
         this.upload(file).subscribe(() => this.watchUploadImage);
       } else {
@@ -328,8 +336,8 @@ export class AngularEditorToolbarComponent {
    * Set custom class
    */
   setCustomClass(classId: string) {
-    if (classId === '-1') {
-      this.execute.emit('clear');
+    if (classId === "-1") {
+      this.execute.emit("clear");
     } else {
       this.editorService.createCustomClass(this._customClasses[+classId]);
     }
@@ -345,7 +353,7 @@ export class AngularEditorToolbarComponent {
     let result: any;
     for (const arr of this.hiddenButtons) {
       if (arr instanceof Array) {
-        result = arr.find(item => item === name);
+        result = arr.find((item) => item === name);
       }
       if (result) {
         break;
@@ -355,7 +363,7 @@ export class AngularEditorToolbarComponent {
   }
 
   focus() {
-    this.execute.emit('focus');
-    console.log('focused');
+    this.execute.emit("focus");
+    console.log("focused");
   }
 }

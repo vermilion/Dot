@@ -9,19 +9,15 @@ export const featuresRoutes: Routes = [
     children: [
       {
         path: "users",
-        loadChildren: () => import("./users/users.module").then(m => m.UsersModule),
-        canActivate: [
-          AuthGuard
-        ]
+        loadChildren: () => import("./users/users.module").then((m) => m.UsersModule),
+        canActivate: [AuthGuard]
       },
       {
         path: "roles",
-        loadChildren: () => import("./roles/roles.module").then(m => m.RolesModule),
-        canActivate: [
-          AuthGuard
-        ]
+        loadChildren: () => import("./roles/roles.module").then((m) => m.RolesModule),
+        canActivate: [AuthGuard]
       }
     ]
   },
-  { path: "**", redirectTo: "users" },
+  { path: "**", redirectTo: "users" }
 ];

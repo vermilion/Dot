@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Web;
 using Cofoundry.Web.Admin;
+using FastEndpoints;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,8 @@ namespace Cofoundry.BasicTestSite
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddFastEndpoints();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("Default", x => x
@@ -61,7 +64,7 @@ namespace Cofoundry.BasicTestSite
             // configure openapi
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo()
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "API ",
@@ -113,7 +116,7 @@ namespace Cofoundry.BasicTestSite
 
             app.UseDot();
 
-            app.UseMiddleware<IsSetupMiddleware>();
+            //app.UseMiddleware<IsSetupMiddleware>();
 
             app.UseDotUI();
 
@@ -137,6 +140,8 @@ namespace Cofoundry.BasicTestSite
             {
                 options.MapControllers();
                 options.MapDefaultControllerRoute();
+
+                options.MapFastEndpoints();
             });
 
             var assembly = typeof(BaseApiController).Assembly;

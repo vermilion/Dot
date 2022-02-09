@@ -2,7 +2,7 @@
 
 namespace Cofoundry.Domain.Data
 {
-    public partial class FailedAuthenticationAttempt
+    public class FailedAuthenticationAttempt
     {
         public string UserName { get; set; }
 

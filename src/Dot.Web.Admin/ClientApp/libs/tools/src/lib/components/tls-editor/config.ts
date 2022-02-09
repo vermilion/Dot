@@ -1,5 +1,5 @@
-import { HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpEvent } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 export interface CustomClass {
   name: string;
@@ -15,25 +15,25 @@ export interface Font {
 export interface AngularEditorConfig {
   editable?: boolean;
   spellcheck?: boolean;
-  height?: 'auto' | string;
-  minHeight?: '0' | string;
-  maxHeight?: 'auto' | string;
-  width?: 'auto' | string;
-  minWidth?: '0' | string;
-  translate?: 'yes' | 'now' | string;
+  height?: "auto" | string;
+  minHeight?: "0" | string;
+  maxHeight?: "auto" | string;
+  width?: "auto" | string;
+  minWidth?: "0" | string;
+  translate?: "yes" | "now" | string;
   enableToolbar?: boolean;
   showToolbar?: boolean;
   placeholder?: string;
   defaultParagraphSeparator?: string;
   defaultFontName?: string;
-  defaultFontSize?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | string;
+  defaultFontSize?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | string;
   uploadUrl?: string;
   upload?: (file: File) => Observable<any>;
   uploadWithCredentials?: boolean;
   fonts?: Font[];
   customClasses?: CustomClass[];
   sanitize?: boolean;
-  toolbarPosition?: 'top' | 'bottom';
+  toolbarPosition?: "top" | "bottom";
   outline?: boolean;
   toolbarHiddenButtons?: string[][];
 }
@@ -41,29 +41,29 @@ export interface AngularEditorConfig {
 export const angularEditorConfig: AngularEditorConfig = {
   editable: true,
   spellcheck: true,
-  height: 'auto',
-  minHeight: '0',
-  maxHeight: 'auto',
-  width: 'auto',
-  minWidth: '0',
-  translate: 'yes',
+  height: "auto",
+  minHeight: "0",
+  maxHeight: "auto",
+  width: "auto",
+  minWidth: "0",
+  translate: "yes",
   enableToolbar: true,
   showToolbar: true,
-  placeholder: 'Enter text here...',
-  defaultParagraphSeparator: '',
-  defaultFontName: '',
-  defaultFontSize: '',
+  placeholder: "Enter text here...",
+  defaultParagraphSeparator: "",
+  defaultFontName: "",
+  defaultFontSize: "",
   fonts: [
-    {class: 'arial', name: 'Arial'},
-    {class: 'times-new-roman', name: 'Times New Roman'},
-    {class: 'calibri', name: 'Calibri'},
-    {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+    { class: "arial", name: "Arial" },
+    { class: "times-new-roman", name: "Times New Roman" },
+    { class: "calibri", name: "Calibri" },
+    { class: "comic-sans-ms", name: "Comic Sans MS" }
   ],
-  uploadUrl: 'v1/image',
+  uploadUrl: "v1/image",
   uploadWithCredentials: false,
   sanitize: true,
-  toolbarPosition: 'top',
-  outline: true,
+  toolbarPosition: "top",
+  outline: true
   /*toolbarHiddenButtons: [
     ['bold', 'italic', 'underline', 'strikeThrough', 'superscript', 'subscript'],
     ['heading', 'fontName', 'fontSize', 'color'],

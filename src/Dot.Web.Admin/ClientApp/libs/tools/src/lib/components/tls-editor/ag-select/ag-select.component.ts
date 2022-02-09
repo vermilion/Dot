@@ -11,10 +11,10 @@ import {
   ViewChild,
   ViewEncapsulation,
   forwardRef
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+} from "@angular/core";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { isDefined } from '../utils';
+import { isDefined } from "../utils";
 
 export interface SelectOption {
   label: string;
@@ -22,29 +22,29 @@ export interface SelectOption {
 }
 
 @Component({
-  selector: 'tls-select',
-  templateUrl: './ag-select.component.html',
-  styleUrls: ['./ag-select.component.scss'],
+  selector: "tls-select",
+  templateUrl: "./ag-select.component.html",
+  styleUrls: ["./ag-select.component.scss"],
   encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TlsSelectComponent),
-      multi: true,
+      multi: true
     }
   ]
 })
 export class TlsSelectComponent implements OnInit, ControlValueAccessor {
   @Input() options: SelectOption[] = [];
   // eslint-disable-next-line @angular-eslint/no-input-rename
-  @Input('hidden') isHidden: boolean;
+  @Input("hidden") isHidden: boolean;
 
   selectedOption: SelectOption;
   disabled = false;
   optionId = 0;
 
   get label(): string {
-    return this.selectedOption && this.selectedOption.hasOwnProperty('label') ? this.selectedOption.label : 'Select';
+    return this.selectedOption && this.selectedOption.hasOwnProperty("label") ? this.selectedOption.label : "Select";
   }
 
   opened = false;
@@ -53,16 +53,14 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
     return this.selectedOption.value;
   }
 
-  @HostBinding('style.display') hidden = 'inline-block';
+  @HostBinding("style.display") hidden = "inline-block";
 
   // eslint-disable-next-line @angular-eslint/no-output-native, @angular-eslint/no-output-rename
-  @Output('change') changeEvent = new EventEmitter();
+  @Output("change") changeEvent = new EventEmitter();
 
-  @ViewChild('labelButton', { static: true }) labelButton: ElementRef;
+  @ViewChild("labelButton", { static: true }) labelButton: ElementRef;
 
-  constructor(private elRef: ElementRef,
-    private r: Renderer2,
-  ) { }
+  constructor(private elRef: ElementRef, private r: Renderer2) {}
 
   ngOnInit() {
     this.selectedOption = this.options[0];
@@ -72,7 +70,7 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   hide() {
-    this.hidden = 'none';
+    this.hidden = "none";
   }
 
   optionSelect(option: SelectOption, event: MouseEvent) {
@@ -92,7 +90,7 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
     this.opened = !this.opened;
   }
 
-  @HostListener('document:click', ['$event'])
+  @HostListener("document:click", ["$event"])
   onClick($event: MouseEvent) {
     if (!this.elRef.nativeElement.contains($event.target)) {
       this.close();
@@ -108,7 +106,7 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value) {
-    if (!value || typeof value !== 'string') {
+    if (!value || typeof value !== "string") {
       return;
     }
     this.setValue(value);
@@ -126,10 +124,8 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  onChange: any = () => {
-  }
-  onTouched: any = () => {
-  }
+  onChange: any = () => {};
+  onTouched: any = () => {};
 
   registerOnChange(fn) {
     this.onChange = fn;
@@ -142,12 +138,12 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
     this.labelButton.nativeElement.disabled = isDisabled;
     const div = this.labelButton.nativeElement;
-    const action = isDisabled ? 'addClass' : 'removeClass';
-    this.r[action](div, 'disabled');
+    const action = isDisabled ? "addClass" : "removeClass";
+    this.r[action](div, "disabled");
     this.disabled = isDisabled;
   }
 
-  @HostListener('keydown', ['$event'])
+  @HostListener("keydown", ["$event"])
   handleKeyDown($event: KeyboardEvent) {
     if (!this.opened) {
       return;
@@ -155,26 +151,26 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
     // console.log($event.key);
     // if (KeyCode[$event.key]) {
     switch ($event.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         this._handleArrowDown($event);
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         this._handleArrowUp($event);
         break;
-      case 'Space':
+      case "Space":
         this._handleSpace($event);
         break;
-      case 'Enter':
+      case "Enter":
         this._handleEnter($event);
         break;
-      case 'Tab':
+      case "Tab":
         this._handleTab($event);
         break;
-      case 'Escape':
+      case "Escape":
         this.close();
         $event.preventDefault();
         break;
-      case 'Backspace':
+      case "Backspace":
         this._handleBackspace();
         break;
     }
@@ -195,19 +191,13 @@ export class TlsSelectComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  _handleSpace($event) {
-
-  }
+  _handleSpace($event) {}
 
   _handleEnter($event) {
     this.optionSelect(this.options[this.optionId], $event);
   }
 
-  _handleTab($event) {
+  _handleTab($event) {}
 
-  }
-
-  _handleBackspace() {
-
-  }
+  _handleBackspace() {}
 }

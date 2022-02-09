@@ -6,7 +6,7 @@ export interface UserSummary {
   auditData: any;
 
   role: {
-    roleId: number,
-    title: string
-  }
+    roleId: number;
+    title: string;
+  };
 }

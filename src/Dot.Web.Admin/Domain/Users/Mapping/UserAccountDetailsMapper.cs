@@ -1,8 +1,4 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Cofoundry.Domain.Data;
 
 namespace Cofoundry.Domain.Internal
 {

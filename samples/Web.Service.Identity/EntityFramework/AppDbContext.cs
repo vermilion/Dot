@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
-using Microsoft.Extensions.Logging;
-using Cofoundry.Core.Data;
-using Cofoundry.Core;
+﻿using Cofoundry.Core;
 using Cofoundry.Domain.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Cofoundry.BasicTestSite
 {

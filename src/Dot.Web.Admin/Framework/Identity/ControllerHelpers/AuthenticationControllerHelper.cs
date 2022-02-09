@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Domain;
 using Cofoundry.Domain.MailTemplates;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Web.Identity
@@ -17,64 +16,12 @@ namespace Cofoundry.Web.Identity
         #region constructor
 
         private readonly IMediator _mediator;
-        private readonly ILoginService _loginService;
-        private readonly IUserContextService _userContextService;
 
         public AuthenticationControllerHelper(
-            IMediator mediator,
-            ILoginService loginService,
-            IUserContextService userContextService
+            IMediator mediator
             )
         {
             _mediator = mediator;
-            _loginService = loginService;
-            _userContextService = userContextService;
-        }
-
-        #endregion
-
-        #region Log in
-
-        public async Task<AuthenticationResult> LogUserInAsync(ControllerBase controller, LoginViewModel vm)
-        {
-            if (controller == null) throw new ArgumentNullException(nameof(controller));
-            if (vm == null) throw new ArgumentNullException(nameof(vm));
-
-            var result = new AuthenticationResult();
-
-            if (!controller.ModelState.IsValid) return result;
-
-            var command = new LogUserInWithCredentialsCommand
-            {
-                Username = vm.Username,
-                Password = vm.Password,
-                RememberUser = vm.RememberMe
-            };
-
-            try
-            {
-                await _mediator.ExecuteAsync(command);
-            }
-            catch (PasswordChangeRequiredException ex)
-            {
-                result.RequiresPasswordChange = true;
-                // Add modelstate error as a precaution, because
-                // result.RequiresPasswordChange may not be handled by the caller
-                controller.ModelState.AddModelError(string.Empty, "Password change required.");
-            }
-
-            result.IsAuthenticated = controller.ModelState.IsValid;
-
-            return result;
-        }
-
-        #endregion
-
-        #region log out
-
-        public Task LogoutAsync()
-        {
-            return _loginService.SignOutAsync();
         }
 
         #endregion

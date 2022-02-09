@@ -39,7 +39,6 @@ import { isDefined } from "./utils";
   ]
 })
 export class AngularEditorComponent implements OnInit, ControlValueAccessor, AfterViewInit, OnDestroy {
-
   private onChange: (value: string) => void;
   private onTouched: () => void;
 
@@ -91,7 +90,7 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
     @Attribute("autofocus") private autoFocus: any
   ) {
     const parsedTabIndex = Number(defaultTabIndex);
-    this.tabIndex = (parsedTabIndex || parsedTabIndex === 0) ? parsedTabIndex : null;
+    this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
   }
 
   ngOnInit() {
@@ -200,13 +199,12 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
     } else {
       html = element.innerText;
     }
-    if ((!html || html === "<br>")) {
+    if (!html || html === "<br>") {
       html = "";
     }
     if (typeof this.onChange === "function") {
-      this.onChange(this.config.sanitize || this.config.sanitize === undefined ?
-        this.sanitizer.sanitize(SecurityContext.HTML, html) : html);
-      if ((!html) !== this.showPlaceholder) {
+      this.onChange(this.config.sanitize || this.config.sanitize === undefined ? this.sanitizer.sanitize(SecurityContext.HTML, html) : html);
+      if (!html !== this.showPlaceholder) {
         this.togglePlaceholder(this.showPlaceholder);
       }
     }
@@ -220,7 +218,7 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
    * @param fn a function
    */
   registerOnChange(fn: any): void {
-    this.onChange = e => (e === "<br>" ? fn("") : fn(e));
+    this.onChange = (e) => (e === "<br>" ? fn("") : fn(e));
   }
 
   /**
@@ -239,7 +237,6 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
    * @param value value to be executed when there is a change in contenteditable
    */
   writeValue(value: any): void {
-
     if ((!value || value === "<br>" || value === "") !== this.showPlaceholder) {
       this.togglePlaceholder(this.showPlaceholder);
     }
@@ -272,7 +269,6 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
     if (!value) {
       this.r.addClass(this.editorWrapper.nativeElement, "show-placeholder");
       this.showPlaceholder = true;
-
     } else {
       this.r.removeClass(this.editorWrapper.nativeElement, "show-placeholder");
       this.showPlaceholder = false;
@@ -386,14 +382,14 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
 
   getFonts() {
     const fonts = this.config.fonts ? this.config.fonts : angularEditorConfig.fonts;
-    return fonts.map(x => {
+    return fonts.map((x) => {
       return { label: x.name, value: x.name };
     });
   }
 
   getCustomTags() {
     const tags = ["span"];
-    this.config.customClasses.forEach(x => {
+    this.config.customClasses.forEach((x) => {
       if (x.tag !== undefined) {
         if (!tags.includes(x.tag)) {
           tags.push(x.tag);

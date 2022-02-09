@@ -88,93 +88,6 @@
         }
       }
     },
-    "setup": {
-      "projectType": "application",
-      "root": "apps/setup",
-      "sourceRoot": "apps/setup/src",
-      "prefix": "client-app",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/setup",
-            "index": "apps/setup/src/index.html",
-            "main": "apps/setup/src/main.ts",
-            "polyfills": "apps/setup/src/polyfills.ts",
-            "tsConfig": "apps/setup/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": ["apps/setup/src/favicon.ico", "apps/setup/src/assets"],
-            "styles": ["node_modules/ng-zorro-antd/ng-zorro-antd.min.css", "apps/setup/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "1500kb",
-                  "maximumError": "3mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/setup/src/environments/environment.ts",
-                  "with": "apps/setup/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "setup:build:production"
-            },
-            "development": {
-              "browserTarget": "setup:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "setup:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/setup/src/**/*.ts", "apps/setup/src/**/*.html"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/setup"],
-          "options": {
-            "jestConfig": "apps/setup/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "tools": {
       "projectType": "library",
       "root": "libs/tools",
@@ -189,10 +102,6 @@
         }
       }
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/angular",
-    "packageManager": "npm"
   },
   "schematics": {
     "@nrwl/angular": {
@@ -220,6 +129,5 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  },
-  "defaultProject": "administration"
+  }
 }

@@ -8,21 +8,8 @@ import { TlsNgZorroModule } from "../../ng-zorro.module.ts";
 import { TlsSelectComponent } from "./ag-select/ag-select.component";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TlsNgZorroModule
-  ],
-  declarations: [
-    AngularEditorComponent,
-    AngularEditorToolbarComponent,
-    TlsSelectComponent
-  ],
-  exports: [
-    AngularEditorComponent,
-    AngularEditorToolbarComponent
-  ]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TlsNgZorroModule],
+  declarations: [AngularEditorComponent, AngularEditorToolbarComponent, TlsSelectComponent],
+  exports: [AngularEditorComponent, AngularEditorToolbarComponent]
 })
-export class TlsEditorModule {
-}
+export class TlsEditorModule {}

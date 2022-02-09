@@ -38,7 +38,7 @@ const ngZorroConfig: NzConfig = {
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
-const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key]);
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map((key) => antDesignIcons[key]);
 
 const ngZorroModules = [
   NzGridModule,
@@ -64,19 +64,13 @@ const ngZorroModules = [
 ];
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [
-    ...ngZorroModules
-  ],
-  exports: [
-    ...ngZorroModules
-  ],
+  declarations: [],
+  imports: [...ngZorroModules],
+  exports: [...ngZorroModules],
   providers: [
     { provide: NZ_ICONS, useValue: icons },
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_CONFIG, useValue: ngZorroConfig }
   ]
 })
-export class NgZorroModule {
-}
+export class NgZorroModule {}

@@ -1,27 +1,24 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { CustomClass } from './config';
+import { Inject, Injectable } from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { CustomClass } from "./config";
 
 @Injectable()
 export class AngularEditorService {
-
   savedSelection: Range | null;
   selectedText: string;
   uploadUrl: string;
   uploadWithCredentials: boolean;
 
-  constructor(
-    @Inject(DOCUMENT) private doc: any) {
-  }
+  constructor(@Inject(DOCUMENT) private doc: any) {}
 
   /**
    * Executed command from editor header buttons exclude toggleEditorMode
    * @param command string from triggerCommand
    */
   executeCommand(command: string) {
-    const commands = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre'];
+    const commands = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "pre"];
     if (commands.includes(command)) {
-      this.doc.execCommand('formatBlock', false, command);
+      this.doc.execCommand("formatBlock", false, command);
       return;
     }
     this.doc.execCommand(command, false, null);
@@ -32,10 +29,10 @@ export class AngularEditorService {
    * @param url string from UI prompt
    */
   createLink(url: string) {
-    if (!url.includes('http')) {
-      this.doc.execCommand('createlink', false, url);
+    if (!url.includes("http")) {
+      this.doc.execCommand("createlink", false, url);
     } else {
-      const newUrl = '<a href="' + url + '" target="_blank">' + this.selectedText + '</a>';
+      const newUrl = '<a href="' + url + '" target="_blank">' + this.selectedText + "</a>";
       this.insertHtml(newUrl);
     }
   }
@@ -49,10 +46,10 @@ export class AngularEditorService {
   insertColor(color: string, where: string): void {
     const restored = this.restoreSelection();
     if (restored) {
-      if (where === 'textColor') {
-        this.doc.execCommand('foreColor', false, color);
+      if (where === "textColor") {
+        this.doc.execCommand("foreColor", false, color);
       } else {
-        this.doc.execCommand('hiliteColor', false, color);
+        this.doc.execCommand("hiliteColor", false, color);
       }
     }
   }
@@ -62,7 +59,7 @@ export class AngularEditorService {
    * @param fontName string
    */
   setFontName(fontName: string) {
-    this.doc.execCommand('fontName', false, fontName);
+    this.doc.execCommand("fontName", false, fontName);
   }
 
   /**
@@ -70,7 +67,7 @@ export class AngularEditorService {
    * @param fontSize string
    */
   setFontSize(fontSize: string) {
-    this.doc.execCommand('fontSize', false, fontSize);
+    this.doc.execCommand("fontSize", false, fontSize);
   }
 
   /**
@@ -78,11 +75,10 @@ export class AngularEditorService {
    * @param html HTML string
    */
   insertHtml(html: string): void {
-
-    const isHTMLInserted = this.doc.execCommand('insertHTML', false, html);
+    const isHTMLInserted = this.doc.execCommand("insertHTML", false, html);
 
     if (!isHTMLInserted) {
-      throw new Error('Unable to perform the operation');
+      throw new Error("Unable to perform the operation");
     }
   }
 
@@ -101,7 +97,7 @@ export class AngularEditorService {
     } else {
       this.savedSelection = null;
     }
-  }
+  };
 
   /**
    * restore selection when the editor is focused in
@@ -133,11 +129,10 @@ export class AngularEditorService {
 
   /** check any selection is made or not */
   private checkSelection(): any {
-
     const selectedText = this.savedSelection.toString();
 
     if (selectedText.length === 0) {
-      throw new Error('No Selection Made');
+      throw new Error("No Selection Made");
     }
     return true;
   }
@@ -147,18 +142,18 @@ export class AngularEditorService {
    * @param imageUrl The imageUrl.
    */
   insertImage(imageUrl: string) {
-    this.doc.execCommand('insertImage', false, imageUrl);
+    this.doc.execCommand("insertImage", false, imageUrl);
   }
 
   setDefaultParagraphSeparator(separator: string) {
-    this.doc.execCommand('defaultParagraphSeparator', false, separator);
+    this.doc.execCommand("defaultParagraphSeparator", false, separator);
   }
 
   createCustomClass(customClass: CustomClass) {
     let newTag = this.selectedText;
     if (customClass) {
-      const tagName = customClass.tag ? customClass.tag : 'span';
-      newTag = '<' + tagName + ' class="' + customClass.class + '">' + this.selectedText + '</' + tagName + '>';
+      const tagName = customClass.tag ? customClass.tag : "span";
+      newTag = "<" + tagName + ' class="' + customClass.class + '">' + this.selectedText + "</" + tagName + ">";
     }
     this.insertHtml(newTag);
   }
@@ -188,7 +183,7 @@ export class AngularEditorService {
     } else {
       // Iterate nodes until we hit the end container
       while (node && node !== endNode) {
-        rangeNodes.push(node = this.nextNode(node));
+        rangeNodes.push((node = this.nextNode(node)));
       }
 
       // Add partially selected nodes at the start of the range
@@ -231,10 +226,9 @@ export class AngularEditorService {
   }
 
   removeSelectedElements(tagNames) {
-    const tagNamesArray = tagNames.toLowerCase().split(',');
+    const tagNamesArray = tagNames.toLowerCase().split(",");
     this.getSelectedNodes().forEach((node) => {
-      if (node.nodeType === 1 &&
-        tagNamesArray.indexOf(node.tagName.toLowerCase()) > -1) {
+      if (node.nodeType === 1 && tagNamesArray.indexOf(node.tagName.toLowerCase()) > -1) {
         // Remove the node and replace it with its children
         this.replaceWithOwnChildren(node);
       }

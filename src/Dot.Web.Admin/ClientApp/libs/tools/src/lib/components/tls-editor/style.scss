@@ -17,7 +17,7 @@ a {
     width: 8px;
     height: 8px;
     cursor: nwse-resize;
-    background-color: rgba(255, 255, 255, 0.5)
+    background-color: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -38,7 +38,7 @@ a {
       vertical-align: middle;
       border: 1px solid #ddd;
       padding: 0.4rem;
-      min-width: 2.0rem;
+      min-width: 2rem;
       float: left;
 
       &:hover {
@@ -83,7 +83,7 @@ a {
       display: inline-block;
       width: 90px;
 
-      @supports not(-moz-appearance:none) {
+      @supports not (-moz-appearance: none) {
         optgroup {
           font-size: 12px;
           background-color: #f4f4f4;
@@ -149,7 +149,7 @@ a {
       display: inline-block;
       width: 90px;
 
-      @supports not(-moz-appearance:none) {
+      @supports not (-moz-appearance: none) {
         optgroup {
           font-size: 12px;
           background-color: #f4f4f4;
@@ -179,7 +179,7 @@ a {
       display: inline-block;
       width: 50px;
 
-      @supports not(-moz-appearance:none) {
+      @supports not (-moz-appearance: none) {
         optgroup {
           font-size: 12px;
           background-color: #f4f4f4;
@@ -237,7 +237,7 @@ a {
       display: inline-block;
       width: 90px;
 
-      @supports not(-moz-appearance:none) {
+      @supports not (-moz-appearance: none) {
         optgroup {
           font-size: 12px;
           background-color: #f4f4f4;

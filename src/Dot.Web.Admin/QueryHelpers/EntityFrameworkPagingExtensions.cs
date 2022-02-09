@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,6 +20,7 @@ namespace Cofoundry.Domain.Data
                 TotalItems = await source.CountAsync(),
                 Items = await source.Page(query).ToArrayAsync()
             };
+
             PagingQueryExtensions.MapPagingData(query, result);
 
             return result;

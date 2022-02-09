@@ -12,14 +12,14 @@ const routes: Routes = [
     component: RolesListComponent,
     data: {
       breadcrumb: "Roles List"
-    },
+    }
   },
   {
     path: "create",
     component: RoleCreateComponent,
     data: {
       breadcrumb: "Role Create"
-    },
+    }
   },
   {
     path: "role/:id",
@@ -37,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class RolesRoutingModule { }
+export class RolesRoutingModule {}

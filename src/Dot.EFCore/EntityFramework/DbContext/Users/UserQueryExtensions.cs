@@ -1,13 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ardalis.Specification;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Data
 {
     public static class UserQueryExtensions
     {
+        /// <summary>
+        /// Filters the result to include only the user with the specified UserId
+        /// </summary>
+        public static ISpecificationBuilder<User> FilterById(this ISpecificationBuilder<User> users, int? id)
+        {
+            var user = users
+                .Where(u => u.UserId == id && !u.IsDeleted);
+
+            return user;
+        }
+
+        /// <summary>
+        /// Returns only users that are allowed to be logged in i.e. is not
+        /// deleted and is not the system user.
+        /// </summary>
+        public static ISpecificationBuilder<User> FilterCanLogIn(this ISpecificationBuilder<User> users)
+        {
+            var user = users
+                .Where(u => !u.IsSystemAccount && !u.IsDeleted);
+
+            return user;
+        }
+
         /// <summary>
         /// Filters the result to include only the user with the specified UserId
         /// </summary>

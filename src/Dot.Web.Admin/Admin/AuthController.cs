@@ -15,10 +15,12 @@ namespace Cofoundry.Web.Admin
         private readonly IMediator _mediator;
         private readonly IUserContextService _userContextService;
         private readonly AuthenticationControllerHelper _authenticationHelper;
+        private readonly IUserSessionService _userSessionService;
         private readonly AccountManagementControllerHelper _accountManagementControllerHelper;
 
         public AuthController(
             IMediator mediator,
+            IUserSessionService userSessionService,
             IUserContextService userContextService,
             AuthenticationControllerHelper authenticationHelper,
             AccountManagementControllerHelper accountManagementControllerHelper
@@ -26,6 +28,7 @@ namespace Cofoundry.Web.Admin
         {
             _mediator = mediator;
             _authenticationHelper = authenticationHelper;
+            _userSessionService = userSessionService;
             _userContextService = userContextService;
             _accountManagementControllerHelper = accountManagementControllerHelper;
         }
@@ -33,43 +36,6 @@ namespace Cofoundry.Web.Admin
         #endregion
 
         #region routes
-
-        [AllowAnonymous]
-        [HttpPost]
-        public async Task<ActionResult> Login(LoginViewModel command)
-        {
-            var result = await _authenticationHelper.LogUserInAsync(this, command);
-
-            if (result.RequiresPasswordChange)
-            {
-                return Unauthorized();
-                //return Redirect(_adminRouteLibrary.Auth.ChangePassword(returnUrl));
-            }
-            else if (result.IsAuthenticated)
-            {
-                //var context = await _userContextService.GetCurrentContextAsync();
-                //var user = await _queryExecutor.ExecuteAsync(new GetUserMicroSummaryByIdQuery(context.UserId.Value));
-                return Ok();
-            }
-            else if (result.IsAuthenticated)
-            {
-                _userContextService.ClearCache();
-                return Ok();
-                //return await GetLoggedInDefaultRedirectActionAsync();
-            }
-
-            return Ok();
-            //var viewPath = ViewPathFormatter.View(CONTROLLER_NAME, nameof(Login));
-            //return View(viewPath, command);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Logout()
-        {
-            await _authenticationHelper.LogoutAsync();
-            return Ok();
-            //return Redirect(_adminRouteLibrary.Auth.Login(Request.Query["ReturnUrl"].FirstOrDefault()));
-        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -82,8 +48,6 @@ namespace Cofoundry.Web.Admin
             await _authenticationHelper.SendPasswordResetNotificationAsync(this, command, template);
 
             return Ok();
-            //var viewPath = ViewPathFormatter.View(CONTROLLER_NAME, nameof(ForgotPassword));
-            //return View(viewPath, command);
         }
 
         [AllowAnonymous]
@@ -99,8 +63,6 @@ namespace Cofoundry.Web.Admin
             if (ModelState.IsValid)
             {
                 return Ok();
-                //var completeViewPath = ViewPathFormatter.View(CONTROLLER_NAME, nameof(ResetPassword) + "Complete");
-                //return View(completeViewPath);
             }
 
             return Forbid();
@@ -120,7 +82,7 @@ namespace Cofoundry.Web.Admin
                 }
 
                 // The user shouldn't be logged in, but if so, log them out
-                await _authenticationHelper.LogoutAsync();
+                await SignOutAsync();
             }
 
             await _accountManagementControllerHelper.ChangePasswordAsync(this, vm);
@@ -128,8 +90,15 @@ namespace Cofoundry.Web.Admin
             //ViewBag.ReturnUrl = returnUrl;
 
             return Ok();
-            //var viewPath = ViewPathFormatter.View(CONTROLLER_NAME, nameof(ChangePassword));
-            //return View(viewPath, vm);
+        }
+
+        /// <summary>
+        /// Signs the user out of the application and ends the session.
+        /// </summary>
+        private async Task SignOutAsync()
+        {
+            await _userSessionService.LogUserOutAsync();
+            _userContextService.ClearCache();
         }
 
         #endregion
