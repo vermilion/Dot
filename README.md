@@ -10,9 +10,9 @@
 
 ## Technologies
 
-* [.NET 5](https://dotnet.microsoft.com/download)
+* [.NET 6](https://dotnet.microsoft.com/download)
 * [ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core)
-* [Entity Framework Core 5](https://docs.microsoft.com/en-us/ef/core)
+* [Entity Framework Core 6](https://docs.microsoft.com/en-us/ef/core)
 * [C# 9.0](https://docs.microsoft.com/en-us/dotnet/csharp)
 
 ## Installing
