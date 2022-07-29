@@ -1,15 +1,10 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Core.Validation;
+﻿using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Dot.EFCore.Transactions.Services.Interfaces;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -21,9 +16,7 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<RegisterPermissionsAndRolesCommand, Unit>
         , IPermissionRestrictedRequestHandler<RegisterPermissionsAndRolesCommand>
     {
-        #region constructor
-
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
         private readonly IRoleCache _roleCache;
         private readonly IPermissionValidationService _permissionValidationService;
@@ -34,7 +27,7 @@ namespace Cofoundry.Domain.Internal
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public RegisterPermissionsAndRolesCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IMediator mediator,
             IRoleCache roleCache,
             IPermissionValidationService permissionValidationService,
@@ -45,7 +38,7 @@ namespace Cofoundry.Domain.Internal
             ITransactionScopeManager transactionScopeFactory
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _mediator = mediator;
             _roleCache = roleCache;
             _permissionValidationService = permissionValidationService;
@@ -56,8 +49,6 @@ namespace Cofoundry.Domain.Internal
             _transactionScopeFactory = transactionScopeFactory;
         }
 
-        #endregion
-
         #region execution
 
         public async Task<Unit> ExecuteAsync(RegisterPermissionsAndRolesCommand command, IExecutionContext executionContext)
@@ -66,8 +57,8 @@ namespace Cofoundry.Domain.Internal
 
             // ENTITY DEFINITIONS
 
-            var dbEntityDefinitions = await _dbContext
-                .EntityDefinitions
+            var dbEntityDefinitions = await _unitOfWork
+                .EntityDefinitions()
                 .ToDictionaryAsync(e => e.EntityDefinitionCode);
 
             await EnsureAllEntityDefinitionsExistAsync(dbEntityDefinitions);
@@ -75,8 +66,8 @@ namespace Cofoundry.Domain.Internal
             // PERMISSIONS
 
             // permissions already registered in the database
-            var dbPermissions = await _dbContext
-                .Permissions
+            var dbPermissions = await _unitOfWork
+                .Permissions()
                 .ToDictionaryAsync(p => p.GetUniqueCode());
 
             // code-based permission objects
@@ -92,8 +83,8 @@ namespace Cofoundry.Domain.Internal
 
             // ROLES
 
-            var dbRoles = await _dbContext
-                .Roles
+            var dbRoles = await _unitOfWork
+                .Roles()
                 .Include(r => r.RolePermissions)
                 .ThenInclude(p => p.Permission)
                 .ToListAsync();
@@ -125,8 +116,8 @@ namespace Cofoundry.Domain.Internal
                 }
             }
 
-            await _dbContext.SaveChangesAsync();
-            await _transactionScopeFactory.QueueCompletionTaskAsync(_dbContext, () => Task.Run(_roleCache.Clear));
+            await _unitOfWork.SaveChangesAsync();
+            await _transactionScopeFactory.QueueCompletionTaskAsync(_unitOfWork.Context, () => Task.Run(_roleCache.Clear));
 
             return Unit.Value;
         }
@@ -156,7 +147,7 @@ namespace Cofoundry.Domain.Internal
                 }
 
                 dbPermissions.Add(uniquePermissionCode, dbPermission);
-                _dbContext.Permissions.Add(dbPermission);
+                _unitOfWork.Permissions().Add(dbPermission);
             }
         }
 
@@ -186,17 +177,17 @@ namespace Cofoundry.Domain.Internal
                 var entityDefinition = _entityDefinitionRepository.GetByCode(definitionCode);
 
                 // create a matching db record
-                var dbDefinition = new EntityDefinition()
+                var dbDefinition = new EntityDefinition
                 {
                     EntityDefinitionCode = entityDefinition.EntityDefinitionCode,
                     Name = entityDefinition.Name
                 };
 
-                _dbContext.EntityDefinitions.Add(dbDefinition);
+                _unitOfWork.EntityDefinitions().Add(dbDefinition);
                 dbDefinitions.Add(dbDefinition.EntityDefinitionCode, dbDefinition);
             }
 
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         private void UpdatePermissions(
@@ -306,11 +297,13 @@ namespace Cofoundry.Domain.Internal
 
         private Role MapAndAddRole(IRoleDefinition roleDefinition)
         {
-            var dbRole = new Role();
-            dbRole.Title = roleDefinition.Title.Trim();
-            dbRole.RoleCode = roleDefinition.RoleCode;
+            var dbRole = new Role
+            {
+                Title = roleDefinition.Title.Trim(),
+                RoleCode = roleDefinition.RoleCode
+            };
 
-            _dbContext.Roles.Add(dbRole);
+            _unitOfWork.Roles().Add(dbRole);
             return dbRole;
         }
 

@@ -36,8 +36,7 @@ namespace Cofoundry.Web
         private static IMvcBuilder EnsureCoreMVCServicesAdded(IMvcBuilder mvcBuilder)
         {
             return mvcBuilder.Services
-                .AddControllersWithViews()
-                ;
+                .AddControllersWithViews();
         }
 
         private static void AddAdditionalTypes(IMvcBuilder mvcBuilder)

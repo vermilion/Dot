@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Cofoundry.Core;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -20,17 +21,17 @@ namespace Cofoundry.Domain.Internal
 
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserSessionService _userSessionService;
         private readonly UserContextMapper _userContextMapper;
 
         public UserContextService(
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             IUserSessionService userSessionService,
             UserContextMapper userContextMapper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
             _userSessionService = userSessionService;
             _userContextMapper = userContextMapper;
         }
@@ -105,8 +106,8 @@ namespace Cofoundry.Domain.Internal
             UserContext cx = null;
 
             // Raw query required here because using IQueryExecutor will cause a stack overflow
-            var dbResult = await _dbContext
-                .Users
+            var dbResult = await _unitOfWork
+                .Users()
                 .Include(u => u.Role)
                 .AsNoTracking()
                 .FilterById(userId.Value)
@@ -127,8 +128,8 @@ namespace Cofoundry.Domain.Internal
 
         protected virtual IQueryable<User> QuerySystemUser()
         {
-            var query = _dbContext
-                .Users
+            var query = _unitOfWork
+                .Users()
                 .Include(u => u.Role)
                 .FilterActive()
                 .Where(u => u.IsSystemAccount);

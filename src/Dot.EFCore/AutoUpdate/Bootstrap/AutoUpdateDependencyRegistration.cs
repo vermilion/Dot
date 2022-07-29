@@ -1,7 +1,7 @@
-﻿using Cofoundry.Core.AutoUpdate.Internal;
-using Cofoundry.Core.DependencyInjection;
+﻿using Cofoundry.Core.DependencyInjection;
 using Cofoundry.Web;
 using Dot.EFCore.AutoUpdate.Services;
+using Dot.EFCore.AutoUpdate.Services.Interfaces;
 
 namespace Cofoundry.Core.AutoUpdate.Registration
 {
@@ -14,10 +14,7 @@ namespace Cofoundry.Core.AutoUpdate.Registration
                 .RegisterAllGenericImplementations(typeof(IAlwaysRunUpdateCommandHandler<>))
                 .Register<IUpdateCommandHandlerFactory, UpdateCommandHandlerFactory>()
                 .Register<IAutoUpdateService, AutoUpdateService>()
-                .RegisterSingleton<AutoUpdateState>()
-                .Register<IDbHealthChecker, DbHealthChecker>()
-                .Register<IAutoUpdateDistributedLockManager, AutoUpdateDistributedLockManager>()
-                ;
+                .RegisterSingleton<AutoUpdateState>();
         }
     }
 }

@@ -2,6 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>10.0</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<PackageId>Cofoundry.Web.Admin</PackageId>
 		<Description>
@@ -34,7 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Dot.EFCore\Dot.EFCore.csproj" />
+	  <ProjectReference Include="..\..\Dot.EFCore.Identity\Dot.EFCore.Identity.csproj" />
 	  <ProjectReference Include="..\Dot\Dot.csproj" />
 	</ItemGroup>
 

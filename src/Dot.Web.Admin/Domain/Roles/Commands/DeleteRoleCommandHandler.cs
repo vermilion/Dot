@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
-using Cofoundry.Core.Data;
+using Dot.EFCore.Transactions.Services.Interfaces;
+using Dot.EFCore.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -18,20 +15,21 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<DeleteRoleCommand, Unit>
         , IPermissionRestrictedRequestHandler<DeleteRoleCommand>
     {
+        private readonly IUnitOfWork _unitOfWork;
         #region constructor
 
-        private readonly DbContextCore _dbContext;
         private readonly IRoleCache _roleCache;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public DeleteRoleCommandHandler(
+            IUnitOfWork unitOfWork,
             DbContextCore dbContext,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IRoleCache roleCache,
             ITransactionScopeManager transactionScopeFactory
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _roleCache = roleCache;
             _transactionScopeFactory = transactionScopeFactory;
         }
@@ -42,8 +40,8 @@ namespace Cofoundry.Domain.Internal
 
         public async Task<Unit> ExecuteAsync(DeleteRoleCommand command, IExecutionContext executionContext)
         {
-            var role = await _dbContext
-                .Roles
+            var role = await _unitOfWork
+                .Roles()
                 .FilterById(command.RoleId)
                 .SingleOrDefaultAsync();
 
@@ -51,10 +49,10 @@ namespace Cofoundry.Domain.Internal
             {
                 ValidateCanDelete(role, command);
 
-                _dbContext.Roles.Remove(role);
+                _unitOfWork.Roles().Remove(role);
 
-                await _dbContext.SaveChangesAsync();
-                await _transactionScopeFactory.QueueCompletionTaskAsync(_dbContext, () => Task.Run(() => _roleCache.Clear(command.RoleId)));
+                await _unitOfWork.SaveChangesAsync();
+                await _transactionScopeFactory.QueueCompletionTaskAsync(_unitOfWork.Context, () => Task.Run(() => _roleCache.Clear(command.RoleId)));
             }
 
             return Unit.Value;
@@ -72,8 +70,8 @@ namespace Cofoundry.Domain.Internal
                 throw new ValidationException("The super administrator role cannot be deleted.");
             }
 
-            var isInUse = _dbContext
-                .Users
+            var isInUse = _unitOfWork
+                .Users()
                 .Any(u => u.RoleId == command.RoleId);
 
             if (isInUse)

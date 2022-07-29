@@ -1,8 +1,7 @@
-﻿using Cofoundry.Core.Data;
-using Cofoundry.Domain.CQS;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.Transactions.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {

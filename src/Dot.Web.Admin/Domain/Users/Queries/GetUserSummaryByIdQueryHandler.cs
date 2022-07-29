@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -13,22 +9,22 @@ namespace Cofoundry.Domain.Internal
     /// Finds a user by a database id returning a UserMicroSummary object if it 
     /// is found, otherwise null.
     /// </summary>
-    public class GetUserSummaryByIdQueryHandler 
+    public class GetUserSummaryByIdQueryHandler
         : IRequestHandler<GetUserSummaryByIdQuery, UserSummary>
     {
         #region constructor
-        
-        private readonly DbContextCore _dbContext;
+
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPermissionValidationService _permissionValidationService;
         private readonly IUserSummaryMapper _userSummaryMapper;
 
         public GetUserSummaryByIdQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IPermissionValidationService permissionValidationService,
             IUserSummaryMapper userSummaryMapper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _permissionValidationService = permissionValidationService;
             _userSummaryMapper = userSummaryMapper;
         }
@@ -49,8 +45,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> Query(GetUserSummaryByIdQuery query)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .Include(u => u.Role)
                 .Include(u => u.Creator)

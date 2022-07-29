@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
 using Microsoft.EntityFrameworkCore;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -13,15 +14,15 @@ namespace Cofoundry.Domain.Internal
     {
         #region construstor
         
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IResetUserPasswordCommandHelper _resetUserPasswordCommandHelper;
 
         public ResetUserPasswordByUsernameCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IResetUserPasswordCommandHelper resetUserPasswordCommandHelper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _resetUserPasswordCommandHelper = resetUserPasswordCommandHelper; 
         }
 
@@ -45,8 +46,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> QueryUser(ResetUserPasswordByUsernameCommand command, IExecutionContext executionContext)
         {
-            var user = _dbContext
-                .Users
+            var user = _unitOfWork
+                .Users()
                 .FilterCanLogIn()
                 .Where(u => u.Username == command.Username.Trim());
 

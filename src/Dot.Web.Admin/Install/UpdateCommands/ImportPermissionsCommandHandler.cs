@@ -1,7 +1,6 @@
-﻿using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.AutoUpdate;
-using Cofoundry.Core.Data;
+﻿using Cofoundry.Core.AutoUpdate;
+using Dot.EFCore.Transactions.Services.Interfaces;
+using System.Text;
 
 namespace Cofoundry.Domain.Installation
 {

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -19,13 +20,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
         public IsUsernameUniqueQueryHandler(
-            DbContextCore dbContext
+            IUnitOfWork unitOfWork
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
         
         #endregion
@@ -40,8 +41,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> Exists(IsUsernameUniqueQuery query)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .FilterActive()
                 .Where(u => u.UserId != query.UserId && u.Username == query.Username);

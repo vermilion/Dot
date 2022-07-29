@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Domain.CQS;
+﻿using Cofoundry.Domain.CQS;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -23,9 +18,8 @@ namespace Cofoundry.Domain.Internal
         {
             var settings = await _queryExecutor.ExecuteAsync(new GetSettingsQuery<GeneralSiteSettings>(), executionContext);
 
-            return new UpdateGeneralSiteSettingsCommand()
+            return new UpdateGeneralSiteSettingsCommand
             {
-                AllowAutomaticUpdates = settings.AllowAutomaticUpdates,
                 ApplicationName = settings.ApplicationName
             };
         }

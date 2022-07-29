@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+﻿using Cofoundry.Core;
 using Cofoundry.Core.Validation;
-using Cofoundry.Core;
-using Cofoundry.Core.Data;
+using Cofoundry.Domain.CQS;
+using Cofoundry.Domain.Data;
+using Dot.EFCore.Transactions.Services.Interfaces;
+using Dot.EFCore.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -18,21 +15,21 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IRoleCache _roleCache;
         private readonly ITransactionScopeManager _transactionScopeFactory;
 
         public UpdateRoleCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IMediator mediator,
             IPermissionRepository permissionRepository,
             IRoleCache roleCache,
             ITransactionScopeManager transactionScopeFactory
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _mediator = mediator;
             _permissionRepository = permissionRepository;
             _roleCache = roleCache;
@@ -55,9 +52,9 @@ namespace Cofoundry.Domain.Internal
 
             MapRole(command, role);
             await MergePermissionsAsync(command, role, executionContext);
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
-            await _transactionScopeFactory.QueueCompletionTaskAsync(_dbContext, () => Task.Run(() => _roleCache.Clear(command.RoleId)));
+            await _transactionScopeFactory.QueueCompletionTaskAsync(_unitOfWork.Context, () => Task.Run(() => _roleCache.Clear(command.RoleId)));
 
             return Unit.Value;
         }
@@ -86,8 +83,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> QueryRole(UpdateRoleCommand command)
         {
-            return _dbContext
-                .Roles
+            return _unitOfWork
+                .Roles()
                 .Include(r => r.RolePermissions)
                 .ThenInclude(p => p.Permission)
                 .FilterById(command.RoleId);
@@ -106,7 +103,7 @@ namespace Cofoundry.Domain.Internal
 
             foreach (var permissionToRemove in permissionsToRemove)
             {
-                _dbContext.RolePermissions.Remove(permissionToRemove);
+                _unitOfWork.RolePermissions().Remove(permissionToRemove);
             }
 
             // Additions
@@ -124,8 +121,8 @@ namespace Cofoundry.Domain.Internal
                     .ToList();
 
                 // Get permissions from the db
-                var dbPermissions = await _dbContext
-                    .Permissions
+                var dbPermissions = await _unitOfWork
+                    .Permissions()
                     .Where(p => permissionToAddTokens.Contains((p.EntityDefinitionCode ?? "") + p.PermissionCode))
                     .ToListAsync();
 

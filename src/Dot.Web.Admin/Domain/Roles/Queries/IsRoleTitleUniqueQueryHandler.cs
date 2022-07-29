@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -18,13 +19,13 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
         public IsRoleTitleUniqueQueryHandler(
-            DbContextCore dbContext
+            IUnitOfWork unitOfWork
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
         
         #endregion
@@ -43,8 +44,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> Exists(IsRoleTitleUniqueQuery query)
         {
-            return _dbContext
-                .Roles
+            return _unitOfWork
+                .Roles()
                 .AsNoTracking()
                 .Where(r => r.RoleId != query.RoleId && r.Title == query.Title);
         }

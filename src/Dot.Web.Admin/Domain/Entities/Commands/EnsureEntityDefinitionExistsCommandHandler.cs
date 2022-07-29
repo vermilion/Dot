@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -14,15 +10,15 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEntityDefinitionRepository _entityDefinitionRepository;
 
         public EnsureEntityDefinitionExistsCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IEntityDefinitionRepository entityDefinitionRepository
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _entityDefinitionRepository = entityDefinitionRepository;
         }
 
@@ -34,20 +30,20 @@ namespace Cofoundry.Domain.Internal
         {
             var entityDefinition = _entityDefinitionRepository.GetByCode(command.EntityDefinitionCode);
 
-            var dbDefinition = await _dbContext
-                .EntityDefinitions
+            var dbDefinition = await _unitOfWork
+                .EntityDefinitions()
                 .SingleOrDefaultAsync(e => e.EntityDefinitionCode == command.EntityDefinitionCode);
 
             if (dbDefinition == null)
             {
-                dbDefinition = new EntityDefinition()
+                dbDefinition = new EntityDefinition
                 {
                     EntityDefinitionCode = entityDefinition.EntityDefinitionCode,
                     Name = entityDefinition.Name
                 };
 
-                _dbContext.EntityDefinitions.Add(dbDefinition);
-                await _dbContext.SaveChangesAsync();
+                _unitOfWork.EntityDefinitions().Add(dbDefinition);
+                await _unitOfWork.SaveChangesAsync();
             }
 
             return Unit.Value;

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
 using Microsoft.EntityFrameworkCore;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -20,15 +21,15 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserMicroSummaryMapper _userMicroSummaryMapper;
 
         public GetUserMicroSummaryByEmailQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             IUserMicroSummaryMapper userMicroSummaryMapper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
             _userMicroSummaryMapper = userMicroSummaryMapper;
         }
 
@@ -48,8 +49,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> Query(GetUserMicroSummaryByEmailQuery query)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .Where(u => u.Email == query.Email);
         }

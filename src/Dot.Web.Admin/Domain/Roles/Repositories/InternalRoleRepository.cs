@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,17 +19,17 @@ namespace Cofoundry.Domain.Internal
         #region constructor
 
         private readonly IRoleCache _roleCache;
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IRoleDetailsMapper _roleMappingHelper;
 
         public InternalRoleRepository(
             IRoleCache roleCache,
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             IRoleDetailsMapper roleMappingHelper
             )
         {
             _roleCache = roleCache;
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
             _roleMappingHelper = roleMappingHelper;
         }
 
@@ -70,8 +71,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> QueryAnonymousRole()
         {
-            return _dbContext
-                    .Roles
+            return _unitOfWork
+                    .Roles()
                     .AsNoTracking()
                     .Include(r => r.RolePermissions)
                     .ThenInclude(p => p.Permission)
@@ -81,8 +82,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> QueryRoleById(int roleId)
         {
-            return _dbContext
-                    .Roles
+            return _unitOfWork
+                    .Roles()
                     .AsNoTracking()
                     .Include(r => r.RolePermissions)
                     .ThenInclude(p => p.Permission)

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -20,15 +16,15 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserMicroSummaryMapper _userMicroSummaryMapper;
 
         public GetUserMicroSummaryByUsernameQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IUserMicroSummaryMapper userMicroSummaryMapper
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _userMicroSummaryMapper = userMicroSummaryMapper;
         }
 
@@ -49,8 +45,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> Query(GetUserMicroSummaryByUsernameQuery query)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .Where(u => u.Username == query.Username);
         }

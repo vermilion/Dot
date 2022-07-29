@@ -1,9 +1,5 @@
-﻿using Cofoundry.Core.Data;
+﻿using Dot.EFCore.Transactions.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cofoundry.Domain.Extendable
 {

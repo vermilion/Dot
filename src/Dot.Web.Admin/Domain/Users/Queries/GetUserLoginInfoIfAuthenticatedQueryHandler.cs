@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,15 +15,15 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<GetUserLoginInfoIfAuthenticatedQuery, UserLoginInfo>
     {
         private readonly UserAuthenticationHelper _userAuthenticationHelper;
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
         public GetUserLoginInfoIfAuthenticatedQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             UserAuthenticationHelper userAuthenticationHelper
             )
         {
             _userAuthenticationHelper = userAuthenticationHelper;
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
         }
 
         public async Task<UserLoginInfo> ExecuteAsync(GetUserLoginInfoIfAuthenticatedQuery query, IExecutionContext executionContext)
@@ -52,8 +53,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> Query(GetUserLoginInfoIfAuthenticatedQuery query)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .FilterCanLogIn()
                 .Where(u => u.Username == query.Username);

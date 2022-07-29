@@ -2,6 +2,7 @@
 using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _queryExecutor;
         private readonly IPasswordCryptographyService _passwordCryptographyService;
         private readonly IMailService _mailService;
@@ -25,7 +26,7 @@ namespace Cofoundry.Domain.Internal
         private readonly IPermissionValidationService _permissionValidationService;
 
         public AddUserCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IMediator queryExecutor,
             IPasswordCryptographyService passwordCryptographyService,
             IMailService mailService,
@@ -33,7 +34,7 @@ namespace Cofoundry.Domain.Internal
             IPermissionValidationService permissionValidationService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _queryExecutor = queryExecutor;
             _passwordCryptographyService = passwordCryptographyService;
             _mailService = mailService;
@@ -54,7 +55,7 @@ namespace Cofoundry.Domain.Internal
             var newRole = await _userCommandPermissionsHelper.GetAndValidateNewRoleAsync(command.RoleId, null, executionContext);
 
             var user = MapAndAddUser(command, executionContext, newRole);
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new AddUserCommandResult { UserId = user.UserId };
         }
@@ -101,7 +102,7 @@ namespace Cofoundry.Domain.Internal
                 Password = hashResult.Hash
             };
 
-            _dbContext.Users.Add(user);
+            _unitOfWork.Users().Add(user);
 
             return user;
         }

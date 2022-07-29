@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Medallion.Threading;
+using System;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Core.DistributedLocks
 {
@@ -11,16 +13,14 @@ namespace Cofoundry.Core.DistributedLocks
     /// </summary>
     public interface IDistributedLockManager
     {
+        Task<bool> IsLockedAsync(string lockKey);
+
         /// <summary>
         /// Creates a lock for the specified definition using a unique
         /// lock id that represents the running process. You can
         /// query the returned DistributedLock instance to determine if 
         /// the lock was successful.
         /// </summary>
-        /// <typeparam name="TDefinition">
-        /// The definition type that conmtains the locking parameters that
-        /// represent the process to be run.
-        /// </typeparam>
         /// <param name="lockingId">
         /// A unique identifier that represents the specific instance of
         /// the process you want lock. 
@@ -32,8 +32,7 @@ namespace Cofoundry.Core.DistributedLocks
         /// successful then the new lock will be returned. You can
         /// query the returned object to determine if the lock was successful.
         /// </returns>
-        Task<DistributedLock> LockAsync<TDefinition>()
-            where TDefinition : IDistributedLockDefinition;
+        ValueTask<IDistributedSynchronizationHandle> LockAsync(string lockKey, TimeSpan? timeout = null);
 
         /// <summary>
         /// Unlocks the specified distributed lock, freeing it up
@@ -43,6 +42,6 @@ namespace Cofoundry.Core.DistributedLocks
         /// The distributed lock entry to unlock. This should be the instance
         /// you received from a call to the LockAsync method.
         /// </param>
-        Task UnlockAsync(DistributedLock distributedLock);
+        Task UnlockAsync(IDistributedSynchronizationHandle distributedLock);
     }
 }

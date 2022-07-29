@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29418.71
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D2401F5E-96D5-44AB-BFF7-2A3435E58370}"
 EndProject
@@ -22,7 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.Identity", "sam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Validation.FluentValidation", "src\Dot.Validation.FluentValidation\Dot.Validation.FluentValidation.csproj", "{10473153-25D6-4399-82BF-CCD9448F7EA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.EFCore", "src\Dot.EFCore\Dot.EFCore.csproj", "{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.EFCore", "src\Dot.EFCore\Dot.EFCore.csproj", "{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.EFCore.Identity", "Dot.EFCore.Identity\Dot.EFCore.Identity.csproj", "{75F730A4-C58E-418F-98B4-EEC1FDE389F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{001A3F1B-B478-425E-8EA7-CA0B39FDD00E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F730A4-C58E-418F-98B4-EEC1FDE389F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F730A4-C58E-418F-98B4-EEC1FDE389F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F730A4-C58E-418F-98B4-EEC1FDE389F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F730A4-C58E-418F-98B4-EEC1FDE389F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

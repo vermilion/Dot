@@ -6,6 +6,7 @@ using Cofoundry.Core;
 using Cofoundry.Core.Validation;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -19,19 +20,19 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
         private readonly IPermissionRepository _permissionRepository;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public AddRoleCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             IMediator mediator,
             IPermissionRepository permissionRepository,
             IPermissionValidationService permissionValidationService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
             _mediator = mediator;
             _permissionRepository = permissionRepository;
             _permissionValidationService = permissionValidationService;
@@ -49,7 +50,7 @@ namespace Cofoundry.Domain.Internal
 
             var permissions = await GetCommandPermissionsAsync(command, executionContext);
             var role = MapAndAddRole(command, executionContext, permissions);
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new AddRoleCommandResult { RoleId = role.RoleId };
         }
@@ -74,7 +75,7 @@ namespace Cofoundry.Domain.Internal
                 role.RolePermissions.Add(rolePermission);
             }
             
-            _dbContext.Roles.Add(role);
+            _unitOfWork.Roles().Add(role);
             return role;
         }
 
@@ -123,8 +124,8 @@ namespace Cofoundry.Domain.Internal
 
             if (!EnumerableHelper.IsNullOrEmpty(command.Permissions))
             {
-                var dbPermissions = await _dbContext
-                    .Permissions
+                var dbPermissions = await _unitOfWork
+                    .Permissions()
                     .ToListAsync();
 
                 foreach (var permissionCommand in command.Permissions)

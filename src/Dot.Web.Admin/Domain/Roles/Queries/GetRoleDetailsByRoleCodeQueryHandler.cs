@@ -7,6 +7,7 @@ using Cofoundry.Domain.Data;
 using System.Collections.ObjectModel;
 using Cofoundry.Core;
 using Microsoft.EntityFrameworkCore;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -22,17 +23,17 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IInternalRoleRepository _internalRoleRepository;
         private readonly IRoleCache _roleCache;
 
         public GetRoleDetailsByRoleCodeQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IInternalRoleRepository internalRoleRepository,
             IRoleCache roleCache
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _internalRoleRepository = internalRoleRepository;
             _roleCache = roleCache;
         }
@@ -59,8 +60,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> QueryRoleCodes()
         {
-            return _dbContext
-                    .Roles
+            return _unitOfWork
+                    .Roles()
                     .AsNoTracking()
                     .Where(r => r.RoleCode != null);
         }

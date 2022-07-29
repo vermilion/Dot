@@ -1,5 +1,6 @@
 ﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -8,22 +9,22 @@ namespace Cofoundry.Domain.Internal
     public class GetUpdateUserCommandByIdQueryHandler
         : IRequestHandler<GetUpdateCommandByIdQuery<UpdateUserCommand>, UpdateUserCommand>
     {
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public GetUpdateUserCommandByIdQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IPermissionValidationService permissionValidationService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _permissionValidationService = permissionValidationService;
         }
 
         public async Task<UpdateUserCommand> ExecuteAsync(GetUpdateCommandByIdQuery<UpdateUserCommand> query, IExecutionContext executionContext)
         {
-            var dbUser = await _dbContext
-                .Users
+            var dbUser = await _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .FilterCanLogIn()
                 .FilterById(query.Id)

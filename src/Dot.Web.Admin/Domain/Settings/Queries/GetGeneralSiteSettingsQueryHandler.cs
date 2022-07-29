@@ -1,5 +1,5 @@
 ﻿using Cofoundry.Domain.CQS;
-using Dot.EFCore.AutoUpdate.Services;
+using Dot.EFCore.AutoUpdate.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -44,9 +44,6 @@ namespace Cofoundry.Domain.Internal
             var settings = new GeneralSiteSettings();
 
             _getSettingQueryHelper.SetSettingProperty(settings, s => s.ApplicationName, allSettings);
-
-            var isLocked = await _autoUpdateService.IsLockedAsync();
-            settings.AllowAutomaticUpdates = !isLocked;
 
             return settings;
         }

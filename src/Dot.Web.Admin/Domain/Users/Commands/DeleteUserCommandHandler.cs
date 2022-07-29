@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cofoundry.Domain.Data;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Core;
+using Dot.EFCore.UnitOfWork;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -18,17 +19,17 @@ namespace Cofoundry.Domain.Internal
         : IRequestHandler<DeleteUserCommand, Unit>
         , IPermissionRestrictedRequestHandler<DeleteUserCommand>
     {
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly UserCommandPermissionsHelper _userCommandPermissionsHelper;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public DeleteUserCommandHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             UserCommandPermissionsHelper userCommandPermissionsHelper,
             IPermissionValidationService permissionValidationService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _userCommandPermissionsHelper = userCommandPermissionsHelper;
             _permissionValidationService = permissionValidationService;
         }
@@ -39,7 +40,7 @@ namespace Cofoundry.Domain.Internal
             var executorRole = await _userCommandPermissionsHelper.GetExecutorRoleAsync(executionContext);
             ValidateCustomPermissions(user, executionContext, executorRole);
             MarkRecordDeleted(user, executionContext);
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }
@@ -54,8 +55,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<User> QueryUser(int userId)
         {
-            return _dbContext
-                .Users
+            return _unitOfWork
+                .Users()
                 .Include(u => u.Role)
                 .FilterById(userId);
         }

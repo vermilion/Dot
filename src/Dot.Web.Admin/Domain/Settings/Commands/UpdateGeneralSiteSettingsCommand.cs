@@ -8,7 +8,5 @@ namespace Cofoundry.Domain
         [Required]
         [MaxLength(100)]
         public string ApplicationName { get; set; }
-
-        public bool AllowAutomaticUpdates { get; set; }
     }
 }

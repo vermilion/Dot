@@ -39,38 +39,12 @@ namespace Cofoundry.Domain.Data
         {
             modelBuilder
                 .HasDefaultSchema(DbConstants.CofoundrySchema)
-                .MapCofoundryContent()
                 .ApplyConfiguration(new SettingMap());
         }
 
         #region properties
 
-        public DbSet<EntityDefinition> EntityDefinitions { get; set; }
-
-        /// <summary>
-        /// A permission represents an type action a user can
-        /// be permitted to perform. Typically this is associated
-        /// with a specified entity type, but doesn't have to be e.g.
-        /// "read pages", "access dashboard", "delete images". The 
-        /// combination of EntityDefinitionCode and PermissionCode
-        /// must be unique
-        /// </summary>
-        public DbSet<Permission> Permissions { get; set; }
-
-        /// <summary>
-        /// Roles are an assignable collection of permissions. Every user has to 
-        /// be assigned to one role.
-        /// </summary>
-        public DbSet<Role> Roles { get; set; }
-
-        public DbSet<RolePermission> RolePermissions { get; set; }
-
         public DbSet<Setting> Settings { get; set; }
-
-        /// <summary>
-        /// Represents the user in the Cofoundry custom identity system
-        /// </summary>
-        public DbSet<User> Users { get; set; }
 
         #endregion
     }

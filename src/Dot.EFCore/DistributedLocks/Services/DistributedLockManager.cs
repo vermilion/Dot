@@ -1,8 +1,5 @@
-﻿using Cofoundry.Domain.Data;
-using Dot.EFCore.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
+﻿using Medallion.Threading;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Core.DistributedLocks.Internal
@@ -23,16 +20,19 @@ namespace Cofoundry.Core.DistributedLocks.Internal
     /// </remarks>
     public class DistributedLockManager : IDistributedLockManager
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IDistributedLockDefinitionRepository _distributedLockDefinitionRepository;
+        private readonly IDistributedLockProvider _distributedLockProvider;
 
-        public DistributedLockManager(
-            IUnitOfWork unitOfWork,
-            IDistributedLockDefinitionRepository distributedLockDefinitionRepository
-            )
+        public DistributedLockManager(IDistributedLockProvider distributedLockProvider)
         {
-            _unitOfWork = unitOfWork;
-            _distributedLockDefinitionRepository = distributedLockDefinitionRepository;
+            _distributedLockProvider = distributedLockProvider;
+        }
+
+        public async Task<bool> IsLockedAsync(string lockKey)
+        {
+            var distributedLock = _distributedLockProvider.CreateLock(lockKey);
+
+            var handle = await distributedLock.TryAcquireAsync();
+            return handle != null;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Cofoundry.Core.DistributedLocks.Internal
         /// the lock was successful.
         /// </summary>
         /// <typeparam name="TDefinition">
-        /// The definition type that conmtains the locking parameters that
+        /// The definition type that contains the locking parameters that
         /// represent the process to be run.
         /// </typeparam>
         /// <returns>
@@ -52,96 +52,26 @@ namespace Cofoundry.Core.DistributedLocks.Internal
         /// successful then the new lock will be returned. You can
         /// query the returned object to determine if the lock was successful.
         /// </returns>
-        public async Task<DistributedLock> LockAsync<TDefinition>()
-            where TDefinition : IDistributedLockDefinition
+        public ValueTask<IDistributedSynchronizationHandle> LockAsync(string lockKey, TimeSpan? timeout = null)
         {
-            var distributedLockDefinition = _distributedLockDefinitionRepository.Get<TDefinition>();
-            EntityNotFoundException.ThrowIfNull(distributedLockDefinition, typeof(TDefinition));
+            var distributedLock = _distributedLockProvider.CreateLock(lockKey);
 
-            var lockingId = Guid.NewGuid();
-            var now = DateTime.Now;
-
-            var distributedLock = await _unitOfWork.DistributedLocks()
-                .Where(x => x.DistributedLockId == distributedLockDefinition.DistributedLockId)
-                .SingleOrDefaultAsync();
-
-            if (distributedLock == null)
-            {
-                distributedLock = new DistributedLockEntity
-                {
-                    DistributedLockId = distributedLockDefinition.DistributedLockId,
-                    Name = distributedLockDefinition.Name
-                };
-
-                await _unitOfWork.DistributedLocks().AddAsync(distributedLock);
-            }
-
-            if (distributedLock.ExpiryDate.GetValueOrDefault(DateTime.MinValue) < now)
-            {
-                distributedLock.LockingId = lockingId;
-                distributedLock.LockDate = now;
-                distributedLock.ExpiryDate = now.AddSeconds(distributedLockDefinition.Timeout.TotalSeconds);
-            }
-
-            await _unitOfWork.SaveChangesAsync();
-
-            return new DistributedLock(distributedLock) { RequestedLockingId = lockingId };
-
-            /*var query = @" 
-                declare @DateNow datetime2(7) = GetUtcDate();
-
-                with data as (select @DistributedLockId as DistributedLockId, @DistributedLockName as [Name])
-                merge Cofoundry.DistributedLock t
-                using data s on s.DistributedLockId = t.DistributedLockId
-                when not matched by target
-                then insert (DistributedLockId, [Name]) 
-                values (s.DistributedLockId, s.[Name]);
-
-                update Cofoundry.DistributedLock 
-                set LockingId = @LockingId, LockDate = @DateNow, ExpiryDate = dateadd(second, @TimeoutInSeconds, @DateNow)
-                where DistributedLockId = @DistributedLockId
-                and (LockingId is null or ExpiryDate < @DateNow)
-
-                select DistributedLockId, LockingId, LockDate, ExpiryDate 
-                from Cofoundry.DistributedLock
-                where DistributedLockId = @DistributedLockId
-                ";
-
-            var distributedLock = (await _db.ReadAsync(query,
-                MapDistributedLock,
-                new SqlParameter("DistributedLockId", distributedLockDefinition.DistributedLockId),
-                new SqlParameter("DistributedLockName", distributedLockDefinition.Name),
-                new SqlParameter("LockingId", lockingId),
-                new SqlParameter("TimeoutInSeconds", distributedLockDefinition.Timeout.TotalSeconds)
-                ))
-                .SingleOrDefault();
-
-            if (distributedLock == null)
-            {
-                throw new Exception($"Unknown error creating a distributed lock with a DistributedLockId of '{distributedLockDefinition.DistributedLockId}'");
-            }
-            */
+            return distributedLock.AcquireAsync(timeout);
         }
 
         /// <summary>
         /// Unlocks the specified distributed lock, freeing it up
         /// for other processes to use.
         /// </summary>
-        /// <param name="distributedLock">
+        /// <param name="distributedLockHandle">
         /// The distributed lock entry to unlock. This should be the instance
         /// you received from a call to the LockAsync method.
         /// </param>
-        public async Task UnlockAsync(DistributedLock distributedLock)
+        public async Task UnlockAsync(IDistributedSynchronizationHandle distributedLockHandle)
         {
-            if (distributedLock == null) throw new ArgumentNullException(nameof(distributedLock));
+            if (distributedLockHandle == null) throw new ArgumentNullException(nameof(distributedLockHandle));
 
-            var existingLocks = await _unitOfWork.DistributedLocks()
-                .Where(x => x.LockingId == distributedLock.Entity.LockingId && x.DistributedLockId == distributedLock.Entity.DistributedLockId)
-                .ToListAsync();
-
-            _unitOfWork.DistributedLocks().RemoveRange(existingLocks);
-
-            await _unitOfWork.SaveChangesAsync();
+            await distributedLockHandle.DisposeAsync();
         }
     }
 }

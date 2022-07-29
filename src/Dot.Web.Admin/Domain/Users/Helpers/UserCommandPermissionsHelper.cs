@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Core;
+﻿using Cofoundry.Core;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Domain.Internal
@@ -11,15 +10,15 @@ namespace Cofoundry.Domain.Internal
     {
         #region constructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IInternalRoleRepository _internalRoleRepository;
 
         public UserCommandPermissionsHelper(
-            DbContextCore dbContext,
+            IUnitOfWork dbContext,
             IInternalRoleRepository internalRoleRepository
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = dbContext;
             _internalRoleRepository = internalRoleRepository;
         }
 
@@ -83,8 +82,8 @@ namespace Cofoundry.Domain.Internal
 
         private IQueryable<Role> QueryRole(int roleId)
         {
-            return _dbContext
-                .Roles
+            return _unitOfWork
+                .Roles()
                 .FilterById(roleId);
         }
 

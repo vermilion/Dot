@@ -1,11 +1,11 @@
 ﻿using Cofoundry.Core.AutoUpdate;
+using Cofoundry.Core.DistributedLocks;
+using Dot.EFCore.AutoUpdate.Services.Interfaces;
+using Dot.EFCore.Health.Services;
 using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Dot.EFCore.AutoUpdate.Services
 {
@@ -24,7 +24,7 @@ namespace Dot.EFCore.AutoUpdate.Services
         private readonly DbContext _db;
         private readonly IDbHealthChecker _healthChecker;
         private readonly AutoUpdateSettings _autoUpdateSettings;
-        private readonly IAutoUpdateDistributedLockManager _autoUpdateDistributedLockManager;
+        private readonly IDistributedLockManager _distributedLockManager;
 
         #endregion
 
@@ -36,15 +36,15 @@ namespace Dot.EFCore.AutoUpdate.Services
             IUnitOfWork unitOfWork,
             IDbHealthChecker healthChecker,
             AutoUpdateSettings autoUpdateSettings,
-            IAutoUpdateDistributedLockManager autoUpdateDistributedLockManager
+            IDistributedLockManager distributedLockManager
             )
         {
             _logger = logger;
             _commandHandlerFactory = commandHandlerFactory;
-            _db = unitOfWork.Context();
+            _db = unitOfWork.Context;
             _healthChecker = healthChecker;
             _autoUpdateSettings = autoUpdateSettings;
-            _autoUpdateDistributedLockManager = autoUpdateDistributedLockManager;
+            _distributedLockManager = distributedLockManager;
         }
 
         #endregion
@@ -57,16 +57,19 @@ namespace Dot.EFCore.AutoUpdate.Services
         /// </summary>
         public async Task UpdateAsync(CancellationToken cancellationToken = default)
         {
-            var isLocked = await IsLockedAsync();
+            var lockKey = "AUTO_UPDATE_PROCESS";
+
+            var isLocked = await _distributedLockManager.IsLockedAsync(lockKey);
 
             if (isLocked)
-                throw new DatabaseLockedException();
+                throw new AutoUpdateProcessLockedException();
 
             if (IsCancelled(cancellationToken)) return;
 
-            // TODO: avoid lock when no DB exist
+            var timeout = TimeSpan.FromSeconds(_autoUpdateSettings.ProcessLockTimeoutInSeconds);
+
             // Lock the process to prevent concurrent updates
-            //var distributedLock = await _autoUpdateDistributedLockManager.LockAsync();
+            var distributedLock = await _distributedLockManager.LockAsync(lockKey, timeout);
 
             try
             {
@@ -91,7 +94,7 @@ namespace Dot.EFCore.AutoUpdate.Services
             }
             finally
             {
-                //await _autoUpdateDistributedLockManager.UnlockAsync(distributedLock);
+                await _distributedLockManager.UnlockAsync(distributedLock);
             }
         }
 
@@ -126,51 +129,6 @@ namespace Dot.EFCore.AutoUpdate.Services
         {
             var runner = _commandHandlerFactory.CreateAlwaysRunCommand<TCommand>();
             return runner.ExecuteAsync(command);
-        }
-
-        #endregion
-
-        #region locking
-
-        /// <summary>
-        /// Works out whether the database is locked for 
-        /// schema updates. This is different to distributed locking which 
-        /// is intended to prevent multile update instances running.
-        /// </summary>
-        public async Task<bool> IsLockedAsync()
-        {
-            /*
-            // First check config
-            if (_autoUpdateSettings.Disabled) return true;
-
-            // else this option can also be set in the db
-            var query = @"
-                if (exists (select * 
-                                 from information_schema.tables 
-                                 where table_schema = 'Cofoundry' 
-                                 and  table_name = 'AutoUpdateLock'))
-                begin
-                    select IsLocked from Cofoundry.AutoUpdateLock;
-                end";
-
-            var isLocked = await _db.ReadAsync(query, (r) =>
-            {
-                return (bool)r["IsLocked"];
-            });
-            */
-            return false;
-        }
-
-        /// <summary>
-        /// Sets a flag in the database to enable/disable database updates.
-        /// </summary>
-        /// <param name="isLocked">True to lock the database and prevent schema updates</param>
-        public Task SetLockedAsync(bool isLocked)
-        {
-            //var cmd = "update Cofoundry.AutoUpdateLock set IsLocked = @IsLocked";
-            //return _db.ExecuteAsync(cmd, new SqlParameter("@IsLocked", isLocked));
-
-            return Task.CompletedTask;
         }
 
         #endregion

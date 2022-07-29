@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Cofoundry.Domain.Data;
+﻿using Cofoundry.Core;
 using Cofoundry.Domain.CQS;
+using Cofoundry.Domain.Data;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using Cofoundry.Core;
 
 namespace Cofoundry.Domain.Internal
 {
@@ -18,18 +15,18 @@ namespace Cofoundry.Domain.Internal
     {
         #region consructor
 
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _queryExecutor;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public UpdateCurrentUserAccountCommandHandler(
             IMediator queryExecutor,
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IPermissionValidationService permissionValidationService
             )
         {
             _queryExecutor = queryExecutor;
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _permissionValidationService = permissionValidationService;
         }
 
@@ -41,8 +38,8 @@ namespace Cofoundry.Domain.Internal
         {
             var userId = executionContext.UserContext.UserId.Value;
 
-            var user = await _dbContext
-                .Users
+            var user = await _unitOfWork
+                .Users()
                 .FilterCanLogIn()
                 .FilterById(userId)
                 .SingleOrDefaultAsync();
@@ -53,7 +50,7 @@ namespace Cofoundry.Domain.Internal
             user.FirstName = command.FirstName.Trim();
             user.LastName = command.LastName.Trim();
 
-            await _dbContext.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Unit.Value;
         }

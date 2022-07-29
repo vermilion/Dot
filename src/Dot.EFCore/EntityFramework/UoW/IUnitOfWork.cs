@@ -1,9 +1,6 @@
-using Cofoundry.Core.Data;
+using Dot.EFCore.Transactions.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Dot.EFCore.UnitOfWork
 {
@@ -23,7 +20,7 @@ namespace Dot.EFCore.UnitOfWork
         /// Gets an underlying context
         /// </summary>
         /// <returns></returns>
-        DbContext Context();
+        DbContext Context { get; }
 
         /// <summary>
         /// Gets <paramref name="entity"/> metadata

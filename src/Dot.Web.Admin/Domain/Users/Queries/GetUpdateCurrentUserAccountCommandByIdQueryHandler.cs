@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
-using Cofoundry.Domain.CQS;
+using Dot.EFCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {
     public class GetUpdateCurrentUserAccountCommandByIdQueryHandler 
         : IRequestHandler<GetUpdateCommandByIdQuery<UpdateCurrentUserAccountCommand>, UpdateCurrentUserAccountCommand>
     {
-        private readonly DbContextCore _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPermissionValidationService _permissionValidationService;
 
         public GetUpdateCurrentUserAccountCommandByIdQueryHandler(
-            DbContextCore dbContext,
+            IUnitOfWork unitOfWork,
             IPermissionValidationService permissionValidationService
             )
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _permissionValidationService = permissionValidationService;
         }
 
@@ -28,8 +26,8 @@ namespace Cofoundry.Domain.Internal
         {
             if (!executionContext.UserContext.UserId.HasValue) return null;
 
-            var user = await _dbContext
-                .Users
+            var user = await _unitOfWork
+                .Users()
                 .AsNoTracking()
                 .FilterCanLogIn()
                 .FilterById(executionContext.UserContext.UserId.Value)
