@@ -28,7 +28,6 @@ namespace Cofoundry.Domain
         /// Id of the user to delete.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int UserId { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace Cofoundry.Domain
         /// The database id of the role to update.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int RoleId { get; set; }
 
         /// <summary>

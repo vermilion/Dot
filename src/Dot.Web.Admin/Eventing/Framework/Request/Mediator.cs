@@ -1,8 +1,5 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Threading.Tasks;
-using Cofoundry.Core.Validation;
 
 namespace Cofoundry.Domain.CQS.Internal
 {
@@ -17,20 +14,16 @@ namespace Cofoundry.Domain.CQS.Internal
 
         private readonly IRequestHandlerFactory _queryHandlerFactory;
         private readonly IExecutionContextFactory _executionContextFactory;
-        private readonly IExecuteModelValidationService _executeModelValidationService;
         private readonly IExecutePermissionValidationService _executePermissionValidationService;
 
         public Mediator(
-            IModelValidationService modelValidationService,
             IRequestHandlerFactory queryHandlerFactory,
             IExecutionContextFactory executionContextFactory,
-            IExecuteModelValidationService executeModelValidationService,
             IExecutePermissionValidationService executePermissionValidationService
             )
         {
             _queryHandlerFactory = queryHandlerFactory;
             _executionContextFactory = executionContextFactory;
-            _executeModelValidationService = executeModelValidationService;
             _executePermissionValidationService = executePermissionValidationService;
         }
 
@@ -81,7 +74,6 @@ namespace Cofoundry.Domain.CQS.Internal
                 throw new MissingHandlerMappingException(typeof(TRequest));
             }
 
-            await _executeModelValidationService.Validate(request, handler, ctx);
             _executePermissionValidationService.Validate(request, handler, ctx);
             var result = await handler.ExecuteAsync(request, ctx);
 

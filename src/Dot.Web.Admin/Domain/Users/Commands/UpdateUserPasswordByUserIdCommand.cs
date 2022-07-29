@@ -9,7 +9,6 @@ namespace Cofoundry.Domain
     public class UpdateUserPasswordByUserIdCommand : IRequest<Unit>, ILoggableCommand
     {
         [Required]
-        [PositiveInteger]
         public int UserId { get; set; }
 
         [Required]

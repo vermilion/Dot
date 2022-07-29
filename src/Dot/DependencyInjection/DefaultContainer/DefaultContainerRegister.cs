@@ -65,7 +65,7 @@ namespace Cofoundry.Core.DependencyInjection
             return Register<TConcrete, TConcrete>(options);
         }
 
-        public IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null) 
+        public IContainerRegister Register<TRegisterAs, TConcrete>(RegistrationOptions options = null)
             where TConcrete : TRegisterAs
         {
             var fn = new Action(() =>
@@ -86,10 +86,7 @@ namespace Cofoundry.Core.DependencyInjection
 
                 AddService(concreteType, concreteType, options);
 
-                foreach (var type in EnumerableHelper
-                    .Enumerate(types)
-                    .Where(t => t != concreteType)
-                    )
+                foreach (var type in types.Where(t => t != concreteType))
                 {
                     AddServiceWithFactory(type, x => x.GetService<TConcrete>(), options);
                 }
@@ -289,7 +286,7 @@ namespace Cofoundry.Core.DependencyInjection
                 .GetDiscoveredTypes()
                 .Where(t => t.IsClass
                     && !t.IsAbstract
-                    &&!t.ContainsGenericParameters
+                    && !t.ContainsGenericParameters
                     );
         }
 

@@ -1,7 +1,5 @@
-﻿using Cofoundry.Core.Validation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
 
 namespace Cofoundry.Core.Configuration
 {
@@ -15,15 +13,12 @@ namespace Cofoundry.Core.Configuration
         #region constructor
 
         private readonly IServiceProvider _serviceProvider;
-        private readonly IModelValidationService _modelValidationService;
 
         public ConfigurationSettingsFactory(
-            IServiceProvider serviceProvider,
-            IModelValidationService modelValidationService
+            IServiceProvider serviceProvider
             )
         {
             _serviceProvider = serviceProvider;
-            _modelValidationService = modelValidationService;
         }
 
         #endregion

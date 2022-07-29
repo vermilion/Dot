@@ -9,7 +9,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<UserPasswordResetRequest> builder)
         {
-            builder.ToTable("UserPasswordResetRequest", DbConstants.CofoundrySchema);
+            builder.ToTable("UserPasswordResetRequest", DbConstants.DotSchema);
 
             builder.Property(s => s.Token);
 

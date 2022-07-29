@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cofoundry.Core
+﻿namespace Cofoundry.Core
 {
     /// <summary>
     /// Exception to be used when an argument has an empty value (but not null)

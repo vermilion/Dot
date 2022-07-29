@@ -10,7 +10,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("Role", DbConstants.CofoundrySchema);
+            builder.ToTable("Role", DbConstants.DotSchema);
 
             builder.Property(s => s.Title)
                 .IsRequired()

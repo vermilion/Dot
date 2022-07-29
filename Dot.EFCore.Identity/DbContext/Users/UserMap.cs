@@ -9,7 +9,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("User", DbConstants.CofoundrySchema);
+            builder.ToTable("User", DbConstants.DotSchema);
 
             builder.HasKey(x => x.UserId);
 

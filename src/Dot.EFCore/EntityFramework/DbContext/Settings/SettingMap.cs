@@ -10,7 +10,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<Setting> builder)
         {
-            builder.ToTable("Setting", DbConstants.CofoundrySchema);
+            builder.ToTable("Setting", DbConstants.DotSchema);
 
             // Properties
 

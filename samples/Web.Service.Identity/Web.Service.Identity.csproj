@@ -7,12 +7,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="FastEndpoints.Swagger" Version="3.4.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.3" />
-		<PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.5" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -8,7 +8,6 @@ namespace Cofoundry.Domain
     public class ResetUserPasswordByUserIdCommand : IRequest<Unit>, ILoggableCommand, IResetUserPasswordCommand
     {
         [Required]
-        [PositiveInteger]
         public int UserId { get; set; }
 
         [Required]

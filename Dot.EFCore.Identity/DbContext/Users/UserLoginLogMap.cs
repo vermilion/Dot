@@ -8,7 +8,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<UserLoginLog> builder)
         {
-            builder.ToTable("UserLoginLog", DbConstants.CofoundrySchema);
+            builder.ToTable("UserLoginLog", DbConstants.DotSchema);
 
             builder.HasKey(s => s.UserLoginLogId);
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cofoundry.Core.Configuration
+﻿namespace Cofoundry.Core.Configuration
 {
     /// <summary>
     /// An attribute that can be applied to a settings class that allows

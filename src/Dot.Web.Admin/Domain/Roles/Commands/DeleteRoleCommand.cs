@@ -25,7 +25,6 @@ namespace Cofoundry.Domain
         /// Id of the role to delete.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int RoleId { get; set; }
     }
 }

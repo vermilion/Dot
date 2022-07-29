@@ -6,8 +6,7 @@ namespace Cofoundry.Web
     public static class UseCofoundryStartupExtension
     {
         /// <summary>
-        /// Registers Cofoundry into the application pipeline and runs all the registered
-        /// Cofoundry StartupTasks.
+        /// Registers Cofoundry into the application pipeline and runs all the registered StartupTasks
         /// </summary>
         /// <param name="app">Application configuration.</param>
         public static void UseDot(this IApplicationBuilder app)

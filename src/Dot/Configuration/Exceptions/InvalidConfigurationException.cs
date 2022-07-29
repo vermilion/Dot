@@ -1,9 +1,4 @@
-﻿using Cofoundry.Core.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dot.Validation;
 
 namespace Cofoundry.Core.Configuration
 {

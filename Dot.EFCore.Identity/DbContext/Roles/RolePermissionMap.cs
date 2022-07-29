@@ -9,7 +9,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<RolePermission> builder)
         {
-            builder.ToTable("RolePermission", DbConstants.CofoundrySchema);
+            builder.ToTable("RolePermission", DbConstants.DotSchema);
 
             // Primary Key
             builder.HasKey(s => new { s.RoleId, s.PermissionId });

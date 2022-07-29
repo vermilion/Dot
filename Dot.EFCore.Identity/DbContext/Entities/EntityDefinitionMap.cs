@@ -10,7 +10,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<EntityDefinition> builder)
         {
-            builder.ToTable("EntityDefinition", DbConstants.CofoundrySchema);
+            builder.ToTable("EntityDefinition", DbConstants.DotSchema);
 
             builder.HasKey(s => s.EntityDefinitionCode);
 

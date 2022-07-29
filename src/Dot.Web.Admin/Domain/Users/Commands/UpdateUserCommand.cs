@@ -14,7 +14,6 @@ namespace Cofoundry.Domain
         /// Database id of the user to update.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int UserId { get; set; }
 
         /// <summary>
@@ -52,7 +51,6 @@ namespace Cofoundry.Domain
         /// determines the permissions available to the user.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int RoleId { get; set; }
 
         /// <summary>

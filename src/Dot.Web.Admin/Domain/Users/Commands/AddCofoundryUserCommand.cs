@@ -54,7 +54,6 @@ namespace Cofoundry.Domain
         /// that belongs to the Cofoundry admin user area.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int RoleId { get; set; }
     }
 

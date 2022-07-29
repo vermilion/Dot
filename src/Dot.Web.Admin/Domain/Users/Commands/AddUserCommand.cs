@@ -66,7 +66,6 @@ namespace Cofoundry.Domain
         /// determines the permissions available to the user.
         /// </summary>
         [Required]
-        [PositiveInteger]
         public int RoleId { get; set; }
     }
 

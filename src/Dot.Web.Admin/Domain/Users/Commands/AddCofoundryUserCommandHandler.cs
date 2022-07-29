@@ -2,8 +2,6 @@
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.MailTemplates;
 using Microsoft.AspNetCore.Html;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Domain.Internal
 {

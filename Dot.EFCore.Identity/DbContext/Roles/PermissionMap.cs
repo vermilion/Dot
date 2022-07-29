@@ -10,7 +10,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            builder.ToTable("Permission", DbConstants.CofoundrySchema);
+            builder.ToTable("Permission", DbConstants.DotSchema);
 
             builder.Property(s => s.PermissionCode)
                 .IsRequired()

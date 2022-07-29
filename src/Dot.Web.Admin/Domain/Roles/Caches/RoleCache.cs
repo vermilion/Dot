@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.Caching;
+﻿using Dot.Caching.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

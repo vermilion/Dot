@@ -1,8 +1,6 @@
-﻿using Cofoundry.Core.Caching;
-using Cofoundry.Core.Validation;
+﻿using Dot.Caching.Services;
+using Dot.Validation;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Web.Admin
 {

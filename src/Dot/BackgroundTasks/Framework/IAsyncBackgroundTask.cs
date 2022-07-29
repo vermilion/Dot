@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Cofoundry.Core.BackgroundTasks
+﻿namespace Cofoundry.Core.BackgroundTasks
 {
     /// <summary>
     /// Represents a task to execute 

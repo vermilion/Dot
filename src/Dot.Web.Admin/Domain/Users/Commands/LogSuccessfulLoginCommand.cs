@@ -18,7 +18,6 @@ namespace Cofoundry.Domain
         /// <summary>
         /// The database id of the user to mark as logged in.
         /// </summary>
-        [PositiveInteger]
         public int UserId { get; set; }
     }
 }

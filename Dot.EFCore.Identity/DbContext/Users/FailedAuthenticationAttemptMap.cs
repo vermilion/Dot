@@ -8,7 +8,7 @@ namespace Cofoundry.Domain.Data
     {
         public void Configure(EntityTypeBuilder<FailedAuthenticationAttempt> builder)
         {
-            builder.ToTable("FailedAuthenticationAttempt", DbConstants.CofoundrySchema);
+            builder.ToTable("FailedAuthenticationAttempt", DbConstants.DotSchema);
 
             builder.HasKey(s => s.FailedAuthenticationAttemptId);
 
