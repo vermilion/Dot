@@ -1,10 +1,6 @@
 ﻿using Cofoundry.Core.DependencyInjection;
+using Dot.Configuration.Extensions;
 using Dot.Time.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Core.Time.Registration
 {
@@ -12,10 +8,14 @@ namespace Cofoundry.Core.Time.Registration
     {
         public void Register(IContainerRegister container)
         {
+            container.Settings(x =>
+            {
+                x.Register<DateTimeSettings>();
+            });
+
             container
                 .RegisterSingleton<IDateTimeService, DateTimeService>()
-                .RegisterScoped<ITimeZoneConverter, TimeZoneConverter>()
-                ;
+                .RegisterScoped<ITimeZoneConverter, TimeZoneConverter>();
         }
     }
 }

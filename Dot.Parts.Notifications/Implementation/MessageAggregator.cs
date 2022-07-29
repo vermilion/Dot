@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.DependencyInjection;
-
-namespace Cofoundry.Core.MessageAggregator.Internal
+﻿namespace Cofoundry.Core.MessageAggregator.Internal
 {
     /// <summary>
     /// A simple Message Aggregator (Event Bus) implementation to allow subscribable message communication.

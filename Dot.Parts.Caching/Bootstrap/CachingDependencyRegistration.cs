@@ -1,6 +1,7 @@
 ﻿using Cofoundry.Core.Caching.Internal;
 using Cofoundry.Core.DependencyInjection;
 using Dot.Caching.Services;
+using Dot.Configuration.Extensions;
 
 namespace Cofoundry.Core.Caching.Registration
 {
@@ -8,7 +9,12 @@ namespace Cofoundry.Core.Caching.Registration
     {
         public void Register(IContainerRegister container)
         {
-            var cacheMode = container.Configuration.GetValue("Cofoundry:InMemoryObjectCache:CacheMode", InMemoryObjectCacheMode.Persitent);
+            container.Settings(x =>
+            {
+                x.Register<InMemoryObjectCacheSettings>();
+            });
+
+            var cacheMode = container.ConfigurationHelper.GetValue("Cofoundry:InMemoryObjectCache:CacheMode", InMemoryObjectCacheMode.Persitent);
 
             if (cacheMode == InMemoryObjectCacheMode.PerScope)
             {

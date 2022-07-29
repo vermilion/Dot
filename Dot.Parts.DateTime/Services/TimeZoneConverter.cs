@@ -1,7 +1,4 @@
-﻿using Cofoundry.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Ardalis.GuardClauses;
 
 namespace Dot.Time.Services
 {
@@ -17,8 +14,7 @@ namespace Dot.Time.Services
         /// <param name="timeZoneId">Timezone to convert to.</param>
         public virtual DateTimeOffset FromUtcToOffset(DateTime dateTime, string timeZoneId)
         {
-            if (timeZoneId == null) throw new ArgumentNullException(timeZoneId);
-            if (string.IsNullOrWhiteSpace(timeZoneId)) throw new ArgumentEmptyException(timeZoneId);
+            Guard.Against.NullOrWhiteSpace(timeZoneId);
 
             if (dateTime.Kind == DateTimeKind.Local)
             {

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Cofoundry.Core.Configuration;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Core.Configuration;
 
 namespace Cofoundry.Core.Mail
 {
     /// <summary>
     /// Generic settings for sending mail.
     /// </summary>
-    public class MailSettings : CofoundryConfigurationSettingsBase
+    public class MailSettings : DotConfigurationSettingsBase
     {
         public MailSettings()
         {

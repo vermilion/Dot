@@ -8,7 +8,7 @@ namespace Cofoundry.Core.Caching
     /// <summary>
     /// Settings specificaly for the default in-memory object cache implementation.
     /// </summary>
-    public class InMemoryObjectCacheSettings : CofoundryConfigurationSettingsBase
+    public class InMemoryObjectCacheSettings : DotConfigurationSettingsBase
     {
         /// <summary>
         /// The cache mode that should be used to determine the lifetime

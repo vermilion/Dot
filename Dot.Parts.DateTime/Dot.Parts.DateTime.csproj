@@ -8,7 +8,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\Dot\Dot.csproj" />
+	  <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dot\Dot.csproj" />
 	</ItemGroup>
 
 </Project>

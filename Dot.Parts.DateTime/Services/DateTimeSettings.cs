@@ -8,7 +8,7 @@ namespace Dot.Time.Services
     /// <summary>
     /// Settings used by the DatetimeService.
     /// </summary>
-    public class DateTimeSettings : CofoundryConfigurationSettingsBase
+    public class DateTimeSettings : DotConfigurationSettingsBase
     {
         /// <summary>
         /// The base date can be used when testing or debugging to alter the 

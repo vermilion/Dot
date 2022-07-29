@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\Dot.EFCore\Dot.EFCore.csproj" />
+	  <ProjectReference Include="..\Dot.EFCore\Dot.EFCore.csproj" />
 	</ItemGroup>
 
 </Project>
