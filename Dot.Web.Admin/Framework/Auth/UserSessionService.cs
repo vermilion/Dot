@@ -1,11 +1,8 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Cofoundry.Core;
-using Cofoundry.Domain;
+﻿using Cofoundry.Domain;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Cofoundry.Web
 {
@@ -94,7 +91,6 @@ namespace Cofoundry.Web
         /// <summary>
         /// Logs the user out of the specified user area.
         /// </summary>
-        /// <param name="userAreaCode">Unique code of the user area to log the user out of (required).</param>
         public Task LogUserOutAsync()
         {
             ClearCache();

@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
 		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -26,13 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.EFCore.Identity", "Dot.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Parts.Mail", "Dot.Parts.Mail\Dot.Parts.Mail.csproj", "{7C62ABFB-34A9-4F05-8B9C-91309E59FFE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Parts.Notifications", "Dot.Parts.Notifications\Dot.Parts.Notifications.csproj", "{797A2ADB-C326-4F6F-ABF6-A33DC470C22D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Parts.Notifications", "Dot.Parts.Notifications\Dot.Parts.Notifications.csproj", "{797A2ADB-C326-4F6F-ABF6-A33DC470C22D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Parts.Caching", "Dot.Parts.Caching\Dot.Parts.Caching.csproj", "{C84D8823-3F89-4D88-9A72-2524E7B2F6AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Parts.Caching", "Dot.Parts.Caching\Dot.Parts.Caching.csproj", "{C84D8823-3F89-4D88-9A72-2524E7B2F6AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Parts.DateTime", "Dot.Parts.DateTime\Dot.Parts.DateTime.csproj", "{5B4E9754-D786-4A3F-9D09-53997FDCA803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Parts.DateTime", "Dot.Parts.DateTime\Dot.Parts.DateTime.csproj", "{5B4E9754-D786-4A3F-9D09-53997FDCA803}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dot.Parts.BackgroundTasks", "Dot.Parts.BackgroundTasks\Dot.Parts.BackgroundTasks.csproj", "{2099312A-4959-4796-A4DC-E22B84A51FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dot.Parts.BackgroundTasks", "Dot.Parts.BackgroundTasks\Dot.Parts.BackgroundTasks.csproj", "{2099312A-4959-4796-A4DC-E22B84A51FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,6 +12,6 @@ namespace Cofoundry.Web
         /// <summary>
         /// Applies authentication configuration to the IMvcBuilder.
         /// </summary>
-        void Configure(IMvcBuilder mvcBuilder);
+        void Configure(IServiceCollection services);
     }
 }

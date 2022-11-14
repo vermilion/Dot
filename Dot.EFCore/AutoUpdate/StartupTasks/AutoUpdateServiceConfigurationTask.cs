@@ -9,9 +9,9 @@ namespace Cofoundry.Web
     /// </summary>
     public class AutoUpdateServiceConfigurationTask : IStartupServiceConfigurationTask
     {
-        public void ConfigureServices(IMvcBuilder mvcBuilder)
+        public void ConfigureServices(IServiceCollection services)
         {
-            mvcBuilder.Services.AddHostedService<AutoUpdateHostedService>();
+            services.AddHostedService<AutoUpdateHostedService>();
         }
     }
 }

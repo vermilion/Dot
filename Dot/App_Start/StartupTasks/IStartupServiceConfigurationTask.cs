@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Web
 {
@@ -19,7 +14,6 @@ namespace Cofoundry.Web
         /// Configures Mvc services. Runs after AddMvc in the service
         /// configuration pipeline.
         /// </summary>
-        /// <param name="mvcBuilder">IMvcBuilder to configure.</param>
-        void ConfigureServices(IMvcBuilder mvcBuilder);
+        void ConfigureServices(IServiceCollection services);
     }
 }

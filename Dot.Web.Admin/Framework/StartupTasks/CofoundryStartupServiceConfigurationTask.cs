@@ -21,10 +21,9 @@ namespace Cofoundry.Web
         /// Configures Mvc services. Runs after AddMvc in the service
         /// configuration pipeline.
         /// </summary>
-        /// <param name="mvcBuilder">IMvcBuilder to configure.</param>
-        public void ConfigureServices(IMvcBuilder mvcBuilder)
+        public void ConfigureServices(IServiceCollection services)
         {
-            _authConfiguration.Configure(mvcBuilder);
+            _authConfiguration.Configure(services);
         }
     }
 }

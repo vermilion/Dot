@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Web
 {
@@ -20,11 +19,9 @@ namespace Cofoundry.Web
             _authCookieNamespaceProvider = authCookieNamespaceProvider;
         }
 
-        public void Configure(IMvcBuilder mvcBuilder)
+        public void Configure(IServiceCollection services)
         {
-            var services = mvcBuilder.Services;
-
-            var authBuilder = mvcBuilder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
+            var authBuilder = services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
             var cookieNamespace = _authCookieNamespaceProvider.GetNamespace();
 
             authBuilder
@@ -48,7 +45,7 @@ namespace Cofoundry.Web
                     };
                 });
 
-            mvcBuilder.Services.AddAuthorization();
+            services.AddAuthorization();
         }
     }
 }
